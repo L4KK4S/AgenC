@@ -9,4 +9,7 @@ struct s_cell{
 
 typedef struct s_cell t_cell, *p_cell;
 
+p_cell createEmptyCell(int x);
+void addVtab(p_cell cell, int x);
+
 #endif //AGENC_FICHIER_H
