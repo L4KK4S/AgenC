@@ -12,7 +12,7 @@ p_list createEmptylist(int x) {
 
 
 
-void display_list (p_list list) {
+void uniform_display_list (p_list list) {
     p_cell tmp_v = list->head_v;
     int level = 0;
     while (tmp_v!=NULL) { // loop while all level arent done

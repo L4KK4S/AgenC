@@ -14,5 +14,6 @@ typedef struct s_list t_list, *p_list;
 
 
 p_list createEmptylist(int x);
+void uniform_display_list (p_list list);
 
 #endif //AGENC_LIST!?
