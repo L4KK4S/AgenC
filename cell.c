@@ -24,6 +24,7 @@ p_cell addVtab(p_cell cell, int x) {
         tmp->next_v = createEmptyLevelCell(cell->value);
         tmp=tmp->next_v;
     }
+    return newhead;
 }
 
 int countCell(p_list list, p_cell first, p_cell last){ //useless

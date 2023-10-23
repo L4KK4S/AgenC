@@ -26,6 +26,7 @@ void uniform_display_list (p_list list) {
                 }
             } else {
                 printf("-->[ %d|@-]"); // if yes then print the cell
+                tmp_h = tmp_h->next_h;
             }
             level0cur = level0cur->next_h; // uptdate the value compared to the cursor
         }
