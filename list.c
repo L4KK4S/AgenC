@@ -24,6 +24,7 @@ p_list createEmptylist(int x) {                           // This function creat
 }
 
 void uniform_display_list (p_list list) {
+
     p_cell tmp_v = list->head_v;
     int level = 0;
     while (tmp_v!=NULL) { // loop while all level arent done
@@ -37,6 +38,7 @@ void uniform_display_list (p_list list) {
                 }
             } else {
                 printf("-->[ %d|@-]"); // if yes then print the cell
+                tmp_h = tmp_h->next_h; // update the tmp cursor
             }
             level0cur = level0cur->next_h; // uptdate the value compared to the cursor
         }

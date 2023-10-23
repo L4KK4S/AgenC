@@ -14,17 +14,21 @@
 
 // -------------------------- Structures --------------------------
 typedef struct s_cell{                          // Structure of a cell
+
     int value;                                  // Value of the cell
     struct s_cell *next_h;                      // Pointer to the next cell horizontally
     struct s_cell *next_v;                      // Pointer to the next cell vertically
+
 }t_cell, *p_cell;                               // Creation of an alias for the structure
 
 
 // -------------------------- Prototypes --------------------------
-p_cell createEmptyLevelCell(int x);
-p_cell addVtab(p_cell cell, int x);
-int countCell(p_list list, p_cell first, p_cell last);
-int cellLength (p_cell cell);
-int isInTheLevel (p_cell head, int x);
+p_cell createEmptyCell(int, int);               // Creates an empty cell with vertical tab
+p_cell createEmptyLevelCell(int);               // Creates an empty cell without vertical tab
+p_cell addVtab(p_cell, int);                    // Adds a vertical tab to a cell
+int countCell(p_list, p_cell, p_cell);          // Counts the gap between two cells
+int cellLength(p_cell);                         // Returns the number of characters of a cell value
+int isInTheLevel(p_cell, int);                  // Checks if a value is in the level
+void displayCell(p_cell);                       // Display a cell
 
 #endif //AGENC_FICHIER_H
