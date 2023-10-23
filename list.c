@@ -15,17 +15,21 @@ p_list createEmptylist(int x) {
 void display_list (p_list list) {
     p_cell tmp_v = list->head_v;
     int level = 0;
-    while (tmp_v!=NULL) {
-        printf("[list head_%d @-]-->",level);
-        p_cell tmp2 = tmp_v;
-        while (tmp2->next_h!=NULL) {
-            printf("[ %d‰|@-]",tmp2->value);
-            for (int i = 0 ; i< countCell(tmp2, tmp2->next_h) ; i++) {
-                printf(" ")
+    while (tmp_v!=NULL) { // loop while all level arent done
+        printf("[list head_%d @-]",level);
+        p_cell level0cur = list->head_h; // create a cursor to compare to higher value (because the first level will be the most complete, we have to check if we have to fill higher level or not)
+        p_cell tmp_h = tmp_v; // set a new tmp to the actual level head
+        while (level0cur!=NULL) {
+            if (isInTheLevel(tmp_v, level0cur->value)) { // check if it has to print the cell
+                for (int i = 0; i < cellLength(level0cur) - 3; i++) { // if not print the equivalent of the cell with -
+                    printf("-");
+                }
+            } else {
+                printf("-->[ %d|@-]"); // if yes then print the cell
             }
-
+            level0cur = level0cur->next_h; // uptdate the value compared to the cursor
         }
+        tmp_v = tmp_v->next_h; // update level cursor
         level++;
-        tmp_v =
     }
 }

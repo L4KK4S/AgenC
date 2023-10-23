@@ -30,16 +30,44 @@ int countCell(p_list list, p_cell first, p_cell last){
     return count;
 }
 
-int isInTheLevel (p_list list, int x) {
-    p_cell tmp = list->head_h;
-    while (tmp!=NULL) {
-        if (tmp->value == x) {
-            return 0;
+int cellLength (p_cell cell) {
+    int tmp = cell->value;
+    int count=0;
+    if (tmp<0) {
+        count ++;
+        tmp = tmp * (-1);
+        if (tmp/10==0) {
+            return 8; // mean value under 10 + negative -> normal case [ -1|@-]
+        } else {
+            while (tmp/10!=0) {
+                tmp/=10;
+                count++;
+            }
+            return 7 + count; // case where the number is bigger than 10 -> [ -1000|@-] (return 11)
         }
+    } else {
+        if (tmp / 100 == 0) {
+            return 8; // mean value under 100 -> normal case [ 91|@-]
+        } else {
+            while (tmp / 100 != 0) {
+                tmp /= 10;
+                count++;
+            }
+            return 8 + count; // case where the number is bigger than 100 -> [ 1000|@-] (return 11)
+
+        }
+    }
+}
+
+int isInTheLevel (p_cell head, int x) {
+    p_cell tmp = head;
+    while(tmp!=NULL && tmp->value!=x) {
         tmp=tmp->next_h;
     }
-    if (x<0) {
-        return -1*(x/10) + 1;
+    if (x==tmp->value) {
+        return 1;
+    } else {
+        return 0;
     }
-    return x/10;
 }
+

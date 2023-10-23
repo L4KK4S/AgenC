@@ -14,5 +14,7 @@ typedef struct s_cell t_cell, *p_cell;
 p_cell createEmptyCell(int x);
 void addVtab(p_cell cell, int x);
 int countCell(p_list list, p_cell first, p_cell last);
+int cellLength (p_cell cell);
+int isInTheLevel (p_cell head, int x);
 
 #endif //AGENC_FICHIER_H
