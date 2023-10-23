@@ -6,7 +6,7 @@ p_list createEmptylist(int x) {
     p_list new = (p_list) malloc (sizeof(t_list));
     new->level=x;
     new->head_h=NULL;
-    new->head_v=NULL;
+    new->head_v= addVtab(new->head_v, x);
     return new;
 }
 

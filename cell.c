@@ -1,7 +1,15 @@
 #include "cell.h"
 #include <stdlib.h>
 
-p_cell createEmptyCell(int x) {
+p_cell createEmptyCell(int x, int levels) { // missing v_tab
+    p_cell new = (p_cell) malloc (sizeof(t_cell));
+    new->value=x;
+    new->next_h=NULL;
+    new->next_v = addVtab(new, levels);
+    return new;
+}
+
+p_cell createEmptyLevelCell(int x) { // missing v_tab
     p_cell new = (p_cell) malloc (sizeof(t_cell));
     new->value=x;
     new->next_h=NULL;
@@ -9,15 +17,16 @@ p_cell createEmptyCell(int x) {
     return new;
 }
 
-void addVtab(p_cell cell, int x) {
-    p_cell tmp = cell;
+p_cell addVtab(p_cell cell, int x) {
+    p_cell newhead = createEmptyLevelCell(x);
+    p_cell tmp = newhead;
     for (int i = 0 ; i < x ; i++) {
-        tmp->next_v = createEmptyCell(cell->value);
+        tmp->next_v = createEmptyLevelCell(cell->value);
         tmp=tmp->next_v;
     }
 }
 
-int countCell(p_list list, p_cell first, p_cell last){
+int countCell(p_list list, p_cell first, p_cell last){ //useless
     p_cell tmp = list->head_h;
     while (tmp->value!=first->value) {
         tmp=tmp->next_h;
