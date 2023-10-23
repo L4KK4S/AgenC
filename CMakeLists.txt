@@ -4,4 +4,4 @@ project(AgenC C)
 set(CMAKE_C_STANDARD 11)
 
 add_executable(AgenC
-        Main.c "fichier .c" "fichier .h" "fichier .h" "fichier .h")
+        Main.c "cell.c" "cell.h" "cell.h" "cell.h" list.c list.h)
