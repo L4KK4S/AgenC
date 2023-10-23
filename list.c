@@ -18,7 +18,7 @@ p_list createEmptylist(int x) {                           // This function creat
     p_list new_list = (p_list) malloc(sizeof(t_list));    // Allocation of memory for the new list
     new_list->level = x;                                  // Initialization of the level of the list
     new_list->head_h = NULL;                              // Initialization of the pointer to the head of the horizontal list
-    new_list->head_v = addVtab(new->head_v, x);           // Initialization of the pointer to the head of the vertical list
+    new_list->head_v = addVtab(new_list->head_v, x);      // Initialization of the pointer to the head of the vertical list
 
     return new_list;                                      // Return the new list
 }

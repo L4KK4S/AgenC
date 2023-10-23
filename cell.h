@@ -9,6 +9,7 @@
 // -------------------------- Includes --------------------------
 #ifndef AGENC_FICHIER_H
 #define AGENC_FICHIER_H
+#include "list.h"
 
 
 // -------------------------- Structures --------------------------
