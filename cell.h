@@ -16,7 +16,7 @@ typedef struct s_cell{                          // Structure of a cell
     int value;                                  // Value of the cell                      
     struct s_cell *next_h;                      // Pointer to the next cell horizontally            
     struct s_cell *next_v;                      // Pointer to the next cell vertically
-}s_cell, *p_cell;                               // Creation of an alias for the structure
+}t_cell, *p_cell;                               // Creation of an alias for the structure
 
 
 // -------------------------- Prototypes --------------------------
