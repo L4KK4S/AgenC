@@ -11,6 +11,7 @@ struct s_cell{
 
 typedef struct s_cell t_cell, *p_cell;
 
+p_cell createEmptyCell(int x, int levels);
 p_cell createEmptyLevelCell(int x);
 p_cell addVtab(p_cell cell, int x);
 int countCell(p_list list, p_cell first, p_cell last);
