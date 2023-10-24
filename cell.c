@@ -19,7 +19,7 @@ p_cell createEmptyCell(int x, int levels) {               // This function creat
     p_cell new_cell = (p_cell) malloc(sizeof(t_cell));    // Allocation of memory for the new cell
     new_cell->value = x;                                  // Initialization of the value of the cell
     new_cell->next_h = NULL;                              // Initialization of the pointer to the next cell horizontally
-    new_cell->next_v = addVtab(x, levels);         // Initialization of the pointer to the next cell vertically
+    new_cell->next_v = addVtabCell(x, levels);         // Initialization of the pointer to the next cell vertically
 
     return new_cell;                                      // Return the new cell
 
@@ -39,7 +39,7 @@ p_cell createEmptyLevelCell(int x) {                      // This function creat
 }
 
 
-p_cell addVtab(int value, int levels) {                      // This function adds a vertical tab to a cell
+p_cell addVtabCell(int value, int levels) {                      // This function adds a vertical tab to a cell
 
     if (levels>1) {
         p_cell newhead = createEmptyLevelCell(value);             // Creation of a new cell with the level x

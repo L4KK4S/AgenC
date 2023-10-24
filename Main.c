@@ -22,15 +22,15 @@ int main() {
 
     printf("Hello World! Bienvenue sur AgenC, una agenda bien agence!\n");
 
-    //p_cell cell1 = createEmptyCell(0, 1);
-    //p_cell cell2 = createEmptyCell(5, 3);
-    //p_cell cell3 = createEmptyCell(7, 3);
+    p_cell cell1 = createEmptyCell(0, 1);
+    p_cell cell2 = createEmptyCell(5, 3);
+    p_cell cell3 = createEmptyCell(7, 3);
     p_cell cell4 = createEmptyCell(9, 3);
-    //p_cell cell5 = createEmptyCell(2, 1);*/
-    //p_cell cell6 = createEmptyCell(1, 0);
-    //p_list liste = createEmptylist(3);
+    p_cell cell5 = createEmptyCell(2, 1);
+    p_cell cell6 = createEmptyCell(1, 0);
+    p_list liste = createEmptylistCell(2);
 
-    p_cell tmp = cell4;
+    p_list tmp = liste;
     int count = 0;
     while (tmp!=NULL) {
         tmp=tmp->next_v;
