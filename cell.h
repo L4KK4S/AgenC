@@ -1,15 +1,34 @@
+/*
+    |----------------------------------------------------------|
+    |     This file contains the structures and prototype      |
+    |                needed for the cell                       |
+    |----------------------------------------------------------|
+*/
+
+
+// -------------------------- Includes --------------------------
 #ifndef AGENC_FICHIER_H
 #define AGENC_FICHIER_H
+#include "list.h"
 
-struct s_cell{
-    int value;
-    struct s_cell *next_h;
-    struct s_cell *next_v;
-};
 
-typedef struct s_cell t_cell, *p_cell;
+// -------------------------- Structures --------------------------
+typedef struct s_cell{                          // Structure of a cell
 
-p_cell createEmptyCell(int x);
-void addVtab(p_cell cell, int x);
+    int value;                                  // Value of the cell
+    struct s_cell *next_h;                      // Pointer to the next cell horizontally
+    struct s_cell *next_v;                      // Pointer to the next cell vertically
+
+}t_cell, *p_cell;                               // Creation of an alias for the structure
+
+
+// -------------------------- Prototypes --------------------------
+p_cell createEmptyCell(int, int);               // Creates an empty cell with vertical tab
+p_cell createEmptyLevelCell(int);               // Creates an empty cell without vertical tab
+p_cell addVtab(p_cell, int);                    // Adds a vertical tab to a cell
+int countCell(p_list, p_cell, p_cell);          // Counts the gap between two cells
+int cellLength(p_cell);                         // Returns the number of characters of a cell value
+int isInTheLevel(p_cell, int);                  // Checks if a value is in the level
+void displayCell(p_cell);                       // Display a cell
 
 #endif //AGENC_FICHIER_H
