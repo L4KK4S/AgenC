@@ -22,11 +22,11 @@ int main() {
 
     printf("Hello World! Bienvenue sur AgenC, una agenda bien agence!\n");
 
-    p_cell cell1 = createEmptyCell(5, 2);
-    p_cell cell2 = createEmptyCell(0, 3);
+    p_cell cell1 = createEmptyCell(9, 2);
+    p_cell cell2 = createEmptyCell(6, 3);
     p_cell cell3 = createEmptyCell(7, 2);
-    p_cell cell4 = createEmptyCell(9, 3);
-    p_cell cell5 = createEmptyCell(2, 1);
+    p_cell cell4 = createEmptyCell(8, 4);
+    p_cell cell5 = createEmptyCell(11, 1);
     p_cell cell6 = createEmptyCell(1, 0);
     p_list liste = createEmptylistCell(4);
     uniform_display_list(liste);

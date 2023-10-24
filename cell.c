@@ -171,18 +171,22 @@ void insertCell(p_cell cell, p_list list) {
             // relier correctement en gerant le cas de tete si il existe
 
             if (tmp_h->value > cell->value && tmp_h == tmp_vList->head_h) { // head insert
-                printf("head insert %d\n", cell->value);
                 tmp_vCell->next_h=tmp_vList->head_h;
                 tmp_vList->head_h = tmp_vCell;
             } else {
                 tmp_h = tmp_vList->head_h;
                 p_cell prev = tmp_h;
-                while ( tmp_h->value < cell->value && tmp_h->next_h!=NULL) {
+                while (tmp_h->value < cell->value && tmp_h->next_h!=NULL) {
                     prev= tmp_h;
                     tmp_h=tmp_h->next_h;
                 }
-                tmp_vCell->next_h = tmp_h->next_h;
-                tmp_h->next_h = tmp_vCell;
+                if (tmp_h->next_h==NULL) {
+                    tmp_vCell->next_h = tmp_h->next_h;
+                    tmp_h->next_h = tmp_vCell;
+                } else {
+                    prev->next_h=tmp_vCell;
+                    tmp_vCell->next_h=tmp_h;
+                }
             }
 
 
