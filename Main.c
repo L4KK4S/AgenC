@@ -22,44 +22,21 @@ int main() {
 
     printf("Hello World! Bienvenue sur AgenC, una agenda bien agence!\n");
 
-    p_cell cell1 = createEmptyCell(0, 2);
-    p_cell cell2 = createEmptyCell(2, 3);
-    p_cell cell3 = createEmptyCell(1, 2);
-    p_cell cell4 = createEmptyCell(4, 4);
-    p_cell cell5 = createEmptyCell(3, 1);
-    p_cell cell6 = createEmptyCell(5, 0);
-    p_list liste = createEmptylistCell(4);
+    p_list liste = createOrderedList();
     uniform_display_list(liste);
-
-
-    insertCell(cell1, liste);
-    uniform_display_list(liste);
-    insertCell(cell2, liste);
-    uniform_display_list(liste);
-    insertCell(cell3, liste);
-    uniform_display_list(liste);
-    insertCell(cell4, liste);
-    uniform_display_list(liste);
-    insertCell(cell5, liste);
-    uniform_display_list(liste);
-    insertCell(cell6, liste);
-
-
     printf("\n");
 
-    /*int count = 0;
-    p_cell tmp = cell1;
-    while (tmp!=NULL) {
-        tmp=tmp->next_v;
-        count++;
-    }
-    printf("count = %d\n", count);*/
-    //cell1->next_h = cell2;
+    p_list liste2 = createChaoticValueList();
+    uniform_display_list(liste2);
+    printf("\n");
 
-    uniform_display_list(liste);
+    p_list liste3 = createWaveFormList();
+    uniform_display_list(liste3);
+    printf("\n");
 
-
-
+    p_list liste4 = createWaveFormList2();
+    uniform_display_list(liste4);
+    printf("\n");
 
     return 0;
  
