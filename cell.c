@@ -180,7 +180,7 @@ void insertCell(p_cell cell, p_list list) {
                     prev= tmp_h;
                     tmp_h=tmp_h->next_h;
                 }
-                if (tmp_h->next_h==NULL) {
+                if (tmp_h->value < cell->value) {
                     tmp_vCell->next_h = tmp_h->next_h;
                     tmp_h->next_h = tmp_vCell;
                 } else {
