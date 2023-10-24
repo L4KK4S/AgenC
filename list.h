@@ -24,4 +24,5 @@ typedef struct s_list {                          // Structure of a list
 p_list createEmptylist(int x);                   // This function creates an empty list
 void uniform_display_list (p_list list);         // This function displays the list
 
+
 #endif //AGENC_LIST_H
