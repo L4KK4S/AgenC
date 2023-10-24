@@ -16,7 +16,7 @@
 typedef struct s_list {                          // Structure of a list
     int level;                                   // Level of the list
     struct s_list *next_v;                       // Pointer to the head of the vertical list
-    struct s_list *head_h;                       // Pointer to the head of the horizontal list
+    struct s_cell *head_h;                       // Pointer to the head of the horizontal list
 }t_list, *p_list;                                // Creation of an alias for the structure
 
 

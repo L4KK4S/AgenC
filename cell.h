@@ -28,7 +28,7 @@ p_cell createEmptyLevelCell(int);               // Creates an empty cell without
 p_cell addVtabCell(int, int);                    // Adds a vertical tab to a cell
 int countCell(p_list, p_cell, p_cell);          // Counts the gap between two cells
 int cellLength(p_cell);                         // Returns the number of characters of a cell value
-int isInTheLevel(p_cell, int);                  // Checks if a value is in the level
+int NotInTheLevel(p_cell, int);                  // Checks if a value is in the level
 void displayCell(p_cell);                       // Display a cell
 void insertCell(p_cell cell, p_list list);
 

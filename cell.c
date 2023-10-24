@@ -103,21 +103,21 @@ int cellLength (p_cell cell) {                            // This function retur
 }
 
 
-int isInTheLevel (p_cell head, int val) {                 // Checks if a value is in the level
+int NotInTheLevel (p_cell head, int val) {                 // Checks if a value is in the level
 
     p_cell tmp = head;
 
     while(tmp != NULL) {                                  // Looking for the value, while we can pass to the next one
 
         if (tmp->value == val){                           // If we found it we return 1
-            return 1;
+            return 0;
         }
 
         tmp = tmp->next_h;                                // We pass to the next cell
 
     }
 
-    return 0;                                             // If the while loop ends, it means that we haven't found the value
+    return 1;                                             // If the while loop ends, it means that we haven't found the value
 }
 
 
