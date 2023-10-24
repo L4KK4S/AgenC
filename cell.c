@@ -154,3 +154,41 @@ void displayCell(p_cell cell){                            // This function displ
     }
 
 }
+
+void insertCell(p_cell cell, p_list list) {
+    p_cell tmp_vCell = cell;                    //set a tmp so we can know when to stop linking
+    p_list tmp_vList = list;                     // set vertical tmp to level 0
+    p_cell tmp_h = tmp_vList->head_h;           // set the first horizontal cursor (use only after line 40)
+
+    while (tmp_vCell!=NULL) { // while all cell level aren't linked
+        tmp_h = tmp_vList->head_h;
+        if (tmp_h==NULL) {    // if level is empty`
+            tmp_vList->head_h = tmp_vCell;
+        } else { // level is not empty
+            // line 171 to 175 not working
+            // besoin parcourir niveau jusqu'a trouver emplacement correct
+            // besoin analiser si placer à tete
+            // relier correctement en gerant le cas de tete si il existe
+
+            if (tmp_h->value > cell->value && tmp_h == tmp_vList->head_h) { // head insert
+                printf("head insert %d\n", cell->value);
+                tmp_vCell->next_h=tmp_vList->head_h;
+                tmp_vList->head_h = tmp_vCell;
+            } else {
+                tmp_h = tmp_vList->head_h;
+                p_cell prev = tmp_h;
+                while ( tmp_h->value < cell->value && tmp_h->next_h!=NULL) {
+                    prev= tmp_h;
+                    tmp_h=tmp_h->next_h;
+                }
+                tmp_vCell->next_h = tmp_h->next_h;
+                tmp_h->next_h = tmp_vCell;
+            }
+
+
+        }
+        tmp_vList = tmp_vList->next_v; // update the level we're linking
+        tmp_vCell = tmp_vCell->next_v; // update the level Cell we're linking
+
+    }
+}

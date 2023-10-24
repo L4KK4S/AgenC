@@ -54,35 +54,17 @@ p_list addVtabList(int levels) {                      // This function adds a ve
 // Parcourir chaque niveau et insérer la cellule au bon endroit
 //Gérer les cas ou le niveau est vide (next_h == NULL)
 
-void insertCell(p_cell cell, p_list list) {
-    p_cell tmp_vCell = cell;                    //set a tmp so we can know when to stop linking
-    p_list tmp_vList = list;                     // set vertical tmp to level 0
-    p_cell tmp_h = tmp_vList->head_h;           // set the first horizontal cursor (use only after line 40)
 
-    while (tmp_vCell!=NULL) { // while all cell level aren't linked
-        if (tmp_h==NULL) {    // if level is empty
-            tmp_vList->head_h = tmp_vCell;
-        } else { // level is not empty
-            while (tmp_h->next_h->value < cell->value || tmp_h->next_h!=NULL) { // while the next value is inferior to the cell value and next is not NULL (end of the list)
-                tmp_h = tmp_h->next_h;
-            }
-            tmp_vCell->next_h = tmp_h->next_h;
-            tmp_h->next_h = tmp_vCell;
-        }
-        tmp_vList = tmp_vList->next_v; // update the level we're linking
-        tmp_vCell = tmp_vCell->next_v; // update the level Cell we're linking
-
-    }
-}
 
 void uniform_display_list (p_list list) {
+    printf("\n");
 
     p_list tmp_v = list;
     int level = 0;
     while (tmp_v!=NULL) { // loop while all level arent done
         printf("[list head_%d @-]",level);
         p_cell level0cur = list->head_h; // create a cursor to compare to higher value (because the first level will be the most complete, we have to check if we have to fill higher level or not)
-        p_cell tmp_h = tmp_v;            // set a new tmp to the actual level head
+        p_cell tmp_h = tmp_v->head_h;            // set a new tmp to the actual level head
 
         while (level0cur!=NULL) {
             if (NotInTheLevel(tmp_v->head_h, level0cur->value)) { // check if it has to print the cell
