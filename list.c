@@ -79,6 +79,57 @@ void uniform_display_list (p_list list) {
     }
 }
 
+void display_list (p_list list) {
+
+    p_list tmp_v = list;                                                            // Set a moving variable at the level 0 list
+    int level = 0;                                                                  // Create anb int variable to indicate the level
+    while (tmp_v!=NULL) {                                                           // Loop which stop when all level are printed
+        printf("[list head_%d @-]",level);                                          // Special printing for the head of the list
+        p_cell tmp_h = tmp_v->head_h;                                               // Set the moving pointer to the head of the level
+        while (tmp_h!=NULL){
+            printf("-->[ %d|@-]", tmp_h->value);                                    // Special print for the cell
+            tmp_h = tmp_h->next_h;                                                  // Incrementing the moving pointer
+        }
+        printf("-->NULL\n");                                                        // Special print to indicate the end of the level list
+        tmp_v = tmp_v->next_v;                                                      // Update the level cursor
+        level++;                                                                    // Update the level variable
+    }
+}
+
+void show_level(p_list list, int level) {
+    p_list tmp_v = list;                                                            // Set a moving pointer which will go to the different level
+    p_cell tmp_h;                                                                   // Set a moving pointer which will go through the levels
+
+    for (int i = 0 ; i<level ; i++) {                                               // Set the moving pointer to the right level
+        tmp_v=tmp_v->next_v;
+    }
+    tmp_h = tmp_v->head_h;                                                          // Set the moving pointer to the head of the right level
+    printf("[list head_%d @-]",level);                                              // Special printing for the head of the list
+    while (tmp_h!=NULL) {                                                           // Loop to print all elements from a level
+        printf("-->[ %d|@-]", tmp_h->value);                                        // Special print for the cell
+        tmp_h=tmp_h->next_h;
+    }
+    printf("-->NULL\n");                                                            // Special print to indicate the end of the level list
+}
+int checkListCompatibility(p_list list, int level) {
+    if (level>list->level) {                                                        // Check if the level is superior than the max level of the list
+        return 0;
+    } else {
+        return 1;
+    }
+}
+
+int checkIfAlreadyInList(p_list list, int value) {
+    p_cell tmp = list->head_h;                                                      // Set a moving pointer at the head of the level 0
+    while (tmp!=NULL) {                                                             // Loop to check all value
+        if (tmp->value==value) {                                                    // If the value is already in the list we return 1
+            return 1;
+        }
+        tmp=tmp->next_h;
+    }
+    return 0;                                                                       // If not we return 0
+}
+
 
 // -------------------------- Tests Lists Functions --------------------------
 

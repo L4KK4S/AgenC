@@ -41,20 +41,20 @@ p_cell createEmptyLevelCell(int x) {                      // This function creat
 
 }
 
-p_cell addVtabCell(int value, int levels) {                      // This function adds a vertical tab to a cell
+p_cell addVtabCell(int value, int levels) {                          // This function adds a vertical tab to a cell
 
     if (levels>=1) {
         p_cell newhead = createEmptyLevelCell(value);             // Creation of a new cell with the level x
-        p_cell tmp = newhead;                                 // Creation of a temporary cell to browse the list
+        p_cell tmp = newhead;                                        // Creation of a temporary cell to browse the list
         if (levels >= 2) {
-            for (int i = 0; i < levels - 1; i++) {                         // Loop with n(=number of levels) iterations
-                tmp->next_v = createEmptyLevelCell(value);  // Creation of a new cell with the value of the cell
-                tmp = tmp->next_v;                                // Creation of a new cell with the value of the cell
+            for (int i = 0; i < levels - 1; i++) {                   // Loop with n(=number of levels) iterations
+                tmp->next_v = createEmptyLevelCell(value);        // Creation of a new cell with the value of the cell
+                tmp = tmp->next_v;                                   // Creation of a new cell with the value of the cell
             }
         }
         return newhead;
     }
-    return NULL;                                       // Return the new head of the vertical list
+    return NULL;                                                     // Return the new head of the vertical list
 
 }
 
