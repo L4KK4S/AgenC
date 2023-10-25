@@ -37,11 +37,11 @@ p_list createEmptyLevelListCell(int x) {                           // This funct
 
 p_list addVtabList(int levels) {                                            // This function adds a vertical tab to a cell
 
-    if (levels>1) {
+    if (levels>=1) {
         p_list newhead = createEmptyLevelListCell(levels);               // Creation of a new cell with the level x
         p_list tmp = newhead;                                               // Creation of a temporary cell to browse the list
-        if (levels > 2) {
-            for (int i = 0; i < levels - 2; i++) {                          // Loop with n(=number of levels) iterations
+        if (levels >= 2) {
+            for (int i = 0; i < levels - 1; i++) {                          // Loop with n(=number of levels) iterations
                 tmp->next_v = createEmptyLevelListCell(levels);          // Creation of a new cell with the value of the cell
                 tmp = tmp->next_v;                                          // Creation of a new cell with the value of the cell
             }
@@ -112,7 +112,7 @@ void show_level(p_list list, int level) {
     printf("-->NULL\n");                                                            // Special print to indicate the end of the level list
 }
 int checkListCompatibility(p_list list, int level) {
-    if (level+1>list->level) {                                                        // Check if the level is superior than the max level of the list
+    if (level>list->level) {                                                        // Check if the level is superior than the max level of the list
         return 0;
     } else {
         return 1;
