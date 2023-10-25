@@ -16,6 +16,8 @@
 
 // -------------------------- Functions --------------------------
 
+
+
 p_cell createEmptyCell(int x, int levels) {               // This function creates an empty cell with an level
 
     p_cell new_cell = (p_cell) malloc(sizeof(t_cell));    // Allocation of memory for the new cell
