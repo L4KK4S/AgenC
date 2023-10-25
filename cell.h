@@ -28,10 +28,10 @@ typedef struct s_cell{                          // Structure of a cell
 // -------------------------- Prototypes --------------------------
 
 p_cell createEmptyCell(int, int);               // Creates an empty cell with vertical tab
-p_cell createEmptyLevelCell(p_cell, int);               // Creates an empty cell without vertical tab
-p_cell addVtabCell(p_cell prev, int levels);                   // Adds a vertical tab to a cell
+p_cell createEmptyLevelCell(p_cell, int);       // Creates an empty cell without vertical tab
+p_cell addVtabCell(p_cell prev, int levels);    // Adds a vertical tab to a cell
 int cellLength(p_cell);                         // Returns the number of characters of a cell value
-int isNotSame (p_cell, p_cell);                 // Checks if a value is in the level
+int isNotSame (p_cell, p_cell);                 // Check if the level cell is the same as the level 0 cell
 void displayCell(p_cell);                       // Display a cell
 void insertCell(p_cell cell, p_list list);      // Insert a cell while keeping the list in order
 

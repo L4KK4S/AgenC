@@ -88,13 +88,15 @@ int cellLength (p_cell cell) {                            // This function retur
 }
 
 int isNotSame (p_cell cell, p_cell cur) {                 // Checks if a value is in the level
+    if (cell==NULL) {                                     // case where cell is NULL, mean no more case on the level and have to print '-'
+        return 1;
+    }
+    p_cell tmp = cell;                                    // To reduce the check we go from the cell to the level 0
 
-    p_cell tmp = cell;
-
-    while(tmp->prev_v != NULL) {                                  // Looking for the value, while we can pass to the next one
+    while(tmp->prev_v != NULL) {                          // Loop to go to level 0
         tmp=tmp->prev_v;
     }
-    if (tmp==cur) {
+    if (tmp==cur) {                                       // If it's the same memory cell it mean the level cell is the same case
         return 0;
     }
     return 1;

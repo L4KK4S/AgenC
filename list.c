@@ -64,7 +64,7 @@ void uniform_display_list (p_list list) {
         p_cell tmp_h = tmp_v->head_h;                                               // Set a moving variable to go through every level
 
         while (level0cur!=NULL) {                                                   // Loop to go through all cell of the first level each level (and see if cell are there or not)
-            if (isNotSame(tmp_h, level0cur)) {         // Check if it has to print the cell
+            if (isNotSame(tmp_h, level0cur)) {                            // Check if it has to print the cell
                 for (int i = 0; i < cellLength(level0cur)+3; i++) {            // Case where cell is not on the level, then we print "-" for the length of the correspondant cell at level 0 to keep it align
                     printf("-");
                 }

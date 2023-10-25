@@ -15,15 +15,15 @@
 
 
 int get_inputs (char* input) {
-    char* functions[12] = {"error", "exit", "help",                             // List of all available function in argument order to compare the input
+    char* functions[11] = {"error", "exit", "help",                             // List of all available function in argument order to compare the input
                            "show list","create list", "switch list",
                            "delete list", "delete cell", "show level"
-                           , "std search", "dtc search", "create cell"};
+                           , "search","create cell"};
     int j, True;                                                                             // Set some variable to parcour and test the different strings
     if (input[strlen(input)-2]==' ') {                                                    // Case where there is a space at the end of the input
         return 0;
     }
-    for(int i = 1 ; i<12 ; i++) {                                                            // Loop to test all the different string
+    for(int i = 1 ; i<11 ; i++) {                                                            // Loop to test all the different string
         if (strlen(input) >= strlen(functions[i])) {                                   // Check if the string is longer or equal (argument or '\0') may work with >
             j=0, True = 1;                                                                   // Reset the test condition for each strings
             while (functions[i][j]!='\0' && True==1) {                                       // Loop to test while the input arrive at the end or True is still 1
@@ -72,7 +72,7 @@ int arguments(char *input, int index, int* args) {
     int i=0, count=0;
 
 
-    if (index>2) {                                                                                              // If the index > 2, it mean there is a space in the word, to avoid false positive, we start to count at 8
+    if (index>2 && index!=9) {                                                                                  // If the index > 2, it mean there is a space in the word, to avoid false positive, we start to count at 8, there is an exception for 9 because the funciton is "search"
         i=8;
     }
 
@@ -102,7 +102,7 @@ int arguments(char *input, int index, int* args) {
         return count;                                                                                           // As we have to return an int value, we return the number of space (useless)
     } else if (index > 3 && index <=10 && count==1) {                                                           // Test for 1 argument functions
         return count;
-    } else if (index==11 && count==2){                                                                          // Test for 2 arguments functions
+    } else if (index==10 && count==2){                                                                          // Test for 2 arguments functions
         return count;
     } else {
         return -1;                                                                                              // If the test is wrong we return the error code -1

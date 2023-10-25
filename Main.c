@@ -23,7 +23,7 @@
 
 int main() {
 
-    printf("Hello World! Bienvenue sur AgenC, una agenda bien agence!\n\n");
+    printf("\nWelcome to AgenC, please type a command or type help if needed :\n\n");
 
     // ------------------------- Variable definition --------------------------
 
@@ -52,7 +52,27 @@ int main() {
                 exit=1;
                 break;
             case 2:
-                printf("help : not coded for now\n");
+                printf("\n======================= Available Functions =======================\n\n"
+                       "\033[0mGeneral Functions :\033[0;37m \n"
+                       "\t - \033[0;36mhelp\033[0;37m : show all function available\n"
+                       "\t - \033[0;36mexit\033[0;37m : quit the program\n"
+                       "\033[0mPrinting Functions :\033[0;37m \n"
+                       "\t - \033[0;36mshow list\033[0;37m : show the memory structure of the current list\n"
+                       "\t\t\t\t \033[0;35m<standard>\033[0;37m : show the memory structure of the list level by level\n"
+                       "\t\t\t\t \033[0;35m<align>\033[0;37m : show an align version of the memory structure of the list\n"
+                       "\t - \033[0;36mshow level \033[0;34mID\033[0;37m : show a specific level\n"
+                       "\033[0mList Functions :\033[0;37m\n"
+                       "\t - \033[0;36mcreate list \033[0;34m(max number of level)\033[0;37m : create a list with a max level number\n"
+                       "\t - \033[0;36mswitch list \033[0;34mID\033[0;37m : change the current list\n"
+                       "\t - \033[0;36mdelete list \033[0;34mID\033[0;37m : delete a list with it ID\n"
+                       "\033[0mCellFunctions :\033[0;37m\n"
+                       "\t - \033[0;36mcreate cell \033[0;34m(value) (max number of level)\033[0;37m : create a cell on a max number of level stocking a specific value\n"
+                       "\033[0mSearch Functions :\033[0;37m\n"
+                       "\t - \033[0;36msearch \033[0;34m(value)\033[0;37m : you can choose the way to search your value\n\033[0m"
+                       "\t\t\t\t \033[0;35m<standard>\033[0;37m : classic search at level 0\n"
+                       "\t\t\t\t \033[0;35m<dichotomic>\033[0;37m : faster search using classification and level\n\n\033[0m"
+                       ""
+                       "");
                 break;
             case 3:
                 if (allList[list_index]!=NULL) {
@@ -110,9 +130,6 @@ int main() {
                 printf("std search : not coded for now\n");
                 break;
             case 10:
-                printf("dtc search : not coded for now\n");
-                break;
-            case 11:
                 if (allList[list_index]!=NULL) {
                     if ((checkListCompatibility(allList[list_index], function_argument[1])) == 1) {
                         p_cell new = createEmptyCell(function_argument[0], function_argument[1]);
