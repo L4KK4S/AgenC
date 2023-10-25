@@ -31,7 +31,6 @@ p_list addVtabList(p_list, int );                      // Function to chained a 
 void uniform_display_list (p_list);             // This function displays the list while keeping align
 void display_list(p_list list);                      // This function displays the list by levels
 void show_level(p_list list, int level);             // This function displays a specific level
-int checkListCompatibility(p_list list, int level);  // Test to check if the level asked is superior to the max level list
 int checkIfAlreadyInList(p_list list, int value);    // Test to check if the value is already in the list
 
 

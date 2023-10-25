@@ -115,13 +115,9 @@ int main() {
             case 11:
                 if (allList[list_index]!=NULL) {
                     if ((checkListCompatibility(allList[list_index], function_argument[1])) == 1) {
-                        if ((checkIfAlreadyInList(allList[list_index], function_argument[0])) == 0) {
-                            p_cell new = createEmptyCell(function_argument[0], function_argument[1]);
-                            insertCell(new, allList[list_index]);
-                            printf("Cell created with success\n");
-                        } else {
-                            printf("Value is already in the list !\n");
-                        }
+                        p_cell new = createEmptyCell(function_argument[0], function_argument[1]);
+                        insertCell(new, allList[list_index]);
+                        printf("Cell created with success\n");
                     } else {
                         printf("Can't create a cell of level %d in a list of level %d\n", function_argument[1], allList[list_index]->level);
                     }

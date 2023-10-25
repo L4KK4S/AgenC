@@ -87,21 +87,17 @@ int cellLength (p_cell cell) {                            // This function retur
     
 }
 
-int NotInTheLevel (p_cell head, int val) {                 // Checks if a value is in the level
+int isNotSame (p_cell cell, p_cell cur) {                 // Checks if a value is in the level
 
-    p_cell tmp = head;
+    p_cell tmp = cell;
 
-    while(tmp != NULL) {                                  // Looking for the value, while we can pass to the next one
-
-        if (tmp->value == val){                           // If we found it we return 1
-            return 0;
-        }
-
-        tmp = tmp->next_h;                                // We pass to the next cell
-
+    while(tmp->prev_v != NULL) {                                  // Looking for the value, while we can pass to the next one
+        tmp=tmp->prev_v;
     }
-
-    return 1;                                             // If the while loop ends, it means that we haven't found the value
+    if (tmp==cur) {
+        return 0;
+    }
+    return 1;
 }
 
 void displayCell(p_cell cell){                            // This function display a cell
@@ -149,11 +145,11 @@ void insertCell(p_cell cell, p_list list) {
         if (tmp_h==NULL) {                                                              // If the level is empty create the new head of the level
             tmp_vList->head_h = tmp_vCell;
         } else {
-            if (tmp_h->value > cell->value && tmp_h == tmp_vList->head_h) {             // If the new cell has to be inserted on the head of the list
+            if (tmp_h->value >= cell->value && tmp_h == tmp_vList->head_h) {             // If the new cell has to be inserted on the head of the list
                 tmp_vCell->next_h=tmp_vList->head_h;
                 tmp_vList->head_h = tmp_vCell;
             } else {
-                while (tmp_h->value < cell->value && tmp_h->next_h!=NULL) {             // Loop to move the cursor just after the emplacement to insert or at the end (as this two idea are not the same emplacmeent condition, this mays be optimizable)
+                while (tmp_h->value <= cell->value && tmp_h->next_h!=NULL) {             // Loop to move the cursor just after the emplacement to insert or at the end (as this two idea are not the same emplacmeent condition, this mays be optimizable)
                     prev= tmp_h;
                     tmp_h=tmp_h->next_h;
                 }

@@ -64,8 +64,8 @@ void uniform_display_list (p_list list) {
         p_cell tmp_h = tmp_v->head_h;                                               // Set a moving variable to go through every level
 
         while (level0cur!=NULL) {                                                   // Loop to go through all cell of the first level each level (and see if cell are there or not)
-            if (NotInTheLevel(tmp_v->head_h, level0cur->value)) {          // Check if it has to print the cell
-                for (int i = 0; i < cellLength(level0cur)+3; i++) {             // Case where cell is not on the level, then we print "-" for the length of the correspondant cell at level 0 to keep it align
+            if (isNotSame(tmp_h, level0cur)) {         // Check if it has to print the cell
+                for (int i = 0; i < cellLength(level0cur)+3; i++) {            // Case where cell is not on the level, then we print "-" for the length of the correspondant cell at level 0 to keep it align
                     printf("-");
                 }
             } else {                                                                // Case where we have to print the cell
@@ -119,17 +119,6 @@ int checkListCompatibility(p_list list, int level) {
     } else {
         return 1;
     }
-}
-
-int checkIfAlreadyInList(p_list list, int value) {
-    p_cell tmp = list->head_h;                                                      // Set a moving pointer at the head of the level 0
-    while (tmp!=NULL) {                                                             // Loop to check all value
-        if (tmp->value==value) {                                                    // If the value is already in the list we return 1
-            return 1;
-        }
-        tmp=tmp->next_h;
-    }
-    return 0;                                                                       // If not we return 0
 }
 
 
