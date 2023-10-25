@@ -23,32 +23,35 @@ p_cell createEmptyCell(int x, int levels) {               // This function creat
     p_cell new_cell = (p_cell) malloc(sizeof(t_cell));    // Allocation of memory for the new cell
     new_cell->value = x;                                  // Initialization of the value of the cell
     new_cell->next_h = NULL;                              // Initialization of the pointer to the next cell horizontally
-    new_cell->next_v = addVtabCell(x, levels);         // Initialization of the pointer to the next cell vertically
+    new_cell->next_v = addVtabCell(new_cell, levels);;     // Initialization of the pointer to the next cell vertically
+    new_cell->prev_v = NULL;
+
 
     return new_cell;                                      // Return the new cell
 
 }
 
-p_cell createEmptyLevelCell(int x) {                      // This function creates an empty cell without an level
+p_cell createEmptyLevelCell(p_cell prev, int x) {                      // This function creates an empty cell without an level
 
     p_cell new_cell = (p_cell) malloc (sizeof(t_cell));   // Allocation of memory for the new cell
 
     new_cell->value = x;                                  // Initialization of the value of the cell
     new_cell->next_h = NULL;                              // Initialization of the pointer to the next cell horizontally
     new_cell->next_v = NULL;                              // Initialization of the pointer to the next cell vertically
+    new_cell->prev_v = prev;
 
     return new_cell;                                      // Return the new cell
 
 }
 
-p_cell addVtabCell(int value, int levels) {                          // This function adds a vertical tab to a cell
+p_cell addVtabCell(p_cell root, int levels) {                          // This function adds a vertical tab to a cell
 
     if (levels>=1) {
-        p_cell newhead = createEmptyLevelCell(value);             // Creation of a new cell with the level x
+        p_cell newhead = createEmptyLevelCell(root, root->value);             // Creation of a new cell with the level x
         p_cell tmp = newhead;                                        // Creation of a temporary cell to browse the list
         if (levels >= 2) {
             for (int i = 0; i < levels - 1; i++) {                   // Loop with n(=number of levels) iterations
-                tmp->next_v = createEmptyLevelCell(value);        // Creation of a new cell with the value of the cell
+                tmp->next_v = createEmptyLevelCell(tmp, root->value);        // Creation of a new cell with the value of the cell
                 tmp = tmp->next_v;                                   // Creation of a new cell with the value of the cell
             }
         }

@@ -184,7 +184,7 @@ p_list createChaoticValueList() {
 }
 
 p_list createWaveFormList() {
-    p_list liste = createEmptylistCell(6);
+    p_list liste = createEmptylistCell(5);
     p_cell cell1 = createEmptyCell(2, 0);
     p_cell cell2 = createEmptyCell(4, 1);
     p_cell cell3 = createEmptyCell(6, 2);
@@ -209,7 +209,7 @@ p_list createWaveFormList() {
 }
 
 p_list createWaveFormList2() {
-    p_list liste = createEmptylistCell(6);
+    p_list liste = createEmptylistCell(5);
     p_cell cell1 = createEmptyCell(-2, 3);
     p_cell cell2 = createEmptyCell(4, 3);
     p_cell cell3 = createEmptyCell(-6, 2);
