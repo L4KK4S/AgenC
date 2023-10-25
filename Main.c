@@ -54,7 +54,7 @@ int main() {
             case 2:
                 printf("\n======================= Available Functions =======================\n\n"
                        "\033[0mGeneral Functions :\033[0;37m \n"
-                       "\t - \033[0;36mhelp\033[0;37m : show all function available\n"
+                       "\t - \033[0;36mhelp\033[0;37m : show all available functions\n"
                        "\t - \033[0;36mexit\033[0;37m : quit the program\n"
                        "\033[0mPrinting Functions :\033[0;37m \n"
                        "\t - \033[0;36mshow list\033[0;37m : show the memory structure of the current list\n"
