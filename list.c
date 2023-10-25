@@ -112,7 +112,7 @@ void show_level(p_list list, int level) {
     printf("-->NULL\n");                                                            // Special print to indicate the end of the level list
 }
 int checkListCompatibility(p_list list, int level) {
-    if (level>list->level) {                                                        // Check if the level is superior than the max level of the list
+    if (level+1>list->level) {                                                        // Check if the level is superior than the max level of the list
         return 0;
     } else {
         return 1;
