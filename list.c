@@ -18,82 +18,48 @@
 p_list createEmptylistCell(int x) {                            // This function creates an empty list
 
     p_list new_list = (p_list) malloc(sizeof(t_list));     // Allocation of memory for the new list
-    new_list->level = x;                                       // Initialization of the level of the list
-    new_list->head_h = NULL;                                   // Initialization of the pointer to the head of the horizontal list
-    new_list->next_v = addVtabList(new_list, x);                    // Initialization of the pointer to the head of the vertical list
-    new_list->prev_v=NULL;
-
+    new_list->max_levels = x;                                       // Initialization of the level of the list
+    new_list->levels = (p_cell*) malloc (x*sizeof(p_cell));
     return new_list;                                           // Return the new list
 }
 
-p_list createEmptyLevelListCell(p_list prev, int x) {                           // This function creates an empty list
-
-    p_list new_list = (p_list) malloc(sizeof(t_list));         // Allocation of memory for the new list
-    new_list->level = x;                                           // Initialization of the level of the list
-    new_list->head_h = NULL;                                       // Initialization of the pointer to the head of the horizontal list
-    new_list->next_v = NULL;                                       // Initialization of the pointer to the head of the vertical list
-    new_list->prev_v = prev;
-
-    return new_list;                                               // Return the new list
-}
-
-p_list addVtabList(p_list root, int levels) {                                            // This function adds a vertical tab to a cell
-
-    if (levels>=1) {
-        p_list newhead = createEmptyLevelListCell(root, levels);               // Creation of a new cell with the level x
-        p_list tmp = newhead;                                               // Creation of a temporary cell to browse the list
-        if (levels >= 2) {
-            for (int i = 0; i < levels - 1; i++) {                          // Loop with n(=number of levels) iterations
-                tmp->next_v = createEmptyLevelListCell(tmp, levels);          // Creation of a new cell with the value of the cell
-                tmp = tmp->next_v;                                          // Creation of a new cell with the value of the cell
-            }
-        }
-        return newhead;
-    }
-    return NULL;                                                            // Return the new head of the vertical list
-
-}
 
 void uniform_display_list (p_list list) {
+    p_cell level0cur;                                           // Create a cursor to compare to higher value (because the first level will be the most complete, we have to check if we have to fill higher level or not)
+    p_cell tmp_h;     // Create anb int variable to indicate the level
 
-    p_list tmp_v = list;                                                            // Set a moving variable at the level 0 list
-    int level = 0;                                                                  // Create anb int variable to indicate the level
-    while (tmp_v!=NULL) {                                                           // Loop which stop when all level are printed
-        printf("[list head_%d @-]",level);                                          // Special printing for the head of the list
-        p_cell level0cur = list->head_h;                                            // Create a cursor to compare to higher value (because the first level will be the most complete, we have to check if we have to fill higher level or not)
-        p_cell tmp_h = tmp_v->head_h;                                               // Set a moving variable to go through every level
+    for (int i = 0 ; i<list->max_levels ; i++){                                                           // Loop which stop when all level are printed
+        printf("[list head_%d @-]",i);                                          // Special printing for the head of the list
+        tmp_h = list->levels[i];                                               // Set a moving variable to go through every level
+        level0cur = list->levels[0];
 
         while (level0cur!=NULL) {                                                   // Loop to go through all cell of the first level each level (and see if cell are there or not)
-            if (isNotSame(tmp_h, level0cur)) {                            // Check if it has to print the cell
-                for (int i = 0; i < cellLength(level0cur)+3; i++) {            // Case where cell is not on the level, then we print "-" for the length of the correspondant cell at level 0 to keep it align
+            if (tmp_h!=level0cur) {                            // Check if it has to print the cell
+                for (int j = 0; j < cellLength(level0cur)+3; j++) {            // Case where cell is not on the level, then we print "-" for the length of the correspondant cell at level 0 to keep it align
                     printf("-");
                 }
             } else {                                                                // Case where we have to print the cell
-                printf("-->[ %d|@-]", level0cur->value);                            // Special print for the cell
+                printf("-->[ %d|@-]", tmp_h->value);                            // Special print for the cell
                 tmp_h = tmp_h->next_h;                                              // If we have printed the cell on the level we can move to the next one to continue the checking for missing cell in between
             }
             level0cur = level0cur->next_h;                                          // Move the checking cursor on the level 0
 
         }
         printf("-->NULL\n");                                                        // Special print to indicate the end of the level list
-        tmp_v = tmp_v->next_v;                                                      // Update the level cursor
-        level++;                                                                    // Update the level variable
     }
 }
 
 void display_list (p_list list) {
 
-    p_list tmp_v = list;                                                            // Set a moving variable at the level 0 list
     int level = 0;                                                                  // Create anb int variable to indicate the level
-    while (tmp_v!=NULL) {                                                           // Loop which stop when all level are printed
+    for (int i = 0 ; i<list->max_levels ; i++) {                                                           // Loop which stop when all level are printed
         printf("[list head_%d @-]",level);                                          // Special printing for the head of the list
-        p_cell tmp_h = tmp_v->head_h;                                               // Set the moving pointer to the head of the level
+        p_cell tmp_h = list->levels[level];                                               // Set the moving pointer to the head of the level
         while (tmp_h!=NULL){
             printf("-->[ %d|@-]", tmp_h->value);                                    // Special print for the cell
             tmp_h = tmp_h->next_h;                                                  // Incrementing the moving pointer
         }
         printf("-->NULL\n");                                                        // Special print to indicate the end of the level list
-        tmp_v = tmp_v->next_v;                                                      // Update the level cursor
         level++;                                                                    // Update the level variable
     }
 }
@@ -102,10 +68,7 @@ void show_level(p_list list, int level) {
     p_list tmp_v = list;                                                            // Set a moving pointer which will go to the different level
     p_cell tmp_h;                                                                   // Set a moving pointer which will go through the levels
 
-    for (int i = 0 ; i<level ; i++) {                                               // Set the moving pointer to the right level
-        tmp_v=tmp_v->next_v;
-    }
-    tmp_h = tmp_v->head_h;                                                          // Set the moving pointer to the head of the right level
+    tmp_h = list->levels[level];                                                         // Set the moving pointer to the head of the right level
     printf("[list head_%d @-]",level);                                              // Special printing for the head of the list
     while (tmp_h!=NULL) {                                                           // Loop to print all elements from a level
         printf("-->[ %d|@-]", tmp_h->value);                                        // Special print for the cell
@@ -114,7 +77,7 @@ void show_level(p_list list, int level) {
     printf("-->NULL\n");                                                            // Special print to indicate the end of the level list
 }
 int checkListCompatibility(p_list list, int level) {
-    if (level>list->level) {                                                        // Check if the level is superior than the max level of the list
+    if (level>list->max_levels) {                                                        // Check if the level is superior than the max level of the list
         return 0;
     } else {
         return 1;
@@ -122,7 +85,7 @@ int checkListCompatibility(p_list list, int level) {
 }
 
 int std_search(p_list list, int value) {
-    p_cell tmp = list->head_h;
+    p_cell tmp = list->levels[0];
     while (tmp!=NULL) {
         if (tmp->value==value) {
             return 1;
@@ -131,6 +94,8 @@ int std_search(p_list list, int value) {
     }
     return 0;
 }
+
+
 
 
 // -------------------------- Tests Lists Functions --------------------------
@@ -147,16 +112,16 @@ p_list createOrderedList() {
     p_cell cell8 = createEmptyCell(3, 0);
     p_cell cell9 = createEmptyCell(6, 0);
     p_cell cell10 = createEmptyCell(1, 3);
-    insertCell(cell1, liste);
-    insertCell(cell2, liste);
-    insertCell(cell3, liste);
-    insertCell(cell4, liste);
-    insertCell(cell5, liste);
-    insertCell(cell6, liste);
-    insertCell(cell7, liste);
-    insertCell(cell8, liste);
-    insertCell(cell9, liste);
-    insertCell(cell10, liste);
+    insertCell(cell1, liste, 1);
+    insertCell(cell2, liste, 2);
+    insertCell(cell3, liste, 3);
+    insertCell(cell4, liste, 5);
+    insertCell(cell5, liste, 4);
+    insertCell(cell6, liste, 2);
+    insertCell(cell7, liste, 2);
+    insertCell(cell8, liste, 0);
+    insertCell(cell9, liste, 0);
+    insertCell(cell10, liste, 3);
     return liste;
 }
 
@@ -172,16 +137,16 @@ p_list createChaoticValueList() {
     p_cell cell8 = createEmptyCell(7, 0);
     p_cell cell9 = createEmptyCell(5, 0);
     p_cell cell10 = createEmptyCell(102, 3);
-    insertCell(cell1, liste);
-    insertCell(cell2, liste);
-    insertCell(cell3, liste);
-    insertCell(cell4, liste);
-    insertCell(cell5, liste);
-    insertCell(cell6, liste);
-    insertCell(cell7, liste);
-    insertCell(cell8, liste);
-    insertCell(cell9, liste);
-    insertCell(cell10, liste);
+    insertCell(cell1, liste, 1);
+    insertCell(cell2, liste, 2);
+    insertCell(cell3, liste, 0);
+    insertCell(cell4, liste, 5);
+    insertCell(cell5, liste, 4);
+    insertCell(cell6, liste, 2);
+    insertCell(cell7, liste, 2);
+    insertCell(cell8, liste, 0);
+    insertCell(cell9, liste, 0);
+    insertCell(cell10, liste, 3);
     return liste;
 }
 
@@ -197,16 +162,16 @@ p_list createWaveFormList() {
     p_cell cell8 = createEmptyCell(16, 3);
     p_cell cell9 = createEmptyCell(18, 2);
     p_cell cell10 = createEmptyCell(20, 1);
-    insertCell(cell1, liste);
-    insertCell(cell2, liste);
-    insertCell(cell3, liste);
-    insertCell(cell4, liste);
-    insertCell(cell5, liste);
-    insertCell(cell6, liste);
-    insertCell(cell7, liste);
-    insertCell(cell8, liste);
-    insertCell(cell9, liste);
-    insertCell(cell10, liste);
+    insertCell(cell1, liste, 0);
+    insertCell(cell2, liste,1);
+    insertCell(cell3, liste, 2);
+    insertCell(cell4, liste, 3);
+    insertCell(cell5, liste, 4);
+    insertCell(cell6, liste, 5);
+    insertCell(cell7, liste, 4);
+    insertCell(cell8, liste, 3);
+    insertCell(cell9, liste, 2);
+    insertCell(cell10, liste, 1);
     return liste;
 }
 
@@ -222,15 +187,15 @@ p_list createWaveFormList2() {
     p_cell cell8 = createEmptyCell(16, 5);
     p_cell cell9 = createEmptyCell(-18, 5);
     p_cell cell10 = createEmptyCell(20, 1);
-    insertCell(cell1, liste);
-    insertCell(cell2, liste);
-    insertCell(cell3, liste);
-    insertCell(cell4, liste);
-    insertCell(cell5, liste);
-    insertCell(cell6, liste);
-    insertCell(cell7, liste);
-    insertCell(cell8, liste);
-    insertCell(cell9, liste);
-    insertCell(cell10, liste);
+    insertCell(cell1, liste, 3);
+    insertCell(cell2, liste,3);
+    insertCell(cell3, liste, 2);
+    insertCell(cell4, liste, 4);
+    insertCell(cell5, liste, 4);
+    insertCell(cell6, liste, 2);
+    insertCell(cell7, liste, 1);
+    insertCell(cell8, liste, 5);
+    insertCell(cell9, liste, 5);
+    insertCell(cell10, liste, 1);
     return liste;
 }

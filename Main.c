@@ -35,9 +35,9 @@ int main() {
     // ------------------------- Test list definition --------------------------
 
     allList[1] = createOrderedList();
-    allList[2] = createChaoticValueList();
-    allList[3] = createWaveFormList();
-    allList[4] = createWaveFormList2();
+    //allList[2] = createChaoticValueList();
+    //allList[3] = createWaveFormList();
+    //allList[4] = createWaveFormList2();
 
     while (exit==0) {
         do {
@@ -160,12 +160,12 @@ int main() {
                             printf("head insertion not coded yet\n");
                         } else if (get_option(input) == 5){
                             p_cell new = createEmptyCell(function_argument[0], function_argument[1]);
-                            insertCell(new, allList[list_index]);
+                            insertCell(new, allList[list_index], function_argument[1]);
                             printf("Cell created with success\n");
                         }
 
                     } else {
-                        printf("Can't create a cell of level %d in a list of level %d\n", function_argument[1], allList[list_index]->level);
+                        printf("Can't create a cell of level %d in a list of level %d\n", function_argument[1], allList[list_index]->max_levels);
                     }
                 } else {
                     printf("Can't create a cell in an empty list. Please create a list first\n");
