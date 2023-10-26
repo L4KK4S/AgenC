@@ -34,15 +34,15 @@ void uniform_display_list (p_list list) {
         level0cur = list->levels[0];
 
         while (level0cur!=NULL) {                                                   // Loop to go through all cell of the first level each level (and see if cell are there or not)
-            if (tmp_h!=level0cur) {                            // Check if it has to print the cell
+            if (tmp_h!=level0cur || tmp_h==NULL) {                            // Check if it has to print the cell
                 for (int j = 0; j < cellLength(level0cur)+3; j++) {            // Case where cell is not on the level, then we print "-" for the length of the correspondant cell at level 0 to keep it align
                     printf("-");
                 }
             } else {                                                                // Case where we have to print the cell
                 printf("-->[ %d|@-]", tmp_h->value);                            // Special print for the cell
-                tmp_h = tmp_h->next_h;                                              // If we have printed the cell on the level we can move to the next one to continue the checking for missing cell in between
+                tmp_h = tmp_h->levels[i];                                              // If we have printed the cell on the level we can move to the next one to continue the checking for missing cell in between
             }
-            level0cur = level0cur->next_h;                                          // Move the checking cursor on the level 0
+            level0cur = level0cur->levels[0];                                          // Move the checking cursor on the level 0
 
         }
         printf("-->NULL\n");                                                        // Special print to indicate the end of the level list
@@ -50,17 +50,14 @@ void uniform_display_list (p_list list) {
 }
 
 void display_list (p_list list) {
-
-    int level = 0;                                                                  // Create anb int variable to indicate the level
     for (int i = 0 ; i<list->max_levels ; i++) {                                                           // Loop which stop when all level are printed
-        printf("[list head_%d @-]",level);                                          // Special printing for the head of the list
-        p_cell tmp_h = list->levels[level];                                               // Set the moving pointer to the head of the level
+        printf("[list head_%d @-]",i);                                          // Special printing for the head of the list
+        p_cell tmp_h = list->levels[i];                                               // Set the moving pointer to the head of the level
         while (tmp_h!=NULL){
             printf("-->[ %d|@-]", tmp_h->value);                                    // Special print for the cell
-            tmp_h = tmp_h->next_h;                                                  // Incrementing the moving pointer
+            tmp_h = tmp_h->levels[i];                                                  // Incrementing the moving pointer
         }
         printf("-->NULL\n");                                                        // Special print to indicate the end of the level list
-        level++;                                                                    // Update the level variable
     }
 }
 
@@ -72,7 +69,7 @@ void show_level(p_list list, int level) {
     printf("[list head_%d @-]",level);                                              // Special printing for the head of the list
     while (tmp_h!=NULL) {                                                           // Loop to print all elements from a level
         printf("-->[ %d|@-]", tmp_h->value);                                        // Special print for the cell
-        tmp_h=tmp_h->next_h;
+        tmp_h=tmp_h->levels[level];
     }
     printf("-->NULL\n");                                                            // Special print to indicate the end of the level list
 }
@@ -90,7 +87,7 @@ int std_search(p_list list, int value) {
         if (tmp->value==value) {
             return 1;
         }
-        tmp=tmp->next_h;
+        tmp=tmp->levels[0];
     }
     return 0;
 }

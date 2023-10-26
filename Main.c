@@ -34,7 +34,7 @@ int main() {
 
     // ------------------------- Test list definition --------------------------
 
-    allList[1] = createOrderedList();
+    //allList[1] = createOrderedList();
     //allList[2] = createChaoticValueList();
     //allList[3] = createWaveFormList();
     //allList[4] = createWaveFormList2();

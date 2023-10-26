@@ -63,30 +63,28 @@ int cellLength (p_cell cell) {                            // This function retur
 
 
 void insertCell(p_cell cell, p_list list, int level) {
-    p_cell tmp_vCell = cell;                                                            // Moving variable to indicate the Vertical cell we're linking
     p_cell tmp_h;                                                                       // Moving variable to move in the different levels
-    p_cell prev;                                                                // Set a previous cursor variable
+    p_cell prev;                                                                        // Set a previous cursor variable
 
     for (int i = 0 ; i<level ; i++) {
         tmp_h = list->levels[i];
         if (tmp_h==NULL) {                                                              // If the level is empty create the new head of the level
             list->levels[i] = cell;
         } else {
-            if (tmp_h->value >= cell->value && tmp_h == list->levels[i]) {             // If the new cell has to be inserted on the head of the list
-                tmp_h->next_h = list->levels[i];
-                list->levels[i] = tmp_h;
+            if (tmp_h->value >= cell->value) {             // If the new cell has to be inserted on the head of the list
+                cell->levels[i] = list->levels[i];
+                list->levels[i] = cell;
             } else {
-                while (tmp_h->value <= cell->value && tmp_h->next_h!=NULL) {             // Loop to move the cursor just after the emplacement to insert or at the end (as this two idea are not the same emplacmeent condition, this mays be optimizable)
+                while (tmp_h->value <= cell->value && tmp_h->levels[i]!=NULL) {             // Loop to move the cursor just after the emplacement to insert or at the end (as this two idea are not the same emplacmeent condition, this mays be optimizable)
                     prev = tmp_h;
-                    tmp_h=tmp_h->next_h;
+                    tmp_h=tmp_h->levels[i];
                 }
 
                 if (tmp_h->value < cell->value) {                                       // Case where the cursor is just after the right place
-                    tmp_vCell->next_h = tmp_h->next_h;
-                    tmp_h->next_h = tmp_vCell;
+                     cell->levels[i] = tmp_h;
+                    prev->levels[i] = cell;
                 } else {                                                                // Case where the cursor is at the end of the list
-                    prev->next_h=tmp_vCell;
-                    tmp_vCell->next_h=tmp_h;
+                    tmp_h->levels[i]=cell;
                 }
             }
 

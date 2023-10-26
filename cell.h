@@ -18,7 +18,6 @@
 typedef struct s_cell{                          // Structure of a cell
 
     int value;                                  // Value of the cell
-    struct s_cell *next_h;
     struct s_cell **levels;
 
 }t_cell, *p_cell;                               // Creation of an alias for the structure
