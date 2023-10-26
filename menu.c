@@ -42,12 +42,12 @@ int get_inputs (char* input) {
 }
 
 int get_option(char* input) {
-    char* functions[4] = {"error", "align", "standard", "dichotomatic"};            // List of all available option
+    char* functions[6] = {"error", "align", "standard", "dichotomous", "head", "ordered"};            // List of all available option
     int j, True;
     if (input[strlen(input)-2]==' ') {                                                             // Case where there is a space at the end of the input
         return 0;
     }
-    for(int i = 1 ; i<4 ; i++) {                                                                      // Loop to test all the different string
+    for(int i = 1 ; i<6 ; i++) {                                                                      // Loop to test all the different string
         if (strlen(input)-1 == strlen(functions[i])) {                                          // Check if there is no argument (option)
             j=0, True = 1;                                                                            // Reset the test condition for each strings
             while (functions[i][j]!='\0' && True==1) {                                                // Loop to test while the input arrive at the end or True is still 1

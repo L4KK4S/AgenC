@@ -67,10 +67,12 @@ int main() {
                        "\t - \033[0;36mdelete list \033[0;34mID\033[0;37m : delete a list with it ID\n"
                        "\033[0mCellFunctions :\033[0;37m\n"
                        "\t - \033[0;36mcreate cell \033[0;34m(value) (max number of level)\033[0;37m : create a cell on a max number of level stocking a specific value\n"
+                       "\t\t\t\t \033[0;35m<head>\033[0;37m : insert the val by the head of the list\n"
+                       "\t\t\t\t \033[0;35m<ordered>\033[0;37m : insert the val in the correct emplacement\n"
                        "\033[0mSearch Functions :\033[0;37m\n"
                        "\t - \033[0;36msearch \033[0;34m(value)\033[0;37m : you can choose the way to search your value\n\033[0m"
                        "\t\t\t\t \033[0;35m<standard>\033[0;37m : classic search at level 0\n"
-                       "\t\t\t\t \033[0;35m<dichotomic>\033[0;37m : faster search using classification and level\n\n\033[0m"
+                       "\t\t\t\t \033[0;35m<dichotomous>\033[0;37m : faster search using classification and level\n\n\033[0m"
                        ""
                        "");
                 break;
@@ -127,14 +129,37 @@ int main() {
                 }
                 break;
             case 9:
-                printf("std search : not coded for now\n");
+                if (allList[list_index]!=NULL) {
+                    printf("Insertion option : head / ordered\n");
+                    while (get_option(input) != 2 && get_option(input) != 3) {
+                        printf("~> ");
+                        fgets(input, 100, stdin);
+                    }
+                    if (get_option(input) == 2) {
+                        printf("std search not coded yet\n");
+                    } else if (get_option(input) == 3) {
+                        printf("dtc search not coded yet\n");
+                    }
+                } else {
+                    printf("Can't search in an empty list. Please create a list first.\n");
+                }
                 break;
             case 10:
                 if (allList[list_index]!=NULL) {
                     if ((checkListCompatibility(allList[list_index], function_argument[1])) == 1) {
-                        p_cell new = createEmptyCell(function_argument[0], function_argument[1]);
-                        insertCell(new, allList[list_index]);
-                        printf("Cell created with success\n");
+                        printf("Insertion option : standard / dichotomous\n");
+                        while (get_option(input)!=4 && get_option(input)!=5) {
+                            printf("~> ");
+                            fgets(input, 100, stdin);
+                        }
+                        if (get_option(input) == 4) {
+                            printf("head insertion not coded yet\n");
+                        } else if (get_option(input) == 5){
+                            p_cell new = createEmptyCell(function_argument[0], function_argument[1]);
+                            insertCell(new, allList[list_index]);
+                            printf("Cell created with success\n");
+                        }
+
                     } else {
                         printf("Can't create a cell of level %d in a list of level %d\n", function_argument[1], allList[list_index]->level);
                     }
