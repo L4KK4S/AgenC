@@ -121,6 +121,17 @@ int checkListCompatibility(p_list list, int level) {
     }
 }
 
+int std_search(p_list list, int value) {
+    p_cell tmp = list->head_h;
+    while (tmp!=NULL) {
+        if (tmp->value==value) {
+            return 1;
+        }
+        tmp=tmp->next_h;
+    }
+    return 0;
+}
+
 
 // -------------------------- Tests Lists Functions --------------------------
 

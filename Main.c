@@ -130,13 +130,17 @@ int main() {
                 break;
             case 9:
                 if (allList[list_index]!=NULL) {
-                    printf("Insertion option : head / ordered\n");
+                    printf("Search option : standard / dichotomous\n");
                     while (get_option(input) != 2 && get_option(input) != 3) {
                         printf("~> ");
                         fgets(input, 100, stdin);
                     }
                     if (get_option(input) == 2) {
-                        printf("std search not coded yet\n");
+                        if (std_search(allList[list_index], function_argument[0])) {
+                            printf("%d is in the list\n", function_argument[0]);
+                        } else {
+                            printf("%d is not in the list\n", function_argument[0]);
+                        }
                     } else if (get_option(input) == 3) {
                         printf("dtc search not coded yet\n");
                     }
@@ -147,7 +151,7 @@ int main() {
             case 10:
                 if (allList[list_index]!=NULL) {
                     if ((checkListCompatibility(allList[list_index], function_argument[1])) == 1) {
-                        printf("Insertion option : standard / dichotomous\n");
+                        printf("Insertion option : head / ordered\n");
                         while (get_option(input)!=4 && get_option(input)!=5) {
                             printf("~> ");
                             fgets(input, 100, stdin);
@@ -168,7 +172,7 @@ int main() {
                 }
                 break;
             default:
-                printf("uncovered case, mistake somewhere in the code\n");
+                printf("Uncovered path - Error in the code\n");
                 break;
         }
     }
