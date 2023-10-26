@@ -1,0 +1,23 @@
+---
+triple:          'x86_64-apple-darwin'
+binary-path:     Main
+relocations:
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _createEmptyCell, symObjAddr: 0x0, symBinAddr: 0x100001D90, symSize: 0x70 }
+  - { offsetInCU: 0xD6, offset: 0xD6, size: 0x8, addend: 0x0, symName: _createEmptyCell, symObjAddr: 0x0, symBinAddr: 0x100001D90, symSize: 0x70 }
+  - { offsetInCU: 0x11A, offset: 0x11A, size: 0x8, addend: 0x0, symName: _cellLength, symObjAddr: 0x70, symBinAddr: 0x100001E00, symSize: 0x90 }
+  - { offsetInCU: 0x16C, offset: 0x16C, size: 0x8, addend: 0x0, symName: _insertCell, symObjAddr: 0x100, symBinAddr: 0x100001E90, symSize: 0x190 }
+  - { offsetInCU: 0x1F2, offset: 0x1F2, size: 0x8, addend: 0x0, symName: _createEmptylistCell, symObjAddr: 0x290, symBinAddr: 0x100002020, symSize: 0x50 }
+  - { offsetInCU: 0x228, offset: 0x228, size: 0x8, addend: 0x0, symName: _uniform_display_list, symObjAddr: 0x2E0, symBinAddr: 0x100002070, symSize: 0x110 }
+  - { offsetInCU: 0x2A0, offset: 0x2A0, size: 0x8, addend: 0x0, symName: _display_list, symObjAddr: 0x3F0, symBinAddr: 0x100002180, symSize: 0xB0 }
+  - { offsetInCU: 0x30A, offset: 0x30A, size: 0x8, addend: 0x0, symName: _show_level, symObjAddr: 0x4A0, symBinAddr: 0x100002230, symSize: 0x80 }
+  - { offsetInCU: 0x358, offset: 0x358, size: 0x8, addend: 0x0, symName: _checkListCompatibility, symObjAddr: 0x520, symBinAddr: 0x1000022B0, symSize: 0x40 }
+  - { offsetInCU: 0x38E, offset: 0x38E, size: 0x8, addend: 0x0, symName: _std_search, symObjAddr: 0x560, symBinAddr: 0x1000022F0, symSize: 0x60 }
+  - { offsetInCU: 0x3D2, offset: 0x3D2, size: 0x8, addend: 0x0, symName: _createOrderedList, symObjAddr: 0x5C0, symBinAddr: 0x100002350, symSize: 0x180 }
+  - { offsetInCU: 0x489, offset: 0x489, size: 0x8, addend: 0x0, symName: _createChaoticValueList, symObjAddr: 0x740, symBinAddr: 0x1000024D0, symSize: 0x180 }
+  - { offsetInCU: 0x540, offset: 0x540, size: 0x8, addend: 0x0, symName: _createWaveFormList, symObjAddr: 0x8C0, symBinAddr: 0x100002650, symSize: 0x190 }
+  - { offsetInCU: 0x5F7, offset: 0x5F7, size: 0x8, addend: 0x0, symName: _createWaveFormList2, symObjAddr: 0xA50, symBinAddr: 0x1000027E0, symSize: 0x1A0 }
+  - { offsetInCU: 0x6AE, offset: 0x6AE, size: 0x8, addend: 0x0, symName: _get_inputs, symObjAddr: 0xBF0, symBinAddr: 0x100002980, symSize: 0x1B0 }
+  - { offsetInCU: 0x721, offset: 0x721, size: 0x8, addend: 0x0, symName: _get_option, symObjAddr: 0xDA0, symBinAddr: 0x100002B30, symSize: 0x190 }
+  - { offsetInCU: 0x793, offset: 0x793, size: 0x8, addend: 0x0, symName: _arguments, symObjAddr: 0xF30, symBinAddr: 0x100002CC0, symSize: 0x2B0 }
+  - { offsetInCU: 0x83D, offset: 0x83D, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x11E0, symBinAddr: 0x100002F70, symSize: 0x668 }
+...
