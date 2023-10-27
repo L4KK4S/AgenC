@@ -15,42 +15,42 @@
 
 // -------------------------- Functions --------------------------
 
-p_list createEmptylistCell(int x) {                            // This function creates an empty list
+p_list createEmptylistCell(int x) {                                                         // This function creates an empty list
 
-    p_list new_list = (p_list) malloc(sizeof(t_list));     // Allocation of memory for the new list
-    new_list->max_levels = x;                                       // Initialization of the level of the list
-    new_list->levels = (p_cell*) malloc ((new_list->max_levels+1)*sizeof(p_cell));
-    return new_list;                                           // Return the new list
+    p_list new_list = (p_list) malloc(sizeof(t_list));                                 // Allocation of memory for the new list
+    new_list->max_levels = x;                                                               // Initialization of the level of the list (Warning we define the level as the id of the last level -> mean level 6 = 7 levels)
+    new_list->levels = (p_cell*) malloc ((new_list->max_levels+1)*sizeof(p_cell));     // Initialization of the tab stocking all level of the list with (level + 1) value because of the level 0
+    return new_list;                                                                        // Return the new list
 }
 
 
 void uniform_display_list (p_list list) {
-    p_cell level0cur;                                           // Create a cursor to compare to higher value (because the first level will be the most complete, we have to check if we have to fill higher level or not)
-    p_cell tmp_h;     // Create anb int variable to indicate the level
+    p_cell level0cur;                                                           // Create a cursor to compare to higher value (because the first level will be the most complete, we have to check if we have to fill higher level or not)
+    p_cell tmp_h;                                                               // Create a cursor pointer to go through each level
 
-    for (int i = 0 ; i<=list->max_levels ; i++){                                                           // Loop which stop when all level are printed
+    for (int i = 0 ; i<=list->max_levels ; i++){                                // Loop which stop when all level including the last one are printed
         printf("[list head_%d @-]",i);                                          // Special printing for the head of the list
-        tmp_h = list->levels[i];                                               // Set a moving variable to go through every level
-        level0cur = list->levels[0];
+        tmp_h = list->levels[i];                                                // Set the pointer to the head of the current level
+        level0cur = list->levels[0];                                            // Reset the level 0 cursor to the first cell of the level 0
 
-        while (level0cur!=NULL) {                                                   // Loop to go through all cell of the first level each level (and see if cell are there or not)
-            if (tmp_h!=level0cur || tmp_h==NULL) {                            // Check if it has to print the cell
-                for (int j = 0; j < cellLength(level0cur)+3; j++) {            // Case where cell is not on the level, then we print "-" for the length of the correspondant cell at level 0 to keep it align
+        while (level0cur!=NULL) {                                               // Loop to go through all cell of the first level each level (and see if cell are there or not)
+            if (tmp_h!=level0cur || tmp_h==NULL) {                              // If the level cursor is not equal to the level 0 cursor it mean the cell aren't on the same level / or if the level cursor is NULL but there are still cell on the first level
+                for (int j = 0; j < cellLength(level0cur)+3; j++) {        // Case where cell is not on the level, then we print "-" for the length of the corresponding cell at level 0 to keep it align
                     printf("-");
                 }
-            } else {                                                                // Case where we have to print the cell
+            } else {                                                            // Case where we have to print the cell
                 printf("-->[ %d|@-]", tmp_h->value);                            // Special print for the cell
-                tmp_h = tmp_h->levels[i];                                              // If we have printed the cell on the level we can move to the next one to continue the checking for missing cell in between
+                tmp_h = tmp_h->levels[i];                                       // If we have printed the cell on the level we can move to the next one to continue the checking for missing cell in between
             }
-            level0cur = level0cur->levels[0];                                          // Move the checking cursor on the level 0
+            level0cur = level0cur->levels[0];                                   // Move the checking cursor on the level 0 to the next value
 
         }
-        printf("-->NULL\n");                                                        // Special print to indicate the end of the level list
+        printf("-->NULL\n");                                                    // Special print to indicate the end of the level list
     }
 }
 
 void display_list (p_list list) {
-    for (int i = 0 ; i<=list->max_levels ; i++) {                                                           // Loop which stop when all level are printed
+    for (int i = 0 ; i<=list->max_levels ; i++) {                               // Loop which stop when all level are printed (<=)
         printf("[list head_%d @-]",i);                                          // Special printing for the head of the list
         p_cell tmp_h = list->levels[i];                                               // Set the moving pointer to the head of the level
         while (tmp_h!=NULL){
@@ -64,11 +64,11 @@ void display_list (p_list list) {
 void show_level(p_list list, int level) {
     p_cell tmp_h;                                                                   // Set a moving pointer which will go through the levels
 
-    tmp_h = list->levels[level];                                                         // Set the moving pointer to the head of the right level
+    tmp_h = list->levels[level];                                                    // Set the moving pointer to the head of the current level
     printf("[list head_%d @-]",level);                                              // Special printing for the head of the list
     while (tmp_h!=NULL) {                                                           // Loop to print all elements from a level
         printf("-->[ %d|@-]", tmp_h->value);                                        // Special print for the cell
-        tmp_h=tmp_h->levels[level];
+        tmp_h=tmp_h->levels[level];                                                 // Incrementing the level cursor
     }
     printf("-->NULL\n");                                                            // Special print to indicate the end of the level list
 }
@@ -81,14 +81,14 @@ int checkListCompatibility(p_list list, int level) {
 }
 
 int std_search(p_list list, int value) {
-    p_cell tmp = list->levels[0];
-    while (tmp!=NULL) {
-        if (tmp->value==value) {
+    p_cell tmp = list->levels[0];                                                   // Set the level cursor to the first cell of the level 0
+    while (tmp!=NULL) {                                                             // Loop to go through every element
+        if (tmp->value==value) {                                                    // If we find the value we return 1
             return 1;
         }
-        tmp=tmp->levels[0];
+        tmp=tmp->levels[0];                                                         // Incrementing the level cursor
     }
-    return 0;
+    return 0;                                                                       // If we haven't found anything at the end of the loop we return 0
 }
 
 

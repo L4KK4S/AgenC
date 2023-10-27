@@ -42,7 +42,7 @@ int get_inputs (char* input) {
 }
 
 int get_option(char* input) {
-    char* functions[6] = {"error", "a", "s", "dichotomous", "head", "o"};            // List of all available option
+    char* functions[6] = {"error", "align", "standard", "dichotomous", "head", "ordered"};            // List of all available option
     int j, True;
     if (input[strlen(input)-2]==' ') {                                                             // Case where there is a space at the end of the input
         return 0;

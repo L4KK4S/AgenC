@@ -18,12 +18,11 @@
 
 
 
-p_cell createEmptyCell(int x, int levels) {               // This function creates an empty cell with an level
+p_cell createEmptyCell(int x, int levels) {                                             // This function creates an empty cell with an level
 
-    p_cell new_cell = (p_cell) malloc(sizeof(t_cell));    // Allocation of memory for the new cell
-    new_cell->value = x;                                  // Initialization of the value of the cell
-    new_cell-> levels = (p_cell*) malloc ((levels+1)*sizeof(p_cell));
-
+    p_cell new_cell = (p_cell) malloc(sizeof(t_cell));                             // Allocation of memory for the new cell
+    new_cell->value = x;                                                                // Initialization of the value of the cell (Warning : level 5 mean AT level 5 = 6 levels in total with level 0)
+    new_cell-> levels = (p_cell*) malloc ((levels+1)*sizeof(p_cell));              // Initialization of a level+1 tab to stock the different level adress of the cell
 
 
     return new_cell;                                      // Return the new cell
@@ -62,25 +61,25 @@ void insertCell(p_cell cell, p_list list, int level) {
     p_cell tmp_h;                                                                       // Moving variable to move in the different levels
     p_cell prev;                                                                        // Set a previous cursor variable
 
-    for (int i = 0 ; i<=level ; i++) {
-        tmp_h = list->levels[i];
+    for (int i = 0 ; i<=level ; i++) {                                                  // Loop to go through all level of the new cell, <= because we count the last level
+        tmp_h = list->levels[i];                                                        // We set the cursor pointer to the first cell of the level
         if (tmp_h==NULL) {                                                              // If the level is empty create the new head of the level
             list->levels[i] = cell;
         } else {
-            if (tmp_h->value >= cell->value) {                                          // If the new cell has to be inserted on the head of the list
+            if (tmp_h->value >= cell->value) {                                          // If the new cell has to be inserted at the head of the list
                 cell->levels[i] = list->levels[i];
                 list->levels[i] = cell;
             } else {
-                while (tmp_h->value <= cell->value && tmp_h->levels[i]!=NULL) {             // Loop to move the cursor just after the emplacement to insert or at the end (as this two idea are not the same emplacmeent condition, this mays be optimizable)
+                while (tmp_h->value <= cell->value && tmp_h->levels[i]!=NULL) {         // Loop to move the cursor just after the emplacement to insert or at the end (as this two idea are not the same emplacmeent condition, this mays be optimizable)
                     prev = tmp_h;
                     tmp_h=tmp_h->levels[i];
                 }
-                if (tmp_h->value < cell->value) {                                       // Case where the cursor is just after the right place
-                    cell->levels[i] = tmp_h->levels[i];
-                    tmp_h->levels[i] = cell;
-                } else {                                                                // Case where the cursor is at the end of the list
-                    prev->levels[i]=cell;
-                    cell->levels[i]=tmp_h;
+                if (tmp_h->value < cell->value) {                                       // Case where we need to insert the new cell between the temporary cursor and it's next cell
+                    cell->levels[i] = tmp_h->levels[i];                                 // The "next" of the new cell is attributed to the "next" of the temporary pointer
+                    tmp_h->levels[i] = cell;                                            // The "next" of the temporary pointer is set to the new cell
+                } else {                                                                // Case where we have to insert the new cell at the "next" of the prev cursor because the temporary one is equal to NULL
+                    prev->levels[i]=cell;                                               // Set the "next" of the prev to the new cell
+                    cell->levels[i]=tmp_h;                                              // Set the "next" of the new cell to NULL / the temporary cursor
                 }
             }
 

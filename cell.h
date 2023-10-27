@@ -18,16 +18,16 @@
 typedef struct s_cell{                          // Structure of a cell
 
     int value;                                  // Value of the cell
-    struct s_cell **levels;
+    struct s_cell **levels;                     // Tab stocking all of "next" values of the cell depending of the levels
 
 }t_cell, *p_cell;                               // Creation of an alias for the structure
 
 
 // -------------------------- Prototypes --------------------------
 
-p_cell createEmptyCell(int, int);               // Creates an empty cell with vertical tab
-int cellLength(p_cell);                         // Returns the number of characters of a cell value
-void displayCell(p_cell);                       // Display a cell
-void insertCell(p_cell cell, p_list list, int level);      // Insert a cell while keeping the list in order
+p_cell createEmptyCell(int, int);                           // Creates an empty cell with vertical tab
+int cellLength(p_cell);                                     // Returns the number of characters of a cell value
+void displayCell(p_cell);                                   // Display a cell
+void insertCell(p_cell cell, p_list list, int level);       // Insert a cell while keeping the list in order
 
 #endif //AGENC_FICHIER_H
