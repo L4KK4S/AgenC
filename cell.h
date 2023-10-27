@@ -27,7 +27,7 @@ typedef struct s_cell{                          // Structure of a cell
 
 p_cell createEmptyCell(int, int);                           // Creates an empty cell with vertical tab
 int cellLength(p_cell);                                     // Returns the number of characters of a cell value
-void displayCell(p_cell);                                   // Display a cell
 void insertCell(p_cell cell, p_list list, int level);       // Insert a cell while keeping the list in order
+void insertCellHead(p_cell cell, p_list list, int level);   // Insert a cell by at the head of the level
 
 #endif //AGENC_FICHIER_H

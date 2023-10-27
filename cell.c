@@ -87,3 +87,15 @@ void insertCell(p_cell cell, p_list list, int level) {
         }
     }
 }
+
+void insertCellHead(p_cell cell, p_list list, int level) {
+
+    for (int i = 0 ; i<=level ; i++) {                                                  // Loop to go through all level of the new cell, <= because we count the last level
+        if (list->levels[i]==NULL) {                                                    // If the level is empty create the new head of the level
+            list->levels[i] = cell;
+        } else {                                                                        // Else insert correctly the cell at the head of thge level  without losing the head of the level
+            cell->levels[i] = list->levels[i];
+            list->levels[i] = cell;
+        }
+    }
+}

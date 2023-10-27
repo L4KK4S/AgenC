@@ -155,7 +155,9 @@ int main() {
                             fgets(input, 100, stdin);
                         }
                         if (get_option(input) == 4) {
-                            printf("head insertion not coded yet\n");
+                            p_cell new = createEmptyCell(function_argument[0], function_argument[1]);
+                            insertCellHead(new, allList[list_index], function_argument[1]);
+                            printf("Cell created with success\n");
                         } else if (get_option(input) == 5){
                             p_cell new = createEmptyCell(function_argument[0], function_argument[1]);
                             insertCell(new, allList[list_index], function_argument[1]);
