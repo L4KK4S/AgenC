@@ -96,18 +96,22 @@ int main() {
                 }
                 break;
             case 4:
-                if (allList[0]==NULL) {
-                    allList[0] = createEmptylistCell(function_argument[0]);
-                    printf("Congratulation ! You've just created you're first list.\n");
-                } else if (allList[99]==NULL){
-                    int tmp = 0;
-                    while (allList[tmp]!=NULL) {
-                        tmp++;
+                if (function_argument[0]>0) {
+                    if (allList[0] == NULL) {
+                        allList[0] = createEmptylistCell(function_argument[0]);
+                        printf("Congratulation ! You've just created you're first list.\n");
+                    } else if (allList[99] == NULL) {
+                        int tmp = 0;
+                        while (allList[tmp] != NULL) {
+                            tmp++;
+                        }
+                        allList[tmp] = createEmptylistCell(function_argument[0]);
+                        printf("New list created.\n");
+                    } else {
+                        printf("Can't create a list, you're list tab is complete. Please delete a list\n");
                     }
-                    allList[tmp]= createEmptylistCell(function_argument[0]);
-                    printf("New list created.\n");
                 } else {
-                    printf("Can't create a list, you're list tab is complete. Please delete a list\n");
+                    printf("Can't create a list of %d levels\n", function_argument[0]);
                 }
                 break;
             case 5:
