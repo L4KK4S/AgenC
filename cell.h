@@ -29,5 +29,6 @@ p_cell createEmptyCell(int, int);                           // Creates an empty 
 int cellLength(p_cell);                                     // Returns the number of characters of a cell value
 void insertCell(p_cell cell, p_list list, int level);       // Insert a cell while keeping the list in order
 void insertCellHead(p_cell cell, p_list list, int level);   // Insert a cell by at the head of the level
+p_list createListPart2(int n);
 
 #endif //AGENC_FICHIER_H

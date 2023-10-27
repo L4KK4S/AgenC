@@ -22,7 +22,7 @@ p_cell createEmptyCell(int x, int levels) {                                     
 
     p_cell new_cell = (p_cell) malloc(sizeof(t_cell));                             // Allocation of memory for the new cell
     new_cell->value = x;                                                                // Initialization of the value of the cell (Warning : level 5 mean AT level 5 = 6 levels in total with level 0)
-    new_cell-> levels = (p_cell*) malloc ((levels+1)*sizeof(p_cell));              // Initialization of a level+1 tab to stock the different level adress of the cell
+    new_cell-> levels = (p_cell*) malloc ((levels)*sizeof(p_cell));              // Initialization of a level+1 tab to stock the different level adress of the cell
 
 
     return new_cell;                                      // Return the new cell
@@ -61,7 +61,7 @@ void insertCell(p_cell cell, p_list list, int level) {
     p_cell tmp_h;                                                                       // Moving variable to move in the different levels
     p_cell prev;                                                                        // Set a previous cursor variable
 
-    for (int i = 0 ; i<=level ; i++) {                                                  // Loop to go through all level of the new cell, <= because we count the last level
+    for (int i = 0 ; i<level ; i++) {                                                  // Loop to go through all level of the new cell, <= because we count the last level
         tmp_h = list->levels[i];                                                        // We set the cursor pointer to the first cell of the level
         if (tmp_h==NULL) {                                                              // If the level is empty create the new head of the level
             list->levels[i] = cell;
@@ -90,7 +90,7 @@ void insertCell(p_cell cell, p_list list, int level) {
 
 void insertCellHead(p_cell cell, p_list list, int level) {
 
-    for (int i = 0 ; i<=level ; i++) {                                                  // Loop to go through all level of the new cell, <= because we count the last level
+    for (int i = 0 ; i<level ; i++) {                                                  // Loop to go through all level of the new cell, <= because we count the last level
         if (list->levels[i]==NULL) {                                                    // If the level is empty create the new head of the level
             list->levels[i] = cell;
         } else {                                                                        // Else insert correctly the cell at the head of thge level  without losing the head of the level
@@ -98,4 +98,16 @@ void insertCellHead(p_cell cell, p_list list, int level) {
             list->levels[i] = cell;
         }
     }
+}
+
+p_list createListPart2(int n) {
+    p_list new = createEmptylistCell(n);
+    int size = (int) pow(2,n)-1;
+    for (int i = 1 ; i<n+1 ; i++) {
+        for (int j = (int) pow(2,i-1); j<size; j+= (int)pow(2,i)) {
+            p_cell new_cell = createEmptyCell(i, i);
+            insertCell(new_cell, new, i);
+        }
+    }
+    return new;
 }
