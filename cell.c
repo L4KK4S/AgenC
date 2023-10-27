@@ -71,7 +71,7 @@ void insertCell(p_cell cell, p_list list, int level) {
         if (tmp_h==NULL) {                                                              // If the level is empty create the new head of the level
             list->levels[i] = cell;
         } else {
-            if (tmp_h->value >= cell->value) {             // If the new cell has to be inserted on the head of the list
+            if (tmp_h->value >= cell->value) {                                          // If the new cell has to be inserted on the head of the list
                 cell->levels[i] = list->levels[i];
                 list->levels[i] = cell;
             } else {
@@ -79,12 +79,12 @@ void insertCell(p_cell cell, p_list list, int level) {
                     prev = tmp_h;
                     tmp_h=tmp_h->levels[i];
                 }
-
                 if (tmp_h->value < cell->value) {                                       // Case where the cursor is just after the right place
-                     cell->levels[i] = tmp_h;
-                    prev->levels[i] = cell;
+                    cell->levels[i] = tmp_h->levels[i];
+                    tmp_h->levels[i] = cell;
                 } else {                                                                // Case where the cursor is at the end of the list
-                    tmp_h->levels[i]=cell;
+                    prev->levels[i]=cell;
+                    cell->levels[i]=tmp_h;
                 }
             }
 
