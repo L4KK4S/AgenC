@@ -22,11 +22,7 @@ p_cell createEmptyCell(int x, int levels) {               // This function creat
 
     p_cell new_cell = (p_cell) malloc(sizeof(t_cell));    // Allocation of memory for the new cell
     new_cell->value = x;                                  // Initialization of the value of the cell
-    if (levels==0) {
-        new_cell->levels = NULL;
-    } else {
-        new_cell-> levels = (p_cell*) malloc ((levels)*sizeof(p_cell));
-    }
+    new_cell-> levels = (p_cell*) malloc ((levels+1)*sizeof(p_cell));
 
 
 
@@ -66,7 +62,7 @@ void insertCell(p_cell cell, p_list list, int level) {
     p_cell tmp_h;                                                                       // Moving variable to move in the different levels
     p_cell prev;                                                                        // Set a previous cursor variable
 
-    for (int i = 0 ; i<level ; i++) {
+    for (int i = 0 ; i<=level ; i++) {
         tmp_h = list->levels[i];
         if (tmp_h==NULL) {                                                              // If the level is empty create the new head of the level
             list->levels[i] = cell;

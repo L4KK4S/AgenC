@@ -19,7 +19,7 @@ p_list createEmptylistCell(int x) {                            // This function 
 
     p_list new_list = (p_list) malloc(sizeof(t_list));     // Allocation of memory for the new list
     new_list->max_levels = x;                                       // Initialization of the level of the list
-    new_list->levels = (p_cell*) malloc (x*sizeof(p_cell));
+    new_list->levels = (p_cell*) malloc ((new_list->max_levels+1)*sizeof(p_cell));
     return new_list;                                           // Return the new list
 }
 
@@ -28,7 +28,7 @@ void uniform_display_list (p_list list) {
     p_cell level0cur;                                           // Create a cursor to compare to higher value (because the first level will be the most complete, we have to check if we have to fill higher level or not)
     p_cell tmp_h;     // Create anb int variable to indicate the level
 
-    for (int i = 0 ; i<list->max_levels ; i++){                                                           // Loop which stop when all level are printed
+    for (int i = 0 ; i<=list->max_levels ; i++){                                                           // Loop which stop when all level are printed
         printf("[list head_%d @-]",i);                                          // Special printing for the head of the list
         tmp_h = list->levels[i];                                               // Set a moving variable to go through every level
         level0cur = list->levels[0];
@@ -50,7 +50,7 @@ void uniform_display_list (p_list list) {
 }
 
 void display_list (p_list list) {
-    for (int i = 0 ; i<list->max_levels ; i++) {                                                           // Loop which stop when all level are printed
+    for (int i = 0 ; i<=list->max_levels ; i++) {                                                           // Loop which stop when all level are printed
         printf("[list head_%d @-]",i);                                          // Special printing for the head of the list
         p_cell tmp_h = list->levels[i];                                               // Set the moving pointer to the head of the level
         while (tmp_h!=NULL){
@@ -62,7 +62,6 @@ void display_list (p_list list) {
 }
 
 void show_level(p_list list, int level) {
-    p_list tmp_v = list;                                                            // Set a moving pointer which will go to the different level
     p_cell tmp_h;                                                                   // Set a moving pointer which will go through the levels
 
     tmp_h = list->levels[level];                                                         // Set the moving pointer to the head of the right level
@@ -74,7 +73,7 @@ void show_level(p_list list, int level) {
     printf("-->NULL\n");                                                            // Special print to indicate the end of the level list
 }
 int checkListCompatibility(p_list list, int level) {
-    if (level>list->max_levels) {                                                        // Check if the level is superior than the max level of the list
+    if (level>list->max_levels) {                                                   // Check if the level is superior than the max level of the list
         return 0;
     } else {
         return 1;
