@@ -103,9 +103,10 @@ void insertCellHead(p_cell cell, p_list list, int level) {
 p_list createListPart2(int n) {
     p_list new = createEmptylistCell(n);
     int size = (int) pow(2,n)-1;
+
     for (int i = 1 ; i<n+1 ; i++) {
         for (int j = (int) pow(2,i-1); j<size; j+= (int)pow(2,i)) {
-            p_cell new_cell = createEmptyCell(i, i);
+            p_cell new_cell = createEmptyCell(j, i);
             insertCell(new_cell, new, i);
         }
     }
