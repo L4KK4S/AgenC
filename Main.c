@@ -126,19 +126,13 @@ int main() {
                 }
                 break;
             case 7:
-                printf("delete list : not coded for now\n");
-                break;
-            case 8:
-                printf("delete cell : not coded for now\n");
-                break;
-            case 9:
                 if (checkListCompatibility(allList[list_index], function_argument[0])) {
                     show_level(allList[list_index], function_argument[0]);
                 } else {
                     printf("The level %d doesn't exist in the current list\n", function_argument[0]);
                 }
                 break;
-            case 10:
+            case 8:
                 if (allList[list_index]!=NULL) {
                     printf("Search option : standard / dichotomous\n");
                     while (get_option(input) != 2 && get_option(input) != 3) {
@@ -162,7 +156,7 @@ int main() {
                     printf("Can't search in an empty list. Please create a list first.\n");
                 }
                 break;
-            case 11:
+            case 9:
                 if (allList[list_index]!=NULL) {
                     if ((checkListCompatibility(allList[list_index], function_argument[1])) == 1) {
                         printf("Insertion option : head / ordered\n");
