@@ -30,6 +30,10 @@ void show_level(p_list list, int level);             // This function displays a
 int checkListCompatibility(p_list list, int level);  // Check if the level of the cell is inferior to the level of the list
 int std_search(p_list list, int value);              // Search a value in the level 0
 int dtc_search(p_list list, int value);              // Search a value using the ordered level
+void compareSearchMethod();
+int counter_dtc_search(p_list list, int value);
+int counter_std_search(p_list list, int value);
+int print_space(int a, int b);
 
 
 

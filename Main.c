@@ -40,7 +40,7 @@ int main() {
     allList[3] = createWaveFormList();
     allList[4] = createWaveFormList2();
     allList[5] = createTestList();
-    allList[0] = createListPart2(18);
+    allList[0] = createListPart2(3);
 
 
 
@@ -69,7 +69,6 @@ int main() {
                        "\033[0mList Functions :\033[0;37m\n"
                        "\t - \033[0;36mcreate list \033[0;34m(max number of level)\033[0;37m : create a list with a max level number\n"
                        "\t - \033[0;36mswitch list \033[0;34mID\033[0;37m : change the current list\n"
-                       "\t - \033[0;36mdelete list \033[0;34mID\033[0;37m : delete a list with it ID\n"
                        "\033[0mCellFunctions :\033[0;37m\n"
                        "\t - \033[0;36mcreate cell \033[0;34m(value) (max number of level)\033[0;37m : create a cell on a max number of level stocking a specific value\n"
                        "\t\t\t\t \033[0;35m<head>\033[0;37m : insert the val by the head of the list\n"
@@ -77,7 +76,8 @@ int main() {
                        "\033[0mSearch Functions :\033[0;37m\n"
                        "\t - \033[0;36msearch \033[0;34m(value)\033[0;37m : you can choose the way to search your value\n\033[0m"
                        "\t\t\t\t \033[0;35m<standard>\033[0;37m : classic search at level 0\n"
-                       "\t\t\t\t \033[0;35m<dichotomous>\033[0;37m : faster search using classification and level\n\n\033[0m");
+                       "\t\t\t\t \033[0;35m<dichotomous>\033[0;37m : faster search using classification and level\n"
+                       "\t - \033[0;36mcompare search \033[0;34m(seed)\033[0;37m generate a random set of a 100 numbers with a seed and compare the 2 search methods\n\n\033[0m");
                 break;
             case 3:
                 if (allList[list_index]!=NULL) {
@@ -95,7 +95,10 @@ int main() {
                     printf("There is no list to show\n");
                 }
                 break;
-            case 4:
+            case 4 :
+                compareSearchMethod(function_argument[0]);
+                break;
+            case 5:
                 if (function_argument[0]>0) {
                     if (allList[0] == NULL) {
                         allList[0] = createEmptylistCell(function_argument[0]);
@@ -114,7 +117,7 @@ int main() {
                     printf("Can't create a list of %d levels\n", function_argument[0]);
                 }
                 break;
-            case 5:
+            case 6:
                 if (allList[function_argument[0]] != NULL) {
                     list_index=function_argument[0];
                     printf("Successfuly changed the current list.\n");
@@ -122,20 +125,20 @@ int main() {
                     printf("This list doesn't exist.\n");
                 }
                 break;
-            case 6:
+            case 7:
                 printf("delete list : not coded for now\n");
                 break;
-            case 7:
+            case 8:
                 printf("delete cell : not coded for now\n");
                 break;
-            case 8:
+            case 9:
                 if (checkListCompatibility(allList[list_index], function_argument[0])) {
                     show_level(allList[list_index], function_argument[0]);
                 } else {
                     printf("The level %d doesn't exist in the current list\n", function_argument[0]);
                 }
                 break;
-            case 9:
+            case 10:
                 if (allList[list_index]!=NULL) {
                     printf("Search option : standard / dichotomous\n");
                     while (get_option(input) != 2 && get_option(input) != 3) {
@@ -159,7 +162,7 @@ int main() {
                     printf("Can't search in an empty list. Please create a list first.\n");
                 }
                 break;
-            case 10:
+            case 11:
                 if (allList[list_index]!=NULL) {
                     if ((checkListCompatibility(allList[list_index], function_argument[1])) == 1) {
                         printf("Insertion option : head / ordered\n");

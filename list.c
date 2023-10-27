@@ -95,6 +95,19 @@ int std_search(p_list list, int value) {
     return 0;                                                                       // If we haven't found anything at the end of the loop we return 0
 }
 
+int counter_std_search(p_list list, int value) {
+    int operation = 0;                                                              // Set a variable to count the number of operation
+    p_cell tmp = list->levels[0];                                                   // Set the level cursor to the first cell of the level 0
+    while (tmp!=NULL) {                                                             // Loop to go through every element
+        operation++;                                                                // Increment the number of operations
+        if (tmp->value==value) {                                                    // If we find the value we return 1
+            return operation;
+        }
+        tmp=tmp->levels[0];                                                         // Incrementing the level cursor
+    }
+    return operation;                                                                       // If we haven't found anything at the end of the loop we return 0
+}
+
 int dtc_search(p_list list, int value) {
     int operation = 0;                                                              // Initialize a counter for the differents operations
     int current_level = list->max_levels;                                           // Set a variable to decrement the current level
@@ -147,6 +160,102 @@ int dtc_search(p_list list, int value) {
     }                                                                               // Case already treated in the previous if to optimize condition, should never be used
     return 0;
 }
+
+int counter_dtc_search(p_list list, int value) {
+    int operation = 0;                                                              // Initialize a counter for the differents operations
+    int current_level = list->max_levels;                                           // Set a variable to decrement the current level
+    p_cell tmp = list->levels[current_level];                                       // Set the cursor to the head of the last level
+
+    while (tmp==NULL) {                                                             // Loop to downgrade every empty level
+        current_level--;                                                            // Decrement the current level variable
+        operation++;                                                                // Count an operation
+        tmp = list->levels[current_level];                                          // Move the cursor to the inferior level
+    }
+
+    while (tmp->value > value && current_level>0) {                                 // Loop to downgrade the level why the first value is superior than what we're searching
+        current_level--;                                                            // Decrement the current level variable
+        operation++;                                                                // Increment the operation counter
+        tmp = list->levels[current_level];                                          // Move the cursor to the inferior level
+    }
+    if (current_level==0) {                                                         // If every value at every level were superior, it means the searched value is not in the tab
+        return operation;
+    }
+
+    if (tmp->value == value) {                                                      // As we won't check the current value everytime, then we check is the first value is the one searched for
+        return operation;
+    }
+    while (current_level!=0 || tmp!=NULL) {                                         // Loop to go through in the worst case to the level 0 and last value
+        if (tmp->levels[current_level] != NULL) {                                   // We check if the next level is not NULL to avoid crash because we've tried to compare it
+            if (tmp->levels[current_level]->value == value) {                       // If the next value is the searched value we return 1
+                return operation;
+            } else if (tmp->levels[current_level]->value > value){                  // If the next value is not the one searched for
+                if (current_level==0) {                                             // Case where the next value is superior but the level is 0, we can't go lower so the value is not in the tab
+                    return operation;
+                } else {                                                            // Case where we can go lower, so we try to see if the value in on lower level
+                    current_level--;                                                // So we decrement the current level
+                    operation++;                                                    // And we increment the number of operation
+                }
+            } else {                                                                // Case where the next value is not NULL and inferior to what we're searching
+                tmp = tmp->levels[current_level];                                   // Move of the cursor to the next value on the level
+                operation++;                                                        // We increment the operation
+            }
+        } else if (value > tmp->value && current_level==0) {                        // Value is superior than the last value at last level of the list
+            return operation;
+        } else {                                                                    // Case where there is no next value on higher level and we need to drop down till level 0 or level with next value
+            current_level--;                                                        // We decrement the current level variable
+            operation++;                                                            // We increment the operation counter
+        }
+    }                                                                               // Case already treated in the previous if to optimize condition, should never be used
+    return operation;
+}
+
+int print_space(int a, int b) {
+    int countA = 0;
+    int countB = 0;
+    while (a>10) {
+        countA++;
+        a/=10;
+    }
+    while (b>10) {
+        countB++;
+        b/=10;
+    }
+    return countA-countB-1;
+
+}
+
+void compareSearchMethod(int seed) {
+    srand(seed);
+    p_list testlist = createListPart2(15);
+    int** results = (int**) malloc (100*sizeof(int*));
+    results[0] = (int*) malloc (3*sizeof(int));
+    results[0][0]=rand()%250;
+    for (int i = 1 ; i<100 ; i++) {
+        results[i] = (int*) malloc (3*sizeof(int));
+        results[i][0] = results[i-1][0] + (rand()%3500);
+    }
+    for (int i = 0 ; i<100 ; i++) {
+        results[i][1] = counter_std_search(testlist, results[i][0]);
+        results[i][2] = counter_dtc_search(testlist, results[i][0]);
+    }
+    printf("tirage      : ");
+    for (int i = 0 ; i<100 ; i++) {
+        printf ("%d\t", results[i][0]);
+    }
+    printf("\nstandard    : ");
+    for (int i = 0 ; i<100 ; i++) {
+        printf ("%d\t", results[i][1]);
+    }
+    printf("\ndichotomous : ");
+    for (int i = 0 ; i<100 ; i++) {
+        for (int space = 0 ; space< print_space(results[i][1], results[i][3]) ; space++) {
+            printf(" ");
+        }
+        printf ("%d\t", results[i][2]);
+    }
+    printf("\n\n");
+}
+
 
 
 
