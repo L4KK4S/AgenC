@@ -72,9 +72,7 @@ int main() {
                        "\033[0mSearch Functions :\033[0;37m\n"
                        "\t - \033[0;36msearch \033[0;34m(value)\033[0;37m : you can choose the way to search your value\n\033[0m"
                        "\t\t\t\t \033[0;35m<standard>\033[0;37m : classic search at level 0\n"
-                       "\t\t\t\t \033[0;35m<dichotomous>\033[0;37m : faster search using classification and level\n\n\033[0m"
-                       ""
-                       "");
+                       "\t\t\t\t \033[0;35m<dichotomous>\033[0;37m : faster search using classification and level\n\n\033[0m");
                 break;
             case 3:
                 if (allList[list_index]!=NULL) {
