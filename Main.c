@@ -34,10 +34,14 @@ int main() {
 
     // ------------------------- Test list definition --------------------------
 
+
     allList[1] = createOrderedList();
     allList[2] = createChaoticValueList();
     allList[3] = createWaveFormList();
     allList[4] = createWaveFormList2();
+    allList[5] = createTestList();
+
+
 
     while (exit==0) {
         do {
@@ -140,7 +144,11 @@ int main() {
                             printf("%d is not in the list\n", function_argument[0]);
                         }
                     } else if (get_option(input) == 3) {
-                        printf("dtc search not coded yet\n");
+                        if (dtc_search(allList[list_index], function_argument[0])) {
+                            printf("%d is in the list\n", function_argument[0]);
+                        } else {
+                            printf("%d is not in the list\n", function_argument[0]);
+                        }
                     }
                 } else {
                     printf("Can't search in an empty list. Please create a list first.\n");

@@ -81,14 +81,71 @@ int checkListCompatibility(p_list list, int level) {
 }
 
 int std_search(p_list list, int value) {
+    int operation = 0;                                                              // Set a variable to count the number of operation
     p_cell tmp = list->levels[0];                                                   // Set the level cursor to the first cell of the level 0
     while (tmp!=NULL) {                                                             // Loop to go through every element
+        operation++;                                                                // Increment the number of operations
         if (tmp->value==value) {                                                    // If we find the value we return 1
+            printf("%d operations effectued\n", operation);
             return 1;
         }
         tmp=tmp->levels[0];                                                         // Incrementing the level cursor
     }
+    printf("%d operations effectued\n", operation);
     return 0;                                                                       // If we haven't found anything at the end of the loop we return 0
+}
+
+int dtc_search(p_list list, int value) {
+    int operation = 0;                                                              // Initialize a counter for the differents operations
+    int current_level = list->max_levels;                                           // Set a variable to decrement the current level
+    p_cell tmp = list->levels[current_level];                                       // Set the cursor to the head of the last level
+
+    while (tmp==NULL) {                                                             // Loop to downgrade every empty level
+        current_level--;                                                            // Decrement the current level variable
+        operation++;                                                                // Count an operation
+        tmp = list->levels[current_level];                                          // Move the cursor to the inferior level
+    }
+
+    while (tmp->value > value && current_level>0) {                                 // Loop to downgrade the level why the first value is superior than what we're searching
+        current_level--;                                                            // Decrement the current level variable
+        operation++;                                                                // Increment the operation counter
+        tmp = list->levels[current_level];                                          // Move the cursor to the inferior level
+    }
+    if (current_level==0) {                                                         // If every value at every level were superior, it means the searched value is not in the tab
+        printf("%d operations effectued\n", operation);
+        return 0;
+    }
+
+    if (tmp->value == value) {                                                      // As we won't check the current value everytime, then we check is the first value is the one searched for
+        printf("%d operations effectued\n", operation);
+        return 1;
+    }
+    while (current_level!=0 || tmp!=NULL) {                                         // Loop to go through in the worst case to the level 0 and last value
+        if (tmp->levels[current_level] != NULL) {                                   // We check if the next level is not NULL to avoid crash because we've tried to compare it
+            if (tmp->levels[current_level]->value == value) {                       // If the next value is the searched value we return 1
+                printf("%d operations effectued\n", operation);
+                return 1;
+            } else if (tmp->levels[current_level]->value > value){                  // If the next value is not the one searched for
+                if (current_level==0) {                                             // Case where the next value is superior but the level is 0, we can't go lower so the value is not in the tab
+                    printf("%d operations effectued\n", operation);
+                    return 0;
+                } else {                                                            // Case where we can go lower, so we try to see if the value in on lower level
+                    current_level--;                                                // So we decrement the current level
+                    operation++;                                                    // And we increment the number of operation
+                }
+            } else {                                                                // Case where the next value is not NULL and inferior to what we're searching
+                tmp = tmp->levels[current_level];                                   // Move of the cursor to the next value on the level
+                operation++;                                                        // We increment the operation
+            }
+        } else if (value > tmp->value && current_level==0) {                        // Value is superior than the last value at last level of the list
+            printf("%d operations effectued\n", operation);
+            return 0;
+        } else {                                                                    // Case where there is no next value on higher level and we need to drop down till level 0 or level with next value
+            current_level--;                                                        // We decrement the current level variable
+            operation++;                                                            // We increment the operation counter
+        }
+    }                                                                               // Case already treated in the previous if to optimize condition, should never be used
+    return 0;
 }
 
 
@@ -96,8 +153,23 @@ int std_search(p_list list, int value) {
 
 // -------------------------- Tests Lists Functions --------------------------
 
+p_list createTestList() {
+    p_list liste = createEmptylistCell(5);
+    p_cell cell1 = createEmptyCell(4, 4);
+    p_cell cell2 = createEmptyCell(3, 2);
+    p_cell cell3 = createEmptyCell(2, 3);
+    p_cell cell4 = createEmptyCell(1, 3);
+    p_cell cell5 = createEmptyCell(11, 0);
+    insertCell(cell1, liste, 4);
+    insertCell(cell2, liste, 2);
+    insertCell(cell3, liste, 3);
+    insertCell(cell4,liste,  3);
+    insertCell(cell5, liste, 0);
+    return liste;
+}
+
 p_list createOrderedList() {
-    p_list liste = createEmptylistCell(6);
+    p_list liste = createEmptylistCell(5);
     p_cell cell1 = createEmptyCell(0, 1);
     p_cell cell2 = createEmptyCell(10, 2);
     p_cell cell3 = createEmptyCell(9, 3);
@@ -122,7 +194,7 @@ p_list createOrderedList() {
 }
 
 p_list createChaoticValueList() {
-    p_list liste = createEmptylistCell(6);
+    p_list liste = createEmptylistCell(5);
     p_cell cell1 = createEmptyCell(-2, 1);
     p_cell cell2 = createEmptyCell(-9, 2);
     p_cell cell3 = createEmptyCell(100, 0);

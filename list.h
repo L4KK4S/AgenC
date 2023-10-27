@@ -29,10 +29,14 @@ void display_list(p_list list);                      // This function displays t
 void show_level(p_list list, int level);             // This function displays a specific level
 int checkListCompatibility(p_list list, int level);  // Check if the level of the cell is inferior to the level of the list
 int std_search(p_list list, int value);              // Search a value in the level 0
+int dtc_search(p_list list, int value);              // Search a value using the ordered level
+
 
 
 // -------------------------- Tests lists --------------------------
 
+
+p_list createTestList();
 p_list createOrderedList();
 p_list createChaoticValueList();
 p_list createWaveFormList();
