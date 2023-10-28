@@ -11,6 +11,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "list.h"
+#include "timer.h"
+#include "timer.c"
 
 
 // -------------------------- Functions --------------------------
@@ -81,17 +83,22 @@ int checkListCompatibility(p_list list, int level) {
 }
 
 int std_search(p_list list, int value) {
+    startTimer();
     int operation = 0;                                                              // Set a variable to count the number of operation
     p_cell tmp = list->levels[0];                                                   // Set the level cursor to the first cell of the level 0
     while (tmp!=NULL) {                                                             // Loop to go through every element
         operation++;                                                                // Increment the number of operations
         if (tmp->value==value) {                                                    // If we find the value we return 1
             printf("%d operations effectued\n", operation);
+            stopTimer();
+            displayTime();
             return 1;
         }
         tmp=tmp->levels[0];                                                         // Incrementing the level cursor
     }
     printf("%d operations effectued\n", operation);
+    stopTimer();
+    displayTime();
     return 0;                                                                       // If we haven't found anything at the end of the loop we return 0
 }
 
@@ -109,6 +116,8 @@ int counter_std_search(p_list list, int value) {
 }
 
 int dtc_search(p_list list, int value) {
+    startTimer();
+
     int operation = 0;                                                              // Initialize a counter for the differents operations
     int current_level = list->max_levels;                                           // Set a variable to decrement the current level
     p_cell tmp = list->levels[current_level];                                       // Set the cursor to the head of the last level
@@ -126,21 +135,30 @@ int dtc_search(p_list list, int value) {
     }
     if (current_level==0) {                                                         // If every value at every level were superior, it means the searched value is not in the tab
         printf("%d operations effectued\n", operation);
+        stopTimer();
+        displayTime();
         return 0;
+
     }
 
     if (tmp->value == value) {                                                      // As we won't check the current value everytime, then we check is the first value is the one searched for
         printf("%d operations effectued\n", operation);
+        stopTimer();
+        displayTime();
         return 1;
     }
     while (current_level!=0 || tmp!=NULL) {                                         // Loop to go through in the worst case to the level 0 and last value
         if (tmp->levels[current_level] != NULL) {                                   // We check if the next level is not NULL to avoid crash because we've tried to compare it
             if (tmp->levels[current_level]->value == value) {                       // If the next value is the searched value we return 1
                 printf("%d operations effectued\n", operation);
+                stopTimer();
+                displayTime();
                 return 1;
             } else if (tmp->levels[current_level]->value > value){                  // If the next value is not the one searched for
                 if (current_level==0) {                                             // Case where the next value is superior but the level is 0, we can't go lower so the value is not in the tab
                     printf("%d operations effectued\n", operation);
+                    stopTimer();
+                    displayTime();
                     return 0;
                 } else {                                                            // Case where we can go lower, so we try to see if the value in on lower level
                     current_level--;                                                // So we decrement the current level
@@ -152,12 +170,16 @@ int dtc_search(p_list list, int value) {
             }
         } else if (value > tmp->value && current_level==0) {                        // Value is superior than the last value at last level of the list
             printf("%d operations effectued\n", operation);
+            stopTimer();
+            displayTime();
             return 0;
         } else {                                                                    // Case where there is no next value on higher level and we need to drop down till level 0 or level with next value
             current_level--;                                                        // We decrement the current level variable
             operation++;                                                            // We increment the operation counter
         }
     }                                                                               // Case already treated in the previous if to optimize condition, should never be used
+    stopTimer();
+    displayTime();
     return 0;
 }
 
