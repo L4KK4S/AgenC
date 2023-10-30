@@ -40,8 +40,7 @@ int main() {
     allList[3] = createWaveFormList();
     allList[4] = createWaveFormList2();
     allList[5] = createTestList();
-    allList[0] = createListPart2(15);
-
+    allList[0] = createListPart2(7);
 
 
     while (exit==0) {

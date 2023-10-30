@@ -88,6 +88,7 @@ void insertCell(p_cell cell, p_list list, int level) {
     }
 }
 
+
 void insertCellHead(p_cell cell, p_list list, int level) {
 
     for (int i = 0 ; i<level ; i++) {                                                  // Loop to go through all level of the new cell, <= because we count the last level

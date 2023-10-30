@@ -23,6 +23,35 @@ typedef struct s_cell{                          // Structure of a cell
 }t_cell, *p_cell;                               // Creation of an alias for the structure
 
 
+
+
+
+typedef struct s_date {
+    int day;
+    int month;
+    int years;
+}t_date;
+
+struct s_rdv {
+    int hour;
+    int time;
+    char* object;
+    t_date date;
+};
+
+typedef struct s_rdv t_rdv, *p_rdv;
+
+struct s_contact {
+    char* name;
+    struct s_contact **levels;
+    p_rdv head;
+};
+
+typedef struct s_contact t_contact, *p_contact;
+
+
+
+
 // -------------------------- Prototypes --------------------------
 
 p_cell createEmptyCell(int, int);                           // Creates an empty cell with vertical tab

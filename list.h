@@ -11,6 +11,7 @@
 #ifndef AGENC_LIST_H
 #define AGENC_LIST_H
 #include "cell.h"
+#define LEVEL 4
 
 
 // -------------------------- Structures --------------------------
@@ -19,6 +20,11 @@ typedef struct s_list {                          // Structure of a list
     int max_levels;                              // Level of the list
     struct s_cell **levels;                      // Tab stocking all "head" level of the list
 }t_list, *p_list;                                // Creation of an alias for the structure
+
+typedef struct s_listC {
+    int max_levelsL;
+    struct p_contact *levels;
+}t_listC;
 
 
 // -------------------------- Prototypes --------------------------
