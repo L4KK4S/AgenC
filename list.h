@@ -40,6 +40,7 @@ void compareSearchMethod(int seed);
 int counter_dtc_search(p_list list, int value);
 int counter_std_search(p_list list, int value);
 int print_space(int a, int b);
+int compareStrings( char *a, char *b);
 
 
 
