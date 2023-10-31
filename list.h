@@ -21,10 +21,7 @@ typedef struct s_list {                          // Structure of a list
     struct s_cell **levels;                      // Tab stocking all "head" level of the list
 }t_list, *p_list;                                // Creation of an alias for the structure
 
-typedef struct s_listC {
-    int max_levelsL;
-    struct p_contact *levels;
-}t_listC;
+
 
 
 // -------------------------- Prototypes --------------------------
@@ -40,7 +37,7 @@ void compareSearchMethod(int seed);
 int counter_dtc_search(p_list list, int value);
 int counter_std_search(p_list list, int value);
 int print_space(int a, int b);
-int compareStrings( char *a, char *b);
+
 
 
 

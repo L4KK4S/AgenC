@@ -26,32 +26,6 @@ typedef struct s_cell{                          // Structure of a cell
 
 
 
-typedef struct s_date {
-    int day;
-    int month;
-    int years;
-}t_date;
-
-struct s_rdv {
-    int hour;
-    int time;
-    char* object;
-    t_date date;
-};
-
-typedef struct s_rdv t_rdv, *p_rdv;
-
-struct s_contact {
-    char* name;
-    struct s_contact **levels;
-    p_rdv head;
-};
-
-typedef struct s_contact t_contact, *p_contact;
-
-
-
-
 // -------------------------- Prototypes --------------------------
 
 p_cell createEmptyCell(int, int);                           // Creates an empty cell with vertical tab
@@ -59,6 +33,5 @@ int cellLength(p_cell);                                     // Returns the numbe
 void insertCell(p_cell cell, p_list list, int level);       // Insert a cell while keeping the list in order
 void insertCellHead(p_cell cell, p_list list, int level);   // Insert a cell by at the head of the level
 p_list createListPart2(int n);
-int get_level(p_cell cell);
 
 #endif //AGENC_FICHIER_H
