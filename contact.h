@@ -16,9 +16,21 @@ typedef struct s_contact_list {
     struct p_contact *levels;
 }t_contact_list;
 
+typedef struct s_contact_list t_contact_list, *p_contact_list;
+
+typedef struct s_contact {
+    struct p_contact *levels;
+    char* name;
+}t_contact;
+
+typedef struct s_contact t_contact, *p_contact;
+
+
+
 // -------------------------- Structures --------------------------
 
 int compareStrings( char *a, char *b);
+p_contact createContact(char* name);
 
 #endif //AGENC_CONTACT_H
 

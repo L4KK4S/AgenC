@@ -9,6 +9,7 @@
 // -------------------------- Includes --------------------------
 
 #include "contact.h"
+#include <stdlib.h>
 
 // -------------------------- Functions --------------------------
 
@@ -31,4 +32,15 @@ int compareStrings( char *a, char *b) {
     else {
         return 1; // string1 is greater than string2
     }
+}
+
+int getmatch(char* name) {
+    return 0;
+}
+
+p_contact createContact(char* name) {
+    p_contact new = (p_contact) malloc (sizeof(p_contact));
+    new->levels = (p_contact*) malloc (getmatch(name)*sizeof(p_contact));
+    new->name = name;
+    return new;
 }

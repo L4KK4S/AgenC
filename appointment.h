@@ -17,19 +17,19 @@ typedef struct s_date {
     int years;
 }t_date;
 
-struct s_rdv {
+struct s_appointment {
     int hour;
     int time;
     char* object;
     t_date date;
 };
 
-typedef struct s_rdv t_rdv, *p_rdv;
+typedef struct s_appointment t_appointment, *p_appointment;
 
 struct s_contact {
     char* name;
     struct s_contact **levels;
-    p_rdv head;
+    p_appointment head;
 };
 
 typedef struct s_contact t_contact, *p_contact;
