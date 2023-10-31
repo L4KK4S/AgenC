@@ -6,4 +6,3 @@
 #define AGENC_FICHIER_H
 
 #endif //AGENC_FICHIER_H
-printf()
