@@ -36,4 +36,7 @@ typedef struct s_contact t_contact, *p_contact;
 
 // -------------------------- Structures --------------------------
 
+int checkDateFormat(p_appointment new_appointment);
+p_appointment createAppointment ();
+
 #endif //AGENC_APPOINTMENT_H

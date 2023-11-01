@@ -78,7 +78,7 @@ int arguments(char *input, int index, int* args) {
         if (input[i]==' ') {                                                                                    // Detect the ' ' character
             int j = i+1;
             while (input[j]!=' ' && input[j]!='\n' && input[j]!='\0') {                                         // Loop to copy all digit from ONE argument in a single string
-                if (input[j]>=48 && input[j]<=57 || (input[j]==45 && input[j+1]>=48 && input[j+1]<=57)) {       // Check if argument is truly a digit or a '-' follow by a digit (negative number)
+                if (input[j]>=48 && input[j]<=57) {       // Check if argument is truly a digit or a '-' follow by a digit (negative number)
                     strtocat[0] = input[j];                                                                     // modify the temporary string so we can strcat() it just after
                     strcat(temp, strtocat);                                                                     // We add the new digit to the previous recording of digit we had
                     j++;                                                                                        // We increment j to continue checking the input
