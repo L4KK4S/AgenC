@@ -31,11 +31,11 @@ int comparerString1( char *s1, char *s2) {
     int n2 = strlen(s2);
 
 
-    while (i <= n1 && i <= n2 && s1[i] == s2[i]) {     // Compare characters until a mismatch is found or the end of either string is reached
+    while (i < n1 && i < n2 && s1[i] == s2[i]) {     // Compare characters until a mismatch is found or the end of either string is reached
         i++;
     }
 
-    if (i <= n1 && i <= n2) {
+    if (i < n1 && i < n2) {
         if (s1[i] < s2[i]) {
             return 1; //S1 < S2
         } else {
