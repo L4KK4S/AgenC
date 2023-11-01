@@ -28,7 +28,9 @@ int main() {
 
     //mainloop1();
     p_appointment new = createAppointment();
-    printf("%d %d %d", new->date.day, new->date.month, new->date.years);
+    printf("%d %d %d\n", new->date.day, new->date.month, new->date.years);
+    printf("%dh%d\n", new->hour.hours, new->hour.minutes);
+    printf("%dh%d\n", new->length.hours, new->length.minutes);
 
 
 

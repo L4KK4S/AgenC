@@ -34,13 +34,14 @@ int compareStrings( char *a, char *b) {
     }
 }
 
-int getmatch(char* name) {
-    return 0;
-}
-
 p_contact createContact(char* name) {
-    p_contact new = (p_contact) malloc (sizeof(p_contact));
-    new->levels = (p_contact*) malloc (getmatch(name)*sizeof(p_contact));
-    new->name = name;
-    return new;
+    // Allocate memory
+    // Create an empty chained list of appointment
+    // Verify name
+    // Convert Name to the correct format
+    // Loop to search where to insert it with compare string
+    // When place found check correspondance with previous and next contact
+    // Allocate memory and create tab for stocking next adress at different levels
+    // Link correctly the different levels
+    // return the new contact
 }
