@@ -41,7 +41,7 @@ int checkDateFormat(p_appointment new_appointment) {
                 } else if (i < 11) {
                     strcat(years, temp);
                 }
-                strcpy(temp, reset);
+                //strcpy(temp, reset);
             }
 
             i++;
@@ -73,13 +73,72 @@ int checkDateFormat(p_appointment new_appointment) {
     }
 }
 
+int checkHourFormat(p_appointment new_appointment) {
+
+    char* input = (char*) malloc(100*sizeof(char));
+    char hours[10]="", minutes[10]="";
+    char temp[10] = " ", reset[10] = " ";
+    int i = 0;
+    printf("~> ");
+    fgets(input, 100, stdin);
+
+    if (strlen(input)==5 || strlen(input)==6) {
+        if (strlen(input)==5 && input[1]=='h') {
+            if ((input[0] >= 48 && input[0] <= 57) && (input[2] >= 48 && input[2] <= 57) && (input[3] >= 48 && input[3] <= 57)) {
+                temp[0] = input[0];
+                strcat (hours, temp);
+                temp[0] = input[2];
+                strcat(minutes, temp);
+                temp[0]= input[3];
+                strcat(minutes, temp);
+            } else {
+                printf("Hours contain something else than a number\n");
+                return -1;
+            }
+        }
+    } else {
+        if (input[2]=='h') {
+            if ((input[0] >= 48 && input[0] <= 57) && (input[1] >= 48 && input[1] <= 57) && (input[3] >= 48 && input[3] <= 57) && (input[4] >= 48 && input[4] <= 57)) {
+                temp[0] = input[0];
+                strcat (hours, temp);
+                temp[0] = input[1];
+                strcat (hours, temp);
+                temp[0] = input[3];
+                strcat(minutes, temp);
+                temp[0] = input[4];
+                strcat(minutes, temp);
+            } else {
+                printf("Hours contain something else than a number\n");
+                return -1;
+            }
+        }
+    }
+
+    new_appointment->hour.hours = atoi(hours);
+    new_appointment->hour.hours = atoi(minutes);
+
+    if (new_appointment->hour.hours > 24 || new_appointment->hour.minutes > 59) {
+        printf("That time isn't possible\n");
+        return -1;
+    } else {
+        return 0 ;
+    }
+
+}
+
 p_appointment createAppointment () {
-    int f_arguments = -1;
+    int checkFormat = -1;
     p_appointment new = (p_appointment) malloc (sizeof(p_appointment));
-    printf("When is your new appointment (day/month/year)\n\n ");
+    printf("What's the date of your new appointment (day/month/years) ?\n\n ");
     do {
-        f_arguments = checkDateFormat(new);
-    } while (f_arguments == -1);
+        checkFormat = checkDateFormat(new);
+    } while (checkFormat == -1);
+    checkFormat = -1;
+    printf("When is your new appointment ( (hours)h(minutes) ) ?\n\n ");
+    do {
+        checkFormat = checkHourFormat(new);
+    } while (checkFormat == -1);
+
 
     return new;
 

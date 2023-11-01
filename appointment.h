@@ -17,9 +17,14 @@ typedef struct s_date {
     int years;
 }t_date;
 
+typedef struct s_time {
+    int hours;
+    int minutes;
+} t_time;
+
 struct s_appointment {
-    int hour;
-    int time;
+    t_time hour;
+    t_time time;
     char* object;
     t_date date;
 };
