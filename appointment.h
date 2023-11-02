@@ -27,6 +27,7 @@ struct s_appointment {                                                  // Struc
     t_time length;                                                      // Length of the appointment
     char* object;                                                       // Object of the appointment
     t_date date;                                                        // Date of the appointment
+    struct s_appointment *next;                                         // Chained list of appointment
 };
 
 typedef struct s_appointment t_appointment, *p_appointment;             // Creating an alias for pointer to structure appointment
@@ -39,6 +40,7 @@ int checkDateFormat(p_appointment new_appointment);                         // S
 int checkHourFormat(p_appointment new_appointment);                         // Secure entry for the time
 int checkLengthAppointmentFormat(p_appointment new_appointment);            // Secure entry for the length of an appointment
 p_appointment createAppointment ();                                         // Create a new appointment
+void insertAppointment(p_contact contact, p_appointment cell);             // Insert a new appointment in a chained list
 
 
 #endif //AGENC_APPOINTMENT_H

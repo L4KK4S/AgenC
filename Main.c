@@ -31,6 +31,7 @@ int main() {
     printf("%d %d %d\n", new->date.day, new->date.month, new->date.years);
     printf("%dh%d\n", new->hour.hours, new->hour.minutes);
     printf("%dh%d\n", new->length.hours, new->length.minutes);
+    printf("%s\n", new->object);
 
 
 

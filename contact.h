@@ -38,6 +38,7 @@ typedef struct s_contact t_contact, *p_contact;                   // Alias to al
 
 int compareStrings( char *a, char *b);
 p_contact createContact(char* name);                                // Create a new contact
+p_contact searchContact(char* contact);
 
 #endif //AGENC_CONTACT_H
 

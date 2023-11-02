@@ -45,3 +45,7 @@ p_contact createContact(char* name) {
     // Link correctly the different levels
     // return the new contact
 }
+
+p_contact searchContact(char* contact) {
+    return NULL;
+}

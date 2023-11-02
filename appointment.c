@@ -12,9 +12,40 @@
 #include <stdio.h>
 #include <string.h>
 #include "appointment.h"
+#include "contact.h"
 
 // -------------------------- Functions --------------------------
 
+void insertAppointment(p_contact contact, p_appointment cell) {
+    p_appointment tmp = contact->head, prev = tmp;                                                                                              // Create pointer to go through the list
+
+    if (tmp==NULL) {                                                                                                                                // Case where the list is empty
+        contact->head = cell;                                                                                                                       // We asign the head of the contact list
+    } else if ((tmp->hour.hours > cell->hour.hours) || (tmp->hour.hours == cell->hour.hours && tmp->hour.minutes >= cell->hour.minutes)) {          // Head insertion case
+        cell->next = tmp;                                                                                                                           // We asign the next of the new cell to the previous head
+        contact->head = cell;                                                                                                                       // We update the head
+    } else {
+        while (tmp->hour.hours < cell->hour.hours && tmp->next != NULL) {                                                                           // Loop to search the hours spot to insert or the end of the list
+            prev = tmp;                                                                                                                             // Move prev to last value of tmp
+            tmp = tmp->next;                                                                                                                        // Update tmp
+        }
+        while (tmp->hour.hours == cell->hour.hours && tmp->hour.minutes < cell->hour.minutes && tmp->next != NULL) {                                // Loop to search if we arent at the end of the list the good spot for the minute
+            prev = tmp;                                                                                                                             // Move prev to last value of tmp
+            tmp = tmp->next;                                                                                                                        // Update tmp
+        }
+        if (tmp->next==NULL) {                                                                                                                      // If tmp is NULL = we're at the end of the list, we have to identify if we insert at the end or just before
+            if (tmp->hour.hours < cell->hour.hours || (tmp->hour.hours == cell->hour.hours && tmp->hour.minutes < cell->hour.minutes)) {            // If the hours is superior or the hours is the same but minutes are superior wer have to insert at the end
+                tmp->next = cell;
+            } else if (tmp->hour.hours > cell->hour.hours || (tmp->hour.hours == cell->hour.hours && tmp->hour.minutes >= cell->hour.minutes)) {    // If the hours is inferior or the hours is the same but the minutes are inferior or equal we insert just before the end cell (between prev and tmp)
+                prev->next = cell;                                                                                                                  // We update the next of the prev cell
+                cell->next=tmp;                                                                                                                     // We update the next of the cell to tmp
+            }
+        } else {                                                                                                                                    // If we weren't at the end of the list, it means we already have found the sweet spot between prev and tmp
+            prev->next = cell;                                                                                                                      // We update the next of the prev value to the cell
+            cell->next = tmp;                                                                                                                       // We update the next of the cell to the tmp
+        }
+    }
+}
 
 int checkDateFormat(p_appointment new_appointment) {
 
@@ -177,9 +208,22 @@ int checkLengthAppointmentFormat(p_appointment new_appointment) {
 
 }
 
+int checkLengthObject(p_appointment new_appointment) {
+    char* input = (char*) malloc(100*sizeof(char));                                 // str vcariable to stock the input
+    printf("~> ");
+    fgets(input, 100, stdin);
+    new_appointment->object = input;
+    return 0;
+
+}
+
 p_appointment createAppointment () {
+    char* input = (char*) malloc(100*sizeof(char));                                // Str vcariable to stock the input
+    p_contact toAssign;                                                                 // Pointer to check if the contact already exist or not
     int checkFormat = -1;                                                               // Variable to check argument are correct
     p_appointment new = (p_appointment) malloc (sizeof(p_appointment));            // Allocate the memory for the new appointment
+
+    new->next=NULL;
 
     printf("What's the date of your new appointment (day/month/years) ?\n\n ");         // Asking for the date
 
@@ -188,18 +232,38 @@ p_appointment createAppointment () {
     } while (checkFormat == -1);
     checkFormat = -1;                                                                   // Reset the check variable
 
-    printf("\nWhen is your new appointment ( (hours)h(minutes) ) ?\n\n ");              // Asking for the time of the appointment
+    printf("\nWhen is your new appointment {0-23}h{0-59} ?\n\n ");                      // Asking for the time of the appointment
 
     do {                                                                                // Loop to ask while answer is not in the correct format or impossible
         checkFormat = checkHourFormat(new);
     } while (checkFormat == -1);
     checkFormat = -1;                                                                   // Reset the check variable
 
-    printf("\nHow long is your new appointment ( (hours)h(minutes) ) ?\n\n ");          // Asking fir the length of the appointment
+    printf("\nHow long is your new appointment {0-23}h{0-59} ?\n\n ");                  // Asking fir the length of the appointment
 
     do {                                                                                // Loop to ask while answer is not in the correct format or impossible
         checkFormat = checkLengthAppointmentFormat(new);
     } while (checkFormat == -1);
+    checkFormat =-1;
+
+    printf("\nWhat's the object of your appointment ( < 100 characters) ?\n\n ");       // Asking for the object of the appointment
+    do {
+        checkFormat = checkLengthObject(new);
+    } while (checkFormat == -1);
+
+    printf("\nWhat's the object of your appointment ( < 100 characters) ?\n\n ");       // Asking for the contact to assign the appointment
+    printf("~> ");
+    fgets(input, 100, stdin);
+    toAssign = searchContact(input);
+    if (toAssign!=NULL) {
+        insertAppointment(toAssign->head, new);
+    } else {
+        createContact(input);
+        insertAppointment(toAssign->head, new);
+    }
+
+
+
 
 
     return new;                                                                         // Return the new appointment
