@@ -15,8 +15,6 @@
 #include "cell.h"
 #include "list.h"
 #include "menu.h"
-#include "contact.h"
-#include "appointment.h"
 #include "appointment.c"
 #include "contact.c"
 

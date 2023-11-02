@@ -205,16 +205,14 @@ p_appointment createAppointment () {
     printf("~> ");
     fgets(input, 100, stdin);
     toAssign = searchContact(input);
+    // check if input is correct and transform it
     if (toAssign!=NULL) {
-        insertAppointment(toAssign->head, new);
+        insertAppointment(toAssign, new);
     } else {
         createContact(input);
-        insertAppointment(toAssign->head, new);
+        toAssign = searchContact(input);
+        insertAppointment(toAssign, new);
     }
-
-
-
-
 
     return new;                                                                         // Return the new appointment
 
