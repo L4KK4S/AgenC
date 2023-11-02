@@ -11,7 +11,6 @@
 #ifndef AGENC_APPOINTMENT_H
 #define AGENC_APPOINTMENT_H
 
-#include "contact.h"
 
 typedef struct s_date {                                                 // Structure for a date
     int day;                                                            // Int to stock the day
@@ -38,11 +37,13 @@ typedef struct s_appointment t_appointment, *p_appointment;             // Creat
 
 // -------------------------- Structures --------------------------
 
+
+
 int checkDateFormat(p_appointment new_appointment);                         // Secure entry for the date
 int checkHourFormat(p_appointment new_appointment);                         // Secure entry for the time
 int checkLengthAppointmentFormat(p_appointment new_appointment);            // Secure entry for the length of an appointment
-p_appointment createAppointment ();                                         // Create a new appointment
-void insertAppointment(p_contact contact, p_appointment cell);             // Insert a new appointment in a chained list
+int checkLengthObject(p_appointment new_appointment);                       // Secure entry for the object of an appointment
+
 
 
 #endif //AGENC_APPOINTMENT_H
