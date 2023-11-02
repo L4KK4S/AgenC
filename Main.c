@@ -27,19 +27,33 @@ int main() {
 
     printf("\nWelcome to AgenC, please type a command or type help if needed :\n\n");
 
+    // Menu Part 1 and 2
     //mainloop1();
+
+    // Test for the create Appointment function
     /*p_appointment new = createAppointment();
     printf("%d %d %d\n", new->date.day, new->date.month, new->date.years);
     printf("%dh%d\n", new->hour.hours, new->hour.minutes);
     printf("%dh%d\n", new->length.hours, new->length.minutes);
     printf("%s\n", new->object);*/
 
-    char* res = NULL;
+    // Test for the name secure entry function
+    /*char* res = NULL;
     printf("Enter a name : \n\n");
     while (res == NULL) {
         res = CheckNameEntry();
     }
-    printf("%s\n", res);
+    printf("%s\n", res);*/
+
+    // Test for the compare String Function
+    /*printf("%d\n", compareString("a", "b"));
+    printf("%d\n", compareString("b", "a"));
+    printf("%d\n", compareString("a", "a"));
+    printf("%d\n", compareString("abcd", "abcde"));
+    printf("%d\n", compareString("abcde", "abcd"));
+    printf("%d\n", compareString("tigre", "tigresse"));
+    printf("%d\n", compareString("tigresse", "tigre"));*/
+
 
 
 

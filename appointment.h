@@ -39,10 +39,10 @@ typedef struct s_appointment t_appointment, *p_appointment;             // Creat
 
 
 
-int checkDateFormat(p_appointment new_appointment);                         // Secure entry for the date
-int checkHourFormat(p_appointment new_appointment);                         // Secure entry for the time
-int checkLengthAppointmentFormat(p_appointment new_appointment);            // Secure entry for the length of an appointment
-int checkLengthObject(p_appointment new_appointment);                       // Secure entry for the object of an appointment
+int checkDateFormat(p_appointment);                         // Secure entry for the date
+int checkHourFormat(p_appointment);                         // Secure entry for the time
+int checkLengthAppointmentFormat(p_appointment);            // Secure entry for the length of an appointment
+int checkLengthObject(p_appointment);                       // Secure entry for the object of an appointment
 
 
 

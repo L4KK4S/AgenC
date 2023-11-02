@@ -15,24 +15,27 @@
 
 // -------------------------- Functions --------------------------
 
-int compareStrings( char *a, char *b) {
-    while (*a != '\0' && *b != '\0') {
-        if (*a < *b) {
-            return -1; //string1 is shorter than string2
-        } else if (*a > *b) {
-            return 1; //  string1 is greater than string2
+int compareString( char *cursor, char *toplace) {
+
+    int i = 0;                                                                               //  Create an index
+
+    while (i < strlen(cursor) && i < strlen(toplace) && cursor[i] == toplace[i]) {     // Compare characters until a mismatch is found or the end of either string is reached
+        i++;
+    }
+    if (i < strlen(cursor) && i < strlen(toplace)) {                                   // If i was stop before the last character
+        if (cursor[i] < toplace[i]) {                                                        // check is the first string was before  the second one
+            return 1;
+        } else {                                                                             // If not, mean that the second string has to be placed after
+            return - 1;
         }
-        a++;
-        b++;
-    }
-    if (*a == '\0' && *b == '\0'){
-        return 0; // Both strings are identical
-    }
-    if (*a == '\0') {
-        return -1; //string1 is shorter than string2
-    }
-    else {
-        return 1; // string1 is greater than string2
+    } else {                                                                                 // If the cursor is at the end
+        if ( strlen(cursor) == strlen(toplace)) {                                      // We check if length are the same, meaning that str would be same
+            return 0;
+        } else if (i < strlen(cursor)) {                                                // If i is inferior to the length of the first string, mean both string are almost same but s2 a1 as more characters
+            return 1;                                                                        // In this case we want to place the string after the one with more elements
+        } else {
+            return -1;                                                                       // Else we place it before
+        }
     }
 }
 
@@ -48,7 +51,14 @@ p_contact createContact(char* name) {
     // return the new contact
 }
 
-p_contact searchContact(char* contact) {
+p_contact searchContact(char* search, p_contact_list list) {
+    p_contact tmp = list->levels[0];
+    while (tmp!=NULL) {
+        if (compareString(tmp->name, search)==0) {
+            return tmp;
+        }
+        tmp = tmp->levels[0];
+    }
     return NULL;
 }
 
@@ -166,7 +176,7 @@ char* CheckNameEntry() {
     }
 }
 
-p_appointment createAppointment () {
+p_appointment createAppointment (p_contact_list liste) {
     char* input = (char*) malloc(100*sizeof(char));                                // Str variable to stock the input
     p_contact toAssign;                                                                 // Pointer to check if the contact already exist or not
     int checkFormat = -1;                                                               // Variable to check argument are correct
@@ -207,13 +217,13 @@ p_appointment createAppointment () {
     while (input==NULL) {
         input = CheckNameEntry();
     }
-    toAssign = searchContact(input);
+    toAssign = searchContact(input, liste);
     // check if input is correct and transform it
     if (toAssign!=NULL) {
         insertAppointment(toAssign, new);
     } else {
         createContact(input);
-        toAssign = searchContact(input);
+        toAssign = searchContact(input, liste);
         insertAppointment(toAssign, new);
     }
 
