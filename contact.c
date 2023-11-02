@@ -92,7 +92,7 @@ void insertAppointment(p_contact contact, p_appointment cell) {
     }
 }
 
-char* transformName() {
+char* CheckNameEntry() {
     char* input = (char*) malloc(100*sizeof(char));                                                                                 // Allocate memory for the input
     char* name = (char*) malloc(100*sizeof(char));                                                                                  // Allocate memory for the name
     char* surname = (char*) malloc(100*sizeof(char));                                                                               // Allocate memory for the surname
@@ -203,6 +203,10 @@ p_appointment createAppointment () {
     printf("\nWhat's the object of your appointment ( < 100 characters) ?\n\n ");       // Asking for the contact to assign the appointment
     printf("~> ");
     fgets(input, 100, stdin);
+    input = NULL;
+    while (input==NULL) {
+        input = CheckNameEntry();
+    }
     toAssign = searchContact(input);
     // check if input is correct and transform it
     if (toAssign!=NULL) {

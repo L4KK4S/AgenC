@@ -34,7 +34,7 @@ int main() {
     char* res = NULL;
     printf("Enter a name : \n\n");
     while (res == NULL) {
-        res = transformName();
+        res = CheckNameEntry();
     }
     printf("%s\n", res);
 
