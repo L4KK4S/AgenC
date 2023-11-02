@@ -31,13 +31,12 @@ int main() {
     printf("%dh%d\n", new->length.hours, new->length.minutes);
     printf("%s\n", new->object);*/
 
-    p_contact new;
-    int check = -1;
-    printf("Enter a name\n\n");
-    do {
-        check = transformName(new);
-    } while (check==-1);
-    printf("%s\n", new->name);
+    char* res = NULL;
+    printf("Enter a name : \n\n");
+    while (res == NULL) {
+        res = transformName();
+    }
+    printf("%s\n", res);
 
 
 

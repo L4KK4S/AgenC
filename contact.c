@@ -92,7 +92,7 @@ void insertAppointment(p_contact contact, p_appointment cell) {
     }
 }
 
-int transformName(p_contact contact) {
+char* transformName() {
     char* input = (char*) malloc(100*sizeof(char));                                                                                 // Allocate memory for the input
     char* name = (char*) malloc(100*sizeof(char));                                                                                  // Allocate memory for the name
     char* surname = (char*) malloc(100*sizeof(char));                                                                               // Allocate memory for the surname
@@ -116,7 +116,7 @@ int transformName(p_contact contact) {
                 free(name);                                                                                                              // Memory Optimization by freeing allocated memory
                 free(surname);                                                                                                           // Memory Optimization by freeing allocated memory
                 free(temp);                                                                                                              // Memory Optimization by freeing allocated memory
-                return -1;
+                return NULL;
             }
         }
         if (space_counter != 1) {
@@ -126,7 +126,7 @@ int transformName(p_contact contact) {
             free(name);                                                                                                                  // Memory Optimization by freeing allocated memory
             free(surname);                                                                                                               // Memory Optimization by freeing allocated memory
             free(temp);                                                                                                                  // Memory Optimization by freeing allocated memory
-            return -1;
+            return NULL;
         }
 
         i = 0, space_counter = 0;                                                                                                        // If the entry is correct we restart the counter to analyse the differents arguments
@@ -145,12 +145,11 @@ int transformName(p_contact contact) {
         strcat(res, "_");                                                                                                                // We create the result by adding the underscore
         strcat(res, surname);                                                                                                            // We create the result by adding the surname
         change_maj_to_min(res);                                                                                                       // Converting the string to small characters
-        contact->name = res;                                                                                                             // Attributing the contact to the correct variable in the structure
         free(input);                                                                                                                     // Memory Optimization by freeing allocated memory
         free(name);                                                                                                                      // Memory Optimization by freeing allocated memory
         free(surname);                                                                                                                   // Memory Optimization by freeing allocated memory
         free(temp);                                                                                                                      // Memory Optimization by freeing allocated memory
-        return 0;
+        return res;
 
     } else {
         if (input[strlen(input)-2]==' ') {
@@ -163,7 +162,7 @@ int transformName(p_contact contact) {
         free(name);                                                                                                                     // Memory Optimization by freeing allocated memory
         free(surname);                                                                                                                  // Memory Optimization by freeing allocated memory
         free(temp);                                                                                                                     // Memory Optimization by freeing allocated memory
-        return -1;
+        return NULL;
     }
 }
 
