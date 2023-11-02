@@ -10,10 +10,12 @@ int main()
     //printf("%d\n", comparerString1("Maryam", "thomas"));
     //printf("%d\n", comparerString1("thomas", "Maryam"));
     //printf("%d\n", comparerString1("thomas", "thomas2"));
-    char *string2 = malloc(30); // Chaîne dynamique
+   // char *string2 = malloc(30); // Chaîne dynamique
 
-    strcpy(string2, "Autre Chaine De Test");
-    change_maj_to_min(string2);
-
+    //strcpy(string2, "Autre Chaine De Test");
+   // change_maj_to_min(string2);
+    char *resultat = malloc(sizeof(char));
+    transformerNom(resultat);
+    printf("%s\n", resultat);
     return 0;
 }

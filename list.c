@@ -8,26 +8,24 @@
 #include <ctype.h>
 #include <stdlib.h>
 
-/*void change_maj_to_min( char *s) {
+
+
+void change_maj_to_min( char *s) {
    for (int i = 0; s[i] != '\0'; i++) {
        if (s[i] >= 'A' && s[i] <= 'Z') {
         s[i] = s[i] + 32; // Conversion en minuscule
         }
 
     }
- */
-  void change_maj_to_min( char *str) {
-      int i;
-      for (i = 0; str[i] != '\0'; i++) {
-          str[i] = tolower(str[i]);
-      }
-  }
+}
+
+
+
 int comparerString1( char *s1, char *s2) {
     int i = 0;
     int n1 = strlen(s1);
     int n2 = strlen(s2);
-    change_maj_to_min(s1);
-    change_maj_to_min(s2);
+
     while (i < n1 && i < n2 && s1[i] == s2[i]) {     // Compare characters until a mismatch is found or the end of either string is reached
         i++;
     }
@@ -47,5 +45,43 @@ int comparerString1( char *s1, char *s2) {
             return -1; // s1>S2
         }
     }
+}
+
+
+
+
+void transformerNom(char *res) {
+    char nomComplet[256];  // Déclaration d'un tableau pour stocker le nom complet
+
+    printf("Veuillez entrer le nom complet : ");
+    gets(nomComplet);  // Utilise la fonction gets pour saisir le nom complet.
+
+    char *espace = NULL; // Pointeur pour l'emplacement de l'espace.
+
+    // Parcourt la chaîne jusqu'à trouver un espace ou la fin de la chaîne.
+    for (int i = 0; nomComplet[i] != '\0'; i++) {
+        if (nomComplet[i] == ' ') {
+            espace = &nomComplet[i];
+            break; // Sort de la boucle dès qu'un espace est trouvé.
+        }
+    }
+
+    // Si un espace est trouvé, divise le nom complet en prénom et nom.
+    if (espace != NULL) {
+        *espace = '\0'; // Remplace l'espace par un caractère nul pour séparer le prénom et le nom.
+
+        // Copie le nom de famille dans le tableau res.
+        strcpy(res, espace + 1);
+
+        // Ajoute un tiret bas pour séparer le nom de famille du prénom.
+        strcat(res, "_");
+
+        // Copie le prénom dans le tableau res.
+        strcat(res, nomComplet);
+    } else {
+        // Si aucun espace n'est trouvé, copie simplement le nom complet dans res.
+        strcpy(res, nomComplet);
+    }
+    change_maj_to_min(res);
 }
 
