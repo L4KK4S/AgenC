@@ -40,7 +40,10 @@ p_contact searchContact(char*, p_contact_list);                     // Search a 
 void change_maj_to_min(char*);                                      // Transform all maj to min in a str
 void insertAppointment(p_contact, p_appointment);                   // Insert a new appointment in a chained list
 char* CheckNameEntry();                                             // Secure entry to attribute the name of a contact
+int getMatch(p_contact, p_contact);
+int getMatchtest(char* prev, char* new);
 p_appointment createAppointment (p_contact_list);                   // Create a new appointment, sort it in the appointment list and attribute it to a contact (can create contact)
+void insertContact(p_contact_list, p_contact);
 
 #endif //AGENC_CONTACT_H
 

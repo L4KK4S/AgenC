@@ -46,7 +46,7 @@ int main() {
     printf("%s\n", res);*/
 
     // Test for the compare String Function
-    /*printf("%d\n", compareString("a", "b"));
+    /*printf("%d\n", compareString("flamel", "eleonor"));
     printf("%d\n", compareString("b", "a"));
     printf("%d\n", compareString("a", "a"));
     printf("%d\n", compareString("abcd", "abcde"));
@@ -54,6 +54,12 @@ int main() {
     printf("%d\n", compareString("tigre", "tigresse"));
     printf("%d\n", compareString("tigresse", "tigre"));*/
 
+    // Test getmatch()
+    printf("link : %d\n", getMatchtest("eleonor", "gruss"));
+    printf("link : %d\n", getMatchtest("grandin", "gruss"));
+    printf("link : %d\n", getMatchtest("gallouin", "garnier"));
+    printf("link : %d\n", getMatchtest("flamel", "gallouin"));
+    printf("link : %d\n", getMatchtest("guetta", "humbert"));
 
 
 
