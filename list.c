@@ -30,14 +30,14 @@ void uniform_display_list (p_list list) {
     p_cell level0cur;                                                           // Create a cursor to compare to higher value (because the first level will be the most complete, we have to check if we have to fill higher level or not)
     p_cell tmp_h;                                                               // Create a cursor pointer to go through each level
 
-    for (int i = 0 ; i<list->max_levels ; i++){                                // Loop which stop when all level including the last one are printed
+    for (int i = 0 ; i<list->max_levels ; i++){                                 // Loop which stop when all level including the last one are printed
         printf("[list head_%d @-]",i);                                          // Special printing for the head of the list
         tmp_h = list->levels[i];                                                // Set the pointer to the head of the current level
         level0cur = list->levels[0];                                            // Reset the level 0 cursor to the first cell of the level 0
 
         while (level0cur!=NULL) {                                               // Loop to go through all cell of the first level each level (and see if cell are there or not)
             if (tmp_h!=level0cur || tmp_h==NULL) {                              // If the level cursor is not equal to the level 0 cursor it mean the cell aren't on the same level / or if the level cursor is NULL but there are still cell on the first level
-                for (int j = 0; j < cellLength(level0cur)+3; j++) {        // Case where cell is not on the level, then we print "-" for the length of the corresponding cell at level 0 to keep it align
+                for (int j = 0; j < cellLength(level0cur)+3; j++) {             // Case where cell is not on the level, then we print "-" for the length of the corresponding cell at level 0 to keep it align
                     printf("-");
                 }
             } else {                                                            // Case where we have to print the cell

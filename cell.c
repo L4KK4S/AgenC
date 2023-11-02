@@ -56,12 +56,11 @@ int cellLength (p_cell cell) {                            // This function retur
 }
 
 
-
 void insertCell(p_cell cell, p_list list, int level) {
     p_cell tmp_h;                                                                       // Moving variable to move in the different levels
     p_cell prev;                                                                        // Set a previous cursor variable
 
-    for (int i = 0 ; i<level ; i++) {                                                  // Loop to go through all level of the new cell, <= because we count the last level
+    for (int i = 0 ; i<level ; i++) {                                                   // Loop to go through all level of the new cell, <= because we count the last level
         tmp_h = list->levels[i];                                                        // We set the cursor pointer to the first cell of the level
         if (tmp_h==NULL) {                                                              // If the level is empty create the new head of the level
             list->levels[i] = cell;
