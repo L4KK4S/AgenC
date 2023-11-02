@@ -47,6 +47,52 @@ void insertAppointment(p_contact contact, p_appointment cell) {
     }
 }
 
+int transformName(p_contact contact) {
+    char* input = (char*) malloc(100*sizeof(char));
+    char name[100]="", surname[100]="", temp[10]= " ", res[100]="";
+    printf("~> ");
+    fgets(input, 100, stdin);
+    int i = 0, space_counter=0;
+
+    if (input[strlen(input)-2]!=' ' && strlen(input)>= 4) {
+        while (input[i] != '\0') {
+            if ((input[i] >= 'a' && input[i] <= 'z') || (input[i] >= 'A' && input[i] <= 'Z') || input[i] == ' ') {
+                if (input[i] == ' ') {
+                    space_counter++;
+                }
+                i++;
+            } else {
+                printf(" not a letter or a space\n");
+                return -1;
+            }
+        }
+        if (space_counter != 1) {
+            printf("too much space\n");
+            return -1;
+        }
+        i = 0, space_counter = 0;
+        while (input[i]!='\0') {
+            temp[0] = input[i];
+            if (input[i] == ' ') {
+                space_counter++;
+            }
+            if (space_counter == 0) {
+                strcat(surname, temp);
+            } else {
+                strcat (name, temp);
+            }
+            i++;
+        }
+        strcat(res, name);
+        strcat(res, "_");
+        strcat(res, surname);
+        contact->name = res;
+    } else {
+        return -1;
+    }
+}
+
+
 int checkDateFormat(p_appointment new_appointment) {
 
     char* input = (char*) malloc(100*sizeof(char));          // --> Comment to the right                                                                                    // Create a str variable to stock the input
@@ -54,7 +100,7 @@ int checkDateFormat(p_appointment new_appointment) {
     char temp[10] = " ";                                                                                                                                                         // Create some str variable to manipulate the input
     int i = 0;                                                                                                                                                                   // Set an index to 0
     printf("~> ");
-    fgets(input, 100, stdin);                                                                                                                                                    // Get the input
+    fgets(input, 100, stdin);                                                                                                                                            // Get the input
 
     if (strlen(input)==11) {                                                                                                                                                  // Check if the input is the correct length
         while (i!=11) {                                                                                                                                                          // Loop to check all element

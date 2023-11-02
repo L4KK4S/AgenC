@@ -11,6 +11,8 @@
 #ifndef AGENC_APPOINTMENT_H
 #define AGENC_APPOINTMENT_H
 
+#include "contact.h"
+
 typedef struct s_date {                                                 // Structure for a date
     int day;                                                            // Int to stock the day
     int month;                                                          // Int to stock the month

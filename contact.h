@@ -10,11 +10,11 @@
 
 #include "appointment.h"
 
-
 // -------------------------- Structures --------------------------
 
 #ifndef AGENC_CONTACT_H
 #define AGENC_CONTACT_H
+
 
 typedef struct s_contact_list {                                    // Structure for a list of contacts
     int max_levelsL;                                               // Stock max level of the list (here it's 4 all the time)
