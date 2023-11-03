@@ -71,6 +71,7 @@ void transformerNom(char *res) {
         *espace = '\0'; // Remplace l'espace par un caractère nul pour séparer le prénom et le nom.
 
         // Copie le nom de famille dans le tableau res.
+        printf("%s",espace);
         strcpy(res, espace + 1);
 
         // Ajoute un tiret bas pour séparer le nom de famille du prénom.
@@ -82,6 +83,6 @@ void transformerNom(char *res) {
         // Si aucun espace n'est trouvé, copie simplement le nom complet dans res.
         strcpy(res, nomComplet);
     }
-    change_maj_to_min(res);
+   // change_maj_to_min(res);
 }
 
