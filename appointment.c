@@ -185,5 +185,3 @@ int checkLengthObject(p_appointment new_appointment) {
     return 0;
 
 }
-
-

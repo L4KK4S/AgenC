@@ -38,12 +38,9 @@ typedef struct s_appointment t_appointment, *p_appointment;             // Creat
 // -------------------------- Structures --------------------------
 
 
-
 int checkDateFormat(p_appointment);                         // Secure entry for the date
 int checkHourFormat(p_appointment);                         // Secure entry for the time
 int checkLengthAppointmentFormat(p_appointment);            // Secure entry for the length of an appointment
 int checkLengthObject(p_appointment);                       // Secure entry for the object of an appointment
-
-
 
 #endif //AGENC_APPOINTMENT_H

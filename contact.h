@@ -34,19 +34,31 @@ typedef struct s_contact_list t_contact_list, *p_contact_list;     // Create an 
 
 // -------------------------- Prototypes --------------------------
 
-p_contact_list createEmptyList();
+// 1) Simple Action functions
+
 int compareString( char *, char *);                                 // Compare 2 string and return if the string to place has to be place after or before
+void change_maj_to_min(char*);                                      // Transform all maj to min in a str
+int getMatch(p_contact, p_contact);                                 // Return the size of element to allocate memory depending on the number of matching letter
+int getLevel(p_contact_list list, p_contact search);                // Get the level of a contact in the list
+char* CheckNameEntry();                                             // Secure entry to attribute the name of a contact
+
+// 2) Manipulation of Contact Structure
+
+p_contact_list createEmptyList();                                   // Create an empty contact List
 p_contact createContact(char*);                                     // Create a new contact
 p_contact searchContact(char*, p_contact_list);                     // Search a contact in a contact list
-void change_maj_to_min(char*);                                      // Transform all maj to min in a str
-void insertAppointment(p_contact, p_appointment);                   // Insert a new appointment in a chained list
-char* CheckNameEntry();                                             // Secure entry to attribute the name of a contact
-int getMatch(p_contact, p_contact);                                 // Return the size of element to allocate memory depending on the number of matching letter
-p_appointment createAppointment (p_contact_list);                   // Create a new appointment, sort it in the appointment list and attribute it to a contact (can create contact)
 void insertContact(p_contact_list, p_contact);                      // Insert contact while keepîng the list ordered
+
+// 3) Manipulation of Appointment Structure (related with contact)
+
+p_appointment createAppointment (p_contact_list);                   // Create a new appointment, sort it in the appointment list and attribute it to a contact (can create contact)
+void insertAppointment(p_contact, p_appointment);                   // Insert a new appointment in a chained list
+
+// 4) Display Functions
+
 void display_contact_list (p_contact_list list);                    // Display the list in a standard way
 void uniform_display_contact_list (p_contact_list list);            // Display the list and keep cells align
-int getLevel(p_contact_list list, p_contact search);                // Get the level of a contact in the list
+
 
 // -------------------------- Test Functions --------------------------
 
@@ -55,5 +67,3 @@ p_contact_list createExempleList2(int);                             // Exemple l
 
 
 #endif //AGENC_CONTACT_H
-
-

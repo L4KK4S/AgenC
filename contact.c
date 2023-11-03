@@ -15,13 +15,7 @@
 
 // -------------------------- Functions --------------------------
 
-p_contact_list createEmptyList() {
-    p_contact_list new = (p_contact_list) malloc (sizeof (p_contact_list));         // Allocating memory
-    p_contact* levels = (p_contact*) malloc (4*sizeof(p_contact));                  // Allocating memory for the tab of 4 levels
-    new->levels = levels;                                                                // Attributing the memory tab
-    new->max_levels= 4;                                                                  // Setting the max level to 4
-    return new;
-}
+// 1) Simple Action functions
 
 int compareString( char *cursor, char *toplace) {
 
@@ -47,25 +41,6 @@ int compareString( char *cursor, char *toplace) {
     }
 }
 
-p_contact createContact(char* name) {
-    p_contact new = (p_contact) malloc (sizeof(p_contact));                      // Allocate memory
-    new->name = name;                                                                 // Attributing name
-    new->levels = NULL;                                                               // Setting level to NULL as we don't know yet how many level we need
-    new->head = NULL;                                                                 // Setting the appointment list to NULL
-    return new;
-}
-
-p_contact searchContact(char* search, p_contact_list list) {
-    p_contact tmp = list->levels[0];                                                    // Setting a cursor at level 0 (all cells)
-    while (tmp!=NULL) {                                                                 // Loop to go through all cells
-        if (compareString(tmp->name, search)==0) {                        // Check if cell is the same
-            return tmp;                                                                 // If we have find the cell we return the adress
-        }
-        tmp = tmp->levels[0];
-    }
-    return NULL;                                                                        // If we haven't find the cell we return 0
-}
-
 void change_maj_to_min( char *s) {
     for (int i = 0; s[i] != '\0'; i++) {                       // Loop to go through all characters
         if (s[i] >= 'A' && s[i] <= 'Z') {                      // if the character is a majuscule
@@ -75,35 +50,14 @@ void change_maj_to_min( char *s) {
     }
 }
 
-void insertAppointment(p_contact contact, p_appointment cell) {
-    p_appointment tmp = contact->head, prev = tmp;                                                                                              // Create pointer to go through the list
-
-    if (tmp==NULL) {                                                                                                                                // Case where the list is empty
-        contact->head = cell;                                                                                                                       // We asign the head of the contact list
-    } else if ((tmp->hour.hours > cell->hour.hours) || (tmp->hour.hours == cell->hour.hours && tmp->hour.minutes >= cell->hour.minutes)) {          // Head insertion case
-        cell->next = tmp;                                                                                                                           // We asign the next of the new cell to the previous head
-        contact->head = cell;                                                                                                                       // We update the head
-    } else {
-        while (tmp->hour.hours < cell->hour.hours && tmp->next != NULL) {                                                                           // Loop to search the hours spot to insert or the end of the list
-            prev = tmp;                                                                                                                             // Move prev to last value of tmp
-            tmp = tmp->next;                                                                                                                        // Update tmp
-        }
-        while (tmp->hour.hours == cell->hour.hours && tmp->hour.minutes < cell->hour.minutes && tmp->next != NULL) {                                // Loop to search if we arent at the end of the list the good spot for the minute
-            prev = tmp;                                                                                                                             // Move prev to last value of tmp
-            tmp = tmp->next;                                                                                                                        // Update tmp
-        }
-        if (tmp->next==NULL) {                                                                                                                      // If tmp is NULL = we're at the end of the list, we have to identify if we insert at the end or just before
-            if (tmp->hour.hours < cell->hour.hours || (tmp->hour.hours == cell->hour.hours && tmp->hour.minutes < cell->hour.minutes)) {            // If the hours is superior or the hours is the same but minutes are superior wer have to insert at the end
-                tmp->next = cell;
-            } else if (tmp->hour.hours > cell->hour.hours || (tmp->hour.hours == cell->hour.hours && tmp->hour.minutes >= cell->hour.minutes)) {    // If the hours is inferior or the hours is the same but the minutes are inferior or equal we insert just before the end cell (between prev and tmp)
-                prev->next = cell;                                                                                                                  // We update the next of the prev cell
-                cell->next=tmp;                                                                                                                     // We update the next of the cell to tmp
-            }
-        } else {                                                                                                                                    // If we weren't at the end of the list, it means we already have found the sweet spot between prev and tmp
-            prev->next = cell;                                                                                                                      // We update the next of the prev value to the cell
-            cell->next = tmp;                                                                                                                       // We update the next of the cell to the tmp
-        }
+int getMatch(p_contact prev, p_contact new) {
+    int match = 0;                                                                                                      // Setting a variable to count the match number
+    while (prev->name[match]==new->name[match] && match<3 && prev->name[match]!='\0' && new->name[match]!='\0') {       // Loop to count while 1 str is finish, or match is at it maximum value and both str are the same
+        match++;
     }
+
+    return 4-match;                                                                                                     // We return the number of level we want to create, exemple : 2 common letter = 2 levels
+
 }
 
 char* CheckNameEntry() {
@@ -180,15 +134,133 @@ char* CheckNameEntry() {
     }
 }
 
-int getMatch(p_contact prev, p_contact new) {
-    int match = 0;                                                                                                      // Setting a variable to count the match number
-    while (prev->name[match]==new->name[match] && match<3 && prev->name[match]!='\0' && new->name[match]!='\0') {       // Loop to count while 1 str is finish, or match is at it maximum value and both str are the same
-        match++;
+int getLevel(p_contact_list list, p_contact search) {
+    p_contact tmp;                                                  // Create a cursor
+    for (int i = 3 ; i>0 ; i--) {                                   // Loop going from the higher levels to lower level to optimize the computing time
+        tmp = list->levels[i];                                      // Setting the cursor to the head of the level
+        while (tmp!=NULL) {                                         // Loop to go through all level
+            if (tmp == search) {                                    // Check if we found the value
+                return i+1;                                         // We return the level +1 so we can get the right number of levels (level 3 = 4 levels)
+            }
+            tmp = tmp->levels[i];
+        }
     }
-
-    return 4-match;                                                                                                     // We return the number of level we want to create, exemple : 2 common letter = 2 levels
-
+    return 0+1;                                                     // Else we return 0+1 (0 level, but still link to 1 cell)
 }
+
+
+// 2) Manipulation of Contact Structure
+
+p_contact_list createEmptyList() {
+    p_contact_list new = (p_contact_list) malloc (sizeof (p_contact_list));         // Allocating memory
+    p_contact* levels = (p_contact*) malloc (4*sizeof(p_contact));                  // Allocating memory for the tab of 4 levels
+    new->levels = levels;                                                                // Attributing the memory tab
+    new->max_levels= 4;                                                                  // Setting the max level to 4
+    return new;
+}
+
+p_contact createContact(char* name) {
+    p_contact new = (p_contact) malloc (sizeof(p_contact));                      // Allocate memory
+    new->name = name;                                                                 // Attributing name
+    new->levels = NULL;                                                               // Setting level to NULL as we don't know yet how many level we need
+    new->head = NULL;                                                                 // Setting the appointment list to NULL
+    return new;
+}
+
+p_contact searchContact(char* search, p_contact_list list) {
+    p_contact tmp = list->levels[0];                                                    // Setting a cursor at level 0 (all cells)
+    while (tmp!=NULL) {                                                                 // Loop to go through all cells
+        if (compareString(tmp->name, search)==0) {                        // Check if cell is the same
+            return tmp;                                                                 // If we have find the cell we return the adress
+        }
+        tmp = tmp->levels[0];
+    }
+    return NULL;                                                                        // If we haven't find the cell we return 0
+}
+
+void insertContact(p_contact_list list, p_contact new) {
+    int rebuild = 1;                                                                                                                           // Set a variable to count the number of element of the different rebuild tab
+    p_contact tmp = list->levels[0], rebuild_tmp;                                                                                              // Create some pointer to use as cursor
+    p_contact prev = tmp;                                                                                                                      // Set the previous cursor to the tmp
+    if (list->levels[0]==NULL) {                                                                                                               // Case where level is empty
+        new->levels = (p_contact*) malloc (4*sizeof(p_contact));                                                                          // Create a tab of 4 elements for the new cell
+        for (int i = 0 ; i<4 ; i++) {                                                                                                          // Loop to set the head of each level to the cell
+            list->levels[i]=new;
+        }
+    } else {                                                                                                                                   // Case the tab is not empty
+        if (compareString(tmp->name, new->name)==-1) {                                                                            // Case head insertion
+            new->levels = (p_contact*) malloc (4*sizeof(p_contact));                                                                       // Allocate a memory tab of 4 cell
+            rebuild = getMatch(new, tmp);                                                                                             // Get the size of the new tab
+            p_contact* rebuild_tab = (p_contact*) malloc (rebuild*sizeof(p_contact));                                                       // Allocate the memory of the new tab
+            for (int i = 0 ; i<rebuild ; i++) {                                                                                                  // Loop to copy all common level between the new and the old tab
+                rebuild_tab[i] = tmp->levels[i];                                                                                                 // Copy the old tab to the new tab
+                list->levels[i] = new;                                                                                                           // Set the head of the level to the new cell
+                new->levels[i] = tmp;                                                                                                            // Set the next of the cell to the old cell on the common levels
+            }
+            for (int i = rebuild ; i<4 ; i++) {                                                                                                  // Loop to match all level that haven't been match yet (highers levels)
+                list->levels[i] = new;                                                                                                           // Set the head of the level to the new cell
+                new->levels[i] = tmp->levels[i];                                                                                                 // As the old cell was the first one, it had 4 levels, so we copy the unused old next adresses from the highers levels
+            }
+            free(tmp->levels);                                                                                                                   // Freeing the old tab
+            tmp->levels = rebuild_tab;                                                                                                           // Attributing the new tab to the tmp
+        } else {                                                                                                                                 // Case where the cell is at the middle or at the end
+            while (compareString(tmp->name, new->name) == 1 && tmp->levels[0]!=NULL) {                                             // Loop to go just after the good spot or at the end
+                prev = tmp;
+                tmp = tmp->levels[0];                                                                                                            // The cursor is at level 0 because we first need to place the cell to create the levels tabs of the cell and then attribute other adresses
+            }
+            if (compareString(tmp->name, new->name) == 1 && tmp->levels[0]==NULL) {                                                // Case where we have to place the cell at the end of the list
+                new->levels = (p_contact*) malloc (getMatch(tmp, new)*sizeof(p_contact));                                              // Allocating the right ammount of memory
+                for (int i = 0 ; i<getMatch(tmp, new) ; i++) {                                                                              // Loop to match all cell that were pointing on NULL at the level of the new cell, to the new cell
+                    tmp = list->levels[i];
+                    while (tmp->levels[i]!=NULL) {                                                                                               // Loop to get the last element of each level and link it to the new cell
+                        tmp = tmp->levels[i];
+                    }
+                    tmp->levels[i] = new;
+                }
+            } else if (compareString(tmp->name, new->name) == -1 || compareString(tmp->name, new->name) == 0) {      // Case where we have to insert it in the middle (either an element already existing or not)
+                new->levels = (p_contact*) malloc (getMatch(prev, new)*sizeof(p_contact));                                                   // Allocating memory
+                if (getMatch(prev, new) <= getMatch(new, tmp)) {                                                                       // Case where we don't have to rebuild the cell after the new one, PROBLEM when same element, but the exception is handled
+                    if (compareString(tmp->name, new->name) == 0) {                                                                // Case where it's the same element and the element is the first one
+                        new->levels[0] = tmp->levels[0];                                                                                         // Manually linking the cell correctly to the first ans third cell at the level 0
+                        tmp->levels[0] = new;
+                    } else {                                                                                                                     // Normal case without rebuilding
+                        for (int i = 0; i < getMatch(prev, new); i++) {                                                                          // We link at all level of the previous cell, all the cell that were pointing on the tmp to the new cell (which is placed before and is higher)
+                            rebuild_tmp = list->levels[i];                                                                                       // We set a cursor to the head of each level
+                            while (rebuild_tmp->levels[i] != tmp) {                                                                              // We find the cell that was pointing on the tmp
+                                rebuild_tmp = rebuild_tmp->levels[i];
+                            }
+                            rebuild_tmp->levels[i] = new;                                                                                        // We relink the cell correctly
+                            new->levels[i] = tmp;                                                                                                // We relink the new cell to the tmp at the current level
+                        }
+                    }
+                } else {                                                                                                                         // Case where we have to rebuild
+                    p_contact* rebuild_tab = (p_contact*) malloc (getMatch(new, tmp)*sizeof(p_contact));                          // Allocate the memory
+                    for (int i = 0 ; i<getMatch(new, tmp) ; i++ ) {                                                                    // Loop to start rematching correctly
+                        rebuild_tab[i] = tmp->levels[i];                                                                                         // Copy the common cell from the old tab to the new tab
+                        new->levels[i] = tmp;                                                                                                    // Set the next to the common level of the new cell to the tmp
+                    }
+                    for (int i = getMatch(new, tmp) ; i < getLevel(list, tmp) ; i++) {                                         // Loop to match all the unmatch cell of the new cell and copy the unusued adress of the highers levels of the old tab
+                        new->levels[i] = tmp->levels[i];                                                                                        // Copying the lefting cells from the old tab to the new tab
+                    }
+                    for (int i = 0 ; i<4 ; i++) {                                                                                                // Loop to go through all level and relink
+                        rebuild_tmp = list->levels[i];                                                                                           // Setting a cursor to the head of each level
+                        while (rebuild_tmp->levels[i]!= tmp && rebuild_tmp->levels[i]!=NULL) {                                                   // Loop to find cells that were pointing on the tmp (if they we're)
+                            rebuild_tmp = rebuild_tmp->levels[i];
+                        }
+                        if (rebuild_tmp->levels[i]== tmp) {                                                                                      // If a cell was pointing on the tmp, we relink it to the new cell
+                            rebuild_tmp->levels[i] = new;
+                        }
+                    }
+                    free(tmp->levels);                                                                                                           // Freeing the old tab
+                    tmp->levels = rebuild_tab;                                                                                                   // Attributing the new tab
+                }
+            }
+        }
+    }
+}
+
+
+// 3) Manipulation of Appointment Structure (related with contact)
 
 p_appointment createAppointment (p_contact_list liste) {
     char* input = (char*) malloc(100*sizeof(char));                                // Str variable to stock the input
@@ -245,100 +317,39 @@ p_appointment createAppointment (p_contact_list liste) {
 
 }
 
-int getLevel(p_contact_list list, p_contact search) {
-    p_contact tmp;                                                  // Create a cursor
-    for (int i = 3 ; i>0 ; i--) {                                   // Loop going from the higher levels to lower level to optimize the computing time
-        tmp = list->levels[i];                                      // Setting the cursor to the head of the level
-        while (tmp!=NULL) {                                         // Loop to go through all level
-            if (tmp == search) {                                    // Check if we found the value
-                return i+1;                                         // We return the level +1 so we can get the right number of levels (level 3 = 4 levels)
+void insertAppointment(p_contact contact, p_appointment cell) {
+    p_appointment tmp = contact->head, prev = tmp;                                                                                              // Create pointer to go through the list
+
+    if (tmp==NULL) {                                                                                                                                // Case where the list is empty
+        contact->head = cell;                                                                                                                       // We asign the head of the contact list
+    } else if ((tmp->hour.hours > cell->hour.hours) || (tmp->hour.hours == cell->hour.hours && tmp->hour.minutes >= cell->hour.minutes)) {          // Head insertion case
+        cell->next = tmp;                                                                                                                           // We asign the next of the new cell to the previous head
+        contact->head = cell;                                                                                                                       // We update the head
+    } else {
+        while (tmp->hour.hours < cell->hour.hours && tmp->next != NULL) {                                                                           // Loop to search the hours spot to insert or the end of the list
+            prev = tmp;                                                                                                                             // Move prev to last value of tmp
+            tmp = tmp->next;                                                                                                                        // Update tmp
+        }
+        while (tmp->hour.hours == cell->hour.hours && tmp->hour.minutes < cell->hour.minutes && tmp->next != NULL) {                                // Loop to search if we arent at the end of the list the good spot for the minute
+            prev = tmp;                                                                                                                             // Move prev to last value of tmp
+            tmp = tmp->next;                                                                                                                        // Update tmp
+        }
+        if (tmp->next==NULL) {                                                                                                                      // If tmp is NULL = we're at the end of the list, we have to identify if we insert at the end or just before
+            if (tmp->hour.hours < cell->hour.hours || (tmp->hour.hours == cell->hour.hours && tmp->hour.minutes < cell->hour.minutes)) {            // If the hours is superior or the hours is the same but minutes are superior wer have to insert at the end
+                tmp->next = cell;
+            } else if (tmp->hour.hours > cell->hour.hours || (tmp->hour.hours == cell->hour.hours && tmp->hour.minutes >= cell->hour.minutes)) {    // If the hours is inferior or the hours is the same but the minutes are inferior or equal we insert just before the end cell (between prev and tmp)
+                prev->next = cell;                                                                                                                  // We update the next of the prev cell
+                cell->next=tmp;                                                                                                                     // We update the next of the cell to tmp
             }
-            tmp = tmp->levels[i];
+        } else {                                                                                                                                    // If we weren't at the end of the list, it means we already have found the sweet spot between prev and tmp
+            prev->next = cell;                                                                                                                      // We update the next of the prev value to the cell
+            cell->next = tmp;                                                                                                                       // We update the next of the cell to the tmp
         }
     }
-    return 0+1;                                                     // Else we return 0+1 (0 level, but still link to 1 cell)
 }
 
-void insertContact(p_contact_list list, p_contact new) {
-    int rebuild = 1;                                                                                                                           // Set a variable to count the number of element of the different rebuild tab
-    p_contact tmp = list->levels[0], rebuild_tmp;                                                                                              // Create some pointer to use as cursor
-    p_contact prev = tmp;                                                                                                                      // Set the previous cursor to the tmp
-    if (list->levels[0]==NULL) {                                                                                                               // Case where level is empty
-        new->levels = (p_contact*) malloc (4*sizeof(p_contact));                                                                          // Create a tab of 4 elements for the new cell
-        for (int i = 0 ; i<4 ; i++) {                                                                                                          // Loop to set the head of each level to the cell
-            list->levels[i]=new;
-        }
-    } else {                                                                                                                                   // Case the tab is not empty
-       if (compareString(tmp->name, new->name)==-1) {                                                                            // Case head insertion
-           new->levels = (p_contact*) malloc (4*sizeof(p_contact));                                                                       // Allocate a memory tab of 4 cell
-           rebuild = getMatch(new, tmp);                                                                                             // Get the size of the new tab
-           p_contact* rebuild_tab = (p_contact*) malloc (rebuild*sizeof(p_contact));                                                       // Allocate the memory of the new tab
-           for (int i = 0 ; i<rebuild ; i++) {                                                                                                  // Loop to copy all common level between the new and the old tab
-               rebuild_tab[i] = tmp->levels[i];                                                                                                 // Copy the old tab to the new tab
-               list->levels[i] = new;                                                                                                           // Set the head of the level to the new cell
-               new->levels[i] = tmp;                                                                                                            // Set the next of the cell to the old cell on the common levels
-           }
-           for (int i = rebuild ; i<4 ; i++) {                                                                                                  // Loop to match all level that haven't been match yet (highers levels)
-               list->levels[i] = new;                                                                                                           // Set the head of the level to the new cell
-               new->levels[i] = tmp->levels[i];                                                                                                 // As the old cell was the first one, it had 4 levels, so we copy the unused old next adresses from the highers levels
-           }
-           free(tmp->levels);                                                                                                                   // Freeing the old tab
-           tmp->levels = rebuild_tab;                                                                                                           // Attributing the new tab to the tmp
-       } else {                                                                                                                                 // Case where the cell is at the middle or at the end
-           while (compareString(tmp->name, new->name) == 1 && tmp->levels[0]!=NULL) {                                             // Loop to go just after the good spot or at the end
-               prev = tmp;
-               tmp = tmp->levels[0];                                                                                                            // The cursor is at level 0 because we first need to place the cell to create the levels tabs of the cell and then attribute other adresses
-           }
-           if (compareString(tmp->name, new->name) == 1 && tmp->levels[0]==NULL) {                                                // Case where we have to place the cell at the end of the list
-               new->levels = (p_contact*) malloc (getMatch(tmp, new)*sizeof(p_contact));                                              // Allocating the right ammount of memory
-               for (int i = 0 ; i<getMatch(tmp, new) ; i++) {                                                                              // Loop to match all cell that were pointing on NULL at the level of the new cell, to the new cell
-                   tmp = list->levels[i];
-                   while (tmp->levels[i]!=NULL) {                                                                                               // Loop to get the last element of each level and link it to the new cell
-                       tmp = tmp->levels[i];
-                   }
-                   tmp->levels[i] = new;
-               }
-           } else if (compareString(tmp->name, new->name) == -1 || compareString(tmp->name, new->name) == 0) {      // Case where we have to insert it in the middle (either an element already existing or not)
-               new->levels = (p_contact*) malloc (getMatch(prev, new)*sizeof(p_contact));                                                   // Allocating memory
-               if (getMatch(prev, new) <= getMatch(new, tmp)) {                                                                       // Case where we don't have to rebuild the cell after the new one, PROBLEM when same element, but the exception is handled
-                   if (compareString(tmp->name, new->name) == 0) {                                                                // Case where it's the same element and the element is the first one
-                       new->levels[0] = tmp->levels[0];                                                                                         // Manually linking the cell correctly to the first ans third cell at the level 0
-                       tmp->levels[0] = new;
-                   } else {                                                                                                                     // Normal case without rebuilding
-                       for (int i = 0; i < getMatch(prev, new); i++) {                                                                          // We link at all level of the previous cell, all the cell that were pointing on the tmp to the new cell (which is placed before and is higher)
-                           rebuild_tmp = list->levels[i];                                                                                       // We set a cursor to the head of each level
-                           while (rebuild_tmp->levels[i] != tmp) {                                                                              // We find the cell that was pointing on the tmp
-                               rebuild_tmp = rebuild_tmp->levels[i];
-                           }
-                           rebuild_tmp->levels[i] = new;                                                                                        // We relink the cell correctly
-                           new->levels[i] = tmp;                                                                                                // We relink the new cell to the tmp at the current level
-                       }
-                   }
-               } else {                                                                                                                         // Case where we have to rebuild
-                   p_contact* rebuild_tab = (p_contact*) malloc (getMatch(new, tmp)*sizeof(p_contact));                          // Allocate the memory
-                   for (int i = 0 ; i<getMatch(new, tmp) ; i++ ) {                                                                    // Loop to start rematching correctly
-                       rebuild_tab[i] = tmp->levels[i];                                                                                         // Copy the common cell from the old tab to the new tab
-                       new->levels[i] = tmp;                                                                                                    // Set the next to the common level of the new cell to the tmp
-                   }
-                   for (int i = getMatch(new, tmp) ; i < getLevel(list, tmp) ; i++) {                                         // Loop to match all the unmatch cell of the new cell and copy the unusued adress of the highers levels of the old tab
-                        new->levels[i] = tmp->levels[i];                                                                                        // Copying the lefting cells from the old tab to the new tab
-                   }
-                   for (int i = 0 ; i<4 ; i++) {                                                                                                // Loop to go through all level and relink
-                       rebuild_tmp = list->levels[i];                                                                                           // Setting a cursor to the head of each level
-                       while (rebuild_tmp->levels[i]!= tmp && rebuild_tmp->levels[i]!=NULL) {                                                   // Loop to find cells that were pointing on the tmp (if they we're)
-                           rebuild_tmp = rebuild_tmp->levels[i];
-                       }
-                       if (rebuild_tmp->levels[i]== tmp) {                                                                                      // If a cell was pointing on the tmp, we relink it to the new cell
-                           rebuild_tmp->levels[i] = new;
-                       }
-                    }
-                   free(tmp->levels);                                                                                                           // Freeing the old tab
-                   tmp->levels = rebuild_tab;                                                                                                   // Attributing the new tab
-               }
-           }
-       }
-    }
-}
+
+// 4) Display Functions
 
 void display_contact_list (p_contact_list list) {
     for (int i = 0 ; i<list->max_levels ; i++) {                               // Loop which stop when all level are printed (<=)
@@ -376,6 +387,8 @@ void uniform_display_contact_list (p_contact_list list) {
         printf("-->NULL\n");                                                    // Special print to indicate the end of the level list
     }
 }
+
+
 
 // -------------------------- Tests Functions --------------------------
 
