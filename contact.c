@@ -380,7 +380,7 @@ void uniform_display_contact_list (p_contact_list list) {
 // -------------------------- Tests Functions --------------------------
 
 
-p_contact_list createExempleList1() {
+p_contact_list createExempleList1(int showstep) {
     p_contact_list new = createEmptyList();
     p_contact c1 = createContact("aaaaa");
     p_contact c2 = createContact("zzzzz");
@@ -391,26 +391,40 @@ p_contact_list createExempleList1() {
     p_contact c7 = createContact("mmmmm");
     p_contact c8 = createContact("hma");
     insertContact(new, c1);
-    uniform_display_contact_list(new);
-    printf("\n\n");
+    if (showstep==1) {
+        uniform_display_contact_list(new);
+        printf("\n\n");
+    }
     insertContact(new, c2);
-    uniform_display_contact_list(new);
-    printf("\n\n");
+    if (showstep==1) {
+        uniform_display_contact_list(new);
+        printf("\n\n");
+    }
     insertContact(new, c3);
-    uniform_display_contact_list(new);
-    printf("\n\n");
+    if (showstep==1) {
+        uniform_display_contact_list(new);
+        printf("\n\n");
+    }
     insertContact(new, c4);
-    uniform_display_contact_list(new);
-    printf("\n\n");
+    if (showstep==1) {
+        uniform_display_contact_list(new);
+        printf("\n\n");
+    }
     insertContact(new, c5);
-    uniform_display_contact_list(new);
-    printf("\n\n");
+    if (showstep==1) {
+        uniform_display_contact_list(new);
+        printf("\n\n");
+    }
     insertContact(new, c6);
-    uniform_display_contact_list(new);
-    printf("\n\n");
+    if (showstep==1) {
+        uniform_display_contact_list(new);
+        printf("\n\n");
+    }
     insertContact(new, c7);
-    uniform_display_contact_list(new);
-    printf("\n\n");
+    if (showstep==1) {
+        uniform_display_contact_list(new);
+        printf("\n\n");
+    }
     insertContact(new, c8);
     uniform_display_contact_list(new);
     printf("\n\n");
@@ -418,7 +432,7 @@ p_contact_list createExempleList1() {
 
 }
 
-p_contact_list createExempleList2() {
+p_contact_list createExempleList2(int showstep) {
     p_contact_list new = createEmptyList();
     p_contact c1 = createContact("flamel");
     p_contact c2 = createContact("gallouin");
@@ -430,29 +444,45 @@ p_contact_list createExempleList2() {
     p_contact c8 = createContact("humbert");
     p_contact c9 = createContact("humbert");
     insertContact(new, c3);
-    uniform_display_contact_list(new);
-    printf("\n\n");
+    if (showstep==1) {
+        uniform_display_contact_list(new);
+        printf("\n\n");
+    }
     insertContact(new, c1);
-    uniform_display_contact_list(new);
-    printf("\n\n");
+    if (showstep==1) {
+        uniform_display_contact_list(new);
+        printf("\n\n");
+    }
     insertContact(new, c2);
-    uniform_display_contact_list(new);
-    printf("\n\n");
+    if (showstep==1) {
+        uniform_display_contact_list(new);
+        printf("\n\n");
+    }
     insertContact(new, c8);
-    uniform_display_contact_list(new);
-    printf("\n\n");
+    if (showstep==1) {
+        uniform_display_contact_list(new);
+        printf("\n\n");
+    }
     insertContact(new, c7);
-    uniform_display_contact_list(new);
-    printf("\n\n");
+    if (showstep==1) {
+        uniform_display_contact_list(new);
+        printf("\n\n");
+    }
     insertContact(new, c6);
-    uniform_display_contact_list(new);
-    printf("\n\n");
+    if (showstep==1) {
+        uniform_display_contact_list(new);
+        printf("\n\n");
+    }
     insertContact(new, c5);
-    uniform_display_contact_list(new);
-    printf("\n\n");
+    if (showstep==1) {
+        uniform_display_contact_list(new);
+        printf("\n\n");
+    }
     insertContact(new, c4);
-    uniform_display_contact_list(new);
-    printf("\n\n");
+    if (showstep==1) {
+        uniform_display_contact_list(new);
+        printf("\n\n");
+    }
     insertContact(new, c9);
     uniform_display_contact_list(new);
     printf("\n\n");

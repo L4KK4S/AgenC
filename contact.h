@@ -50,8 +50,8 @@ int getLevel(p_contact_list list, p_contact search);                // Get the l
 
 // -------------------------- Test Functions --------------------------
 
-p_contact_list createExempleList1();                                // Test list
-p_contact_list createExempleList2();                                // Exemple list from the part 3 + repetitive element
+p_contact_list createExempleList1(int);                             // Test list
+p_contact_list createExempleList2(int);                             // Exemple list from the part 3 + repetitive element
 
 
 #endif //AGENC_CONTACT_H
