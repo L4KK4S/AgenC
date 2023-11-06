@@ -53,7 +53,7 @@ int comparerString1( char *s1, char *s2) {
 void transformerNom(char *res) {
     char nomComplet[256];  // Déclaration d'un tableau pour stocker le nom complet
 
-    printf("Veuillez entrer le nom complet : ");
+    printf("Veuillez entrer le nom complet svp: ");
     gets(nomComplet);  // Utilise la fonction gets pour saisir le nom complet.
 
     char *espace = NULL; // Pointeur pour l'emplacement de l'espace.
