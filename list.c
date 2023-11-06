@@ -23,7 +23,7 @@ p_list createEmptylistCell(int x) {                                             
     new_list->max_levels = x;                                                               // Initialization of the level of the list (Warning we define the level as the id of the last level -> mean level 6 = 7 levels)
     p_cell* levels_tab = (p_cell*) malloc ((new_list->max_levels)*sizeof(p_cell));     // Initialization of the tab stocking all level of the list with (level + 1) value because of the level 0
     for (int i = 0 ; i<x ; i++) {
-        levels_tab;
+        levels_tab[i] = NULL;
     }
     new_list->levels = levels_tab;
     return new_list;                                                                        // Return the new list
