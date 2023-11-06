@@ -154,6 +154,9 @@ int getLevel(p_contact_list list, p_contact search) {
 p_contact_list createEmptyList() {
     p_contact_list new = (p_contact_list) malloc (sizeof (p_contact_list));         // Allocating memory
     p_contact* levels = (p_contact*) malloc (4*sizeof(p_contact));                  // Allocating memory for the tab of 4 levels
+    for (int i  = 0 ; i<4 ; i++) {
+        levels[i]=NULL;
+    }
     new->levels = levels;                                                                // Attributing the memory tab
     new->max_levels= 4;                                                                  // Setting the max level to 4
     return new;
@@ -183,15 +186,26 @@ void insertContact(p_contact_list list, p_contact new) {
     p_contact tmp = list->levels[0], rebuild_tmp;                                                                                              // Create some pointer to use as cursor
     p_contact prev = tmp;                                                                                                                      // Set the previous cursor to the tmp
     if (list->levels[0]==NULL) {                                                                                                               // Case where level is empty
-        new->levels = (p_contact*) malloc (4*sizeof(p_contact));                                                                          // Create a tab of 4 elements for the new cell
+        p_contact* levels = (p_contact*) malloc (4*sizeof(p_contact));                                                                          // Create a tab of 4 elements for the new cell
+        for (int i  = 0 ; i<4 ; i++) {
+            levels[i]=NULL;
+        }
+        new->levels = levels;
         for (int i = 0 ; i<4 ; i++) {                                                                                                          // Loop to set the head of each level to the cell
             list->levels[i]=new;
         }
     } else {                                                                                                                                   // Case the tab is not empty
         if (compareString(tmp->name, new->name)==-1) {                                                                            // Case head insertion
-            new->levels = (p_contact*) malloc (4*sizeof(p_contact));                                                                       // Allocate a memory tab of 4 cell
+            p_contact* levels = (p_contact*) malloc (4*sizeof(p_contact));                                                                          // Create a tab of 4 elements for the new cell
+            for (int i  = 0 ; i<4 ; i++) {
+                levels[i]=NULL;
+            }
+            new->levels = levels;
             rebuild = getMatch(new, tmp);                                                                                             // Get the size of the new tab
             p_contact* rebuild_tab = (p_contact*) malloc (rebuild*sizeof(p_contact));                                                       // Allocate the memory of the new tab
+            for (int i  = 0 ; i<rebuild ; i++) {
+                rebuild_tab[i]=NULL;
+            }
             for (int i = 0 ; i<rebuild ; i++) {                                                                                                  // Loop to copy all common level between the new and the old tab
                 rebuild_tab[i] = tmp->levels[i];                                                                                                 // Copy the old tab to the new tab
                 list->levels[i] = new;                                                                                                           // Set the head of the level to the new cell
@@ -209,7 +223,11 @@ void insertContact(p_contact_list list, p_contact new) {
                 tmp = tmp->levels[0];                                                                                                            // The cursor is at level 0 because we first need to place the cell to create the levels tabs of the cell and then attribute other adresses
             }
             if (compareString(tmp->name, new->name) == 1 && tmp->levels[0]==NULL) {                                                // Case where we have to place the cell at the end of the list
-                new->levels = (p_contact*) malloc (getMatch(tmp, new)*sizeof(p_contact));                                              // Allocating the right ammount of memory
+                p_contact* levels = (p_contact*) malloc (getMatch(tmp, new)*sizeof(p_contact));                                                                          // Create a tab of 4 elements for the new cell
+                for (int i  = 0 ; i<4 ; i++) {
+                    levels[i]=NULL;
+                }
+                new->levels = levels;
                 for (int i = 0 ; i<getMatch(tmp, new) ; i++) {                                                                              // Loop to match all cell that were pointing on NULL at the level of the new cell, to the new cell
                     tmp = list->levels[i];
                     while (tmp->levels[i]!=NULL) {                                                                                               // Loop to get the last element of each level and link it to the new cell
@@ -219,6 +237,9 @@ void insertContact(p_contact_list list, p_contact new) {
                 }
             } else if (compareString(tmp->name, new->name) == -1 || compareString(tmp->name, new->name) == 0) {      // Case where we have to insert it in the middle (either an element already existing or not)
                 new->levels = (p_contact*) malloc (getMatch(prev, new)*sizeof(p_contact));                                                   // Allocating memory
+                for (int i  = 0 ; i<getMatch(prev, new) ; i++) {
+                    new->levels[i]=NULL;
+                }
                 if (getMatch(prev, new) <= getMatch(new, tmp)) {                                                                       // Case where we don't have to rebuild the cell after the new one, PROBLEM when same element, but the exception is handled
                     if (compareString(tmp->name, new->name) == 0) {                                                                // Case where it's the same element and the element is the first one
                         new->levels[0] = tmp->levels[0];                                                                                         // Manually linking the cell correctly to the first ans third cell at the level 0
@@ -235,6 +256,9 @@ void insertContact(p_contact_list list, p_contact new) {
                     }
                 } else {                                                                                                                         // Case where we have to rebuild
                     p_contact* rebuild_tab = (p_contact*) malloc (getMatch(new, tmp)*sizeof(p_contact));                          // Allocate the memory
+                    for (int i  = 0 ; i<getMatch(new, tmp) ; i++) {
+                        rebuild_tab[i]=NULL;
+                    }
                     for (int i = 0 ; i<getMatch(new, tmp) ; i++ ) {                                                                    // Loop to start rematching correctly
                         rebuild_tab[i] = tmp->levels[i];                                                                                         // Copy the common cell from the old tab to the new tab
                         new->levels[i] = tmp;                                                                                                    // Set the next to the common level of the new cell to the tmp
@@ -267,7 +291,6 @@ p_appointment createAppointment (p_contact_list liste) {
     p_contact toAssign;                                                                 // Pointer to check if the contact already exist or not
     int checkFormat = -1;                                                               // Variable to check argument are correct
     p_appointment new = (p_appointment) malloc (sizeof(p_appointment));            // Allocate the memory for the new appointment
-
     new->next=NULL;
 
     printf("What's the date of your new appointment (day/month/years) ?\n\n ");         // Asking for the date

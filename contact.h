@@ -36,7 +36,7 @@ typedef struct s_contact_list t_contact_list, *p_contact_list;     // Create an 
 
 // 1) Simple Action functions
 
-int compareString( char *, char *);                                 // Compare 2 string and return if the string to place has to be place after or before
+int compareString( char *, char *);                                 // Compare 2 string and return if the string to place has to be placed after or before
 void change_maj_to_min(char*);                                      // Transform all maj to min in a str
 int getMatch(p_contact, p_contact);                                 // Return the size of element to allocate memory depending on the number of matching letter
 int getLevel(p_contact_list list, p_contact search);                // Get the level of a contact in the list

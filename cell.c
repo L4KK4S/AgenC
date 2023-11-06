@@ -22,9 +22,11 @@ p_cell createEmptyCell(int x, int levels) {                                     
 
     p_cell new_cell = (p_cell) malloc(sizeof(t_cell));                             // Allocation of memory for the new cell
     new_cell->value = x;                                                                // Initialization of the value of the cell (Warning : level 5 mean AT level 5 = 6 levels in total with level 0)
-    new_cell-> levels = (p_cell*) malloc ((levels)*sizeof(p_cell));              // Initialization of a level+1 tab to stock the different level adress of the cell
-
-
+    p_cell* levels_tab = (p_cell*) malloc ((levels)*sizeof(p_cell));              // Initialization of a level+1 tab to stock the different level adress of the cell
+    for (int i = 0 ; i<levels ; i++) {
+        levels_tab[i]=NULL;
+    }
+    new_cell->levels= levels_tab;
     return new_cell;                                      // Return the new cell
 
 }

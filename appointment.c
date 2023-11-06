@@ -140,7 +140,7 @@ int checkLengthAppointmentFormat(p_appointment new_appointment) {
     }
 
     if (strlen(input) == 5 || strlen(input) == 6) {                                // Check the input is the correct possible length
-        while (input[i+1]!='\0') {                                                       // Loop to go through all caracter except the end one
+        while (input[i+1]!='\0') {                                                       // Loop to go through all character except the end one
             if (i!=skip) {                                                               // Avoid checking the delimiter
                 if (input[i] >= 48 && input[i] <= 57) {                                  // Check if it's a number
                     temp[0] = input[i];                                                  // Adding the number to the argument temporary variable
