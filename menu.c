@@ -111,105 +111,105 @@ int arguments(char *input, int index, int* args) {
 }
 
 int matchingString(char* ref, char* new) {
-    int i = 0;
-    while (ref[i]==new[i] && ref[i]!='\0') {
+    int i = 0;                                                                      // Set an index to 0
+    while (ref[i]==new[i] && ref[i]!='\0' && new[i]=='\0') {                        // Loop to check element if character are the same
         i++;
     }
-    if (ref[i]!='\0') {
-        return 0;
+    if (ref[i]!='\0') {                                                             // If the ref[i] equal to '\0' it means that all characters till the end of the check string match
+        return 0;                                                                   // If it wasn't the case we return 0
     } else {
-        return 1;
+        return 1;                                                                   // Else we return 1
     }
 }
 
 char** getCompletion(char* input, p_contact_list list) {
-    char** results = (char**) malloc (100*sizeof(char*));
-    for (int i = 0 ; i<100; i++) {
-        results[i]=NULL;
+    char** results = (char**) malloc (100*sizeof(char*));                       // Allocate memory for the result tab
+    for (int i = 0 ; i<100; i++) {                                                   // Force all cell to NULL for Window compatibility
+        results[i]=NULL;                                                             // Force to NULL
     }
-    p_contact tmp = list->levels[0];
-    int counter = 0;
-    while (tmp->name[0] < input[0] && tmp->levels[0]!=NULL) {
-        tmp = tmp->levels[0];
+    p_contact tmp = list->levels[0];                                                 // Set a cursor to the first level
+    int counter = 0;                                                                 // Set a counter to 0
+
+while (tmp->name[0] < input[0] && tmp->levels[0]!=NULL) {                            // Loop to set the cursor to the first cell with a matching letter or the end or a one after the one we search
+        tmp = tmp->levels[0];                                                        // Increment the tmp
 //        printf("fw\n");
     }
-    if (tmp->levels[0]!=NULL) {
-        while (tmp->name[0] == input[0] && tmp->levels[0]!=NULL) {
-            if (matchingString(input, tmp->name) == 1) {
+    if (tmp->levels[0]!=NULL) {                                                      // Check if this was the last cell
+        while (tmp->name[0] == input[0] && tmp->levels[0]!=NULL) {                   // Loop to get all string while it's not the last cell or it's the same first letter
+            if (matchingString(input, tmp->name) == 1) {                   // Check if it match
 //                printf("match ");
-                results[counter] = tmp->name;
+                results[counter] = tmp->name;                                       // Add the match string to the result tab
 //                printf("%s\n", results[counter]);
-                counter++;
+                counter++;                                                          // Increment the counter
             }
-            tmp = tmp->levels[0];
+            tmp = tmp->levels[0];                                                   // Increment the cursor
 
         }
     }
-    if (results[0]!=NULL) {
+    if (results[0]!=NULL) {                                                         // Check if there was some results
 //        printf("return\n");
-        return results;
+        return results;                                                             // If yes return the tab
     } else {
-        return NULL;
+        return NULL;                                                                // If not return NULL
     }
 
 }
 
 char* autoCompletion(p_contact_list list) {
-    printf("Auto completion is enable on this entry, type help to know more about how it work\n");
-    char** search = NULL;
-    char* input = (char*) malloc (100*sizeof(char));
-    char* res = (char*) malloc (100*sizeof(char));
-    char* newres = (char*) malloc (100*sizeof(char));
-    char reset[10] = "";
-    char temp[10] = "";
-    int index= 0, copy;
-    do {
-        printf("-> %s", res);
-        fgets(input, 100, stdin);
-        // Function to check for help
-        if (strlen(input)==1 && strlen(res)>=1) {
-            copy = strlen(res)-1;
-            strcpy(newres, reset);
-            for (int i = 0 ; i<copy ; i++) {
-                temp[0]=res[i];
-                strcat(newres, temp);
+    printf("Auto completion is enable on this entry, type help to know more about how it work\n");                                      // Message to indicate the entry button are differnet than other entries
+    char** search = NULL;                                                                                                               // Allocate memory for the completion tab
+    char* input = (char*) malloc (100*sizeof(char));                                                                               // Allocate memory for the input
+    char* res = (char*) malloc (100*sizeof(char));                                                                                 // Allocate memory for the current string
+    char* newres = (char*) malloc (100*sizeof(char));                                                                              // Allocate memory for a temp variable and also prev
+    char reset[10] = "";                                                                                                                // String use to reset an other string
+    char temp[10] = "";                                                                                                                 // String use to copy convert from character to string type
+    int index= 0;                                                                                                                       // Int to indicate the level of the completion tab and copy to get the length -1 of a string
+    do {                                                                                                                                // Loop to deal with the input
+        printf("-> %s", res);                                                                                                           // print the cursor and the current string
+        fgets(input, 100, stdin);                                                                                                       // Get the input from the user
+        // Function to check for help                                                                                                   // NOT CODED YET, FUNCTION TO CHECK IF USER WANT THE HELP MENU
+        if (strlen(input)==1 && strlen(res)>=1) {                                                                                 // Check if the input is only the ENTER key and if there is something to delete in the current string
+            strcpy(newres, reset);                                                                                                      // Reset the new result string
+            for (int i = 0 ; i<strlen(res)-1 ; i++) {                                                                                // Loop to add 1 by 1 all character-1 of the current string
+                temp[0]=res[i];                                                                                                         // Convert from character to string
+                strcat(newres, temp);                                                                                                   // Cat to the new result string
             }
-            strcpy(res, newres);
-        } else if(input[strlen(input)-2]=='\t') {
-            for (int i = 0 ; i<strlen(input)-1 ; i++) {
-                if (input[i] != '\t') {
-                    temp[0] = input[i];
-                    strcat(res, temp);
+            strcpy(res, newres);                                                                                                        // We change the current string to the new result
+        } else if(input[strlen(input)-2]=='\t') {                                                                                    // Case where the last user input is TAB (want a completion)
+            for (int i = 0 ; i<strlen(input)-1 ; i++) {                                                                              // Loop to get all character except TAB
+                if (input[i] != '\t') {                                                                                                 // If the character is not a tab we add it
+                    temp[0] = input[i];                                                                                                 // Convert from car to string
+                    strcat(res, temp);                                                                                                  // Add to the results
                 }
             }
-            if (strlen(res)>1) {
-                if (compareString(newres, res)==0 && search!=NULL) {
-                    if (search[index+1]!=NULL) {
-                        index++;
-                        strcpy(res, search[index]);
-                    } else {
+            if (strlen(res)>1) {                                                                                                     // Check if the result was just composed of TAB
+                if (compareString(newres, res)==0 && search!=NULL) {                                                                    // Check if the current string is the same as the previous input, meaning user wants a second result if there is of the completion
+                    if (search[index+1]!=NULL) {                                                                                        // Check if there is an other result
+                        index++;                                                                                                        // If yes we increment the index
+                        strcpy(res, search[index]);                                                                                     // We update the current string
+                    } else {                                                                                                            // Case where there is no more input
                         //printf("No more results\n");
-                        index = 0;
-                        strcpy(res, search[index]);
+                        index = 0;                                                                                                      // We set back the user to the first result
+                        strcpy(res, search[index]);                                                                                     // We update the current string
                     }
-                } else {
-                    search = getCompletion(res, list);
-                    if (search != NULL) {
-                        index = 0;
-                        strcpy(res, search[index]);
+                } else {                                                                                                                // Case where the current string has changed
+                    search = getCompletion(res, list);                                                                            // Get the matching string tab
+                    if (search != NULL) {                                                                                               // Case where there was results
+                        index = 0;                                                                                                      // We reset the index to 0
+                        strcpy(res, search[index]);                                                                                     // We update the current string
                     }
                 }
             }
-        } else {
-            for (int i = 0 ; i<strlen(input)-1 ; i++) {
-                if (input[i]!='\t') {
-                    temp[0] = input[i];
-                    strcat(res, temp);
+        } else {                                                                                                                        // If there was no special character we just update the current string
+            for (int i = 0 ; i<strlen(input)-1 ; i++) {                                                                              // Loop to check all character from the input
+                if (input[i]!='\t') {                                                                                                   // We add all character that aren't TAB
+                    temp[0] = input[i];                                                                                                 // We convert from car to string
+                    strcat(res, temp);                                                                                                  // We add that to the current string
                 }
             }
         }
-        strcpy(newres, res);
-    } while (strlen(input)<=1 || input[strlen(input)-2]!=' ');
+        strcpy(newres, res);                                                                                                            // We update the new result string which is used here as a previous string
+    } while (strlen(input)<=1 || input[strlen(input)-2]!=' ');                                                                    // Loop to continue while the input doesn't end by SPACE and ENTER
 }
 
 
