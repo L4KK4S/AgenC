@@ -29,7 +29,7 @@ int main() {
     printf("\nWelcome to AgenC, please type a command or type help if needed :\n\n");
 
     // Menu Part 1 and 2
-    mainloop1();
+    //mainloop1();
 
     // Test for the create Appointment function
     /*p_appointment new = createAppointment();
@@ -48,7 +48,7 @@ int main() {
 
 
     // Test list
-    //p_contact_list test = createExempleList1(0);
+    p_contact_list test = createExempleList2(0);
 
    // Test auto completion
 

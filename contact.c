@@ -236,10 +236,11 @@ void insertContact(p_contact_list list, p_contact new) {
                     tmp->levels[i] = new;
                 }
             } else if (compareString(tmp->name, new->name) == -1 || compareString(tmp->name, new->name) == 0) {      // Case where we have to insert it in the middle (either an element already existing or not)
-                new->levels = (p_contact*) malloc (getMatch(prev, new)*sizeof(p_contact));                                                   // Allocating memory
+                p_contact* levels = (p_contact*) malloc (getMatch(prev, new)*sizeof(p_contact));                                                   // Allocating memory
                 for (int i  = 0 ; i<getMatch(prev, new) ; i++) {
-                    new->levels[i]=NULL;
+                    levels[i]=NULL;
                 }
+                new->levels = levels;
                 if (getMatch(prev, new) <= getMatch(new, tmp)) {                                                                       // Case where we don't have to rebuild the cell after the new one, PROBLEM when same element, but the exception is handled
                     if (compareString(tmp->name, new->name) == 0) {                                                                // Case where it's the same element and the element is the first one
                         new->levels[0] = tmp->levels[0];                                                                                         // Manually linking the cell correctly to the first ans third cell at the level 0
