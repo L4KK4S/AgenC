@@ -8,10 +8,12 @@
 
 // -------------------------- Includes --------------------------
 
-#include "menu.h"
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
+#include "menu.h"
+
 
 
 int get_inputs (char* input) {
@@ -107,6 +109,45 @@ int arguments(char *input, int index, int* args) {
         return -1;                                                                                              // If the test is wrong we return the error code -1
     }
 }
+
+char* autoCompletion(p_contact_list list) {
+    printf("Auto completion is enable on this entry, type help to know more about how it work\n");
+    char* search[4] = {"", "test1", "test2", "test3"};
+    char* input = (char*) malloc (100*sizeof(char));
+    char* res = (char*) malloc (100*sizeof(char));
+    char* newres = (char*) malloc (100*sizeof(char));
+    char reset[10] = "";
+    char temp[10] = "";
+    int index= 0, copy;
+    do {
+        printf("-> %s", res);
+        fgets(input, 100, stdin);
+        // Function to check for help
+        if (strlen(input)==1 && strlen(res)>=1) {
+            copy = strlen(res)-1;
+            strcpy(newres, reset);
+            for (int i = 0 ; i<copy ; i++) {
+                temp[0]=res[i];
+                strcat(newres, temp);
+            }
+            strcpy(res, newres);
+        } else if(input[strlen(input)-2]=='\t') {
+            if (index == 3) {
+                index = 0;
+            } else {
+                index ++;
+            }
+            strcpy(res, search[index]);
+        } else {
+            for (int i = 0 ; i<strlen(input)-1 ; i++) {
+                temp[0]=input[i];
+                strcat(res, temp);
+            }
+        }
+    } while (strlen(input)<=1 || input[strlen(input)-2]!=' ');
+}
+
+
 
 void mainloop1() {
 

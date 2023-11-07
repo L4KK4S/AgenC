@@ -48,11 +48,11 @@ int main() {
 
 
     // Test list
-    //p_contact_list test = createExempleList2(0);
+    p_contact_list test = createExempleList2(0);
 
    // Test auto completion
 
-
+    autoCompletion(test);
 
 
 
