@@ -224,7 +224,7 @@ void insertContact(p_contact_list list, p_contact new) {
             }
             if (compareString(tmp->name, new->name) == 1 && tmp->levels[0]==NULL) {                                                // Case where we have to place the cell at the end of the list
                 p_contact* levels = (p_contact*) malloc (getMatch(tmp, new)*sizeof(p_contact));                                                                          // Create a tab of 4 elements for the new cell
-                for (int i  = 0 ; i<4 ; i++) {
+                for (int i  = 0 ; i<getMatch(tmp, new) ; i++) {
                     levels[i]=NULL;
                 }
                 new->levels = levels;
