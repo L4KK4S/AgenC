@@ -112,7 +112,7 @@ int arguments(char *input, int index, int* args) {
 
 int matchingString(char* ref, char* new) {
     int i = 0;                                                                      // Set an index to 0
-    while (ref[i]==new[i] && ref[i]!='\0' && new[i]=='\0') {                        // Loop to check element if character are the same
+    while (ref[i]==new[i] && ref[i]!='\0') {                                        // Loop to check element if character are the same
         i++;
     }
     if (ref[i]!='\0') {                                                             // If the ref[i] equal to '\0' it means that all characters till the end of the check string match
@@ -163,14 +163,15 @@ char* autoCompletion(p_contact_list list) {
     char* newres = (char*) malloc (100*sizeof(char));                                                                              // Allocate memory for a temp variable and also prev
     char reset[10] = "";                                                                                                                // String use to reset an other string
     char temp[10] = "";                                                                                                                 // String use to copy convert from character to string type
-    int index= 0;                                                                                                                       // Int to indicate the level of the completion tab and copy to get the length -1 of a string
+    int index= 0, copy ;                                                                                                                       // Int to indicate the level of the completion tab and copy to get the length -1 of a string
     do {                                                                                                                                // Loop to deal with the input
         printf("-> %s", res);                                                                                                           // print the cursor and the current string
         fgets(input, 100, stdin);                                                                                                       // Get the input from the user
         // Function to check for help                                                                                                   // NOT CODED YET, FUNCTION TO CHECK IF USER WANT THE HELP MENU
         if (strlen(input)==1 && strlen(res)>=1) {                                                                                 // Check if the input is only the ENTER key and if there is something to delete in the current string
+            copy = strlen(res)-1;
             strcpy(newres, reset);                                                                                                      // Reset the new result string
-            for (int i = 0 ; i<strlen(res)-1 ; i++) {                                                                                // Loop to add 1 by 1 all character-1 of the current string
+            for (int i = 0 ; i< copy; i++) {                                                                                            // Loop to add 1 by 1 all character-1 of the current string
                 temp[0]=res[i];                                                                                                         // Convert from character to string
                 strcat(newres, temp);                                                                                                   // Cat to the new result string
             }
