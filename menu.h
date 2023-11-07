@@ -9,7 +9,7 @@
 
 #ifndef AGENC_MENU_H
 #define AGENC_MENU_H
-
+#include "list.h"
 
 // -------------------------- Prototypes --------------------------
 

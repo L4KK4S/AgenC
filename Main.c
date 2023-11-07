@@ -48,27 +48,11 @@ int main() {
 
 
     // Test list
-    p_contact_list test = createExempleList2(0);
+    //p_contact_list test = createExempleList2(0);
 
    // Test auto completion
 
-  /* char* list[4] = {"", "test1", "test2", "test3"};
-   char* test = (char*) malloc (100*sizeof(char));
-   int index= 0;
-   int check;
-   while (1) {
-       printf("-> %s", list[index]);
-       fgets(test, 100, stdin);
-//       check = getchar();
-//       printf("%d", check);
-       if(test[strlen(test)-2]=='\t') {
-           if (index == 3) {
-               index = 0;
-           } else {
-               index ++;
-           }
-       }
-   }*/
+
 
 
 
