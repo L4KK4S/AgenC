@@ -214,7 +214,6 @@ char* autoCompletion(p_contact_list list) {
 }
 
 
-
 void mainloop1() {
 
     // ------------------------- Variable definition --------------------------
