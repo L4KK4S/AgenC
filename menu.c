@@ -11,6 +11,8 @@
 #include "menu.h"
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include "list.h"
 
 
 int get_inputs (char* input) {
