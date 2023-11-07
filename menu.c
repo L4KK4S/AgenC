@@ -110,9 +110,53 @@ int arguments(char *input, int index, int* args) {
     }
 }
 
+int matchingString(char* ref, char* new) {
+    int i = 0;
+    while (ref[i]==new[i] && ref[i]!='\0') {
+        i++;
+    }
+    if (ref[i]!='\0') {
+        return 0;
+    } else {
+        return 1;
+    }
+}
+
+char** getCompletion(char* input, p_contact_list list) {
+    char** results = (char**) malloc (100*sizeof(char*));
+    for (int i = 0 ; i<100; i++) {
+        results[i]=NULL;
+    }
+    p_contact tmp = list->levels[0];
+    int counter = 0;
+    while (tmp->name[0] < input[0] && tmp->levels[0]!=NULL) {
+        tmp = tmp->levels[0];
+//        printf("fw\n");
+    }
+    if (tmp->levels[0]!=NULL) {
+        while (tmp->name[0] == input[0] && tmp->levels[0]!=NULL) {
+            if (matchingString(input, tmp->name) == 1) {
+//                printf("match ");
+                results[counter] = tmp->name;
+//                printf("%s\n", results[counter]);
+                counter++;
+            }
+            tmp = tmp->levels[0];
+
+        }
+    }
+    if (results[0]!=NULL) {
+//        printf("return\n");
+        return results;
+    } else {
+        return NULL;
+    }
+
+}
+
 char* autoCompletion(p_contact_list list) {
     printf("Auto completion is enable on this entry, type help to know more about how it work\n");
-    char* search[4] = {"", "test1", "test2", "test3"};
+    char** search = NULL;
     char* input = (char*) malloc (100*sizeof(char));
     char* res = (char*) malloc (100*sizeof(char));
     char* newres = (char*) malloc (100*sizeof(char));
@@ -132,18 +176,39 @@ char* autoCompletion(p_contact_list list) {
             }
             strcpy(res, newres);
         } else if(input[strlen(input)-2]=='\t') {
-            if (index == 3) {
-                index = 0;
-            } else {
-                index ++;
+            for (int i = 0 ; i<strlen(input)-1 ; i++) {
+                if (input[i] != '\t') {
+                    temp[0] = input[i];
+                    strcat(res, temp);
+                }
             }
-            strcpy(res, search[index]);
+            if (strlen(res)>1) {
+                if (compareString(newres, res)==0 && search!=NULL) {
+                    if (search[index+1]!=NULL) {
+                        index++;
+                        strcpy(res, search[index]);
+                    } else {
+                        //printf("No more results\n");
+                        index = 0;
+                        strcpy(res, search[index]);
+                    }
+                } else {
+                    search = getCompletion(res, list);
+                    if (search != NULL) {
+                        index = 0;
+                        strcpy(res, search[index]);
+                    }
+                }
+            }
         } else {
             for (int i = 0 ; i<strlen(input)-1 ; i++) {
-                temp[0]=input[i];
-                strcat(res, temp);
+                if (input[i]!='\t') {
+                    temp[0] = input[i];
+                    strcat(res, temp);
+                }
             }
         }
+        strcpy(newres, res);
     } while (strlen(input)<=1 || input[strlen(input)-2]!=' ');
 }
 
