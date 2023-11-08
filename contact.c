@@ -41,16 +41,7 @@ int compareString( char *cursor, char *toplace) {
     }
 }
 
-void change_maj_to_min( char *s) {
-    for (int i = 0; s[i] != '\0'; i++) {                       // Loop to go through all characters
-        if (s[i] >= 'A' && s[i] <= 'Z') {                      // if the character is a majuscule
-            s[i] = s[i] + 32;                                  // Convert to min
-        }
-
-    }
-}
-
-char* change_maj_to_min_return( char *s) {
+char* change_maj_to_min( char *s) {
     for (int i = 0; s[i] != '\0'; i++) {                       // Loop to go through all characters
         if (s[i] >= 'A' && s[i] <= 'Z') {                      // if the character is a majuscule
             s[i] = s[i] + 32;                                  // Convert to min
@@ -92,7 +83,7 @@ char* formatString(char* input) {
     strcat(res, name);                                                                                                              // We create the result by adding the name first
     strcat(res, "_");                                                                                                               // We create the result by adding the underscore
     strcat(res, surname);                                                                                                           // We create the result by adding the surname
-    change_maj_to_min(res);                                                                                                      // Converting the string to small characters
+    res = change_maj_to_min(res);                                                                                                // Converting the string to small characters
     return res;
 }
 
@@ -185,6 +176,52 @@ int getLevel(p_contact_list list, p_contact search) {
         }
     }
     return 0+1;                                                     // Else we return 0+1 (0 level, but still link to 1 cell)
+}
+
+int compareDate(p_appointment toplace, p_appointment check) {
+    if (toplace->date.years < check->date.years) {
+        return -1;
+    } else if (toplace->date.years > check->date.years) {
+        return 1;
+    } else {
+        if (toplace->date.month < check->date.month) {
+            return -1;
+        } else if (toplace->date.month > check->date.month) {
+            return 1;
+        } else {
+            if (toplace->date.day < check->date.day) {
+                return -1;
+            } else if (toplace->date.day > check->date.day) {
+                return 1;
+            } else {
+                if (toplace->hour.hours < check->hour.hours) {
+                    return -1;
+                } else if (toplace->hour.hours > check->hour.hours) {
+                    return 1;
+                } else {
+                    if (toplace->hour.minutes < check->hour.minutes ) {
+                        return -1;
+                    } else if (toplace->hour.minutes  > check->hour.minutes ) {
+                        return 1;
+                    } else {
+                        if (toplace->length.hours < check->length.hours ) {
+                            return 1;
+                        } else if (toplace->length.hours  > check->length.hours ) {
+                            return -1;
+                        } else {
+                            if (toplace->length.minutes < check->length.minutes ) {
+                                return 1;
+                            } else if (toplace->length.minutes  > check->length.minutes ) {
+                                return -1;
+                            } else {
+                                return 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 
@@ -363,9 +400,12 @@ p_appointment createAppointment (p_contact_list liste) {
     printf("~> ");
     fgets(input, 100, stdin);
     input = NULL;
-    while (input==NULL) {
-        input = checkNameEntry(input);
-    }
+
+    printf("Please enter a contact to assign or create :\n\n");
+    do {
+        input = autoCompletion(liste);
+    } while (input==NULL);
+
     toAssign = searchContact(input, liste);
     // check if input is correct and transform it
     if (toAssign!=NULL) {

@@ -131,7 +131,7 @@ char** getCompletion(char* input, p_contact_list list) {
     int counter = 0;                                                                                                         // Set a counter to 0
 
     while (tmp!=NULL) {                                                                                                      // Loop to compare all value because the input is the surname and value are ordered by name
-        if (matchingString(input, change_maj_to_min_return(unformatString(tmp->name)))) {                     // Check if it match with the unformat and all min string
+        if (matchingString(input, change_maj_to_min(unformatString(tmp->name)))) {                     // Check if it match with the unformat and all min string
             results[counter] = unformatString(tmp->name);                                                              // Add the match string to the result tab
             counter++;                                                                                                       // Increment the counter
         }
@@ -201,12 +201,11 @@ char* autoCompletion(p_contact_list list) {
         strcpy(newres, res);                                                                                                            // We update the new result string which is used here as a previous string
     } while (strlen(input)<=1 || input[strlen(input)-2]!=' ');                                                                    // Loop to continue while the input doesn't end by SPACE and ENTER
     if (checkNameEntry(res)) {
-        return res;
+        return formatString(res);
     } else {
         return NULL;
     }
 }
-
 
 void mainloop1() {
 

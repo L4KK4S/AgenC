@@ -38,10 +38,10 @@ typedef struct s_contact_list t_contact_list, *p_contact_list;     // Create an 
 // 1) Simple Action functions
 
 int compareString( char *, char *);                                 // Compare 2 string and return if the string to place has to be placed after or before
-void change_maj_to_min(char*);                                      // Transform all maj to min in a str
-char* change_maj_to_min_return(char*);                              // Change maj to min and return the result
+char* change_maj_to_min(char*);                                     // Change maj to min and return the result
 int getMatch(p_contact, p_contact);                                 // Return the size of element to allocate memory depending on the number of matching letter
-int getLevel(p_contact_list list, p_contact search);                // Get the level of a contact in the list
+int getLevel(p_contact_list, p_contact);                            // Get the level of a contact in the list
+int compareDate(p_appointment, p_appointment);                      // Compare the date of 2 appointments
 char* formatString(char* input);                                    // Transform a correct unformat string to a format string
 char* unformatString(char* input);                                  // Transform a correct format string to an unformat string
 char* checkNameEntry(char* input);                                  // Check has the correct format (only letter and 1 space)
