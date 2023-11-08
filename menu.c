@@ -183,7 +183,7 @@ char* autoCompletion(p_contact_list list) {
                         strcpy(res, search[index]);                                                                                     // We update the current string
                     }
                 } else {                                                                                                                // Case where the current string has changed
-                    search = getCompletion(res, list);                                                                            // Get the matching string tab
+                    search = getCompletion(change_maj_to_min(res), list);                                                                            // Get the matching string tab
                     if (search != NULL) {                                                                                               // Case where there was results
                         index = 0;                                                                                                      // We reset the index to 0
                         strcpy(res, search[index]);                                                                                     // We update the current string
