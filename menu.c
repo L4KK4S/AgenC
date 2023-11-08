@@ -123,47 +123,36 @@ int matchingString(char* ref, char* new) {
 }
 
 char** getCompletion(char* input, p_contact_list list) {
-    char** results = (char**) malloc (100*sizeof(char*));                       // Allocate memory for the result tab
-    for (int i = 0 ; i<100; i++) {                                                   // Force all cell to NULL for Window compatibility
-        results[i]=NULL;                                                             // Force to NULL
+    char** results = (char**) malloc (100*sizeof(char*));                                                               // Allocate memory for the result tab
+    for (int i = 0 ; i<100; i++) {                                                                                           // Force all cell to NULL for Window compatibility
+        results[i]=NULL;                                                                                                     // Force to NULL
     }
-    p_contact tmp = list->levels[0];                                                 // Set a cursor to the first level
-    int counter = 0;                                                                 // Set a counter to 0
+    p_contact tmp = list->levels[0];                                                                                         // Set a cursor to the first level
+    int counter = 0;                                                                                                         // Set a counter to 0
 
-while (tmp->name[0] < input[0] && tmp->levels[0]!=NULL) {                            // Loop to set the cursor to the first cell with a matching letter or the end or a one after the one we search
-        tmp = tmp->levels[0];                                                        // Increment the tmp
-//        printf("fw\n");
-    }
-    if (tmp->levels[0]!=NULL) {                                                      // Check if this was the last cell
-        while (tmp->name[0] == input[0] && tmp->levels[0]!=NULL) {                   // Loop to get all string while it's not the last cell or it's the same first letter
-            if (matchingString(input, tmp->name) == 1) {                   // Check if it match
-//                printf("match ");
-                results[counter] = tmp->name;                                       // Add the match string to the result tab
-//                printf("%s\n", results[counter]);
-                counter++;                                                          // Increment the counter
-            }
-            tmp = tmp->levels[0];                                                   // Increment the cursor
-
+    while (tmp!=NULL) {                                                                                                      // Loop to compare all value because the input is the surname and value are ordered by name
+        if (matchingString(input, change_maj_to_min_return(unformatString(tmp->name)))) {                     // Check if it match with the unformat and all min string
+            results[counter] = unformatString(tmp->name);                                                              // Add the match string to the result tab
+            counter++;                                                                                                       // Increment the counter
         }
+        tmp = tmp->levels[0];                                                                                                // Increment the tmp
     }
-    if (results[0]!=NULL) {                                                         // Check if there was some results
-//        printf("return\n");
-        return results;                                                             // If yes return the tab
+    if (results[0]!=NULL) {                                                                                                  // Check if there was some results
+        return results;                                                                                                      // If yes return the tab
     } else {
-        return NULL;                                                                // If not return NULL
+        return NULL;                                                                                                         // If not return NULL
     }
 
 }
 
 char* autoCompletion(p_contact_list list) {
-    printf("Auto completion is enable on this entry, type help to know more about how it work\n");                                      // Message to indicate the entry button are differnet than other entries
     char** search = NULL;                                                                                                               // Allocate memory for the completion tab
     char* input = (char*) malloc (100*sizeof(char));                                                                               // Allocate memory for the input
     char* res = (char*) malloc (100*sizeof(char));                                                                                 // Allocate memory for the current string
     char* newres = (char*) malloc (100*sizeof(char));                                                                              // Allocate memory for a temp variable and also prev
     char reset[10] = "";                                                                                                                // String use to reset an other string
     char temp[10] = "";                                                                                                                 // String use to copy convert from character to string type
-    int index= 0, copy ;                                                                                                                       // Int to indicate the level of the completion tab and copy to get the length -1 of a string
+    int index= 0, copy ;                                                                                                                // Int to indicate the level of the completion tab and copy to get the length -1 of a string
     do {                                                                                                                                // Loop to deal with the input
         printf("-> %s", res);                                                                                                           // print the cursor and the current string
         fgets(input, 100, stdin);                                                                                                       // Get the input from the user
@@ -189,7 +178,7 @@ char* autoCompletion(p_contact_list list) {
                         index++;                                                                                                        // If yes we increment the index
                         strcpy(res, search[index]);                                                                                     // We update the current string
                     } else {                                                                                                            // Case where there is no more input
-                        //printf("No more results\n");
+                        printf("No more results\n");
                         index = 0;                                                                                                      // We set back the user to the first result
                         strcpy(res, search[index]);                                                                                     // We update the current string
                     }
@@ -211,6 +200,11 @@ char* autoCompletion(p_contact_list list) {
         }
         strcpy(newres, res);                                                                                                            // We update the new result string which is used here as a previous string
     } while (strlen(input)<=1 || input[strlen(input)-2]!=' ');                                                                    // Loop to continue while the input doesn't end by SPACE and ENTER
+    if (checkNameEntry(res)) {
+        return res;
+    } else {
+        return NULL;
+    }
 }
 
 
