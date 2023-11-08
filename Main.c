@@ -62,8 +62,6 @@ int main() {
     } while (name==NULL);
     printf("%s\n", name);
 
-    printf("pushtest");
-
 
 
     return 0;
