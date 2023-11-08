@@ -60,7 +60,6 @@ int main() {
         printf("Auto completion is enable on this entry, type help to know more about how it work\n");                                       // Message to indicate the entry button are differnet than other entries
         name = autoCompletion(test);
     } while (name==NULL);
-    printf("%s\n", name);
 
 
 
