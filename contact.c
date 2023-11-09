@@ -179,52 +179,6 @@ int getLevel(p_contact_list list, p_contact search) {
     return 0+1;                                                     // Else we return 0+1 (0 level, but still link to 1 cell)
 }
 
-int compareDate(p_appointment toplace, p_appointment check) {
-    if (toplace->date.years < check->date.years) {
-        return 1;
-    } else if (toplace->date.years > check->date.years) {
-        return -1;
-    } else {
-        if (toplace->date.month < check->date.month) {
-            return 1;
-        } else if (toplace->date.month > check->date.month) {
-            return -1;
-        } else {
-            if (toplace->date.day < check->date.day) {
-                return 1;
-            } else if (toplace->date.day > check->date.day) {
-                return -1;
-            } else {
-                if (toplace->hour.hours < check->hour.hours) {
-                    return 1;
-                } else if (toplace->hour.hours > check->hour.hours) {
-                    return -1;
-                } else {
-                    if (toplace->hour.minutes < check->hour.minutes ) {
-                        return 1;
-                    } else if (toplace->hour.minutes  > check->hour.minutes ) {
-                        return -1;
-                    } else {
-                        if (toplace->length.hours < check->length.hours ) {
-                            return -1;
-                        } else if (toplace->length.hours  > check->length.hours ) {
-                            return 1;
-                        } else {
-                            if (toplace->length.minutes < check->length.minutes ) {
-                                return -1;
-                            } else if (toplace->length.minutes  > check->length.minutes ) {
-                                return 1;
-                            } else {
-                                return 0;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
 
 // 2) Manipulation of Contact Structure
 
@@ -251,10 +205,12 @@ p_contact searchContact(char* search, p_contact_list list) {
     p_contact tmp = list->levels[0];                                                    // Setting a cursor at level 0 (all cells)
     while (tmp!=NULL) {                                                                 // Loop to go through all cells
         if (compareString(tmp->name, search)==0) {                        // Check if cell is the same
+            printf("found\n");
             return tmp;                                                                 // If we have find the cell we return the adress
         }
         tmp = tmp->levels[0];
     }
+    printf("not existing\n");
     return NULL;                                                                        // If we haven't find the cell we return 0
 }
 
@@ -366,10 +322,9 @@ void insertContact(p_contact_list list, p_contact new) {
 
 p_appointment createAppointment (p_contact_list liste) {
     char* input = (char*) malloc(100*sizeof(char));                                // Str variable to stock the input
-    p_contact toAssign;                                                                 // Pointer to check if the contact already exist or not
+    p_contact toAssign = (p_contact) malloc (sizeof(p_contact));                                                                 // Pointer to check if the contact already exist or not
     int checkFormat = -1;                                                               // Variable to check argument are correct
     p_appointment new = (p_appointment) malloc (sizeof(p_appointment));            // Allocate the memory for the new appointment
-    new->next=NULL;
 
     printf("What's the date of your new appointment (day/month/years) ?\n\n ");         // Asking for the date
 
@@ -397,25 +352,30 @@ p_appointment createAppointment (p_contact_list liste) {
         checkFormat = checkLengthObject(new);
     } while (checkFormat == -1);
 
-    //testPrintAppointment(new);
+    printf("cell before inserting in contact : ");
+    testPrintAppointment(new);
+    printf("\n");
 
     printf("Please enter a contact to assign or create :\n\n");
     do {
         input = autoCompletion(liste);
     } while (input==NULL);
 
+    printf("input : %s\n", input);
+
     toAssign = searchContact(input, liste);
 
     // check if input is correct and transform it
     if (toAssign==NULL) {
-        p_contact new_contact = createContact(input);
-        insertContact(liste, new_contact);
+        printf("creating contact\n");
+        toAssign = createContact(input);
+        insertContact(liste, toAssign);
         toAssign = searchContact(input, liste);
-        insertAppointment(toAssign, new);
     }
     printf("\n");
     uniform_display_contact_list(liste);
     printf("\n");
+
     insertAppointment(toAssign, new);
     testDisplayAppointment(toAssign);
 
@@ -424,21 +384,30 @@ p_appointment createAppointment (p_contact_list liste) {
 }
 
 void insertAppointment(p_contact contact, p_appointment cell) {
-    p_appointment tmp = contact->head, prev = tmp;
+    p_appointment tmp = contact->head  ;
+    p_appointment prev = tmp;
+    printf("name : %s\n", unformatString(contact->name));
+
     if (contact->head==NULL) {
+        printf("empty insertion\n");
         contact->head = cell;
-    } else if (compareDate(cell, tmp)!=1) {
+    } else if (compareDate(cell, tmp) == -1) {
+        printf("head insertion\n");
         cell->next = contact->head;
         contact->head = cell;
     } else {
+        printf("comparison : %d\n", compareDate(cell, tmp));
+        printf("loop\n");
         while (compareDate(cell, tmp)!=-1 && tmp->next!=NULL) {
             prev = tmp;
             tmp = tmp->next;
         }
         if (compareDate(cell, tmp)==-1) {
+            printf("mid insertion\n");
             prev->next = cell;
             cell->next = tmp;
         } else {
+            printf("end insertion\n");
             tmp->next = cell;
         }
     }
@@ -485,10 +454,14 @@ void uniform_display_contact_list (p_contact_list list) {
 }
 
 void testDisplayAppointment (p_contact contact) {
-    p_appointment tmp = contact->head;
-    while (tmp!=NULL) {
-        testPrintAppointment(tmp);
-        tmp = tmp->next;
+    if (contact->head!=NULL) {
+        p_appointment tmp = contact->head;
+        while (tmp != NULL) {
+            testPrintAppointment(tmp);
+            tmp = tmp->next;
+        }
+    } else {
+        printf("empty list\n");
     }
 }
 
@@ -560,6 +533,7 @@ p_contact_list createExempleList2(int showstep) {
     p_contact c7 = createContact("guetta_david");
     p_contact c8 = createContact("humbert_dave");
     p_contact c9 = createContact("zerator_charlotte");
+    p_contact c10 = createContact("picou_thomas");
     insertContact(new, c3);
     if (showstep==1) {
         uniform_display_contact_list(new);
@@ -601,6 +575,7 @@ p_contact_list createExempleList2(int showstep) {
         printf("\n\n");
     }
     insertContact(new, c9);
+    //insertContact(new, c10);
     //uniform_display_contact_list(new);
     printf("\n\n");
     return new;

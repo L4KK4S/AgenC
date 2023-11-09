@@ -57,7 +57,21 @@ int main() {
 
     // Test for create appointment list
 
+//    p_appointment new = (p_appointment) malloc (sizeof(p_appointment));
+//    new->object = "test";
+//    new->length.hours=12;
+//    new->length.minutes=12;
+//    new->hour.hours = 12;
+//    new->hour.minutes = 12;
+//    new->date.day = 12;
+//    new->date.month = 9;
+//    new->date.years = 2004;
+//    testPrintAppointment(new);
+//    insertAppointment(searchContact("picou_thomas", test), new);
+//    uniform_display_contact_list(test);
+
     while (1) {
+
         createAppointment(test);
     }
 

@@ -186,6 +186,53 @@ int checkLengthObject(p_appointment new_appointment) {
 
 }
 
+int compareDate(p_appointment toplace, p_appointment check) {
+    if (toplace->date.years < check->date.years) {
+        return -1;
+    } else if (toplace->date.years > check->date.years) {
+        return 1;
+    } else {
+        if (toplace->date.month < check->date.month) {
+            return -1;
+        } else if (toplace->date.month > check->date.month) {
+            return 1;
+        } else {
+            if (toplace->date.day < check->date.day) {
+                return -1;
+            } else if (toplace->date.day > check->date.day) {
+                return 1;
+            } else {
+                if (toplace->hour.hours < check->hour.hours) {
+                    return -1;
+                } else if (toplace->hour.hours > check->hour.hours) {
+                    return 1;
+                } else {
+
+                    if (toplace->hour.minutes < check->hour.minutes ) {
+                        return -1;
+                    } else if (toplace->hour.minutes  > check->hour.minutes ) {
+                        return 1;
+                    } else {
+                        if (toplace->length.hours < check->length.hours ) {
+                            return 1;
+                        } else if (toplace->length.hours  > check->length.hours ) {
+                            return -1;
+                        } else {
+                            if (toplace->length.minutes < check->length.minutes ) {
+                                return 1;
+                            } else if (toplace->length.minutes  > check->length.minutes ) {
+                                return -1;
+                            } else {
+                                return 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 void testPrintAppointment(p_appointment a) {
     printf("%d/%d/%d %dh%d (%dh%d) %s\n", a->date.day, a->date.month, a->date.years, a->hour.hours, a->hour.hours, a->length.hours, a->length.minutes, a->object);
 }
