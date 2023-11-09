@@ -165,7 +165,7 @@ int checkLengthAppointmentFormat(p_appointment new_appointment) {
         }
         new_appointment->length.hours = atoi(hours);                                     // Convert and attribute the hours value
         new_appointment->length.minutes  = atoi(minutes);                                // Convert and attribute the minutes value
-        if (new_appointment->hour.minutes > 59) {                                        // Check that minute variable is possible
+        if (new_appointment->length.minutes > 59) {                                        // Check that minute variable is possible
             printf("Not a valid hours / minute\n");
             return -1;
         }
@@ -184,4 +184,8 @@ int checkLengthObject(p_appointment new_appointment) {
     new_appointment->object = input;                                                     // Attribute the input
     return 0;
 
+}
+
+void testPrintAppointment(p_appointment a) {
+    printf("%d/%d/%d %dh%d (%dh%d) %s\n", a->date.day, a->date.month, a->date.years, a->hour.hours, a->hour.hours, a->length.hours, a->length.minutes, a->object);
 }

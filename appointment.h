@@ -42,5 +42,6 @@ int checkDateFormat(p_appointment);                         // Secure entry for 
 int checkHourFormat(p_appointment);                         // Secure entry for the time
 int checkLengthAppointmentFormat(p_appointment);            // Secure entry for the length of an appointment
 int checkLengthObject(p_appointment);                       // Secure entry for the object of an appointment
+void testPrintAppointment(p_appointment);
 
 #endif //AGENC_APPOINTMENT_H

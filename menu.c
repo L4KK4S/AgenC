@@ -131,7 +131,7 @@ char** getCompletion(char* input, p_contact_list list) {
     int counter = 0;                                                                                                         // Set a counter to 0
 
     while (tmp!=NULL) {                                                                                                      // Loop to compare all value because the input is the surname and value are ordered by name
-        if (matchingString(input, change_maj_to_min(unformatString(tmp->name)))) {                     // Check if it match with the unformat and all min string
+        if (matchingString(input, change_maj_to_min(unformatString(tmp->name)))) {                            // Check if it match with the unformat and all min string
             results[counter] = unformatString(tmp->name);                                                              // Add the match string to the result tab
             counter++;                                                                                                       // Increment the counter
         }
@@ -174,6 +174,7 @@ char* autoCompletion(p_contact_list list) {
             }
             if (strlen(res)>1) {                                                                                                     // Check if the result was just composed of TAB
                 if (compareString(newres, res)==0 && search!=NULL) {                                                                    // Check if the current string is the same as the previous input, meaning user wants a second result if there is of the completion
+                    printf("same\n");
                     if (search[index+1]!=NULL) {                                                                                        // Check if there is an other result
                         index++;                                                                                                        // If yes we increment the index
                         strcpy(res, search[index]);                                                                                     // We update the current string
@@ -183,10 +184,12 @@ char* autoCompletion(p_contact_list list) {
                         strcpy(res, search[index]);                                                                                     // We update the current string
                     }
                 } else {                                                                                                                // Case where the current string has changed
-                    search = getCompletion(change_maj_to_min(res), list);                                                                            // Get the matching string tab
-                    if (search != NULL) {                                                                                               // Case where there was results
-                        index = 0;                                                                                                      // We reset the index to 0
-                        strcpy(res, search[index]);                                                                                     // We update the current string
+                    if (compareString(newres, res)!= 0) {
+                        search = getCompletion(change_maj_to_min(res), list);                                                     // Get the matching string tab
+                        if (search != NULL) {                                                                                           // Case where there was results
+                            index = 0;                                                                                                  // We reset the index to 0
+                            strcpy(res, search[index]);                                                                                 // We update the current string
+                        }
                     }
                 }
             }
@@ -197,6 +200,7 @@ char* autoCompletion(p_contact_list list) {
                     strcat(res, temp);                                                                                                  // We add that to the current string
                 }
             }
+            search = NULL;
         }
         strcpy(newres, res);                                                                                                            // We update the new result string which is used here as a previous string
     } while (strlen(input)<=1 || input[strlen(input)-2]!=' ');                                                                    // Loop to continue while the input doesn't end by SPACE and ENTER

@@ -62,6 +62,7 @@ void insertAppointment(p_contact, p_appointment);                   // Insert a 
 
 void display_contact_list (p_contact_list list);                    // Display the list in a standard way
 void uniform_display_contact_list (p_contact_list list);            // Display the list and keep cells align
+void testDisplayAppointment (p_contact);
 
 
 // -------------------------- Test Functions --------------------------

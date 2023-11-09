@@ -19,6 +19,7 @@
 
 int compareString( char *cursor, char *toplace) {
 
+
     int i = 0;                                                                               //  Create an index
 
     while (i < strlen(cursor) && i < strlen(toplace) && cursor[i] == toplace[i]) {     // Compare characters until a mismatch is found or the end of either string is reached
@@ -31,7 +32,7 @@ int compareString( char *cursor, char *toplace) {
             return - 1;
         }
     } else {                                                                                 // If the cursor is at the end
-        if ( strlen(cursor) == strlen(toplace)) {                                      // We check if length are the same, meaning that str would be same
+        if ( strlen(cursor) == strlen(toplace) && cursor[strlen(cursor)-1]== toplace[strlen(toplace)-1]) {                                      // We check if length are the same, meaning that str would be same
             return 0;
         } else if (i < strlen(cursor)) {                                                  // If i is inferior to the length of the first string, mean both string are almost same but s2 a1 as more characters
             return 1;                                                                        // In this case we want to place the string after the one with more elements
@@ -180,39 +181,39 @@ int getLevel(p_contact_list list, p_contact search) {
 
 int compareDate(p_appointment toplace, p_appointment check) {
     if (toplace->date.years < check->date.years) {
-        return -1;
-    } else if (toplace->date.years > check->date.years) {
         return 1;
+    } else if (toplace->date.years > check->date.years) {
+        return -1;
     } else {
         if (toplace->date.month < check->date.month) {
-            return -1;
-        } else if (toplace->date.month > check->date.month) {
             return 1;
+        } else if (toplace->date.month > check->date.month) {
+            return -1;
         } else {
             if (toplace->date.day < check->date.day) {
-                return -1;
-            } else if (toplace->date.day > check->date.day) {
                 return 1;
+            } else if (toplace->date.day > check->date.day) {
+                return -1;
             } else {
                 if (toplace->hour.hours < check->hour.hours) {
-                    return -1;
-                } else if (toplace->hour.hours > check->hour.hours) {
                     return 1;
+                } else if (toplace->hour.hours > check->hour.hours) {
+                    return -1;
                 } else {
                     if (toplace->hour.minutes < check->hour.minutes ) {
-                        return -1;
-                    } else if (toplace->hour.minutes  > check->hour.minutes ) {
                         return 1;
+                    } else if (toplace->hour.minutes  > check->hour.minutes ) {
+                        return -1;
                     } else {
                         if (toplace->length.hours < check->length.hours ) {
-                            return 1;
-                        } else if (toplace->length.hours  > check->length.hours ) {
                             return -1;
+                        } else if (toplace->length.hours  > check->length.hours ) {
+                            return 1;
                         } else {
                             if (toplace->length.minutes < check->length.minutes ) {
-                                return 1;
-                            } else if (toplace->length.minutes  > check->length.minutes ) {
                                 return -1;
+                            } else if (toplace->length.minutes  > check->length.minutes ) {
+                                return 1;
                             } else {
                                 return 0;
                             }
@@ -396,10 +397,7 @@ p_appointment createAppointment (p_contact_list liste) {
         checkFormat = checkLengthObject(new);
     } while (checkFormat == -1);
 
-    printf("\nWhat's the object of your appointment ( < 100 characters) ?\n\n ");       // Asking for the contact to assign the appointment
-    printf("~> ");
-    fgets(input, 100, stdin);
-    input = NULL;
+    //testPrintAppointment(new);
 
     printf("Please enter a contact to assign or create :\n\n");
     do {
@@ -407,46 +405,41 @@ p_appointment createAppointment (p_contact_list liste) {
     } while (input==NULL);
 
     toAssign = searchContact(input, liste);
+
     // check if input is correct and transform it
-    if (toAssign!=NULL) {
-        insertAppointment(toAssign, new);
-    } else {
-        createContact(input);
+    if (toAssign==NULL) {
+        p_contact new_contact = createContact(input);
+        insertContact(liste, new_contact);
         toAssign = searchContact(input, liste);
         insertAppointment(toAssign, new);
     }
+    printf("\n");
+    uniform_display_contact_list(liste);
+    printf("\n");
+    insertAppointment(toAssign, new);
+    testDisplayAppointment(toAssign);
 
     return new;                                                                         // Return the new appointment
 
 }
 
 void insertAppointment(p_contact contact, p_appointment cell) {
-    p_appointment tmp = contact->head, prev = tmp;                                                                                                  // Create pointer to go through the list
-
-    if (tmp==NULL) {                                                                                                                                // Case where the list is empty
-        contact->head = cell;                                                                                                                       // We asign the head of the contact list
-    } else if ((tmp->hour.hours > cell->hour.hours) || (tmp->hour.hours == cell->hour.hours && tmp->hour.minutes >= cell->hour.minutes)) {          // Head insertion case
-        cell->next = tmp;                                                                                                                           // We asign the next of the new cell to the previous head
-        contact->head = cell;                                                                                                                       // We update the head
+    p_appointment tmp = contact->head, prev = tmp;
+    if (contact->head==NULL) {
+        contact->head = cell;
+    } else if (compareDate(cell, tmp)!=1) {
+        cell->next = contact->head;
+        contact->head = cell;
     } else {
-        while (tmp->hour.hours < cell->hour.hours && tmp->next != NULL) {                                                                           // Loop to search the hours spot to insert or the end of the list
-            prev = tmp;                                                                                                                             // Move prev to last value of tmp
-            tmp = tmp->next;                                                                                                                        // Update tmp
+        while (compareDate(cell, tmp)!=-1 && tmp->next!=NULL) {
+            prev = tmp;
+            tmp = tmp->next;
         }
-        while (tmp->hour.hours == cell->hour.hours && tmp->hour.minutes < cell->hour.minutes && tmp->next != NULL) {                                // Loop to search if we arent at the end of the list the good spot for the minute
-            prev = tmp;                                                                                                                             // Move prev to last value of tmp
-            tmp = tmp->next;                                                                                                                        // Update tmp
-        }
-        if (tmp->next==NULL) {                                                                                                                      // If tmp is NULL = we're at the end of the list, we have to identify if we insert at the end or just before
-            if (tmp->hour.hours < cell->hour.hours || (tmp->hour.hours == cell->hour.hours && tmp->hour.minutes < cell->hour.minutes)) {            // If the hours is superior or the hours is the same but minutes are superior wer have to insert at the end
-                tmp->next = cell;
-            } else if (tmp->hour.hours > cell->hour.hours || (tmp->hour.hours == cell->hour.hours && tmp->hour.minutes >= cell->hour.minutes)) {    // If the hours is inferior or the hours is the same but the minutes are inferior or equal we insert just before the end cell (between prev and tmp)
-                prev->next = cell;                                                                                                                  // We update the next of the prev cell
-                cell->next=tmp;                                                                                                                     // We update the next of the cell to tmp
-            }
-        } else {                                                                                                                                    // If we weren't at the end of the list, it means we already have found the sweet spot between prev and tmp
-            prev->next = cell;                                                                                                                      // We update the next of the prev value to the cell
-            cell->next = tmp;                                                                                                                       // We update the next of the cell to the tmp
+        if (compareDate(cell, tmp)==-1) {
+            prev->next = cell;
+            cell->next = tmp;
+        } else {
+            tmp->next = cell;
         }
     }
 }
@@ -488,6 +481,14 @@ void uniform_display_contact_list (p_contact_list list) {
 
         }
         printf("-->NULL\n");                                                    // Special print to indicate the end of the level list
+    }
+}
+
+void testDisplayAppointment (p_contact contact) {
+    p_appointment tmp = contact->head;
+    while (tmp!=NULL) {
+        testPrintAppointment(tmp);
+        tmp = tmp->next;
     }
 }
 

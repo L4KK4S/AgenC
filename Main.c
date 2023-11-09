@@ -31,26 +31,19 @@ int main() {
     // Menu Part 1 and 2
     //mainloop1();
 
+    // Test list
+    p_contact_list test = createExempleList2(0);
+
     // Test for the create Appointment function
-    /*p_appointment new = createAppointment();
+    /*p_appointment new = createAppointment(test);
     printf("%d %d %d\n", new->date.day, new->date.month, new->date.years);
     printf("%dh%d\n", new->hour.hours, new->hour.minutes);
     printf("%dh%d\n", new->length.hours, new->length.minutes);
     printf("%s\n", new->object);*/
 
-    // Test for the name secure entry function
-    /*char* res = NULL;
-    printf("Enter a name : \n\n");
-    while (res == NULL) {
-        res = CheckNameEntry();
-    }
-    printf("%s\n", res);*/
+    // Test for the completion + checkname + search contact
 
-
-    // Test list
-    p_contact_list test = createExempleList2(0);
-
-    p_contact tmp = test->levels[0];
+    /*p_contact tmp = test->levels[0];
     while (tmp!=NULL) {
         printf("%s\n",unformatString(tmp->name));
         tmp = tmp->levels[0];
@@ -60,7 +53,13 @@ int main() {
         printf("Auto completion is enable on this entry, type help to know more about how it work\n");                                       // Message to indicate the entry button are differnet than other entries
         name = autoCompletion(test);
     } while (name==NULL);
+    printf("%s\n", name);*/
 
+    // Test for create appointment list
+
+    while (1) {
+        createAppointment(test);
+    }
 
 
     return 0;
