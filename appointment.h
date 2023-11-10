@@ -18,10 +18,12 @@ typedef struct s_date {                                                 // Struc
     int years;                                                          // Int to stock the years
 }t_date;
 
+
 typedef struct s_time {                                                 // Structure for the time
     int hours;                                                          // Int that stock the hours
     int minutes;                                                        // Int that stock the minutes
 } t_time;
+
 
 struct s_appointment {                                                  // Structure of an appointment
     t_time hour;                                                        // Hours of the appointment
@@ -37,7 +39,7 @@ typedef struct s_appointment t_appointment, *p_appointment;             // Creat
 
 // -------------------------- Structures --------------------------
 
-
+p_appointment createEmptyAppointment();
 int checkDateFormat(p_appointment);                         // Secure entry for the date
 int checkHourFormat(p_appointment);                         // Secure entry for the time
 int checkLengthAppointmentFormat(p_appointment);            // Secure entry for the length of an appointment

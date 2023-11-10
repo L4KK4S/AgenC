@@ -15,6 +15,30 @@
 
 // -------------------------- Functions --------------------------
 
+p_appointment createEmptyAppointment() {
+    p_appointment new = (p_appointment) malloc (sizeof(p_appointment));
+    t_date date;
+    t_time length;
+    t_time hours;
+
+    date.day = -1;
+    date.month = -1;
+    date.years = -1;
+
+    length.hours = -1;
+    length.minutes = -1;
+
+    hours.hours = -1;
+    hours.minutes = -1;
+
+    new->date = date;
+    new->hour = hours;
+    new->length = length;
+    new->object = NULL;
+
+    return new;
+
+}
 
 int checkDateFormat(p_appointment new_appointment) {
 
@@ -66,10 +90,10 @@ int checkDateFormat(p_appointment new_appointment) {
         new_appointment->date.day = (int) strtol (day, convert, 10);                                                                                                                                  // Convert and attribute the day value
         new_appointment->date.month = (int) strtol (month, convert, 10);                                                                                                                            // Convert and attribute the month value
         new_appointment->date.years = (int) strtol (years, convert, 10);                                                                                                                              // Convert and attribute the years value
+        free(input);
         free(month);
         free(day);
         free(years);
-        free(input);
         free(temp);
         free(convert);
         if (new_appointment->date.month > 12 || new_appointment->date.day > 31) {                                                                                               // Overall Check if there isn't big mistake in the month and day value

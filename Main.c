@@ -31,6 +31,8 @@ int main() {
     // Menu Part 1 and 2
     //mainloop1();
 
+
+
     // Test list
     p_contact_list test = createExempleList2(0);
 

@@ -83,8 +83,6 @@ void insertCell(p_cell cell, p_list list, int level) {
                     cell->levels[i]=tmp_h;                                              // Set the "next" of the new cell to NULL / the temporary cursor
                 }
             }
-
-
         }
     }
 }
