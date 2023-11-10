@@ -19,19 +19,28 @@
 int checkDateFormat(p_appointment new_appointment) {
 
     char* input = (char*) malloc(100*sizeof(char));          // --> Comment to the right                                                                                    // Create a str variable to stock the input
-    char day[10]="", month[10]="", years[10]="";                                                                                                                                 // Create some str variable to stock the different arguments
-    char temp[10] = " ";                                                                                                                                                         // Create some str variable to manipulate the input
+    char* day = (char*) malloc(100*sizeof(char));
+    char* month = (char*) malloc(100*sizeof(char));
+    char* years = (char*) malloc(100*sizeof(char));
+    char* temp = (char*) malloc(100*sizeof(char));                                                                                                                          // Create some str variable to manipulate the input
+    char** convert = (char**) malloc(100*sizeof(char*));
     int i = 0;                                                                                                                                                                   // Set an index to 0
     printf("~> ");
     fgets(input, 100, stdin);                                                                                                                                                    // Get the input
 
     if (strlen(input)==11) {                                                                                                                                                  // Check if the input is the correct length
-        while (i!=11) {                                                                                                                                                          // Loop to check all element
-            if (i != 2 && i != 5 && i!=10) {                                                                                                                                     // Avoid checking if the separator is a number
+        while (i!=10) {                                                                                                                                                          // Loop to check all element
+            if (i != 2 && i != 5) {                                                                                                                                              // Avoid checking if the separator is a number
                 if (input[i] >= 48 && input[i] <= 57) {                                                                                                                          // Check if caracter is a number (avoid atoi error)
                     temp[0] = input[i];                                                                                                                                          // modify the temporary string so we can strcat() it just after
                 } else {                                                                                                                                                         // Case where it's not a number
                     printf("Not a number\n");
+                    free(month);
+                    free(day);
+                    free(years);
+                    free(temp);
+                    free(convert);
+                    free(input);
                     return -1;
                 }
                 if (i < 2) {                                                                                                                                                     // If i<2 mean it's the day
@@ -43,14 +52,26 @@ int checkDateFormat(p_appointment new_appointment) {
                 }
             } else if (input[2]!='/' || input[5]!='/') {                                                                                                                         // Check it's the correct separator
                 printf("Not the right separator\n");
+                free(month);
+                free(day);
+                free(years);
+                free(temp);
+                free(convert);
+                free(input);
                 return -1;
             }
 
             i++;
         }
-        new_appointment->date.day = atoi(day);                                                                                                                                  // Convert and attribute the day value
-        new_appointment->date.month = atoi(month);                                                                                                                              // Convert and attribute the month value
-        new_appointment->date.years = atoi(years);                                                                                                                              // Convert and attribute the years value
+        new_appointment->date.day = (int) strtol (day, convert, 10);                                                                                                                                  // Convert and attribute the day value
+        new_appointment->date.month = (int) strtol (month, convert, 10);                                                                                                                            // Convert and attribute the month value
+        new_appointment->date.years = (int) strtol (years, convert, 10);                                                                                                                              // Convert and attribute the years value
+        free(month);
+        free(day);
+        free(years);
+        free(input);
+        free(temp);
+        free(convert);
         if (new_appointment->date.month > 12 || new_appointment->date.day > 31) {                                                                                               // Overall Check if there isn't big mistake in the month and day value
             printf("The day / month isn't possible\n");
             return -1;
@@ -78,8 +99,10 @@ int checkDateFormat(p_appointment new_appointment) {
 int checkHourFormat(p_appointment new_appointment) {
 
     char* input = (char*) malloc(100*sizeof(char));                                 // str vcariable to stock the input
-    char hours[10]="", minutes[10]="";                                                   // str variable to stock the argument
-    char temp[10] = " ";                                                                 // str variables to manipulate the arguments
+    char* hours = (char*) malloc(100*sizeof(char));
+    char* minutes = (char*) malloc(100*sizeof(char));
+    char* temp = (char*) malloc(100*sizeof(char));
+    char** convert = (char**) malloc(100*sizeof(char*));
     int i = 0, skip = 2;                                                                 // Set a index to 0 and the skip variable to the skip if length of the input is 6
     printf("~> ");
     fgets(input, 100, stdin);
@@ -104,16 +127,31 @@ int checkHourFormat(p_appointment new_appointment) {
                     }
                 } else {
                     printf("Not a number\n");
+                    free(hours);
+                    free(minutes);
+                    free(temp);
+                    free(convert);
+                    free(input);
                     return -1;
                 }
             } else if (input[i]!='h') {                                                  // Check if it's the correct delimiter
                 printf("not the correct separator\n");
+                free(hours);
+                free(minutes);
+                free(temp);
+                free(convert);
+                free(input);
                 return -1;
             }
             i++;                                                                         // Incrementing the index
         }
-        new_appointment->hour.hours = atoi(hours);                                       // Convert and attribute the hours value
-        new_appointment->hour.minutes  = atoi(minutes);                                  // Convert and attribute the minutes value
+        new_appointment->hour.hours = (int) strtol(hours, convert, 10);                                       // Convert and attribute the hours value
+        new_appointment->hour.minutes  = (int) strtol(minutes, convert, 10);                                  // Convert and attribute the minutes value
+        free(hours);
+        free(minutes);
+        free(temp);
+        free(convert);
+        free(input);
         if (new_appointment->hour.hours> 23 || new_appointment->hour.minutes > 59) {     // Check that the hours and minute variable are possible
             printf("Not a valid hours / minute\n");
             return -1;
@@ -129,8 +167,10 @@ int checkHourFormat(p_appointment new_appointment) {
 int checkLengthAppointmentFormat(p_appointment new_appointment) {
 
     char* input = (char*) malloc(100*sizeof(char));                                 // str vcariable to stock the input
-    char hours[10]="", minutes[10]="";                                                   // str variable to stock the argument
-    char temp[10] = " ";                                                                 // str variables to manipulate the arguments
+    char* hours = (char*) malloc(100*sizeof(char));
+    char* minutes = (char*) malloc(100*sizeof(char));
+    char* temp = (char*) malloc(100*sizeof(char));
+    char** convert = (char**) malloc(100*sizeof(char*));                          // str variables to manipulate the arguments
     int i = 0, skip = 2;                                                                 // Set a index to 0 and the skip variable to the skip if length of the input is 6
     printf("~> ");
     fgets(input, 100, stdin);
@@ -155,16 +195,31 @@ int checkLengthAppointmentFormat(p_appointment new_appointment) {
                     }
                 } else {
                     printf("Not a number\n");
+                    free(hours);
+                    free(minutes);
+                    free(temp);
+                    free(convert);
+                    free(input);
                     return -1;
                 }
             } else if (input[i]!='h') {                                                  // Check if it's the correct delimiter
                 printf("not the correct separator\n");
+                free(hours);
+                free(minutes);
+                free(temp);
+                free(convert);
+                free(input);
                 return -1;
             }
             i++;                                                                         // Incrementing the index
         }
-        new_appointment->length.hours = atoi(hours);                                     // Convert and attribute the hours value
-        new_appointment->length.minutes  = atoi(minutes);                                // Convert and attribute the minutes value
+        new_appointment->length.hours = (int) strtol(hours, convert, 10);                                     // Convert and attribute the hours value
+        new_appointment->length.minutes  = (int) strtol(minutes, convert, 10);                                // Convert and attribute the minutes value
+        free(hours);
+        free(minutes);
+        free(temp);
+        free(convert);
+        free(input);
         if (new_appointment->length.minutes > 59) {                                        // Check that minute variable is possible
             printf("Not a valid hours / minute\n");
             return -1;
@@ -182,6 +237,9 @@ int checkLengthObject(p_appointment new_appointment) {
     printf("~> ");
     fgets(input, 100, stdin);                                                            // Get the input
     new_appointment->object = input;                                                     // Attribute the input
+    if (strlen(input)<=1) {
+        return -1;
+    }
     return 0;
 
 }
@@ -234,5 +292,5 @@ int compareDate(p_appointment toplace, p_appointment check) {
 }
 
 void testPrintAppointment(p_appointment a) {
-    printf("%d/%d/%d %dh%d (%dh%d) %s\n", a->date.day, a->date.month, a->date.years, a->hour.hours, a->hour.hours, a->length.hours, a->length.minutes, a->object);
+    printf("%d/%d/%d %dh%d (%dh%d) %s", a->date.day, a->date.month, a->date.years, a->hour.hours, a->hour.hours, a->length.hours, a->length.minutes, a->object);
 }

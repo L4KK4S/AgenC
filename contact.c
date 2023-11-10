@@ -322,12 +322,10 @@ void insertContact(p_contact_list list, p_contact new) {
 
 p_appointment createAppointment (p_contact_list liste) {
     char* input = (char*) malloc(100*sizeof(char));                                // Str variable to stock the input
-    p_contact toAssign = (p_contact) malloc (sizeof(p_contact));                                                                 // Pointer to check if the contact already exist or not
+    p_contact toAssign = (p_contact) malloc (sizeof(p_contact));                   // Pointer to check if the contact already exist or not
     int checkFormat = -1;                                                               // Variable to check argument are correct
     p_appointment new = (p_appointment) malloc (sizeof(p_appointment));            // Allocate the memory for the new appointment
-
     printf("What's the date of your new appointment (day/month/years) ?\n\n ");         // Asking for the date
-
     do {                                                                                // Loop to ask while answer is not in the correct format or impossible
         checkFormat = checkDateFormat(new);
     } while (checkFormat == -1);
@@ -339,7 +337,6 @@ p_appointment createAppointment (p_contact_list liste) {
         checkFormat = checkHourFormat(new);
     } while (checkFormat == -1);
     checkFormat = -1;                                                                   // Reset the check variable
-
     printf("\nHow long is your new appointment {0-23}h{0-59} ?\n\n ");                  // Asking fir the length of the appointment
 
     do {                                                                                // Loop to ask while answer is not in the correct format or impossible
@@ -365,6 +362,7 @@ p_appointment createAppointment (p_contact_list liste) {
 
     toAssign = searchContact(input, liste);
 
+
     // check if input is correct and transform it
     if (toAssign==NULL) {
         printf("creating contact\n");
@@ -372,10 +370,9 @@ p_appointment createAppointment (p_contact_list liste) {
         insertContact(liste, toAssign);
         toAssign = searchContact(input, liste);
     }
-    printf("\n");
-    uniform_display_contact_list(liste);
-    printf("\n");
-
+//    printf("\n");
+//    uniform_display_contact_list(liste);
+//    printf("\n");
     insertAppointment(toAssign, new);
     testDisplayAppointment(toAssign);
 
@@ -386,13 +383,10 @@ p_appointment createAppointment (p_contact_list liste) {
 void insertAppointment(p_contact contact, p_appointment cell) {
     p_appointment tmp = contact->head  ;
     p_appointment prev = tmp;
-    printf("name : %s\n", unformatString(contact->name));
 
     if (contact->head==NULL) {
-        printf("empty insertion\n");
         contact->head = cell;
     } else if (compareDate(cell, tmp) == -1) {
-        printf("head insertion\n");
         cell->next = contact->head;
         contact->head = cell;
     } else {
