@@ -12,6 +12,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "cell.h"
 #include "list.h"
 #include "menu.h"
@@ -20,7 +21,7 @@
 #include "cell.c"
 #include "appointment.c"
 #include "contact.c"
-#include <string.h>
+
 
 // ------------------------- Main loop --------------------------
 

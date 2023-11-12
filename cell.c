@@ -10,8 +10,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "cell.h"
 #include <math.h>
+#include "cell.h"
+
 
 
 // -------------------------- Functions --------------------------
@@ -86,7 +87,6 @@ void insertCell(p_cell cell, p_list list, int level) {
         }
     }
 }
-
 
 void insertCellHead(p_cell cell, p_list list, int level) {
 

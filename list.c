@@ -29,7 +29,6 @@ p_list createEmptylistCell(int x) {                                             
     return new_list;                                                                        // Return the new list
 }
 
-
 void uniform_display_list (p_list list) {
     p_cell level0cur;                                                           // Create a cursor to compare to higher value (because the first level will be the most complete, we have to check if we have to fill higher level or not)
     p_cell tmp_h;                                                               // Create a cursor pointer to go through each level
@@ -78,6 +77,7 @@ void show_level(p_list list, int level) {
     }
     printf("-->NULL\n");                                                            // Special print to indicate the end of the level list
 }
+
 int checkListCompatibility(p_list list, int level) {
     if (level>list->max_levels || level<=0) {                                                   // Check if the level is superior than the max level of the list
         return 0;
@@ -281,6 +281,8 @@ void compareSearchMethod(int seed) {
     }
     printf("\n\n");
 }
+
+
 
 
 
