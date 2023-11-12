@@ -70,7 +70,7 @@ int main() {
 //    new->date.years = 2004;
 //    testPrintAppointment(new);
 //    insertAppointment(searchContact("picou_thomas", test), new);
-//    uniform_display_contact_list(test);
+   uniform_display_contact_list(test);
 
     while (1) {
 

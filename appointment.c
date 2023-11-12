@@ -16,7 +16,7 @@
 // -------------------------- Functions --------------------------
 
 p_appointment createEmptyAppointment() {
-    p_appointment new = (p_appointment) malloc (sizeof(p_appointment));
+    p_appointment new = (p_appointment) malloc (sizeof(t_appointment));
     t_date date;
     t_time length;
     t_time hours;
@@ -35,6 +35,7 @@ p_appointment createEmptyAppointment() {
     new->hour = hours;
     new->length = length;
     new->object = NULL;
+    new->next = NULL;
 
     return new;
 
@@ -262,6 +263,7 @@ int checkLengthObject(p_appointment new_appointment) {
     fgets(input, 100, stdin);                                                            // Get the input
     new_appointment->object = input;                                                     // Attribute the input
     if (strlen(input)<=1) {
+        free(input);
         return -1;
     }
     return 0;
@@ -317,4 +319,5 @@ int compareDate(p_appointment toplace, p_appointment check) {
 
 void testPrintAppointment(p_appointment a) {
     printf("%d/%d/%d %dh%d (%dh%d) %s", a->date.day, a->date.month, a->date.years, a->hour.hours, a->hour.hours, a->length.hours, a->length.minutes, a->object);
+    return;
 }
