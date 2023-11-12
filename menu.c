@@ -156,7 +156,15 @@ char* autoCompletion(p_contact_list list) {
         printf("-> %s", res);                                                                                                           // print the cursor and the current string
         fgets(input, 100, stdin);                                                                                                       // Get the input from the user
         // Function to check for help                                                                                                   // NOT CODED YET, FUNCTION TO CHECK IF USER WANT THE HELP MENU
-        if (strlen(input)==1 && strlen(res)>=1) {                                                                                 // Check if the input is only the ENTER key and if there is something to delete in the current string
+        if (input[0]=='h' && input[1]=='e' && input[2]=='l' && input[3]=='p' && strlen(input)==5) {
+            printf("========================================= Help Menu =========================================\n\n"
+                   "As we couldn't use the keyboard input to create an autocompletion mode, we had to change some way to confirm, search or\n"
+                   "delete your current entry\n\n"
+                   "\t\033[0;34mSPACE\033[0;35m -> \033[0;34mENTER\033[0;37m : confirm your entry\n"
+                   "\t\033[0;34mTAB\033[0;35m -> \033[0;34mENTER\033[0;37m : search for completion or show the next result of your last search if you didn't change the entry\n"
+                   "\t\033[0;34mENTER\033[0;37m : delete a character from your previous saved entry\n"
+                   "\t\033[0;36m\"my entry\"\033[0;35m -> \033[0;34mENTER\033[0;37m : update your current entry\033[0m\n\n");
+        } else if (strlen(input)==1 && strlen(res)>=1) {                                                                                 // Check if the input is only the ENTER key and if there is something to delete in the current string
             copy = strlen(res)-1;
             strcpy(newres, reset);                                                                                                      // Reset the new result string
             for (int i = 0 ; i< copy; i++) {                                                                                            // Loop to add 1 by 1 all character-1 of the current string
@@ -173,7 +181,6 @@ char* autoCompletion(p_contact_list list) {
             }
             if (strlen(res)>1) {                                                                                                     // Check if the result was just composed of TAB
                 if (compareString(newres, res)==0 && search!=NULL) {                                                                    // Check if the current string is the same as the previous input, meaning user wants a second result if there is of the completion
-                    printf("same\n");
                     if (search[index+1]!=NULL) {                                                                                        // Check if there is an other result
                         index++;                                                                                                        // If yes we increment the index
                         strcpy(res, search[index]);                                                                                     // We update the current string

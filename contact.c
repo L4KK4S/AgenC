@@ -214,12 +214,10 @@ p_contact searchContact(char* search, p_contact_list list) {
     p_contact tmp = list->levels[0];                                                    // Setting a cursor at level 0 (all cells)
     while (tmp!=NULL) {                                                                 // Loop to go through all cells
         if (compareString(tmp->name, search)==0) {                        // Check if cell is the same
-            printf("found\n");
             return tmp;                                                                 // If we have find the cell we return the adress
         }
         tmp = tmp->levels[0];
     }
-    printf("not existing\n");
     free(tmp);
     return NULL;                                                                        // If we haven't find the cell we return 0
 }
@@ -395,29 +393,19 @@ p_appointment createAppointment (p_contact_list liste) {
         checkFormat = checkLengthObject(new);
     } while (checkFormat == -1);
 
-    printf("cell before inserting in contact : ");
-    testPrintAppointment(new);
-    printf("\n");
-
     printf("Please enter a contact to assign or create :\n\n");
     do {
         input = autoCompletion(liste);
     } while (input==NULL);
 
-    printf("input : %s\n", input);
-
     toAssign = searchContact(input, liste);
 
     // check if input is correct and transform it
     if (toAssign==NULL) {
-        printf("creating contact\n");
         toAssign = createContact(input);
         insertContact(liste, toAssign);
         toAssign = searchContact(input, liste);
     }
-//    printf("\n");
-//    uniform_display_contact_list(liste);
-//    printf("\n");
     insertAppointment(toAssign, new);
     testDisplayAppointment(toAssign);
     return new;                                                                         // Return the new appointment
@@ -429,28 +417,22 @@ void insertAppointment(p_contact contact, p_appointment cell) {
     p_appointment prev = tmp;
 
     if (contact->head==NULL) {
-        printf("empty insertion\n");
         contact->head = cell;
         return;
     } else if (compareDate(cell, tmp) == -1) {
-        printf("head insertion\n");
         cell->next = contact->head;
         contact->head = cell;
         return;
     } else {
-        printf("comparison : %d\n", compareDate(cell, tmp));
         while (compareDate(cell, tmp)!=-1 && tmp->next!=NULL) {
-            printf("loop\n");
             prev = tmp;
             tmp = tmp->next;
         }
         if (compareDate(cell, tmp)==-1) {
-            printf("mid insertion\n");
             prev->next = cell;
             cell->next = tmp;
             return;
         } else {
-            printf("end insertion\n");
             tmp->next = cell;
             return;
         }
@@ -624,9 +606,6 @@ p_contact_list createExempleList2(int showstep) {
         printf("\n\n");
     }
     insertContact(new, c9);
-    //insertContact(new, c10);
-    //uniform_display_contact_list(new);
-    printf("\n\n");
     return new;
 
 }
