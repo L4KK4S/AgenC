@@ -143,7 +143,7 @@ int checkHourFormat(p_appointment new_appointment) {
                     temp[0] = input[i];                                                  // Adding the number to the argument temporary variable
                     if (strlen(input)==5 && i<1) {                                    // Case where the argument is the hour when there is a 1 digit hour
                         strcat(hours, temp);
-                    } else if (strlen(input)==5 && i> 1) {                            // Case where the argument is the minute when there is a 1 digit hour
+                    } else if (strlen(input)==5 && i > 1) {                            // Case where the argument is the minute when there is a 1 digit hour
                         strcat(minutes, temp);
                     } else if (strlen(input)==6 && i<2) {                             // Case where the argument is the hour when there is a 2 digits hour
                         strcat(hours, temp);
@@ -318,6 +318,6 @@ int compareDate(p_appointment toplace, p_appointment check) {
 }
 
 void testPrintAppointment(p_appointment a) {
-    printf("%d/%d/%d %dh%d (%dh%d) %s", a->date.day, a->date.month, a->date.years, a->hour.hours, a->hour.hours, a->length.hours, a->length.minutes, a->object);
+    printf("%d/%d/%d %dh%d (%dh%d) %s", a->date.day, a->date.month, a->date.years, a->hour.hours, a->hour.minutes, a->length.hours, a->length.minutes, a->object);
     return;
 }
