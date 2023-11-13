@@ -15,7 +15,7 @@
 
 
 
-int get_inputs (char* input) {
+int get_inputs_part12 (char* input) {
     char* functions[10] = {"error", "exit", "help",                             // List of all available function in argument order to compare the input
                            "show list","compare search", "create list", "switch list", "show level"
                            , "search","create cell"};
@@ -41,7 +41,7 @@ int get_inputs (char* input) {
     return 0;                                                                                // If there was no match we return the error code 0
 }
 
-int get_option(char* input) {
+int get_option_part12 (char* input) {
     char* functions[6] = {"error", "align", "standard", "dichotomous", "head", "ordered"};            // List of all available option
     int j, True;
     if (input[strlen(input)-2]==' ') {                                                             // Case where there is a space at the end of the input
@@ -65,7 +65,7 @@ int get_option(char* input) {
     return 0;                                                                                         // If there was no match we return the error code 0
 }
 
-int arguments(char *input, int index, int* args) {
+int arguments_part12 (char *input, int index, int* args) {
     char strtocat[10]="";                                                                                       // Set variable to create new string with the argument
     char temp[10]="";                                                                                           // Temporary variable to add one by one each digit of the argument
     char reset[10]="";                                                                                          // Use to reset the precedent string with a strcpy()
@@ -241,8 +241,8 @@ void mainloop1() {
         do {
             printf("~> ");
             fgets(input, 100, stdin);
-            f_index = get_inputs(input);
-            f_arguments = arguments(input, f_index, function_argument);
+            f_index = get_inputs_part12 (input);
+            f_arguments = arguments_part12 (input, f_index, function_argument);
         } while (f_index == 0 || f_arguments == -1);
 
         switch (f_index) {
@@ -275,12 +275,12 @@ void mainloop1() {
             case 3:
                 if (allList[list_index]!=NULL) {
                     printf("Printing option : align / standard\n");
-                    while (get_option(input)!=1 && get_option(input)!=2) {
+                    while (get_option_part12 (input)!=1 && get_option_part12 (input)!=2) {
                         printf("~> ");
                         fgets(input, 100, stdin);
-                        if (get_option(input) == 1) {
+                        if (get_option_part12 (input) == 1) {
                             uniform_display_list(allList[list_index]);
-                        } else if (get_option(input) == 2) {
+                        } else if (get_option_part12 (input) == 2) {
                             display_list((allList[list_index]));
                         }
                     }
@@ -328,17 +328,17 @@ void mainloop1() {
             case 8:
                 if (allList[list_index]!=NULL) {
                     printf("Search option : standard / dichotomous\n");
-                    while (get_option(input) != 2 && get_option(input) != 3) {
+                    while (get_option_part12 (input) != 2 && get_option_part12 (input) != 3) {
                         printf("~> ");
                         fgets(input, 100, stdin);
                     }
-                    if (get_option(input) == 2) {
+                    if (get_option_part12 (input) == 2) {
                         if (std_search(allList[list_index], function_argument[0])) {
                             printf("%d is in the list\n", function_argument[0]);
                         } else {
                             printf("%d is not in the list\n", function_argument[0]);
                         }
-                    } else if (get_option(input) == 3) {
+                    } else if (get_option_part12 (input) == 3) {
                         if (dtc_search(allList[list_index], function_argument[0])) {
                             printf("%d is in the list\n", function_argument[0]);
                         } else {
@@ -353,15 +353,15 @@ void mainloop1() {
                 if (allList[list_index]!=NULL) {
                     if ((checkListCompatibility(allList[list_index], function_argument[1])) == 1) {
                         printf("Insertion option : head / ordered\n");
-                        while (get_option(input)!=4 && get_option(input)!=5) {
+                        while (get_option_part12 (input)!=4 && get_option_part12 (input)!=5) {
                             printf("~> ");
                             fgets(input, 100, stdin);
                         }
-                        if (get_option(input) == 4) {
+                        if (get_option_part12 (input) == 4) {
                             p_cell new = createEmptyCell(function_argument[0], function_argument[1]);
                             insertCellHead(new, allList[list_index], function_argument[1]);
                             printf("Cell created with success\n");
-                        } else if (get_option(input) == 5){
+                        } else if (get_option_part12 (input) == 5){
                             p_cell new = createEmptyCell(function_argument[0], function_argument[1]);
                             insertCell(new, allList[list_index], function_argument[1]);
                             printf("Cell created with success\n");
@@ -378,6 +378,71 @@ void mainloop1() {
                 printf("Uncovered path - Error in the code\n");
                 break;
         }
+    }
+    free(input);
+    free(function_argument);
+    free(allList);
+}
+
+int get_inputs_part3 (char* input) {
+    char* functions[11] = {"error", "exit", "help",                             // List of all available function in argument order to compare the input
+                           "create appointment","create contact -d","create contact -s", "search contact -d","search contact -s", "agenda", "save file",
+                           "load file"};
+    int j, True;                                                                             // Set some variable to parcour and test the different strings
+    input = change_maj_to_min(input);
+
+    if (input[strlen(input)-2]==' ') {                                                    // Case where there is a space at the end of the input
+        return 0;
+    }
+    for(int i = 1 ; i<11 ; i++) {                                                            // Loop to test all the different string
+        if (strlen(input) > strlen(functions[i])+1) {                                   // Check if the string is longer or equal (argument or '\0') may work with >
+            j=0, True = 1;                                                                   // Reset the test condition for each strings
+            while (functions[i][j]!='\0' && True==1) {                                       // Loop to test while the input arrive at the end or True is still 1
+
+                if (functions[i][j]!=input[j]) {                                             // If there is a difference between the string and the input at any time, the test stop
+                    True=0;
+                }
+                j++;
+            }
+            if (True == 1) {                                                                 // If there was no difference between the string we return the index of the function
+                return i;
+            }
+        }
+    }
+    return 0;                                                                                // If there was no match we return the error code 0
+}
+
+char *get_argument_part3(int function, char *input) {
+    char *argument = (char*) malloc (30*sizeof(char));
+    char tmp[5] =" ";
+    char* functions[11] = {"error", "exit", "help",                             // List of all available function in argument order to compare the input
+                           "create appointment","create contact -d","create contact -s", "search contact -d","search contact -s", "agenda", "save file",
+                           "load file"};
+    int space = 0, i;
+    if (function !=0) {
+        i = strlen(functions[function]) ;
+        if (input[i]!=' ') {
+            return NULL;
+        }
+        while (input[i+1]!='\0') {
+            if (i!=strlen(functions[function])) {
+                if (input[i]==' ') {
+                    space++;
+                }
+                tmp[0] = input[i];
+                strcat(argument, tmp);
+            }
+            i++;
+        }
+    }
+    if (function < 4 && strlen(input) == strlen(functions[function])+1) {
+        return input;
+    } else if (function < 10 && space == 1 && checkNameEntry(argument)!=NULL)  {
+        return formatString(argument);
+    } else if (function == 10 && space == 0) {
+        return argument;
+    } else {
+        return NULL;
     }
 }
 

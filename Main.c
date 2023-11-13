@@ -73,9 +73,65 @@ int main() {
 //    insertAppointment(searchContact("picou_thomas", test), new);
 //   uniform_display_contact_list(test);
 
-    while (1) {
+    /*while (1) {
 
         createAppointment(test);
+    }*/
+
+    // ------------------------- Variable definition --------------------------
+
+    char* input = (char*) malloc(100*sizeof(char));
+    char* argument = (char*) malloc (100*sizeof(char));
+    p_contact_list contactList = createEmptyList();
+    int exit = 0, function = -0;
+
+    // ------------------------- Test list definition --------------------------
+
+
+    while (exit==0) {
+        do {
+            printf("~> ");
+            fgets(input, 100, stdin);
+            function = get_inputs_part3(input);
+            argument = get_argument_part3(function, input);
+        } while (function == 0 || argument == NULL);
+        printf("%s\n", argument);
+
+        switch (function) {
+            case 1:
+                exit=1;
+                break;
+            case 2:
+                printf("help : not coded yet\n");
+                break;
+            case 3:
+                printf("create appointment : not coded yet\n");
+                break;
+            case 4 :
+                printf("create contact <option = -d > (contact) : not coded yet\n");
+                break;
+            case 5:
+                printf("create contact <option = -s > (contact) : not coded yet\n");
+                break;
+            case 6:
+                printf("search contact <option = -d > (contact) : not coded yet\n");
+                break;
+            case 7:
+                printf("search contact <option = -s > (contact) : not coded yet\n");
+                break;
+            case 8 :
+                printf("agenda (contact) : not coded yet\n");
+                break;
+            case 9:
+                printf("save file (contact) : not coded yet\n");
+                break;
+            case 10:
+                printf("load file (filename.txt) : not coded yet\n");
+                break;
+            default:
+                printf("Uncovered path - Error in the code\n");
+                break;
+        }
     }
 
 
