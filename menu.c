@@ -211,6 +211,13 @@ char* autoCompletion(p_contact_list list) {
         strcpy(newres, res);                                                                                                            // We update the new result string which is used here as a previous string
     } while (strlen(input)<=1 || input[strlen(input)-2]!=' ');                                                                    // Loop to continue while the input doesn't end by SPACE and ENTER
     if (checkNameEntry(res)) {
+        copy = strlen(res)-1;
+        strcpy(newres, reset);                                                                                                      // Reset the new result string
+        for (int i = 0 ; i< copy; i++) {                                                                                            // Loop to add 1 by 1 all character-1 of the current string
+            temp[0]=res[i];                                                                                                         // Convert from character to string
+            strcat(newres, temp);                                                                                                   // Cat to the new result string
+        }
+        strcpy(res, newres);
         return formatString(res);
     } else {
         return NULL;

@@ -35,13 +35,13 @@ int main() {
 
 
     // Test list
-    p_contact_list test = createExempleList2(0);
 
     // ------------------------- Variable definition --------------------------
 
     char* input = (char*) malloc(100*sizeof(char));
     char* argument = (char*) malloc (100*sizeof(char));
-    p_contact_list contactList = createEmptyList();
+    //p_contact_list contactList = createEmptyList();
+    p_contact_list contactList = createExempleList2(0);
     p_contact new;
     int exit = 0, function;
 
@@ -70,7 +70,7 @@ int main() {
                 createAppointment(contactList);
                 break;
             case 5 :
-                printf("create contact <option = -d > (contact) : not coded yet\n");
+                printf("create contact <option> = -d > (contact) : not coded yet\n");
                 break;
             case 6:
                 new = createContact(argument);

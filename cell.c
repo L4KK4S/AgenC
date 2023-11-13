@@ -33,29 +33,18 @@ p_cell createEmptyCell(int x, int levels) {                                     
 }
 
 int cellLength (p_cell cell) {                            // This function returns the number of character needed to make a cell
-
     int cell_val = cell->value;                           // The cell value
     int counter = 7;                                      // 7 is the number of characters of the cell without the value [ x|@-]
     int n = 1;                                            // A counter for 10's pow
-
-
     if (cell_val < 0) {                                   // If the value is negative we count the "-" character
-
         counter ++;
         cell_val *= -1;
-    
     }
-
     while (cell_val >= (pow(10, n))) {                     // While the value is greater than 10^n, we increase n and counter
-    
         counter++;
         n++;
-
     }
-
     return counter;                                       // Return counter
-
-    
 }
 
 
