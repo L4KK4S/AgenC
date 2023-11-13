@@ -132,7 +132,7 @@ char* checkNameEntry(char* input) {
     int i = 0, space_counter=0;                                                                                                          // Set counting variable to 0
 
     if (input[strlen(input)-2]!=' ' && strlen(input)>= 3) {                                                                        // Check if the input is not ending with a space and have the minimum require length
-        while (input[i+1] != '\0') {                                                                                                     // Check all characters of the input
+        while (input[i] != '\0') {                                                                                                       // Check all characters of the input
             if ((input[i] >= 'a' && input[i] <= 'z') || (input[i] >= 'A' && input[i] <= 'Z') || input[i] == ' ' || input[i]=='-') {      // Check if the character is allowed
                 if (input[i] == ' ') {                                                                                                   // If the character is a space we increment the counter
                     space_counter++;
