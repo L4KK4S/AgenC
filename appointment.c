@@ -271,41 +271,40 @@ int checkLengthObject(p_appointment new_appointment) {
 }
 
 int compareDate(p_appointment toplace, p_appointment check) {
-    if (toplace->date.years < check->date.years) {
+    if (toplace->date.years < check->date.years) {                                                                      // Compare the year of an appointment
         return -1;
     } else if (toplace->date.years > check->date.years) {
         return 1;
-    } else {
+    } else {                                                                                                            // Compare the month of an appointment
         if (toplace->date.month < check->date.month) {
-            return -1;
+            return -2;
         } else if (toplace->date.month > check->date.month) {
-            return 1;
-        } else {
+            return 2;
+        } else {                                                                                                        // Compare the day of an appointment
             if (toplace->date.day < check->date.day) {
-                return -1;
+                return -3;
             } else if (toplace->date.day > check->date.day) {
-                return 1;
-            } else {
+                return 3;
+            } else {                                                                                                    // Compare the time hour of an appointment
                 if (toplace->hour.hours < check->hour.hours) {
-                    return -1;
+                    return -4;
                 } else if (toplace->hour.hours > check->hour.hours) {
-                    return 1;
-                } else {
-
+                    return 4;
+                } else {                                                                                                // Compare the time minute of an appointment
                     if (toplace->hour.minutes < check->hour.minutes ) {
-                        return -1;
+                        return -5;
                     } else if (toplace->hour.minutes  > check->hour.minutes ) {
-                        return 1;
-                    } else {
-                        if (toplace->length.hours < check->length.hours ) {
-                            return 1;
+                        return 5;
+                    } else {                                                                                            // Compare the length hour of the appointment
+                        if (toplace->length.hours < check->length.hours ) {                                             // Place the short appointment before
+                            return -6;
                         } else if (toplace->length.hours  > check->length.hours ) {
-                            return -1;
-                        } else {
-                            if (toplace->length.minutes < check->length.minutes ) {
-                                return 1;
+                            return 6;
+                        } else {                                                                                        // Compare the length minute of the appointment
+                            if (toplace->length.minutes < check->length.minutes ) {                                     // Place the short appointment before
+                                return -7;
                             } else if (toplace->length.minutes  > check->length.minutes ) {
-                                return -1;
+                                return 7;
                             } else {
                                 return 0;
                             }

@@ -228,7 +228,7 @@ void insertContact(p_contact_list list, p_contact new) {
     p_contact prev = tmp;                                                                                                                      // Set the previous cursor to the tmp
 
     if (list->levels[0]==NULL) {                                                                                                               // Case where level is empty
-        p_contact* levels = (p_contact*) malloc (4*sizeof(p_contact));                                                                          // Create a tab of 4 elements for the new cell
+        p_contact* levels = (p_contact*) malloc (4*sizeof(p_contact));                                                                    // Create a tab of 4 elements for the new cell
         for (int i  = 0 ; i<4 ; i++) {
             levels[i]=NULL;
         }
@@ -236,16 +236,16 @@ void insertContact(p_contact_list list, p_contact new) {
         for (int i = 0 ; i<4 ; i++) {                                                                                                          // Loop to set the head of each level to the cell
             list->levels[i]=new;
         }
-        tmp = NULL;
-        prev = NULL;
-        rebuild_tmp = NULL;
-        free(rebuild_tmp);
-        free(tmp);
-        free(prev);
+        tmp = NULL;                                                                                                                            // Avoiding to erase a pointer of the list
+        prev = NULL;                                                                                                                           // Avoiding to erase a pointer of the list
+        rebuild_tmp = NULL;                                                                                                                    // Avoiding to erase a pointer of the list
+        free(rebuild_tmp);                                                                                                                     // Freeing unused pointer
+        free(tmp);                                                                                                                             // Freeing unused variable
+        free(prev);                                                                                                                            // Freeing unused variable
         return;
     } else {                                                                                                                                    // Case the tab is not empty
         if (compareString(tmp->name, new->name)==-1) {                                                                            // Case head insertion
-            p_contact* levels = (p_contact*) malloc (4*sizeof(p_contact));                                                                          // Create a tab of 4 elements for the new cell
+            p_contact* levels = (p_contact*) malloc (4*sizeof(p_contact));                                                                 // Create a tab of 4 elements for the new cell
             for (int i  = 0 ; i<4 ; i++) {
                 levels[i]=NULL;
             }
@@ -266,12 +266,12 @@ void insertContact(p_contact_list list, p_contact new) {
             }
             free(tmp->levels);                                                                                                                   // Freeing the old tab
             tmp->levels = rebuild_tab;                                                                                                           // Attributing the new tab to the tmp
-            tmp = NULL;
-            prev = NULL;
-            rebuild_tmp = NULL;
-            free(rebuild_tmp);
-            free(tmp);
-            free(prev);
+            tmp = NULL;                                                                                                                          // Avoiding to erase a pointer of the list
+            prev = NULL;                                                                                                                         // Avoiding to erase a pointer of the list
+            rebuild_tmp = NULL;                                                                                                                  // Avoiding to erase a pointer of the list
+            free(rebuild_tmp);                                                                                                                   // Freeing unused pointer
+            free(tmp);                                                                                                                           // Freeing unused variable
+            free(prev);                                                                                                                          // Freeing unused variable
             return;
         } else {                                                                                                                                 // Case where the cell is at the middle or at the end
             while (compareString(tmp->name, new->name) == 1 && tmp->levels[0]!=NULL) {                                             // Loop to go just after the good spot or at the end
@@ -291,15 +291,15 @@ void insertContact(p_contact_list list, p_contact new) {
                     }
                     tmp->levels[i] = new;
                 }
-                tmp = NULL;
-                prev = NULL;
-                rebuild_tmp = NULL;
-                free(rebuild_tmp);
-                free(tmp);
-                free(prev);
+                tmp = NULL;                                                                                                                       // Avoiding to erase a pointer of the list
+                prev = NULL;                                                                                                                      // Avoiding to erase a pointer of the list
+                rebuild_tmp = NULL;                                                                                                               // Avoiding to erase a pointer of the list
+                free(rebuild_tmp);                                                                                                                // Freeing unused pointer
+                free(tmp);                                                                                                                        // Freeing unused variable
+                free(prev);                                                                                                                       // Freeing unused variable
                 return;
             } else if (compareString(tmp->name, new->name) == -1 || compareString(tmp->name, new->name) == 0) {      // Case where we have to insert it in the middle (either an element already existing or not)
-                p_contact* levels = (p_contact*) malloc (getMatch(prev, new)*sizeof(p_contact));                                                   // Allocating memory
+                p_contact* levels = (p_contact*) malloc (getMatch(prev, new)*sizeof(p_contact));                                             // Allocating memory
                 for (int i  = 0 ; i<getMatch(prev, new) ; i++) {
                     levels[i]=NULL;
                 }
@@ -318,12 +318,12 @@ void insertContact(p_contact_list list, p_contact new) {
                             new->levels[i] = tmp;                                                                                                // We relink the new cell to the tmp at the current level
                         }
                     }
-                    tmp = NULL;
-                    prev = NULL;
-                    rebuild_tmp = NULL;
-                    free(rebuild_tmp);
-                    free(tmp);
-                    free(prev);
+                    tmp = NULL;                                                                                                                  // Avoiding to erase a pointer of the list
+                    prev = NULL;                                                                                                                 // Avoiding to erase a pointer of the list
+                    rebuild_tmp = NULL;                                                                                                          // Avoiding to erase a pointer of the list
+                    free(rebuild_tmp);                                                                                                           // Freeing unused pointer
+                    free(tmp);                                                                                                                   // Freeing unused variable
+                    free(prev);                                                                                                                  // Freeing unused variable
                     return;
                 } else {                                                                                                                         // Case where we have to rebuild
                     p_contact* rebuild_tab = (p_contact*) malloc (getMatch(new, tmp)*sizeof(p_contact));                          // Allocate the memory
@@ -348,12 +348,12 @@ void insertContact(p_contact_list list, p_contact new) {
                     }
                     free(tmp->levels);                                                                                                           // Freeing the old tab
                     tmp->levels = rebuild_tab;                                                                                                   // Attributing the new tab
-                    tmp = NULL;
-                    prev = NULL;
-                    rebuild_tmp = NULL;
-                    free(rebuild_tmp);
-                    free(tmp);
-                    free(prev);
+                    tmp = NULL;                                                                                                                  // Avoiding to erase a pointer of the list
+                    prev = NULL;                                                                                                                 // Avoiding to erase a pointer of the list
+                    rebuild_tmp = NULL;                                                                                                          // Avoiding to erase a pointer of the list
+                    free(rebuild_tmp);                                                                                                           // Freeing unused pointer
+                    free(tmp);                                                                                                                   // Freeing unused variable
+                    free(prev);                                                                                                                  // Freeing unused variable
                 }
             }
         }
@@ -364,7 +364,7 @@ void insertContact(p_contact_list list, p_contact new) {
 // 3) Manipulation of Appointment Structure (related with contact)
 
 p_appointment createAppointment (p_contact_list liste) {
-    char* input = (char*) malloc(50*sizeof(char));                                // Str variable to stock the input
+    char* input = (char*) malloc(50*sizeof(char));                                 // Str variable to stock the input
     p_contact toAssign = (p_contact) malloc (sizeof(p_contact));                   // Pointer to check if the contact already exist or not
     int checkFormat = -1;                                                               // Variable to check argument are correct
     p_appointment new = createEmptyAppointment();                                       // Allocate the memory for the new appointment
@@ -373,67 +373,65 @@ p_appointment createAppointment (p_contact_list liste) {
     do {                                                                                // Loop to ask while answer is not in the correct format or impossible
         checkFormat = checkDateFormat(new);
     } while (checkFormat == -1);
+
     checkFormat = -1;                                                                   // Reset the check variable
-
     printf("\nWhen is your new appointment {0-23}h{0-59} ?\n\n ");                      // Asking for the time of the appointment
-
     do {                                                                                // Loop to ask while answer is not in the correct format or impossible
         checkFormat = checkHourFormat(new);
     } while (checkFormat == -1);
-    checkFormat = -1;                                                                   // Reset the check variable
-    printf("\nHow long is your new appointment {0-23}h{0-59} ?\n\n ");                  // Asking fir the length of the appointment
 
+    checkFormat = -1;                                                                   // Reset the check variable
+    printf("\nHow long is your new appointment {0-23}h{0-59} ?\n\n ");                  // Asking for the length of the appointment
     do {                                                                                // Loop to ask while answer is not in the correct format or impossible
         checkFormat = checkLengthAppointmentFormat(new);
     } while (checkFormat == -1);
-    checkFormat =-1;
 
+    checkFormat =-1;                                                                    // Reset the check variable
     printf("\nWhat's the object of your appointment ( < 100 characters) ?\n\n ");       // Asking for the object of the appointment
     do {
         checkFormat = checkLengthObject(new);
     } while (checkFormat == -1);
 
-    printf("Please enter a contact to assign or create :\n\n");
-    do {
+    printf("Please enter a contact to assign or create :\n\n");                         // Asking for a contact input
+    do {                                                                                // Loop to get an input while the format is not correct
         input = autoCompletion(liste);
     } while (input==NULL);
 
-    toAssign = searchContact(input, liste);
+    toAssign = searchContact(input, liste);                                 // Search if the wanted contact exist
 
-    // check if input is correct and transform it
-    if (toAssign==NULL) {
-        toAssign = createContact(input);
-        insertContact(liste, toAssign);
-        toAssign = searchContact(input, liste);
+    if (toAssign==NULL) {                                                              // Case where we have to create a new contact
+        toAssign = createContact(input);                                         // Creating the contact
+        insertContact(liste, toAssign);                                       // Inserting the contact in the list
+        toAssign = searchContact(input, liste);                             // Reassigning the contact to the one created
     }
-    insertAppointment(toAssign, new);
-    testDisplayAppointment(toAssign);
+    insertAppointment(toAssign, new);                                       // Inserting the appointment in the contact list
+    testDisplayAppointment(toAssign);                                           // Test to see if the appointment as been correctly inserted
     return new;                                                                         // Return the new appointment
 
 }
 
 void insertAppointment(p_contact contact, p_appointment cell) {
-    p_appointment tmp = contact->head  ;
-    p_appointment prev = tmp;
+    p_appointment tmp = contact->head  ;                                    // Set a cursor to the head of the contact list
+    p_appointment prev = tmp;                                               // Set a prev cursor
 
-    if (contact->head==NULL) {
-        contact->head = cell;
+    if (contact->head==NULL) {                                              // Case where the list is empty
+        contact->head = cell;                                               // We set initialize the head of the list
         return;
-    } else if (compareDate(cell, tmp) == -1) {
-        cell->next = contact->head;
-        contact->head = cell;
+    } else if (compareDate(cell, tmp) <= 0) {                              // Case we have to do an head insertion
+        cell->next = contact->head;                                         // We set the next of the new head to the previous head
+        contact->head = cell;                                               // We update the new head
         return;
     } else {
-        while (compareDate(cell, tmp)!=-1 && tmp->next!=NULL) {
+        while (compareDate(cell, tmp) > 0 && tmp->next!=NULL) {             // Loop to increment either at the end or just after the good value
             prev = tmp;
             tmp = tmp->next;
         }
-        if (compareDate(cell, tmp)==-1) {
-            prev->next = cell;
-            cell->next = tmp;
+        if (compareDate(cell, tmp) <= 0) {                                   // If comparerDate == -1 it means we have to insert just before the actual cell
+            prev->next = cell;                                              // We update the next of the previous cell
+            cell->next = tmp;                                               // We update the next of the new cell to the tmp
             return;
-        } else {
-            tmp->next = cell;
+        } else {                                                            // Case where we are at the end but have to place the new cell at the end
+            tmp->next = cell;                                               // We link next of the tmp to the new cell
             return;
         }
     }
