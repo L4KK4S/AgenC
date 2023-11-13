@@ -172,6 +172,7 @@ char* autoCompletion(p_contact_list list) {
                 strcat(newres, temp);                                                                                                   // Cat to the new result string
             }
             strcpy(res, newres);                                                                                                        // We change the current string to the new result
+            search = NULL;                                                                                                              // If we modify the string we reset the search result
         } else if(input[strlen(input)-2]=='\t') {                                                                                    // Case where the last user input is TAB (want a completion)
             for (int i = 0 ; i<strlen(input)-1 ; i++) {                                                                              // Loop to get all character except TAB
                 if (input[i] != '\t') {                                                                                                 // If the character is not a tab we add it
@@ -185,17 +186,14 @@ char* autoCompletion(p_contact_list list) {
                         index++;                                                                                                        // If yes we increment the index
                         strcpy(res, search[index]);                                                                                     // We update the current string
                     } else {                                                                                                            // Case where there is no more input
-                        printf("No more results\n");
                         index = 0;                                                                                                      // We set back the user to the first result
                         strcpy(res, search[index]);                                                                                     // We update the current string
                     }
                 } else {                                                                                                                // Case where the current string has changed
-                    if (compareString(newres, res)!= 0) {
-                        search = getCompletion(change_maj_to_min(res), list);                                                     // Get the matching string tab
-                        if (search != NULL) {                                                                                           // Case where there was results
-                            index = 0;                                                                                                  // We reset the index to 0
-                            strcpy(res, search[index]);                                                                                 // We update the current string
-                        }
+                    search = getCompletion(change_maj_to_min(res), list);                                                     // Get the matching string tab
+                    if (search != NULL) {                                                                                           // Case where there was results
+                        index = 0;                                                                                                  // We reset the index to 0
+                        strcpy(res, search[index]);                                                                                 // We update the current string
                     }
                 }
             }
@@ -393,7 +391,7 @@ void mainloop1() {
 
 int get_inputs_part3 (char* input) {
     char* functions[12] = {"error", "exit", "help","show list",                             // List of all available function in argument order to compare the input
-                           "create appointment","create contact -d","create contact -s", "search contact -d","search contact -s", "agenda", "save file",
+                           "create appointment","create contact -d","create contact -s", "search -d","search -s", "agenda", "save file",
                            "load file"};
     int j, True;                                                                             // Set some variable to parcour and test the different strings
     input = change_maj_to_min(input);
@@ -423,7 +421,7 @@ char *get_argument_part3(int function, char *input) {
     char *argument = (char*) malloc (30*sizeof(char));
     char tmp[5] =" ";
     char* functions[12] = {"error", "exit", "help","show list",                             // List of all available function in argument order to compare the input
-                           "create appointment","create contact -d","create contact -s", "search contact -d","search contact -s", "agenda", "save file",
+                           "create appointment","create contact -d","create contact -s", "search -d","search -s", "agenda", "save file",
                            "load file"};
     int space = 0, i;
     if (function !=0) {
