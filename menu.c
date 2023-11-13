@@ -164,7 +164,7 @@ char* autoCompletion(p_contact_list list) {
                    "\t\033[0;34mTAB\033[0;35m -> \033[0;34mENTER\033[0;37m : search for completion or show the next result of your last search if you didn't change the entry\n"
                    "\t\033[0;34mENTER\033[0;37m : delete a character from your previous saved entry\n"
                    "\t\033[0;36m\"my entry\"\033[0;35m -> \033[0;34mENTER\033[0;37m : update your current entry\033[0m\n\n");
-        } else if (strlen(input)==1 && strlen(res)>=1) {                                                                                 // Check if the input is only the ENTER key and if there is something to delete in the current string
+        } else if (strlen(input)==1 && strlen(res)>=1) {                                                                          // Check if the input is only the ENTER key and if there is something to delete in the current string
             copy = strlen(res)-1;
             strcpy(newres, reset);                                                                                                      // Reset the new result string
             for (int i = 0 ; i< copy; i++) {                                                                                            // Loop to add 1 by 1 all character-1 of the current string
