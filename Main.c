@@ -67,32 +67,47 @@ int main() {
                 uniform_display_contact_list(contactList);
                 break;
             case 4:
-                createAppointment(contactList);
+                displayAgenda(contactList);
+
                 break;
-            case 5 :
+            case 5:
+                createAppointment(contactList);
+                printf("Successfuly created an appointment\n");
+                break;
+            case 6 :
                 printf("create contact <option> = -d > (contact) : not coded yet\n");
                 break;
-            case 6:
+            case 7:
                 new = createContact(argument);
                 insertContact(contactList, new);
-                break;
-            case 7:
-                printf("search contact <option = -d > (contact) : not coded yet\n");
+                printf("Successfuly created a contact\n");
                 break;
             case 8:
+                printf("search contact <option = -d > (contact) : not coded yet\n");
+                break;
+            case 9:
                 if (searchContact(argument, contactList)) {
                     printf("%s is in the list\n", unformatString(argument));
                 } else {
                     printf("%s isn't in the list\n", unformatString(argument));
                 }
                 break;
-            case 9 :
-                printf("agenda (contact) : not coded yet\n");
-                break;
-            case 10:
-                printf("save file (contact) : not coded yet\n");
+            case 10 :
+                displayContact(searchContact(argument, contactList));
                 break;
             case 11:
+                printf("save file (contact) : not coded yet\n");
+                break;
+            case 12:
+                printf("-> ");
+                fgets(input, 100, stdin);
+                if (removeAppointment(searchContact(argument, contactList), input)) {
+                    printf("Appointment remove with success\n");
+                } else {
+                    printf("Couldn't find any appointment named like that\n");
+                }
+                break;
+            case 13:
                 printf("load file (filename.txt) : not coded yet\n");
                 break;
             default:

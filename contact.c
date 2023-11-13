@@ -147,7 +147,8 @@ char* checkNameEntry(char* input) {
             }
         }
         if (space_counter != 1) {
-            printf("too much space\n");
+            printf("space counter %d\n", space_counter);
+            printf("The number of space is incorrect\n");
             free(name);                                                                                                                  // Memory Optimization by freeing allocated memory
             free(surname);                                                                                                               // Memory Optimization by freeing allocated memory
             free(temp);                                                                                                                  // Memory Optimization by freeing allocated memory
@@ -159,7 +160,7 @@ char* checkNameEntry(char* input) {
         return formatString(input);
 
     } else {
-        printf("input too short");
+        printf("Input is too short\n");
         free(name);                                                                                                                     // Memory Optimization by freeing allocated memory
         free(surname);                                                                                                                  // Memory Optimization by freeing allocated memory
         free(temp);                                                                                                                     // Memory Optimization by freeing allocated memory
@@ -401,7 +402,6 @@ p_appointment createAppointment (p_contact_list liste) {
         toAssign = searchContact(input, liste);                             // Reassigning the contact to the one created
     }
     insertAppointment(toAssign, new);                                       // Inserting the appointment in the contact list
-    testDisplayAppointment(toAssign);                                           // Test to see if the appointment as been correctly inserted
     return new;                                                                         // Return the new appointment
 
 }
@@ -488,6 +488,94 @@ void testDisplayAppointment (p_contact contact) {
     } else {
         printf("empty list\n");
     }
+}
+
+void displayContact(p_contact contact) {
+    if (contact == NULL) {
+        printf("Contact non trouvé.\n");
+    }
+
+    printf("Contact: %s\n", contact->name);
+    p_appointment tmp = contact->head;
+    p_appointment prev = tmp;
+
+    if (tmp == NULL) {
+        printf("No appointment in this agenda\n\n");
+    } else {
+        while (tmp!=NULL) {
+            if (compareDate(prev , tmp) == 1 || compareDate(prev , tmp) == -1 || prev == tmp) {
+                printf("======== %d ========\n", tmp->date.years);
+            }
+            if (compareDate(prev , tmp) >= -3 && compareDate(prev , tmp) <= 3 || prev == tmp) {
+                printf("\n");
+                detectZero(tmp->date.day);
+                printf("/");
+                detectZero(tmp->date.month);
+                printf("\n");
+            }
+            printf("Time : %d", tmp->hour.hours);
+            printf("h");
+            detectZero(tmp->hour.minutes);
+            printf(", Length : %d", tmp->length.hours);
+            printf("h");
+            detectZero(tmp->length.minutes);
+            printf(", Object : %s", tmp->object);
+            prev = tmp;
+            tmp = tmp -> next;
+        }
+        printf("\n");
+    }
+}
+
+void displayAgenda(p_contact_list contactList) {
+    if (contactList == NULL) {
+        printf("Your agenda is empty.\n");                   // Si la liste de contacts est nulle, affiche un message indiquant que l'agenda est vide
+        return;
+    }
+    p_contact temp = contactList->levels[0];
+    while(temp != NULL){
+        displayContact(temp);
+        temp = temp->levels[0];
+    }
+
+}
+
+void detectZero(int x) {
+    if (x < 10) {
+        printf("0%d", x);
+        return;
+    } else {
+        printf("%d", x);
+        return;
+    }
+}
+
+int removeAppointment(p_contact contact, char* objectToRemove) {
+    if (contact == NULL || objectToRemove == NULL) {
+        return 0;                             // Échec de la suppression si le contact ou l'objet est nul
+    }
+
+    p_appointment temp = contact->head;              // Pointeur pour parcourir la liste de rendez-vous
+    p_appointment prev = NULL ;                       // Pointeur pour suivre l'élément précédent dans la liste
+
+    while (temp != NULL) { // jusquè la date av que je dois celle sup
+        if (strcmp(temp->object, objectToRemove) == 0) { // compare la chaîne de caractères stockée dans current->object avec la chaîne de caractères objectToRemove pour déterminer si elles sont identique
+            // Rendez-vous trouvé, supprimez-le
+            if (prev == NULL) {
+                contact->head = temp->next;   // Le rendez-vous à supprimer est en tête de la liste
+            } else {
+                prev->next = temp ->next;
+            }
+            free(temp->object); // Libère la mémoire allouée pour l'objet du rendez-vous
+            free(temp); // Libère la mémoire allouée pour la structure du rendez-vous
+            return 1; // Suppression réussie
+        }
+
+        prev = temp;
+        temp = temp ->next; // Avance vers le prochain rendez-vous
+    }
+
+    return 0; // Rendez-vous non trouvé
 }
 
 

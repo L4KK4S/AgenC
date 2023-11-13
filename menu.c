@@ -14,7 +14,6 @@
 #include "menu.h"
 
 
-
 int get_inputs_part12 (char* input) {
     char* functions[10] = {"error", "exit", "help",                             // List of all available function in argument order to compare the input
                            "show list","compare search", "create list", "switch list", "show level"
@@ -208,14 +207,15 @@ char* autoCompletion(p_contact_list list) {
         }
         strcpy(newres, res);                                                                                                            // We update the new result string which is used here as a previous string
     } while (strlen(input)<=1 || input[strlen(input)-2]!=' ');                                                                    // Loop to continue while the input doesn't end by SPACE and ENTER
-    if (checkNameEntry(res)) {
-        copy = strlen(res)-1;
-        strcpy(newres, reset);                                                                                                      // Reset the new result string
-        for (int i = 0 ; i< copy; i++) {                                                                                            // Loop to add 1 by 1 all character-1 of the current string
-            temp[0]=res[i];                                                                                                         // Convert from character to string
-            strcat(newres, temp);                                                                                                   // Cat to the new result string
-        }
-        strcpy(res, newres);
+    copy = strlen(res)-1;
+    strcpy(newres, reset);                                                                                                      // Reset the new result string
+    for (int i = 0 ; i< copy; i++) {                                                                                            // Loop to add 1 by 1 all character-1 of the current string
+        temp[0]=res[i];                                                                                                         // Convert from character to string
+        strcat(newres, temp);                                                                                                   // Cat to the new result string
+    }
+    strcpy(res, newres);
+
+    if (checkNameEntry(res)!=NULL) {
         return formatString(res);
     } else {
         return NULL;
@@ -390,8 +390,8 @@ void mainloop1() {
 }
 
 int get_inputs_part3 (char* input) {
-    char* functions[12] = {"error", "exit", "help","show list",                             // List of all available function in argument order to compare the input
-                           "create appointment","create contact -d","create contact -s", "search -d","search -s", "agenda", "save file",
+    char* functions[14] = {"error", "exit", "help","show list","show agenda",                             // List of all available function in argument order to compare the input
+                           "create appointment","create contact -d","create contact -s", "search -d","search -s", "agenda", "save file", "delete appointment",
                            "load file"};
     int j, True;                                                                             // Set some variable to parcour and test the different strings
     input = change_maj_to_min(input);
@@ -399,7 +399,7 @@ int get_inputs_part3 (char* input) {
     if (input[strlen(input)-2]==' ') {                                                    // Case where there is a space at the end of the input
         return 0;
     }
-    for(int i = 1 ; i<12 ; i++) {                                                            // Loop to test all the different string
+    for(int i = 1 ; i<14 ; i++) {                                                            // Loop to test all the different string
         if (strlen(input) >= strlen(functions[i])+1) {                                   // Check if the string is longer or equal (argument or '\0') may work with >
             j=0, True = 1;                                                                   // Reset the test condition for each strings
             while (functions[i][j]!='\0' && True==1) {                                       // Loop to test while the input arrive at the end or True is still 1
@@ -414,19 +414,21 @@ int get_inputs_part3 (char* input) {
             }
         }
     }
+    printf("Unknown command\n");
     return 0;                                                                                // If there was no match we return the error code 0
 }
 
 char *get_argument_part3(int function, char *input) {
     char *argument = (char*) malloc (30*sizeof(char));
     char tmp[5] =" ";
-    char* functions[12] = {"error", "exit", "help","show list",                             // List of all available function in argument order to compare the input
-                           "create appointment","create contact -d","create contact -s", "search -d","search -s", "agenda", "save file",
+    char* functions[14] = {"error", "exit", "help","show list","show agenda",                             // List of all available function in argument order to compare the input
+                           "create appointment","create contact -d","create contact -s", "search -d","search -s", "agenda", "save file", "delete appointment",
                            "load file"};
     int space = 0, i;
     if (function !=0) {
         i = strlen(functions[function]) ;
-        if (input[i]!=' ' && function > 4) {
+        if (input[i]!=' ' && function > 5) {
+            printf("A space is missing\n");
             return NULL;
         }
         while (input[i+1]!='\0') {
@@ -440,13 +442,14 @@ char *get_argument_part3(int function, char *input) {
             i++;
         }
     }
-    if (function < 5 && strlen(input) == strlen(functions[function])+1) {
+    if (function < 6 && strlen(input) == strlen(functions[function])+1) {
         return input;
-    } else if (function < 11 && space == 1 && checkNameEntry(argument)!=NULL)  {
+    } else if (function >= 6 && function < 13 && space == 1 && checkNameEntry(argument)!=NULL)  {
         return formatString(argument);
-    } else if (function == 11 && space == 0) {
+    } else if (function == 13 && space == 0) {
         return argument;
     } else {
+        printf("The number of space is incorrect\n");
         return NULL;
     }
 }
