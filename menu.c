@@ -385,7 +385,7 @@ void mainloop1() {
 }
 
 int get_inputs_part3 (char* input) {
-    char* functions[11] = {"error", "exit", "help",                             // List of all available function in argument order to compare the input
+    char* functions[12] = {"error", "exit", "help","show list",                             // List of all available function in argument order to compare the input
                            "create appointment","create contact -d","create contact -s", "search contact -d","search contact -s", "agenda", "save file",
                            "load file"};
     int j, True;                                                                             // Set some variable to parcour and test the different strings
@@ -394,8 +394,8 @@ int get_inputs_part3 (char* input) {
     if (input[strlen(input)-2]==' ') {                                                    // Case where there is a space at the end of the input
         return 0;
     }
-    for(int i = 1 ; i<11 ; i++) {                                                            // Loop to test all the different string
-        if (strlen(input) > strlen(functions[i])+1) {                                   // Check if the string is longer or equal (argument or '\0') may work with >
+    for(int i = 1 ; i<12 ; i++) {                                                            // Loop to test all the different string
+        if (strlen(input) >= strlen(functions[i])+1) {                                   // Check if the string is longer or equal (argument or '\0') may work with >
             j=0, True = 1;                                                                   // Reset the test condition for each strings
             while (functions[i][j]!='\0' && True==1) {                                       // Loop to test while the input arrive at the end or True is still 1
 
@@ -415,13 +415,13 @@ int get_inputs_part3 (char* input) {
 char *get_argument_part3(int function, char *input) {
     char *argument = (char*) malloc (30*sizeof(char));
     char tmp[5] =" ";
-    char* functions[11] = {"error", "exit", "help",                             // List of all available function in argument order to compare the input
+    char* functions[12] = {"error", "exit", "help","show list",                             // List of all available function in argument order to compare the input
                            "create appointment","create contact -d","create contact -s", "search contact -d","search contact -s", "agenda", "save file",
                            "load file"};
     int space = 0, i;
     if (function !=0) {
         i = strlen(functions[function]) ;
-        if (input[i]!=' ') {
+        if (input[i]!=' ' && function > 4) {
             return NULL;
         }
         while (input[i+1]!='\0') {
@@ -435,11 +435,11 @@ char *get_argument_part3(int function, char *input) {
             i++;
         }
     }
-    if (function < 4 && strlen(input) == strlen(functions[function])+1) {
+    if (function < 5 && strlen(input) == strlen(functions[function])+1) {
         return input;
-    } else if (function < 10 && space == 1 && checkNameEntry(argument)!=NULL)  {
+    } else if (function < 11 && space == 1 && checkNameEntry(argument)!=NULL)  {
         return formatString(argument);
-    } else if (function == 10 && space == 0) {
+    } else if (function == 11 && space == 0) {
         return argument;
     } else {
         return NULL;

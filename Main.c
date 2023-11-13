@@ -83,6 +83,7 @@ int main() {
     char* input = (char*) malloc(100*sizeof(char));
     char* argument = (char*) malloc (100*sizeof(char));
     p_contact_list contactList = createEmptyList();
+    p_contact new;
     int exit = 0, function = -0;
 
     // ------------------------- Test list definition --------------------------
@@ -95,7 +96,6 @@ int main() {
             function = get_inputs_part3(input);
             argument = get_argument_part3(function, input);
         } while (function == 0 || argument == NULL);
-        printf("%s\n", argument);
 
         switch (function) {
             case 1:
@@ -105,27 +105,35 @@ int main() {
                 printf("help : not coded yet\n");
                 break;
             case 3:
-                printf("create appointment : not coded yet\n");
+                uniform_display_contact_list(contactList);
                 break;
-            case 4 :
+            case 4:
+                createAppointment(contactList);
+                break;
+            case 5 :
                 printf("create contact <option = -d > (contact) : not coded yet\n");
                 break;
-            case 5:
-                printf("create contact <option = -s > (contact) : not coded yet\n");
-                break;
             case 6:
-                printf("search contact <option = -d > (contact) : not coded yet\n");
+                new = createContact(argument);
+                insertContact(contactList, new);
                 break;
             case 7:
-                printf("search contact <option = -s > (contact) : not coded yet\n");
+                printf("search contact <option = -d > (contact) : not coded yet\n");
                 break;
-            case 8 :
+            case 8:
+                if (searchContact(argument, contactList)) {
+                    printf("%s is in the list\n", unformatString(argument));
+                } else {
+                    printf("%s isn't in the list\n", unformatString(argument));
+                }
+                break;
+            case 9 :
                 printf("agenda (contact) : not coded yet\n");
                 break;
-            case 9:
+            case 10:
                 printf("save file (contact) : not coded yet\n");
                 break;
-            case 10:
+            case 11:
                 printf("load file (filename.txt) : not coded yet\n");
                 break;
             default:
