@@ -150,20 +150,23 @@ char* autoCompletion(p_contact_list list) {
     char* newres = (char*) malloc (100*sizeof(char));                                                                              // Allocate memory for a temp variable and also prev
     char reset[10] = "";                                                                                                                // String use to reset an other string
     char temp[10] = "";                                                                                                                 // String use to copy convert from character to string type
-    int index= 0, copy ;                                                                                                                // Int to indicate the level of the completion tab and copy to get the length -1 of a string
+    int index= 0, copy, cancel = 0 ;                                                                                                                // Int to indicate the level of the completion tab and copy to get the length -1 of a string
     do {                                                                                                                                // Loop to deal with the input
         printf("-> %s", res);                                                                                                           // print the cursor and the current string
         fgets(input, 100, stdin);                                                                                                       // Get the input from the user
         // Function to check for help                                                                                                   // NOT CODED YET, FUNCTION TO CHECK IF USER WANT THE HELP MENU
         if (input[0]=='h' && input[1]=='e' && input[2]=='l' && input[3]=='p' && strlen(input)==5) {
+            cancel = 0;
             printf("========================================= Help Menu =========================================\n\n"
                    "As we couldn't use the keyboard input to create an autocompletion mode, we had to change some way to confirm, search or\n"
                    "delete your current entry\n\n"
                    "\t\033[0;34mSPACE\033[0;35m -> \033[0;34mENTER\033[0;37m : confirm your entry\n"
                    "\t\033[0;34mTAB\033[0;35m -> \033[0;34mENTER\033[0;37m : search for completion or show the next result of your last search if you didn't change the entry\n"
                    "\t\033[0;34mENTER\033[0;37m : delete a character from your previous saved entry\n"
-                   "\t\033[0;36m\"my entry\"\033[0;35m -> \033[0;34mENTER\033[0;37m : update your current entry\033[0m\n\n");
+                   "\t\033[0;36m\"my entry\"\033[0;35m -> \033[0;34mENTER\033[0;37m : update your current entry\n"
+                   "\t\033[0;34mENTER\033[0;35m -> \033[0;34mENTER\033[0;37m : Stop the current command\033[0m\n\n");
         } else if (strlen(input)==1 && strlen(res)>=1) {                                                                          // Check if the input is only the ENTER key and if there is something to delete in the current string
+            cancel = 0;
             copy = strlen(res)-1;
             strcpy(newres, reset);                                                                                                      // Reset the new result string
             for (int i = 0 ; i< copy; i++) {                                                                                            // Loop to add 1 by 1 all character-1 of the current string
@@ -173,6 +176,7 @@ char* autoCompletion(p_contact_list list) {
             strcpy(res, newres);                                                                                                        // We change the current string to the new result
             search = NULL;                                                                                                              // If we modify the string we reset the search result
         } else if(input[strlen(input)-2]=='\t') {                                                                                    // Case where the last user input is TAB (want a completion)
+            cancel = 0;
             for (int i = 0 ; i<strlen(input)-1 ; i++) {                                                                              // Loop to get all character except TAB
                 if (input[i] != '\t') {                                                                                                 // If the character is not a tab we add it
                     temp[0] = input[i];                                                                                                 // Convert from car to string
@@ -197,15 +201,28 @@ char* autoCompletion(p_contact_list list) {
                 }
             }
         } else {                                                                                                                        // If there was no special character we just update the current string
-            for (int i = 0 ; i<strlen(input)-1 ; i++) {                                                                              // Loop to check all character from the input
-                if (input[i]!='\t') {                                                                                                   // We add all character that aren't TAB
-                    temp[0] = input[i];                                                                                                 // We convert from car to string
-                    strcat(res, temp);                                                                                                  // We add that to the current string
+            if (strlen(res)==0 && strlen(input)==1) {
+                cancel++;
+            } else {
+                cancel = 0;
+                for (int i = 0; i < strlen(input) -
+                                    1; i++) {                                                                              // Loop to check all character from the input
+                    if (input[i] !=
+                        '\t') {                                                                                                   // We add all character that aren't TAB
+                        temp[0] = input[i];                                                                                                 // We convert from car to string
+                        strcat(res,
+                               temp);                                                                                                  // We add that to the current string
+                    }
                 }
+                search = NULL;
             }
-            search = NULL;
+        }
+        if (cancel == 2) {
+            printf("## Command canceled ##\n");
+            return NULL;
         }
         strcpy(newres, res);                                                                                                            // We update the new result string which is used here as a previous string
+
     } while (strlen(input)<=1 || input[strlen(input)-2]!=' ');                                                                    // Loop to continue while the input doesn't end by SPACE and ENTER
     copy = strlen(res)-1;
     strcpy(newres, reset);                                                                                                      // Reset the new result string
@@ -390,13 +407,13 @@ void mainloop1() {
 }
 
 int get_inputs_part3 (char* input) {
-    char* functions[14] = {"error", "exit", "help","show list","show agenda",                             // List of all available function in argument order to compare the input
-                           "create appointment","create contact -d","create contact -s", "search -d","search -s", "agenda", "save file", "delete appointment",
+    char* functions[14] = {"error", "exit", "help","show list","show agenda", "search -d","search -s","delete appointment",                             // List of all available function in argument order to compare the input
+                           "save file","agenda","create appointment","create contact -d","create contact -s",
                            "load file"};
     int j, True;                                                                             // Set some variable to parcour and test the different strings
     input = change_maj_to_min(input);
 
-    if (input[strlen(input)-2]==' ') {                                                    // Case where there is a space at the end of the input
+    if (input[strlen(input)-2]==' ' || strlen(input)==1) {                                                    // Case where there is a space at the end of the input
         return 0;
     }
     for(int i = 1 ; i<14 ; i++) {                                                            // Loop to test all the different string
@@ -421,13 +438,13 @@ int get_inputs_part3 (char* input) {
 char *get_argument_part3(int function, char *input) {
     char *argument = (char*) malloc (30*sizeof(char));
     char tmp[5] =" ";
-    char* functions[14] = {"error", "exit", "help","show list","show agenda",                             // List of all available function in argument order to compare the input
-                           "create appointment","create contact -d","create contact -s", "search -d","search -s", "agenda", "save file", "delete appointment",
+    char* functions[14] = {"error", "exit", "help","show list","show agenda", "search -d","search -s","delete appointment",                             // List of all available function in argument order to compare the input
+                           "save file","agenda","create appointment","create contact -d","create contact -s",
                            "load file"};
     int space = 0, i;
     if (function !=0) {
         i = strlen(functions[function]) ;
-        if (input[i]!=' ' && function > 5) {
+        if (input[i]!=' ' && function > 10) {
             printf("A space is missing\n");
             return NULL;
         }
@@ -442,9 +459,9 @@ char *get_argument_part3(int function, char *input) {
             i++;
         }
     }
-    if (function < 6 && strlen(input) == strlen(functions[function])+1) {
+    if (function < 11 && strlen(input) == strlen(functions[function])+1) {
         return input;
-    } else if (function >= 6 && function < 13 && space == 1 && checkNameEntry(argument)!=NULL)  {
+    } else if (function >= 11 && function < 13 && space == 1 && checkNameEntry(argument)!=NULL)  {
         return formatString(argument);
     } else if (function == 13 && space == 0) {
         return argument;
