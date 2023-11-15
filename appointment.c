@@ -16,11 +16,11 @@
 // -------------------------- Functions --------------------------
 
 p_appointment createEmptyAppointment() {
-    p_appointment new = (p_appointment) malloc (sizeof(t_appointment));
-    t_date date;
-    t_time length;
-    t_time hours;
-
+    p_appointment new = (p_appointment) malloc (sizeof(t_appointment));             // Allocate memory
+    t_date date;                                                                         // Create date structure
+    t_time length;                                                                       // Create length structure
+    t_time hours;                                                                        // Create hours structure
+                                                                                         // Initialize all fields
     date.day = -1;
     date.month = -1;
     date.years = -1;
@@ -31,11 +31,11 @@ p_appointment createEmptyAppointment() {
     hours.hours = -1;
     hours.minutes = -1;
 
-    new->date = date;
-    new->hour = hours;
-    new->length = length;
-    new->object = NULL;
-    new->next = NULL;
+    new->date = date;                                                                    // Attribute date
+    new->hour = hours;                                                                   // Attribute hours
+    new->length = length;                                                                // Attribute length
+    new->object = NULL;                                                                  // Set object to NULL
+    new->next = NULL;                                                                    // Set next to NULL
 
     return new;
 
@@ -88,9 +88,9 @@ int checkDateFormat(p_appointment new_appointment) {
 
             i++;
         }
-        new_appointment->date.day = (int) strtol (day, convert, 10);                                                                                                                                  // Convert and attribute the day value
-        new_appointment->date.month = (int) strtol (month, convert, 10);                                                                                                                            // Convert and attribute the month value
-        new_appointment->date.years = (int) strtol (years, convert, 10);                                                                                                                              // Convert and attribute the years value
+        new_appointment->date.day = (int) strtol (day, convert, 10);                                                                                              // Convert and attribute the day value
+        new_appointment->date.month = (int) strtol (month, convert, 10);                                                                                          // Convert and attribute the month value
+        new_appointment->date.years = (int) strtol (years, convert, 10);                                                                                          // Convert and attribute the years value
         free(input);
         free(month);
         free(day);
@@ -123,10 +123,10 @@ int checkDateFormat(p_appointment new_appointment) {
 
 int checkHourFormat(p_appointment new_appointment) {
 
-    char* input = (char*) malloc(100*sizeof(char));                                 // str vcariable to stock the input
-    char* hours = (char*) malloc(100*sizeof(char));
-    char* minutes = (char*) malloc(100*sizeof(char));
-    char* temp = (char*) malloc(100*sizeof(char));
+    char* input = (char*) malloc(100*sizeof(char));                                 // str variables to stock the input
+    char* hours = (char*) malloc(100*sizeof(char));                                 // str variables to stock the hours
+    char* minutes = (char*) malloc(100*sizeof(char));                               // str variables to stock the minutes
+    char* temp = (char*) malloc(100*sizeof(char));                                  // str variables to stock the temp
     char** convert = (char**) malloc(100*sizeof(char*));
     int i = 0, skip = 2;                                                                 // Set a index to 0 and the skip variable to the skip if length of the input is 6
     printf("~> ");
@@ -195,7 +195,7 @@ int checkLengthAppointmentFormat(p_appointment new_appointment) {
     char* hours = (char*) malloc(100*sizeof(char));
     char* minutes = (char*) malloc(100*sizeof(char));
     char* temp = (char*) malloc(100*sizeof(char));
-    char** convert = (char**) malloc(100*sizeof(char*));                          // str variables to manipulate the arguments
+    char** convert = (char**) malloc(100*sizeof(char*));                            // str variables to manipulate the arguments
     int i = 0, skip = 2;                                                                 // Set a index to 0 and the skip variable to the skip if length of the input is 6
     printf("~> ");
     fgets(input, 100, stdin);
@@ -270,7 +270,7 @@ int checkLengthObject(p_appointment new_appointment) {
 
 }
 
-int compareDate(p_appointment toplace, p_appointment check) {
+int compareDate(p_appointment toplace, p_appointment check) {                                                           // We use negative return to return and identify it has to be placed before and positive to identify and insert after
     if (toplace->date.years < check->date.years) {                                                                      // Compare the year of an appointment
         return -1;
     } else if (toplace->date.years > check->date.years) {
@@ -314,9 +314,4 @@ int compareDate(p_appointment toplace, p_appointment check) {
             }
         }
     }
-}
-
-void testPrintAppointment(p_appointment a) {
-    printf("%d/%d/%d %dh%d (%dh%d) %s", a->date.day, a->date.month, a->date.years, a->hour.hours, a->hour.minutes, a->length.hours, a->length.minutes, a->object);
-    return;
 }

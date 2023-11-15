@@ -477,105 +477,91 @@ void uniform_display_contact_list (p_contact_list list) {
     }
 }
 
-void testDisplayAppointment (p_contact contact) {
-    if (contact->head!=NULL) {
-        p_appointment tmp = contact->head;
-        while (tmp != NULL) {
-            testPrintAppointment(tmp);
-            tmp = tmp->next;
-        }
-        free(tmp);
-    } else {
-        printf("empty list\n");
-    }
-}
-
-void displayContact(p_contact contact) {
-    if (contact == NULL) {
+void displayContact(p_contact contact)  {
+    if (contact == NULL) {                                                                                              // Case where the contact hasn't been found
         printf("Contact non trouvé.\n");
     }
 
-    printf("Contact: %s\n", contact->name);
-    p_appointment tmp = contact->head;
-    p_appointment prev = tmp;
+    printf("Contact: %s\n", contact->name);                                                                             // Print the contact name
+    p_appointment tmp = contact->head;                                                                                  // Set the cursor to the first appointment
+    p_appointment prev = tmp;                                                                                           // Set the prev to the tmp
 
-    if (tmp == NULL) {
+    if (tmp == NULL) {                                                                                                  // Case where is no appointment
         printf("No appointment in this agenda\n\n");
-    } else {
-        while (tmp!=NULL) {
-            if (compareDate(prev , tmp) == 1 || compareDate(prev , tmp) == -1 || prev == tmp) {
+    } else {                                                                                                            // Case where there is some appointment
+        while (tmp!=NULL) {                                                                                             // Loop to go through all appointment
+            if (compareDate(prev , tmp) == 1 || compareDate(prev , tmp) == -1 || prev == tmp) {                         // If the Year is different or the It's the first cell we print the year
                 printf("======== %d ========\n", tmp->date.years);
             }
-            if (compareDate(prev , tmp) >= -3 && compareDate(prev , tmp) <= 3 || prev == tmp) {
+            if (compareDate(prev , tmp) >= -3 && compareDate(prev , tmp) <= 3 || prev == tmp) {                         // If the date has changed, we print the date
                 printf("\n");
-                detectZero(tmp->date.day);
+                detectZero(tmp->date.day);                                                                           // If the number if one digit we print the silent 0
                 printf("/");
-                detectZero(tmp->date.month);
+                detectZero(tmp->date.month);                                                                         // If the number if one digit we print the silent 0
                 printf("\n");
             }
-            printf("Time : %d", tmp->hour.hours);
+            printf("Time : %d", tmp->hour.hours);                                                                       // We always print the time
             printf("h");
-            detectZero(tmp->hour.minutes);
+            detectZero(tmp->hour.minutes);                                                                           // We always print the length with the silent 0
             printf(", Length : %d", tmp->length.hours);
             printf("h");
-            detectZero(tmp->length.minutes);
-            printf(", Object : %s", tmp->object);
-            prev = tmp;
-            tmp = tmp -> next;
+            detectZero(tmp->length.minutes);                                                                         // We always print the minutes with silent 0
+            printf(", Object : %s", tmp->object);                                                                       // We print the object
+            prev = tmp;                                                                                                 // Increment the prev
+            tmp = tmp -> next;                                                                                          // Increment the tmp
         }
         printf("\n");
     }
 }
 
 void displayAgenda(p_contact_list contactList) {
-    if (contactList == NULL) {
-        printf("Your agenda is empty.\n");                   // Si la liste de contacts est nulle, affiche un message indiquant que l'agenda est vide
+    if (contactList == NULL) {                              // Case where the agenda is empty
+        printf("Your agenda is empty.\n");
         return;
     }
-    p_contact temp = contactList->levels[0];
+    p_contact temp = contactList->levels[0];                // Set the cursor to the first contact
     while(temp != NULL){
-        displayContact(temp);
-        temp = temp->levels[0];
+        displayContact(temp);                       // Display the contact
+        temp = temp->levels[0];                             // Increment the tmp
     }
 
 }
 
 void detectZero(int x) {
-    if (x < 10) {
+    if (x < 10) {                       // If x under 10 we have to print the silent 0
         printf("0%d", x);
         return;
     } else {
-        printf("%d", x);
+        printf("%d", x);               // We just print the number
         return;
     }
 }
 
 int removeAppointment(p_contact contact, char* objectToRemove) {
-    if (contact == NULL || objectToRemove == NULL) {
-        return 0;                             // Échec de la suppression si le contact ou l'objet est nul
+    if (contact == NULL || objectToRemove == NULL) {                                     // If there wasn't any object to remove or contact
+        return 0;
     }
 
-    p_appointment temp = contact->head;              // Pointeur pour parcourir la liste de rendez-vous
-    p_appointment prev = NULL ;                       // Pointeur pour suivre l'élément précédent dans la liste
+    p_appointment temp = contact->head;                                                  // Set a pointer to the first appointment of the list
+    p_appointment prev = NULL ;                                                          // Set a prev to NULL
 
-    while (temp != NULL) { // jusquè la date av que je dois celle sup
-        if (strcmp(temp->object, objectToRemove) == 0) { // compare la chaîne de caractères stockée dans current->object avec la chaîne de caractères objectToRemove pour déterminer si elles sont identique
-            // Rendez-vous trouvé, supprimez-le
-            if (prev == NULL) {
-                contact->head = temp->next;   // Le rendez-vous à supprimer est en tête de la liste
+    while (temp != NULL) {                                                               // Loop to go through all cells
+        if (strcmp(temp->object, objectToRemove) == 0) {                                 // Check is object is the same as the one searched
+            if (prev == NULL) {                                                          // If prev == NULL, it means we remove the head
+                contact->head = temp->next;                                              // We relink the list
             } else {
-                prev->next = temp ->next;
+                prev->next = temp ->next;                                                // Relink the list if it's in middle or end
             }
-            free(temp->object); // Libère la mémoire allouée pour l'objet du rendez-vous
-            free(temp); // Libère la mémoire allouée pour la structure du rendez-vous
-            return 1; // Suppression réussie
+            free(temp->object);                                                          // Free the object
+            free(temp);                                                                  // Free the removed cell
+            return 1;                                                                    // Return 1 if successful
         }
 
-        prev = temp;
-        temp = temp ->next; // Avance vers le prochain rendez-vous
+        prev = temp;                                                                     // Increment the prev
+        temp = temp ->next;                                                              // Increment the tmp
     }
 
-    return 0; // Rendez-vous non trouvé
+    return 0;                                                                           // Return 0 if unsuccessful
 }
 
 

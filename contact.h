@@ -61,11 +61,10 @@ void insertAppointment(p_contact, p_appointment);                   // Insert a 
 
 void display_contact_list (p_contact_list list);                    // Display the list in a standard way
 void uniform_display_contact_list (p_contact_list list);            // Display the list and keep cells align
-void testDisplayAppointment (p_contact);
-void displayContact(p_contact contact);
-void detectZero(int x);
-void displayAgenda(p_contact_list contactList);
-int removeAppointment(p_contact contact, char* objectToRemove);
+void displayContact(p_contact contact);                             // Display a contact correctly
+void detectZero(int x);                                             // Print silent 0
+void displayAgenda(p_contact_list contactList);                     // Display all agenda of an agenda list
+int removeAppointment(p_contact contact, char* objectToRemove);     // Remove an appointment from an appointment list and return the result
 
 
 // -------------------------- Test Functions --------------------------
