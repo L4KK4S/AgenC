@@ -185,6 +185,16 @@ int getLevel(p_contact_list list, p_contact search) {
     return 0+1;                                                     // Else we return 0+1 (0 level, but still link to 1 cell)
 }
 
+void detectZero(int x) {
+    if (x < 10) {                       // If x under 10 we have to print the silent 0
+        printf("0%d", x);
+        return;
+    } else {
+        printf("%d", x);               // We just print the number
+        return;
+    }
+}
+
 
 // 2) Manipulation of Contact Structure
 
@@ -360,7 +370,7 @@ void insertContact(p_contact_list list, p_contact new) {
 
 // 3) Manipulation of Appointment Structure (related with contact)
 
-p_appointment createAppointment (p_contact_list liste) {
+p_appointment createAppointment (p_contact_list liste) {                                // VARIABLES UNFREE
     char* input = (char*) malloc(50*sizeof(char));                                 // Str variable to stock the input
     p_contact toAssign = (p_contact) malloc (sizeof(p_contact));                   // Pointer to check if the contact already exist or not
     int checkFormat = -1;                                                               // Variable to check argument are correct
@@ -406,7 +416,7 @@ p_appointment createAppointment (p_contact_list liste) {
 
 }
 
-void insertAppointment(p_contact contact, p_appointment cell) {
+void insertAppointment(p_contact contact, p_appointment cell) {             // VARIABLES UNFREE
     p_appointment tmp = contact->head  ;                                    // Set a cursor to the head of the contact list
     p_appointment prev = tmp;                                               // Set a prev cursor
 
@@ -436,20 +446,6 @@ void insertAppointment(p_contact contact, p_appointment cell) {
 
 // 4) Display Functions
 
-void display_contact_list (p_contact_list list) {
-    for (int i = 0 ; i<list->max_levels ; i++) {                               // Loop which stop when all level are printed (<=)
-        printf("[list head_%d @-]",i);                                         // Special printing for the head of the list
-        p_contact tmp_h = list->levels[i];                                     // Set the moving pointer to the head of the level
-        while (tmp_h!=NULL){
-            printf("-->[ %s|@-]", tmp_h->name);                                // Special print for the cell
-            tmp_h = tmp_h->levels[i];                                          // Incrementing the moving pointer
-        }
-        printf("-->NULL\n");                                                   // Special print to indicate the end of the level list
-        free(tmp_h);
-        return;
-    }
-}
-
 void uniform_display_contact_list (p_contact_list list) {
     p_contact level0cur;                                                        // Create a cursor to compare to higher value (because the first level will be the most complete, we have to check if we have to fill higher level or not)
     p_contact tmp_h;                                                            // Create a cursor pointer to go through each level
@@ -477,7 +473,7 @@ void uniform_display_contact_list (p_contact_list list) {
     }
 }
 
-void displayContact(p_contact contact)  {
+void displayContact(p_contact contact)  {                                                                               // VARIABLES UNFREE
     if (contact == NULL) {                                                                                              // Case where the contact hasn't been found
         printf("Contact non trouvé.\n");
     }
@@ -514,7 +510,7 @@ void displayContact(p_contact contact)  {
     }
 }
 
-void displayAgenda(p_contact_list contactList) {
+void displayAgenda(p_contact_list contactList) {            // VARIABLES UNFREE
     if (contactList == NULL) {                              // Case where the agenda is empty
         printf("Your agenda is empty.\n");
         return;
@@ -527,17 +523,7 @@ void displayAgenda(p_contact_list contactList) {
 
 }
 
-void detectZero(int x) {
-    if (x < 10) {                       // If x under 10 we have to print the silent 0
-        printf("0%d", x);
-        return;
-    } else {
-        printf("%d", x);               // We just print the number
-        return;
-    }
-}
-
-int removeAppointment(p_contact contact, char* objectToRemove) {
+int removeAppointment(p_contact contact, char* objectToRemove) {                         // VARIABLES UNFREE
     if (contact == NULL || objectToRemove == NULL) {                                     // If there wasn't any object to remove or contact
         return 0;
     }

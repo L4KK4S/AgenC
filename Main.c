@@ -78,7 +78,7 @@ int main() {
                        "\t\t \033[0;35m-d\033[0;37m : dichotomous insertion of the contact\n\n"
                        "\033[0mAppointment Functions\n"
                        "\t\033[0;36m create appointment \033[0;37m: ask all detail about a new event (can't be cancelled)\n"
-                       "\t\033[0;36m remove appointment \033[0;31m(a) \033[0;34mobject \033[0;37m: delete an appointment of a specific contact with a specific object\n\n"
+                       "\t\033[0;36m delete appointment \033[0;31m(a) \033[0;34mobject \033[0;37m: delete an appointment of a specific contact with a specific object\n\n"
                        "\033[0mFile Functions\n"
                        "\t\033[0;36m load file \033[0;34mfilename.txt \033[0;37m: load a new appointment file\n"
                        "\t\033[0;36m save file \033[0;31m(a) \033[0;37m: update or create an appointment file of an existing contact\n\n\n"
@@ -167,6 +167,9 @@ int main() {
                 break;
         }
     }
+    free(input);
+    free(input2);
+    free(argument);
 
 
     return 0;

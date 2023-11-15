@@ -44,6 +44,7 @@ int getLevel(p_contact_list, p_contact);                            // Get the l
 char* formatString(char* input);                                    // Transform a correct unformat string to a format string
 char* unformatString(char* input);                                  // Transform a correct format string to an unformat string
 char* checkNameEntry(char* input);                                  // Check has the correct format (only letter and 1 space)
+void detectZero(int x);                                             // Print silent 0
 
 // 2) Manipulation of Contact Structure
 
@@ -55,16 +56,14 @@ void insertContact(p_contact_list, p_contact);                      // Insert co
 // 3) Manipulation of Appointment Structure (related with contact)
 
 p_appointment createAppointment (p_contact_list);                   // Create a new appointment, sort it in the appointment list and attribute it to a contact (can create contact)
-void insertAppointment(p_contact, p_appointment);                   // Insert a new appointment in a chained list
+void insertAppointment(p_contact, p_appointment);                   // Insert a new appointment in a chained list (unfree)
 
 // 4) Display Functions
 
-void display_contact_list (p_contact_list list);                    // Display the list in a standard way
 void uniform_display_contact_list (p_contact_list list);            // Display the list and keep cells align
-void displayContact(p_contact contact);                             // Display a contact correctly
-void detectZero(int x);                                             // Print silent 0
-void displayAgenda(p_contact_list contactList);                     // Display all agenda of an agenda list
-int removeAppointment(p_contact contact, char* objectToRemove);     // Remove an appointment from an appointment list and return the result
+void displayContact(p_contact contact);                             // Display a contact correctly (unfree)
+void displayAgenda(p_contact_list contactList);                     // Display all agenda of an agenda list (unfree)
+int removeAppointment(p_contact contact, char* objectToRemove);     // Remove an appointment from an appointment list and return the result (unfree)
 
 
 // -------------------------- Test Functions --------------------------
