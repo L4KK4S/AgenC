@@ -155,7 +155,9 @@ int main() {
                 printf("Successfuly created an appointment\n");
                 break;
             case 11 :
-                printf("create contact <option> = -d > (contact) : not coded yet\n");
+                new = createContact(argument);
+                insertContact_dtc(contactList, new);
+                printf("Successfuly created a contact\n");
                 break;
             case 12:
                 new = createContact(argument);

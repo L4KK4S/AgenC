@@ -422,27 +422,22 @@ void insertContact_dtc(p_contact_list list, p_contact new) {
         return;
     } else if (compareString(tmp->name, new->name)==-1) {                                                                            // Case head insertion
             tmp = list->levels[0];
-            p_contact *levels = (p_contact *) malloc(4 *
-                                                     sizeof(p_contact));                                                                 // Create a tab of 4 elements for the new cell
+            p_contact *levels = (p_contact *) malloc(4 * sizeof(p_contact));                                                                 // Create a tab of 4 elements for the new cell
             for (int i = 0; i < 4; i++) {
                 levels[i] = NULL;
             }
             new->levels = levels;
-            rebuild = getMatch(new,
-                               tmp);                                                                                             // Get the size of the new tab
-            p_contact *rebuild_tab = (p_contact *) malloc(rebuild *
-                                                          sizeof(p_contact));                                                       // Allocate the memory of the new tab
+            rebuild = getMatch(new,tmp);                                                                                             // Get the size of the new tab
+            p_contact *rebuild_tab = (p_contact *) malloc(rebuild * sizeof(p_contact));                                                       // Allocate the memory of the new tab
             for (int i = 0; i < rebuild; i++) {
                 rebuild_tab[i] = NULL;
             }
-            for (int i = 0; i <
-                            rebuild; i++) {                                                                                                  // Loop to copy all common level between the new and the old tab
+            for (int i = 0; i < rebuild; i++) {                                                                                                  // Loop to copy all common level between the new and the old tab
                 rebuild_tab[i] = tmp->levels[i];                                                                                                 // Copy the old tab to the new tab
                 list->levels[i] = new;                                                                                                           // Set the head of the level to the new cell
                 new->levels[i] = tmp;                                                                                                            // Set the next of the cell to the old cell on the common levels
             }
-            for (int i = rebuild; i <
-                                  4; i++) {                                                                                                  // Loop to match all level that haven't been match yet (highers levels)
+            for (int i = rebuild; i < 4; i++) {                                                                                                  // Loop to match all level that haven't been match yet (highers levels)
                 list->levels[i] = new;                                                                                                           // Set the head of the level to the new cell
                 new->levels[i] = tmp->levels[i];                                                                                                 // As the old cell was the first one, it had 4 levels, so we copy the unused old next adresses from the highers levels
             }
