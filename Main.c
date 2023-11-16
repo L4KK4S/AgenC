@@ -96,7 +96,11 @@ int main() {
                 printf("Auto Completion enable, please enter a contact name : \n");
                 input2 = autoCompletion(contactList);
                 if (input2!=NULL) {
-                    printf("search contact <option = -d > (contact) : not coded yet\n");
+                    if (searchContact_dtc(contactList, input2)) {
+                        printf("%s is in the list\n", unformatString(input2));
+                    } else {
+                        printf("%s isn't in the list\n", unformatString(input2));
+                    }
                 } else {
                     printf("Not a contact name\n");
                 }

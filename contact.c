@@ -367,6 +367,24 @@ void insertContact(p_contact_list list, p_contact new) {
     }
 }
 
+int searchContact_dtc(p_contact_list list, char* search) {
+    int current_level = 3;                                                                                              // Set first level to 3 (max level)
+    p_contact tmp = list->levels[current_level];                                                                        // Create a cursor
+    p_contact prev = tmp;                                                                                               // Create a prev
+    while (tmp!=NULL || current_level!=0) {                                                                             // Loop to go through all cell  of level 0 at worst case
+        if (tmp==NULL && current_level!=0) {                                                                            // Check if we have to go down a level
+            tmp = prev;                                                                                                 // Set the tmp to the last cell not NULL
+            current_level--;                                                                                            // Down the level
+        } else if (compareString(tmp->name, search)==0) {                                                 // Check if we have found the value
+            return 1;
+        } else {                                                                                                        // If we can still go fw we increment
+            prev = tmp;
+            tmp = tmp->levels[current_level];
+        }
+    }
+    return 0;                                                                                                           // If we haven't find the value we return 0
+}
+
 
 // 3) Manipulation of Appointment Structure (related with contact)
 
@@ -660,6 +678,10 @@ p_contact_list createExempleList2(int showstep) {
         printf("\n\n");
     }
     insertContact(new, c9);
+    if (showstep==1) {
+        uniform_display_contact_list(new);
+        printf("\n\n");
+    }
     return new;
 
 }

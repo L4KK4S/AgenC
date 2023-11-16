@@ -52,6 +52,7 @@ p_contact_list createEmptyList();                                   // Create an
 p_contact createContact(char*);                                     // Create a new contact
 p_contact searchContact(char*, p_contact_list);                     // Search a contact in a contact list
 void insertContact(p_contact_list, p_contact);                      // Insert contact while keepîng the list ordered
+int searchContact_dtc(p_contact_list list, char* search);
 
 // 3) Manipulation of Appointment Structure (related with contact)
 
