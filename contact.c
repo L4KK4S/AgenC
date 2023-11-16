@@ -367,7 +367,7 @@ void insertContact(p_contact_list list, p_contact new) {
     }
 }
 
-int searchContact_dtc(p_contact_list list, char* search) {
+int searchContact_dtc(p_contact_list list, char* search) {                                                                      // MISSING TO FREE VARIABLES
     int current_level = 3;                                                                                                      // Set first level to 3 (max level)
     p_contact tmp = list->levels[current_level];                                                                                // Create a cursor
     p_contact prev = tmp;                                                                                                       // Create a prev
@@ -394,7 +394,7 @@ int searchContact_dtc(p_contact_list list, char* search) {
     return 0;                                                                                                                   // If we haven't find the value we return 0
 }
 
-void insertContact_dtc(p_contact_list list, p_contact new) {
+void insertContact_dtc(p_contact_list list, p_contact new) {                                                                                    // MISSING TO FREE VARIABLES
     int current_level = 3;                                                                                                                      // Set first level to 3 (max level)
     int rebuild = 1;                                                                                                                            // Set a variable to count the number of element of the different rebuild tab
     p_contact* temp_tab = (p_contact*) malloc (4*sizeof(p_contact));                                                                       // Create a tab to stock the prev for each level
