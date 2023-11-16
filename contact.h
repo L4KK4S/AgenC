@@ -72,6 +72,7 @@ int removeAppointment(p_contact contact, char* objectToRemove);     // Remove an
 
 p_contact_list createExempleList1(int);                             // Test list
 p_contact_list createExempleList2(int);                             // Exemple list from the part 3 + repetitive element
+p_contact_list createExempleList3(int showstep);                    // Same as list 2 but with dtc insertion
 
 
 #endif //AGENC_CONTACT_H
