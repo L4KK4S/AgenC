@@ -148,13 +148,11 @@ char* autoCompletion(p_contact_list list) {
     char* input = (char*) malloc (100*sizeof(char));                                                                               // Allocate memory for the input
     char* res = (char*) malloc (100*sizeof(char));                                                                                 // Allocate memory for the current string
     char* newres = (char*) malloc (100*sizeof(char));                                                                              // Allocate memory for a temp variable and also prev
-    char reset[10] = "";                                                                                                                // String use to reset an other string
     char temp[10] = "";                                                                                                                 // String use to copy convert from character to string type
-    int index= 0, copy, cancel = 0 ;                                                                                                    // Int to indicate the level of the completion tab and copy to get the length -1 of a string and check for escape
+    int index= 0, cancel = 0 ;                                                                                                    // Int to indicate the level of the completion tab and copy to get the length -1 of a string and check for escape
     do {                                                                                                                                // Loop to deal with the input
         printf("-> %s", res);                                                                                                           // print the cursor and the current string
         fgets(input, 100, stdin);                                                                                                       // Get the input from the user
-        // Function to check for help                                                                                                   // Help Menu
         if (input[0]=='h' && input[1]=='e' && input[2]=='l' && input[3]=='p' && strlen(input)==5) {
             cancel = 0;
             printf("========================================= Help Menu =========================================\n\n"
@@ -199,13 +197,10 @@ char* autoCompletion(p_contact_list list) {
                 cancel++;
             } else {
                 cancel = 0;
-                for (int i = 0; i < strlen(input) -
-                                    1; i++) {                                                                                           // Loop to check all character from the input
-                    if (input[i] !=
-                        '\t') {                                                                                                         // We add all character that aren't TAB
+                for (int i = 0; i < strlen(input) - 1; i++) {                                                                                           // Loop to check all character from the input
+                    if (input[i] != '\t') {                                                                                                         // We add all character that aren't TAB
                         temp[0] = input[i];                                                                                             // We convert from car to string
-                        strcat(res,
-                               temp);                                                                                                   // We add that to the current string
+                        strcat(res, temp);                                                                                                   // We add that to the current string
                     }
                 }
                 search = NULL;
@@ -231,7 +226,7 @@ void mainloop1() {
 
     char* input = (char*) malloc(100*sizeof(char));
     int* function_argument = (int*) malloc(100*sizeof(int));
-    int f_index = 0, f_arguments = -1, exit = 0, list_index=0;
+    int f_index, f_arguments, exit = 0, list_index=0;
     p_list* allList = (p_list*) malloc (100*sizeof(p_list));
 
     // ------------------------- Test list definition --------------------------
@@ -430,7 +425,7 @@ char *get_argument_part3(int function, char *input) {
     int space = 0, i;
 
     if (function !=0) {                                                                                      // Doesn't check if there was an invalid function
-        i = strlen(functions[function]) ;                                                                 // Set the start point to the last character of the recognize function
+        i = (int) strlen(functions[function]) ;                                                                 // Set the start point to the last character of the recognize function
         if (input[i]!=' ' && function > 10) {                                                                // Check if function that need to have an argument have the right delimiter
             printf("A space is missing\n");
             return NULL;

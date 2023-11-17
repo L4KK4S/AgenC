@@ -653,7 +653,7 @@ void uniform_display_contact_list (p_contact_list list) {
 
 void displayContact(p_contact contact)  {
     if (contact == NULL) {                                                                                              // Case where the contact hasn't been found
-        printf("Contact non trouvé.\n");
+        printf("Contact not found.\n");
     }
 
     printf("Contact: %s\n", contact->name);                                                                             // Print the contact name
@@ -665,7 +665,7 @@ void displayContact(p_contact contact)  {
     } else {                                                                                                            // Case where there is some appointment
         while (tmp!=NULL) {                                                                                             // Loop to go through all appointment
             if (compareDate(prev , tmp) == 1 || compareDate(prev , tmp) == -1 || prev == tmp) {                         // If the Year is different or the It's the first cell we print the year
-                printf("======== %d ========\n", tmp->date.years);
+                printf("\n=================== %d ===================\n", tmp->date.years);
             }
             if (compareDate(prev , tmp) >= -3 && compareDate(prev , tmp) <= 3 || prev == tmp) {                         // If the date has changed, we print the date
                 printf("\n");
@@ -674,11 +674,9 @@ void displayContact(p_contact contact)  {
                 detectZero(tmp->date.month);                                                                         // If the number if one digit we print the silent 0
                 printf("\n");
             }
-            printf("Time : %d", tmp->hour.hours);                                                                       // We always print the time
-            printf("h");
+            printf("Time : %dh", tmp->hour.hours);                                                                       // We always print the time
             detectZero(tmp->hour.minutes);                                                                           // We always print the length with the silent 0
-            printf(", Length : %d", tmp->length.hours);
-            printf("h");
+            printf(", Length : %dh", tmp->length.hours);
             detectZero(tmp->length.minutes);                                                                         // We always print the minutes with silent 0
             printf(", Object : %s\n", tmp->object);                                                                       // We print the object
             prev = tmp;                                                                                                 // Increment the prev
@@ -710,7 +708,6 @@ int removeAppointment(p_contact contact, char* objectToRemove) {
     p_appointment temp = contact->head;                                                  // Set a pointer to the first appointment of the list
     p_appointment prev = NULL ;                                                          // Set a prev to NULL
 
-
     while (temp != NULL) {                                                               // Loop to go through all cells
         if (strcmp(temp->object, objectToRemove) == 0) {                                 // Check is object is the same as the one searched
             if (prev == NULL) {                                                          // If prev == NULL, it means we remove the head
@@ -733,59 +730,6 @@ int removeAppointment(p_contact contact, char* objectToRemove) {
 
 
 // -------------------------- Tests Functions --------------------------
-
-
-p_contact_list createExempleList1(int showstep) {
-    p_contact_list new = createEmptyList();
-    p_contact c1 = createContact("aaaaa");
-    p_contact c2 = createContact("zzzzz");
-    p_contact c3 = createContact("zzzyy");
-    p_contact c4 = createContact("zaaaa");
-    p_contact c5 = createContact("hhhhhh");
-    p_contact c6 = createContact("hhaa");
-    p_contact c7 = createContact("mmmmm");
-    p_contact c8 = createContact("hma");
-    insertContact(new, c1);
-    if (showstep==1) {
-        uniform_display_contact_list(new);
-        printf("\n\n");
-    }
-    insertContact(new, c2);
-    if (showstep==1) {
-        uniform_display_contact_list(new);
-        printf("\n\n");
-    }
-    insertContact(new, c3);
-    if (showstep==1) {
-        uniform_display_contact_list(new);
-        printf("\n\n");
-    }
-    insertContact(new, c4);
-    if (showstep==1) {
-        uniform_display_contact_list(new);
-        printf("\n\n");
-    }
-    insertContact(new, c5);
-    if (showstep==1) {
-        uniform_display_contact_list(new);
-        printf("\n\n");
-    }
-    insertContact(new, c6);
-    if (showstep==1) {
-        uniform_display_contact_list(new);
-        printf("\n\n");
-    }
-    insertContact(new, c7);
-    if (showstep==1) {
-        uniform_display_contact_list(new);
-        printf("\n\n");
-    }
-    insertContact(new, c8);
-    uniform_display_contact_list(new);
-    printf("\n\n");
-    return new;
-
-}
 
 void createAppointmentList(p_contact contact) {
     p_appointment  a1 = createEmptyAppointment();
@@ -912,6 +856,58 @@ void testRemoveAppointment(p_contact contact) {
     removeAppointment(contact, "test 6");
     removeAppointment(contact, "test 7");
     removeAppointment(contact, "test 8");
+}
+
+p_contact_list createExempleList1(int showstep) {
+    p_contact_list new = createEmptyList();
+    p_contact c1 = createContact("aaaaa");
+    p_contact c2 = createContact("zzzzz");
+    p_contact c3 = createContact("zzzyy");
+    p_contact c4 = createContact("zaaaa");
+    p_contact c5 = createContact("hhhhhh");
+    p_contact c6 = createContact("hhaa");
+    p_contact c7 = createContact("mmmmm");
+    p_contact c8 = createContact("hma");
+    insertContact(new, c1);
+    if (showstep==1) {
+        uniform_display_contact_list(new);
+        printf("\n\n");
+    }
+    insertContact(new, c2);
+    if (showstep==1) {
+        uniform_display_contact_list(new);
+        printf("\n\n");
+    }
+    insertContact(new, c3);
+    if (showstep==1) {
+        uniform_display_contact_list(new);
+        printf("\n\n");
+    }
+    insertContact(new, c4);
+    if (showstep==1) {
+        uniform_display_contact_list(new);
+        printf("\n\n");
+    }
+    insertContact(new, c5);
+    if (showstep==1) {
+        uniform_display_contact_list(new);
+        printf("\n\n");
+    }
+    insertContact(new, c6);
+    if (showstep==1) {
+        uniform_display_contact_list(new);
+        printf("\n\n");
+    }
+    insertContact(new, c7);
+    if (showstep==1) {
+        uniform_display_contact_list(new);
+        printf("\n\n");
+    }
+    insertContact(new, c8);
+    uniform_display_contact_list(new);
+    printf("\n\n");
+    return new;
+
 }
 
 p_contact_list createExempleList2(int showstep) {

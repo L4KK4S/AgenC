@@ -70,8 +70,8 @@ int removeAppointment(p_contact contact, char* objectToRemove);     // Remove an
 
 // -------------------------- Test Functions --------------------------
 
-void createAppointmentList(p_contact contact);
-void testRemoveAppointment(p_contact contact);
+void createAppointmentList(p_contact contact);                      // Define specific Appointment inserted in a random order to a contact
+void testRemoveAppointment(p_contact contact);                      // Delete in a random order all specific appointment created
 p_contact_list createExempleList1(int);                             // Test list
 p_contact_list createExempleList2(int);                             // Exemple list from the part 3 + repetitive element
 p_contact_list createExempleList3(int showstep);                    // Same as list 2 but with dtc insertion

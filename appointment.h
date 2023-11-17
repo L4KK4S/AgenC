@@ -36,11 +36,10 @@ struct s_appointment {                                                  // Struc
 typedef struct s_appointment t_appointment, *p_appointment;             // Creating an alias for pointer to structure appointment
 
 
-
 // -------------------------- Structures --------------------------
 
 p_appointment createEmptyAppointment();
-char* deleteLastChar(char* input);
+char* deleteLastChar(char* input);                          // Delete the last char from an input and return it
 int checkDateFormat(p_appointment);                         // Secure entry for the date
 int checkHourFormat(p_appointment);                         // Secure entry for the time
 int checkLengthAppointmentFormat(p_appointment);            // Secure entry for the length of an appointment
