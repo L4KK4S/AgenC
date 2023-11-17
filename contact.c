@@ -702,10 +702,11 @@ void displayAgenda(p_contact_list contactList) {            // VARIABLES UNFREE
         displayContact(temp);                       // Display the contact
         temp = temp->levels[0];                             // Increment the tmp
     }
-
+    free(temp);
+    return;
 }
 
-int removeAppointment(p_contact contact, char* objectToRemove) {                         // VARIABLES UNFREE
+int removeAppointment(p_contact contact, char* objectToRemove) {
     if (contact == NULL || objectToRemove == NULL) {                                     // If there wasn't any object to remove or contact
         return 0;
     }
