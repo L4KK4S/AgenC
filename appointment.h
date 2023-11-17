@@ -43,7 +43,7 @@ p_appointment createEmptyAppointment();
 int checkDateFormat(p_appointment);                         // Secure entry for the date
 int checkHourFormat(p_appointment);                         // Secure entry for the time
 int checkLengthAppointmentFormat(p_appointment);            // Secure entry for the length of an appointment
-int checkLengthObject(p_appointment);                       // Secure entry for the object of an appointment
+int checkLengthObject(p_appointment);                       // Secure entry for the object of an appointment + delete the \n
 int compareDate(p_appointment, p_appointment);              // Compare the date of 2 appointments
 
 #endif //AGENC_APPOINTMENT_H

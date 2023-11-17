@@ -30,11 +30,11 @@ int main() {
     printf("\nWelcome to AgenC, please type a command or type help if needed :\n\n");
 
     // Menu Part 1 and 2
-    //mainloop1();
+//    mainloop1();
 
 
 
-    // Test list
+    // Menu Part 3
 
     // ------------------------- Variable definition --------------------------
 
@@ -173,6 +173,11 @@ int main() {
                 break;
         }
     }
+    new = NULL;
+    input = NULL;
+    input2 = NULL;
+    argument = NULL;
+    free(new);
     free(input);
     free(input2);
     free(argument);

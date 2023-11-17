@@ -680,7 +680,7 @@ void displayContact(p_contact contact)  {
             printf(", Length : %d", tmp->length.hours);
             printf("h");
             detectZero(tmp->length.minutes);                                                                         // We always print the minutes with silent 0
-            printf(", Object : %s", tmp->object);                                                                       // We print the object
+            printf(", Object : %s\n", tmp->object);                                                                       // We print the object
             prev = tmp;                                                                                                 // Increment the prev
             tmp = tmp -> next;                                                                                          // Increment the tmp
         }
@@ -725,11 +725,13 @@ int removeAppointment(p_contact contact, char* objectToRemove) {
             free(temp);                                                                  // Free the removed cell
             return 1;                                                                    // Return 1 if successful
         }
-
         prev = temp;                                                                     // Increment the prev
         temp = temp ->next;                                                              // Increment the tmp
     }
-
+    prev = NULL;
+    temp = NULL;
+    free(prev);
+    free(temp);                                                                         // Free the temp cell
     return 0;                                                                           // Return 0 if unsuccessful
 }
 
