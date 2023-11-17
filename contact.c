@@ -402,14 +402,14 @@ int searchContact_dtc(p_contact_list list, char* search) {
     return 0;                                                                                                                   // If we haven't find the value we return 0
 }
 
-void insertContact_dtc(p_contact_list list, p_contact new) {                                                                                    // MISSING TO FREE VARIABLES
+void insertContact_dtc(p_contact_list list, p_contact new) {
     int current_level = 3;                                                                                                                      // Set first level to 3 (max level)
     int rebuild = 1;                                                                                                                            // Set a variable to count the number of element of the different rebuild tab
     p_contact* temp_tab = (p_contact*) malloc (4*sizeof(p_contact));                                                                       // Create a tab to stock the prev for each level
     for (int i = 0 ; i<4 ; i++) {
         temp_tab[i]=NULL;
     }
-    p_contact tmp = list->levels[current_level], rebuild_tmp;                                                                                  // Create some pointer to use as cursor
+    p_contact tmp = list->levels[current_level];                                                                                  // Create some pointer to use as cursor
     p_contact prev = tmp;                                                                                                                      // Set the previous cursor to the tmp
 
     if (list->levels[0]==NULL) {                                                                                                               // Case where level is empty
@@ -419,9 +419,7 @@ void insertContact_dtc(p_contact_list list, p_contact new) {                    
             list->levels[i]=new;
         }
         tmp = NULL;                                                                                                                            // Avoiding to erase a pointer of the list
-        prev = NULL;                                                                                                                           // Avoiding to erase a pointer of the list
-        rebuild_tmp = NULL;                                                                                                                    // Avoiding to erase a pointer of the list
-        free(rebuild_tmp);                                                                                                                     // Freeing unused pointer
+        prev = NULL;                                                                                                                           // Avoiding to erase a pointer of the list         // Freeing unused pointer
         free(tmp);                                                                                                                             // Freeing unused variable
         free(prev);                                                                                                                            // Freeing unused variable
         return;
@@ -449,11 +447,10 @@ void insertContact_dtc(p_contact_list list, p_contact new) {                    
             free(tmp->levels);                                                                                                                      // Freeing the old tab
             tmp->levels = rebuild_tab;                                                                                                              // Attributing the new tab to the tmp
             tmp = NULL;                                                                                                                             // Avoiding to erase a pointer of the list
-            prev = NULL;                                                                                                                            // Avoiding to erase a pointer of the list
-            rebuild_tmp = NULL;                                                                                                                     // Avoiding to erase a pointer of the list
-            free(rebuild_tmp);                                                                                                                      // Freeing unused pointer
+            prev = NULL;                                                                                                                            // Avoiding to erase a pointer of the list             // Freeing unused pointer
             free(tmp);                                                                                                                              // Freeing unused variable
             free(prev);                                                                                                                             // Freeing unused variable
+            free(temp_tab);
             return;
         } else {
         while ((tmp != NULL || current_level != 0) && (current_level != 0 || compareString(tmp->name, new->name) == 1)) {             // Loop to find the spot to insert                                                                    // Loop to go through all cell  of level 0 at worst case
@@ -480,6 +477,12 @@ void insertContact_dtc(p_contact_list list, p_contact new) {                    
             for (int i = 0; i<getMatch(prev, new) ; i++) {                                                                                          // We relink the different next saved to the new cell
                 temp_tab[i]->levels[i]=new;
             }
+            tmp = NULL;
+            prev = NULL;
+            free(tmp);
+            free(temp_tab);
+            free(prev);
+            return ;
         } else {                                                                                                                                    // Mid Insertion
             p_contact *levels = (p_contact *) malloc(getMatch(prev, new) * sizeof(p_contact));                                                 // We allocate the memory for the new tab
             for (int i = 0; i < getMatch(prev, new); i++) {                                                                                         // Force to NULL
@@ -491,6 +494,12 @@ void insertContact_dtc(p_contact_list list, p_contact new) {                    
                     new->levels[i] = tmp;                                                                                                           // Linking the matching level of the new cell to the next (tmp)
                     temp_tab[i]->levels[i] = new;                                                                                                   // Linking prev matching level to the new cell
                 }
+                tmp = NULL;
+                prev = NULL;
+                free(tmp);
+                free(prev);
+                free(temp_tab);
+                return ;
             } else {                                                                                                                                // Rebuild case (we have to change the adress tab of the next cell)
                 p_contact *rebuild_tab = (p_contact *) malloc(getMatch(new, tmp) * sizeof(p_contact));                              // Allocate the memory
                 for (int i = 0; i < getMatch(new, tmp); i++) {                                                                           // Force the tab to NULL
@@ -509,6 +518,12 @@ void insertContact_dtc(p_contact_list list, p_contact new) {                    
                 }
                 free(tmp->levels);                                                                                                                   // Freeing the memory
                 tmp->levels = rebuild_tab;                                                                                                           // Attributing the new tab of level to the tmp
+                tmp = NULL;
+                prev = NULL;
+                free(tmp);
+                free(prev);
+                free(temp_tab);
+                return ;
             }
         }
     }
