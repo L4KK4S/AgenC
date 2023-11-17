@@ -167,13 +167,7 @@ char* autoCompletion(p_contact_list list) {
                    "\t\033[0;34mENTER\033[0;35m -> \033[0;34mENTER\033[0;37m : Stop the current command\033[0m\n\n");
         } else if (strlen(input)==1 && strlen(res)>=1) {                                                                          // Check if the input is only the ENTER key and if there is something to delete in the current string
             cancel = 0;
-            copy = strlen(res)-1;
-            strcpy(newres, reset);                                                                                                      // Reset the new result string
-            for (int i = 0 ; i< copy; i++) {                                                                                            // Loop to add 1 by 1 all character-1 of the current string
-                temp[0]=res[i];                                                                                                         // Convert from character to string
-                strcat(newres, temp);                                                                                                   // Cat to the new result string
-            }
-            strcpy(res, newres);                                                                                                        // We change the current string to the new result
+            res = deleteLastChar(res);                                                                                            // We change the current string to the new result
             search = NULL;                                                                                                              // If we modify the string we reset the search result
         } else if(input[strlen(input)-2]=='\t') {                                                                                    // Case where the last user input is TAB (want a completion)
             cancel = 0;
@@ -224,16 +218,8 @@ char* autoCompletion(p_contact_list list) {
         strcpy(newres, res);                                                                                                            // We update the new result string which is used here as a previous string
 
     } while (strlen(input)<=1 || input[strlen(input)-2]!=' ');                                                                    // Loop to continue while the input doesn't end by SPACE and ENTER
-    copy = strlen(res)-1;
-    strcpy(newres, reset);                                                                                                              // Reset the new result string
-    for (int i = 0 ; i< copy; i++) {                                                                                                    // Loop to add 1 by 1 all character-1 of the current string
-        temp[0]=res[i];                                                                                                                 // Convert from character to string
-        strcat(newres, temp);                                                                                                           // Cat to the new result string
-    }
-    strcpy(res, newres);
-
-    if (checkNameEntry(res)!=NULL) {                                                                                              // Check if the input as the correct format
-        return formatString(res);                                                                                                 // If yes we return the format version of the string
+    if (checkNameEntry(deleteLastChar(res))!=NULL) {                                                                                              // Check if the input as the correct format
+        return formatString(deleteLastChar(res));                                                                                                 // If yes we return the format version of the string
     } else {
         return NULL;                                                                                                                    // Else we return NULL
     }

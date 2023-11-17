@@ -41,6 +41,17 @@ p_appointment createEmptyAppointment() {
 
 }
 
+char* deleteLastChar(char* input) {
+    char* res = (char*) malloc(100*sizeof(char));                                   // Str variable to stock the result
+    char* temp = (char*) malloc(100*sizeof(char));                                  // Str variable to transform character into strings
+    for (int i = 0 ; i < (int) strlen(input)-1 ; i++) {                               // Loop to add 1 by 1 all character-1 of the current string (avoid the\n)
+        temp[0]=input[i];                                                                // Convert from character to string
+        strcat(res, temp);                                                               // Cat to the new result string
+    }
+    free(temp);                                                                          // Free memory
+    return res;
+}
+
 int checkDateFormat(p_appointment new_appointment) {
 
     char* input = (char*) malloc(100*sizeof(char));          // --> Comment to the right                                                                                    // Create a str variable to stock the input
@@ -266,11 +277,7 @@ int checkLengthObject(p_appointment new_appointment) {
     if (strlen(input)<=1) {                                                           // If input as no character
         return -1;
     }
-    for (int i = 0 ; i < (int) strlen(input)-1 ; i++) {                               // Loop to add 1 by 1 all character-1 of the current string (avoid the\n)
-        temp[0]=input[i];                                                                // Convert from character to string
-        strcat(res, temp);                                                               // Cat to the new result string
-    }
-    new_appointment->object = res;                                                       // Attribute the input
+    new_appointment->object = deleteLastChar(input);                                                       // Attribute the input
     free(input);                                                                         // Free memory
     free(temp);                                                                          // Free memory
     return 0;

@@ -40,6 +40,7 @@ typedef struct s_appointment t_appointment, *p_appointment;             // Creat
 // -------------------------- Structures --------------------------
 
 p_appointment createEmptyAppointment();
+char* deleteLastChar(char* input);
 int checkDateFormat(p_appointment);                         // Secure entry for the date
 int checkHourFormat(p_appointment);                         // Secure entry for the time
 int checkLengthAppointmentFormat(p_appointment);            // Secure entry for the length of an appointment

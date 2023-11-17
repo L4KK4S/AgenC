@@ -707,12 +707,9 @@ void displayAgenda(p_contact_list contactList) {            // VARIABLES UNFREE
 }
 
 int removeAppointment(p_contact contact, char* objectToRemove) {
-    if (contact == NULL || objectToRemove == NULL) {                                     // If there wasn't any object to remove or contact
-        return 0;
-    }
-
     p_appointment temp = contact->head;                                                  // Set a pointer to the first appointment of the list
     p_appointment prev = NULL ;                                                          // Set a prev to NULL
+
 
     while (temp != NULL) {                                                               // Loop to go through all cells
         if (strcmp(temp->object, objectToRemove) == 0) {                                 // Check is object is the same as the one searched
@@ -721,8 +718,6 @@ int removeAppointment(p_contact contact, char* objectToRemove) {
             } else {
                 prev->next = temp ->next;                                                // Relink the list if it's in middle or end
             }
-            free(temp->object);                                                          // Free the object
-            free(temp);                                                                  // Free the removed cell
             return 1;                                                                    // Return 1 if successful
         }
         prev = temp;                                                                     // Increment the prev
@@ -790,6 +785,133 @@ p_contact_list createExempleList1(int showstep) {
     printf("\n\n");
     return new;
 
+}
+
+void createAppointmentList(p_contact contact) {
+    p_appointment  a1 = createEmptyAppointment();
+    a1->object = "test 1";
+
+    a1 ->date.day = 12;
+    a1->date.month = 9;
+    a1->date.years = 2004;
+
+    a1->hour.hours = 12;
+    a1->hour.minutes = 12;
+
+    a1->length.hours = 8;
+    a1->length.minutes = 30;
+
+    insertAppointment(contact, a1);
+    p_appointment  a2 = createEmptyAppointment();
+    a2->object = "test 2";
+
+    a2 ->date.day = 12;
+    a2->date.month = 9;
+    a2->date.years = 2004;
+
+    a2->hour.hours = 12;
+    a2->hour.minutes = 0;
+
+    a2->length.hours = 2;
+    a2->length.minutes = 0;
+
+    insertAppointment(contact, a2);
+    p_appointment  a3 = createEmptyAppointment();
+    a3->object = "test 3";
+
+    a3 ->date.day = 12;
+    a3->date.month = 9;
+    a3->date.years = 2004;
+
+    a3->hour.hours = 12;
+    a3->hour.minutes = 12;
+
+    a3->length.hours = 2;
+    a3->length.minutes = 0;
+
+    insertAppointment(contact, a3);
+    p_appointment  a4 = createEmptyAppointment();
+    a4->object = "test 4";
+
+    a4 ->date.day = 12;
+    a4->date.month = 9;
+    a4->date.years = 2004;
+
+    a4->hour.hours = 12;
+    a4->hour.minutes = 12;
+
+    a4->length.hours = 2;
+    a4->length.minutes = 0;
+
+    insertAppointment(contact, a4);
+    p_appointment  a5 = createEmptyAppointment();
+    a5->object = "test 5";
+
+    a5 ->date.day = 11;
+    a5->date.month = 9;
+    a5->date.years = 2004;
+
+    a5->hour.hours = 9;
+    a5->hour.minutes = 15;
+
+    a5->length.hours = 234;
+    a5->length.minutes = 59;
+
+    insertAppointment(contact, a5);
+    p_appointment  a6 = createEmptyAppointment();
+    a6->object = "test 6";
+
+    a6 ->date.day = 1;
+    a6->date.month = 1;
+    a6->date.years = 2000;
+
+    a6->hour.hours = 14;
+    a6->hour.minutes = 12;
+
+    a6->length.hours = 1;
+    a6->length.minutes = 58;
+
+    insertAppointment(contact, a6);
+    p_appointment  a7 = createEmptyAppointment();
+    a7->object = "test 7";
+
+    a7 ->date.day = 31;
+    a7->date.month = 12;
+    a7->date.years = 2004;
+
+    a7->hour.hours = 12;
+    a7->hour.minutes = 12;
+
+    a7->length.hours = 7;
+    a7->length.minutes = 0;
+
+    insertAppointment(contact, a7);
+    p_appointment  a8 = createEmptyAppointment();
+    a8->object = "test 8";
+
+    a8 ->date.day = 26;
+    a8->date.month = 3;
+    a8->date.years = 2012;
+
+    a8->hour.hours = 13;
+    a8->hour.minutes = 11;
+
+    a8->length.hours = 0;
+    a8->length.minutes = 20;
+
+    insertAppointment(contact, a8);
+
+}
+
+void testRemoveAppointment(p_contact contact) {
+    removeAppointment(contact, "test 1");
+    removeAppointment(contact, "test 2");
+    removeAppointment(contact, "test 3");
+    removeAppointment(contact, "test 4");
+    removeAppointment(contact, "test 5");
+    removeAppointment(contact, "test 6");
+    removeAppointment(contact, "test 7");
+    removeAppointment(contact, "test 8");
 }
 
 p_contact_list createExempleList2(int showstep) {
@@ -910,6 +1032,9 @@ p_contact_list createExempleList3(int showstep) {
         uniform_display_contact_list(new);
         printf("\n\n");
     }
+    createAppointmentList(c1);
+    testRemoveAppointment(c1);
+    createAppointmentList(c1);
     return new;
 
 }

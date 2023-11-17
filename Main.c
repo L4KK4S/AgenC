@@ -122,7 +122,9 @@ int main() {
                 printf("Auto Completion enable, please enter a contact name : \n");
                 input2 = autoCompletion(contactList);
                 if (input2!=NULL) {
-                    if (removeAppointment(searchContact(argument, contactList), input2)) {
+                    printf("Enter an object to delete : ");
+                    fgets(argument, 100, stdin);
+                    if (removeAppointment(searchContact(input2, contactList), deleteLastChar(argument))) {
                         printf("Appointment remove with success\n");
                     } else {
                         printf("Couldn't find any appointment named like that\n");
