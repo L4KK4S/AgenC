@@ -367,30 +367,38 @@ void insertContact(p_contact_list list, p_contact new) {
     }
 }
 
-int searchContact_dtc(p_contact_list list, char* search) {                                                                      // MISSING TO FREE VARIABLES
+int searchContact_dtc(p_contact_list list, char* search) {
     int current_level = 3;                                                                                                      // Set first level to 3 (max level)
     p_contact tmp = list->levels[current_level];                                                                                // Create a cursor
     p_contact prev = tmp;                                                                                                       // Create a prev
     while ((tmp!=NULL || current_level!=0) && (current_level!=0 || compareString(tmp->name, search) != -1)) {    // Loop to continue while it's not level 0 and NULL or level 0 and next superior
         if (tmp==NULL && current_level!=0) {                                                                                    // Check if we have to go down a level
             tmp = prev;                                                                                                         // Set the tmp to the last cell not NULL
-            printf("\n");
+//            printf("\n");
             current_level--;                                                                                                    // Down the level
         } else if (compareString(tmp->name, search)==0) {                                                         // Check if we have found the value
-            printf("tmp : %s, level : %d\n", tmp->name, current_level);
+//            printf("tmp : %s, level : %d\n", tmp->name, current_level);
+            tmp = NULL;
+            prev = NULL;
+            free(tmp);
+            free(prev);
             return 1;
         } else {                                                                                                                // If we can still go fw we increment
             if (compareString(tmp->name, search)== -1 && current_level!=0) {                                      // Check if the next is superior to the search contact
-                printf("tmp : %s, level : %d\n\n", tmp->name, current_level);
+//                printf("tmp : %s, level : %d\n\n", tmp->name, current_level);
                 tmp = prev;                                                                                                     // If yes we down a level
                 current_level--;
             } else {                                                                                                            // if not we go to the next cell
-                printf("tmp : %s, level : %d\n", tmp->name, current_level);
+//                printf("tmp : %s, level : %d\n", tmp->name, current_level);
                 prev = tmp;
                 tmp = tmp->levels[current_level];
             }
         }
     }
+    tmp = NULL;
+    prev = NULL;
+    free(tmp);
+    free(prev);
     return 0;                                                                                                                   // If we haven't find the value we return 0
 }
 
@@ -555,16 +563,24 @@ p_appointment createAppointment (p_contact_list liste) {                        
 
 }
 
-void insertAppointment(p_contact contact, p_appointment cell) {             // VARIABLES UNFREE
+void insertAppointment(p_contact contact, p_appointment cell) {
     p_appointment tmp = contact->head  ;                                    // Set a cursor to the head of the contact list
     p_appointment prev = tmp;                                               // Set a prev cursor
 
     if (contact->head==NULL) {                                              // Case where the list is empty
         contact->head = cell;                                               // We set initialize the head of the list
+        tmp = NULL;
+        prev = NULL;
+        free(tmp);
+        free(prev);
         return;
     } else if (compareDate(cell, tmp) <= 0) {                              // Case we have to do an head insertion
         cell->next = contact->head;                                         // We set the next of the new head to the previous head
         contact->head = cell;                                               // We update the new head
+        tmp = NULL;
+        prev = NULL;
+        free(tmp);
+        free(prev);
         return;
     } else {
         while (compareDate(cell, tmp) > 0 && tmp->next!=NULL) {             // Loop to increment either at the end or just after the good value
@@ -574,9 +590,17 @@ void insertAppointment(p_contact contact, p_appointment cell) {             // V
         if (compareDate(cell, tmp) <= 0) {                                   // If comparerDate == -1 it means we have to insert just before the actual cell
             prev->next = cell;                                              // We update the next of the previous cell
             cell->next = tmp;                                               // We update the next of the new cell to the tmp
+            tmp = NULL;
+            prev = NULL;
+            free(tmp);
+            free(prev);
             return;
         } else {                                                            // Case where we are at the end but have to place the new cell at the end
             tmp->next = cell;                                               // We link next of the tmp to the new cell
+            tmp = NULL;
+            prev = NULL;
+            free(tmp);
+            free(prev);
             return;
         }
     }
@@ -612,7 +636,7 @@ void uniform_display_contact_list (p_contact_list list) {
     }
 }
 
-void displayContact(p_contact contact)  {                                                                               // VARIABLES UNFREE
+void displayContact(p_contact contact)  {
     if (contact == NULL) {                                                                                              // Case where the contact hasn't been found
         printf("Contact non trouvé.\n");
     }
@@ -647,6 +671,10 @@ void displayContact(p_contact contact)  {                                       
         }
         printf("\n");
     }
+    tmp = NULL;
+    prev = NULL;
+    free(tmp);
+    free(prev);
 }
 
 void displayAgenda(p_contact_list contactList) {            // VARIABLES UNFREE

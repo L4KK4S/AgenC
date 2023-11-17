@@ -52,18 +52,18 @@ p_contact_list createEmptyList();                                   // Create an
 p_contact createContact(char*);                                     // Create a new contact
 p_contact searchContact(char*, p_contact_list);                     // Search a contact in a contact list
 void insertContact(p_contact_list, p_contact);                      // Insert contact while keepîng the list ordered
-int searchContact_dtc(p_contact_list list, char* search);           // Search a contact with a dichotomous search (unfree)
+int searchContact_dtc(p_contact_list list, char* search);           // Search a contact with a dichotomous search
 void insertContact_dtc(p_contact_list list, p_contact new);         // Insert a contact with a dichotomous method (unfree)
 
 // 3) Manipulation of Appointment Structure (related with contact)
 
 p_appointment createAppointment (p_contact_list);                   // Create a new appointment, sort it in the appointment list and attribute it to a contact (can create contact)
-void insertAppointment(p_contact, p_appointment);                   // Insert a new appointment in a chained list (unfree)
+void insertAppointment(p_contact, p_appointment);                   // Insert a new appointment in a chained list
 
 // 4) Display Functions
 
 void uniform_display_contact_list (p_contact_list list);            // Display the list and keep cells align
-void displayContact(p_contact contact);                             // Display a contact correctly (unfree)
+void displayContact(p_contact contact);                             // Display a contact correctly
 void displayAgenda(p_contact_list contactList);                     // Display all agenda of an agenda list (unfree)
 int removeAppointment(p_contact contact, char* objectToRemove);     // Remove an appointment from an appointment list and return the result (unfree)
 

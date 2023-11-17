@@ -42,7 +42,7 @@ int main() {
     char* input2 = (char*) malloc(100*sizeof(char));
     char* argument = (char*) malloc (100*sizeof(char));
     //p_contact_list contactList = createEmptyList();
-    p_contact_list contactList = createExempleList3(0);
+    p_contact_list contactList = createExempleList2(0);
     p_contact new;
     int exit = 0, function;
 
