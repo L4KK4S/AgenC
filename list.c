@@ -123,7 +123,7 @@ int dtc_search(p_list list, int value) {
     startTimer();
 
     int operation = 0;                                                              // Initialize a counter for the differents operations
-    int current_level = list->max_levels;                                           // Set a variable to decrement the current level
+    int current_level = list->max_levels-1;                                           // Set a variable to decrement the current level
     p_cell tmp = list->levels[current_level];                                       // Set the cursor to the head of the last level
 
     while (tmp==NULL) {                                                             // Loop to downgrade every empty level
@@ -132,12 +132,11 @@ int dtc_search(p_list list, int value) {
         tmp = list->levels[current_level];                                          // Move the cursor to the inferior level
     }
 
-    while (tmp->value > value && current_level>0) {                                 // Loop to downgrade the level why the first value is superior than what we're searching
+    while (tmp->value > value && current_level > 0) {                                 // Loop to downgrade the level why the first value is superior than what we're searching
         current_level--;                                                            // Decrement the current level variable
         operation++;                                                                // Increment the operation counter
         tmp = list->levels[current_level];                                          // Move the cursor to the inferior level
     }
-
     if (tmp->value == value) {                                                      // As we won't check the current value everytime, then we check is the first value is the one searched for
         printf("%d operations effectued\n", operation);
         stopTimer();
@@ -191,7 +190,7 @@ int dtc_search(p_list list, int value) {
 
 int counter_dtc_search(p_list list, int value) {
     int operation = 0;                                                              // Initialize a counter for the differents operations
-    int current_level = list->max_levels;                                           // Set a variable to decrement the current level
+    int current_level = list->max_levels-1;                                           // Set a variable to decrement the current level
     p_cell tmp = list->levels[current_level];                                       // Set the cursor to the head of the last level
 
     while (tmp==NULL) {                                                             // Loop to downgrade every empty level
@@ -254,7 +253,7 @@ int print_space(int a, int b) {
 
 void compareSearchMethod(int seed) {
     srand(seed);
-    p_list testlist = createListPart2(18);
+    p_list testlist = createListPart2(15);
     int** results = (int**) malloc (100*sizeof(int*));
     results[0] = (int*) malloc (3*sizeof(int));
     results[0][0]=rand()%250;
