@@ -15,9 +15,9 @@
 
 
 int get_inputs_part12 (char* input) {
-    char* functions[10] = {"error", "exit", "help",                                                           // List of all available function in argument order to compare the input
+    char* functions[11] = {"error", "exit", "help",                                                           // List of all available function in argument order to compare the input
                            "show list","compare search", "create list", "switch list", "show level"
-                           , "search","create cell"};
+                           , "search","create cell", "clear"};
     int j, True;                                                                                                           // Set some variable to go through and test the different strings
     if (input[strlen(input)-2]==' ') {                                                                                  // Case where there is a space at the end of the input
         return 0;
@@ -388,16 +388,16 @@ void mainloop1() {
 }
 
 int get_inputs_part3 (char* input) {
-    char* functions[14] = {"error", "exit", "help","show list","show agenda", "search -d","search -s","delete appointment",                             // List of all available function in argument order to compare the input
+    char* functions[15] = {"error", "exit", "help","show list","show agenda", "search -d","search -s","delete appointment",                             // List of all available function in argument order to compare the input
                            "save file","agenda","create appointment","create contact -d","create contact -s",
-                           "load file"};
+                           "load file", "clear"};
     int j, True;                                                                             // Set some variable to parcour and test the different strings
     input = change_maj_to_min(input);
 
     if (input[strlen(input)-2]==' ' || strlen(input)==1) {                             // Case where there is a space at the end of the input
         return 0;
     }
-    for(int i = 1 ; i<14 ; i++) {                                                            // Loop to test all the different string
+    for(int i = 1 ; i<15 ; i++) {                                                            // Loop to test all the different string
         if (strlen(input) >= strlen(functions[i])+1) {                                 // Check if the string is longer or equal (argument or '\0') may work with >
             j=0, True = 1;                                                                   // Reset the test condition for each strings
             while (functions[i][j]!='\0' && True==1) {                                       // Loop to test while the input arrive at the end or True is still 1
@@ -446,6 +446,8 @@ char *get_argument_part3(int function, char *input) {
     } else if (function >= 11 && function < 13 && space == 1 && checkNameEntry(argument)!=NULL)  {    // Check if function with a name entry have a correct format for the entry
         return formatString(argument);                                                                // We return the formated input
     } else if (function == 13 && space == 0) {                                                              // Check if the last function really have only 1 space
+        return argument;
+    }else if (function == 14 && space == 0){
         return argument;
     } else {                                                                                                // Else we return NULL
         printf("The number of space is incorrect\n");

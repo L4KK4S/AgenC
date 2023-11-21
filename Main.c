@@ -30,7 +30,7 @@ int main() {
     printf("\nWelcome to AgenC, please type a command or type help if needed :\n\n");
 
     // Menu Part 1 and 2
-    mainloop1();
+    //mainloop1();
 
 
 
@@ -42,7 +42,7 @@ int main() {
     char* input2 = (char*) malloc(100*sizeof(char));
     char* argument = (char*) malloc (100*sizeof(char));
     //p_contact_list contactList = createEmptyList();
-    p_contact_list contactList = createExempleList3(0);
+    p_contact_list contactList = createExempleList2(0);
     p_contact new;
     int exit = 0, function;
 
@@ -82,6 +82,10 @@ int main() {
                        "\033[0mFile Functions\n"
                        "\t\033[0;36m load file \033[0;34mfilename.txt \033[0;37m: load a new appointment file\n"
                        "\t\033[0;36m save file \033[0;31m(a) \033[0;37m: update or create an appointment file of an existing contact\n\n\n"
+                       "\033[0mExtra Functions\n"
+                       "\t\033[0;36m clear \033[0;35m-option \033[0;37m: clear the terminal\n"
+                       "\t\t \033[0;35m-w\033[0;37m  : clear if your have an windows OS\n"
+                       "\t\t \033[0;35m-mc\033[0;37m : clear if your have an Mac OS\n\n\n"
                        "\033[0m* \033[0;31m(a)\033[0;37m stand for autocompletion, you have to confirm first the function + option then you'll have access to the autocompletion\n"
                        "\t  for the contact\n"
                        "\033[0m** \033[0;37moptions are mandatory\033[0m\n\n");
@@ -170,6 +174,16 @@ int main() {
             case 13:
                 printf("load file (filename.txt) : not coded yet\n");
                 break;
+
+            case 14:
+                if (argument = "w"){
+                    system("cls");
+                } else if (argument = "mc"){
+                    system("clear");
+                }
+
+                break;
+
             default:
                 printf("Uncovered path - Error in the code\n");
                 break;

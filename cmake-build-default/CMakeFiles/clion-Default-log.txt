@@ -1,0 +1,6 @@
+"C:\Program Files\JetBrains\CLion 2022.3.1\bin\cmake\win\bin\cmake.exe" -G "CodeBlocks - MinGW Makefiles" -S C:\Users\Abdel-Waheb\Desktop\test\AgenC -B C:\Users\Abdel-Waheb\Desktop\test\AgenC\cmake-build-default
+CMake Error at CMakeLists.txt:1 (cmake_minimum_required):
+  CMake 3.25 or higher is required.  You are running version 3.24.2
+
+
+-- Configuring incomplete, errors occurred!
