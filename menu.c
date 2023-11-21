@@ -237,7 +237,7 @@ void mainloop1() {
     allList[3] = createWaveFormList();
     allList[4] = createWaveFormList2();
     allList[5] = createTestList();
-    allList[0] = createListPart2(7);
+    allList[0] = createListPart2(4);
 
 
     while (exit==0) {
