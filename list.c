@@ -137,6 +137,14 @@ int dtc_search(p_list list, int value) {
         operation++;                                                                // Increment the operation counter
         tmp = list->levels[current_level];                                          // Move the cursor to the inferior level
     }
+
+    if (tmp->value == value) {                                                      // As we won't check the current value everytime, then we check is the first value is the one searched for
+        printf("%d operations effectued\n", operation);
+        stopTimer();
+        displayTime();
+        return 1;
+    }
+
     if (current_level==0) {                                                         // If every value at every level were superior, it means the searched value is not in the tab
         printf("%d operations effectued\n", operation);
         stopTimer();
@@ -145,12 +153,6 @@ int dtc_search(p_list list, int value) {
 
     }
 
-    if (tmp->value == value) {                                                      // As we won't check the current value everytime, then we check is the first value is the one searched for
-        printf("%d operations effectued\n", operation);
-        stopTimer();
-        displayTime();
-        return 1;
-    }
     while (current_level!=0 || tmp!=NULL) {                                         // Loop to go through in the worst case to the level 0 and last value
         if (tmp->levels[current_level] != NULL) {                                   // We check if the next level is not NULL to avoid crash because we've tried to compare it
             if (tmp->levels[current_level]->value == value) {                       // If the next value is the searched value we return 1
@@ -252,7 +254,7 @@ int print_space(int a, int b) {
 
 void compareSearchMethod(int seed) {
     srand(seed);
-    p_list testlist = createListPart2(15);
+    p_list testlist = createListPart2(18);
     int** results = (int**) malloc (100*sizeof(int*));
     results[0] = (int*) malloc (3*sizeof(int));
     results[0][0]=rand()%250;
