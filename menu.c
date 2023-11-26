@@ -449,6 +449,8 @@ char *get_argument_part3(int function, char *input) {
         return argument;
     }else if (function == 14 && space == 0){
         return argument;
+    }else if (function == 8 && space == 0){
+        return argument;
     } else {                                                                                                // Else we return NULL
         printf("The number of space is incorrect\n");
         return NULL;

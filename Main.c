@@ -21,7 +21,8 @@
 #include "cell.c"
 #include "appointment.c"
 #include "contact.c"
-
+#include "file.h"
+#include "file.c"
 
 // ------------------------- Main loop --------------------------
 
@@ -138,13 +139,7 @@ int main() {
                 }
                 break;
             case 8:
-                printf("Auto Completion enable, please enter a contact name : \n");
-                input2 = autoCompletion(contactList);
-                if (input2!=NULL) {
-                    printf("save file (contact) : not coded yet\n");
-                } else {
-                    printf("Not a contact name\n");
-                }
+                save_file(contactList);
                 break;
             case 9 :
                 printf("Auto Completion enable, please enter a contact name : \n");
