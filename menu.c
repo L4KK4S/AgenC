@@ -424,9 +424,10 @@ char *get_argument_part3(int function, char *input) {
                            "load file"};
     int space = 0, i;
 
+
     if (function !=0) {                                                                                      // Doesn't check if there was an invalid function
-        i = (int) strlen(functions[function]) ;                                                                 // Set the start point to the last character of the recognize function
-        if (input[i]!=' ' && function > 10) {                                                                // Check if function that need to have an argument have the right delimiter
+        i = (int) strlen(functions[function]);                                                                 // Set the start point to the last character of the recognize function
+        if (input[i]!=' ' && function > 10 && function != 13) {                                                                // Check if function that need to have an argument have the right delimiter
             printf("A space is missing\n");
             return NULL;
         }
@@ -441,12 +442,10 @@ char *get_argument_part3(int function, char *input) {
             i++;
         }
     }
-    if (function < 11 && strlen(input) == strlen(functions[function])+1) {                            // We check if function without argument doesn't have any space or more characters than the base function
+    if ((function < 11 || function == 13)&& strlen(input) == strlen(functions[function])+1) {                            // We check if function without argument doesn't have any space or more characters than the base function
         return input;                                                                                       // As we have to return something else but NULL we return the input but that won't be use
     } else if (function >= 11 && function < 13 && space == 1 && checkNameEntry(argument)!=NULL)  {    // Check if function with a name entry have a correct format for the entry
         return formatString(argument);                                                                // We return the formated input
-    } else if (function == 13 && space == 0) {                                                              // Check if the last function really have only 1 space
-        return argument;
     }else if (function == 14 && space == 0){
         return argument;
     }else if (function == 8 && space == 0){

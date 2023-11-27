@@ -10,15 +10,17 @@
 #include "file.h"
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#define MAXLINES 1000
 
 
 void save_file(p_contact_list all_contact){
 
-    // Open a file for writing
+    // open a file for writing
     FILE *file = fopen("data.txt", "w");
     char* tmp_line;
 
-    // Check if the file was opened successfully
+    // check if the file was opened successfully
     if (file == NULL) {
         printf("ERROR: can't open the file\n");
         return;
@@ -30,16 +32,22 @@ void save_file(p_contact_list all_contact){
         return;
     }
 
+    // create a tmp contact to browse the agenda
     p_contact current_contact = all_contact->levels[0];
 
+    // browse the agenda
     while(current_contact != NULL){
 
+        // write the name of the contact
         fprintf(file, "%s;", current_contact->name);
 
+        // if conctact has appointments
         if (current_contact->head != NULL) {
+            // browse the appointments
             while (current_contact->head  !=NULL ) {
 
 
+                // write the appointment
                 fprintf(file, "[");
 
                 // object
@@ -67,22 +75,86 @@ void save_file(p_contact_list all_contact){
 
                 fprintf(file, "]");
 
+                // go to the next appointment
                 current_contact->head = current_contact->head->next;
             }
 
             printf("\n");
         }
 
+        // go to the next contact
         current_contact = current_contact->levels[0];
         fprintf(file, "\n");
     }
 
-
-    // Close the file
+    // close the file
     fclose(file);
-
 
     return;
 
 }
 
+p_contact_list load_file(int max_level) {
+
+    // open the file for reading
+    FILE *file = fopen("data.txt", "r");
+
+    // check if the file was opened successfully
+    if (file == NULL) {
+        printf("ERROR: can't open the file\n");
+        return NULL;
+    }
+
+    // array to store the readed lines
+    char* lines[MAXLINES];
+    char buffer[MAXLINES];
+
+    // variable to keep track of the number of lines read
+    int line_count = 0;
+
+    // read each line and store it in the array
+    while (fgets(buffer, sizeof(buffer), file) != NULL && line_count < MAXLINES) {
+
+        // read the current line and store it in the array
+        lines[line_count++] = strdup(buffer);
+
+    }
+
+    /*
+    // Print or process the lines as needed
+    printf("Number of lines read: %d\n", line_count);
+    for (int i = 0; i < line_count; i++) {
+        printf("Line %d: %s", i + 1, lines[i]);
+    }*/
+
+
+
+    char temp_name[100];
+    int letter_cursor = 0;
+    p_contact_list temp_contact_list = createEmptyList();
+    temp_contact_list->max_levels = max_level;
+
+    for (int i = 0; i < line_count; i++) {
+        while(lines[i][letter_cursor] != ';'){
+            temp_name[letter_cursor] = lines[i][letter_cursor];
+            letter_cursor++;
+        }
+        temp_name[letter_cursor] = '\0';
+        letter_cursor = 0;
+        printf("\n%s", temp_name);
+
+        insertContact(temp_contact_list, createContact(temp_name));
+
+        if (i == 2) {
+            printf("\n%s", temp_contact_list->levels[0]->name);
+        }
+
+    }
+
+
+    // close the file
+    fclose(file);
+
+
+    return temp_contact_list;
+}
