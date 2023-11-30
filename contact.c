@@ -53,6 +53,7 @@ char* change_maj_to_min( char *s) {
 }
 
 int getMatch(p_contact prev, p_contact new) {
+
     int match = 0;                                                                                                      // Setting a variable to count the match number
     while (prev->name[match]==new->name[match] && match<3 && prev->name[match]!='\0' && new->name[match]!='\0') {       // Loop to count while 1 str is finish, or match is at it maximum value and both str are the same
         match++;
@@ -667,7 +668,7 @@ void displayContact(p_contact contact)  {
             if (compareDate(prev , tmp) == 1 || compareDate(prev , tmp) == -1 || prev == tmp) {                         // If the Year is different or the It's the first cell we print the year
                 printf("\n=================== %d ===================\n", tmp->date.years);
             }
-            if (compareDate(prev , tmp) >= -3 && compareDate(prev , tmp) <= 3 || prev == tmp) {                         // If the date has changed, we print the date
+            if ((compareDate(prev , tmp) >= -3 && compareDate(prev , tmp) <= 3 || prev == tmp) && compareDate(prev , tmp)!=0) {  // If the date has changed, we print the date
                 printf("\n");
                 detectZero(tmp->date.day);                                                                           // If the number if one digit we print the silent 0
                 printf("/");

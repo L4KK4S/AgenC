@@ -60,6 +60,7 @@ void insertContact_dtc(p_contact_list list, p_contact new);         // Insert a 
 p_appointment createAppointment (p_contact_list);                   // Create a new appointment, sort it in the appointment list and attribute it to a contact (can create contact)
 void insertAppointment(p_contact, p_appointment);                   // Insert a new appointment in a chained list
 
+
 // 4) Display Functions
 
 void uniform_display_contact_list (p_contact_list list);            // Display the list and keep cells align
@@ -75,6 +76,8 @@ void testRemoveAppointment(p_contact contact);                      // Delete in
 p_contact_list createExempleList1(int);                             // Test list
 p_contact_list createExempleList2(int);                             // Exemple list from the part 3 + repetitive element
 p_contact_list createExempleList3(int showstep);                    // Same as list 2 but with dtc insertion
+
+
 
 
 #endif //AGENC_CONTACT_H
