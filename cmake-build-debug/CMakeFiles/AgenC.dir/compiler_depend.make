@@ -30,13 +30,7 @@ CMakeFiles/AgenC.dir/Main.c.obj: C:/Users/sakka/AgenC/Main.c \
   C:/Users/sakka/AgenC/contact.h \
   C:/Users/sakka/AgenC/menu.h \
   C:/Users/sakka/AgenC/list.h \
-  C:/Users/sakka/AgenC/file.h \
-  C:/Users/sakka/AgenC/timer.h \
-  C:/Program\ Files/JetBrains/CLion\ 2023.1.3/bin/mingw/x86_64-w64-mingw32/include/time.h \
-  C:/Program\ Files/JetBrains/CLion\ 2023.1.3/bin/mingw/x86_64-w64-mingw32/include/_timeval.h \
-  C:/Program\ Files/JetBrains/CLion\ 2023.1.3/bin/mingw/x86_64-w64-mingw32/include/sys/timeb.h \
-  C:/Program\ Files/JetBrains/CLion\ 2023.1.3/bin/mingw/x86_64-w64-mingw32/include/sec_api/sys/timeb_s.h \
-  C:/Program\ Files/JetBrains/CLion\ 2023.1.3/bin/mingw/x86_64-w64-mingw32/include/pthread_time.h
+  C:/Users/sakka/AgenC/file.h
 
 CMakeFiles/AgenC.dir/appointment.c.obj: C:/Users/sakka/AgenC/appointment.c \
   C:/Program\ Files/JetBrains/CLion\ 2023.1.3/bin/mingw/x86_64-w64-mingw32/include/stdlib.h \
@@ -180,8 +174,7 @@ CMakeFiles/AgenC.dir/list.c.obj: C:/Users/sakka/AgenC/list.c \
   C:/Program\ Files/JetBrains/CLion\ 2023.1.3/bin/mingw/x86_64-w64-mingw32/include/_timeval.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.1.3/bin/mingw/x86_64-w64-mingw32/include/sys/timeb.h \
   C:/Program\ Files/JetBrains/CLion\ 2023.1.3/bin/mingw/x86_64-w64-mingw32/include/sec_api/sys/timeb_s.h \
-  C:/Program\ Files/JetBrains/CLion\ 2023.1.3/bin/mingw/x86_64-w64-mingw32/include/pthread_time.h \
-  C:/Users/sakka/AgenC/timer.c
+  C:/Program\ Files/JetBrains/CLion\ 2023.1.3/bin/mingw/x86_64-w64-mingw32/include/pthread_time.h
 
 CMakeFiles/AgenC.dir/menu.c.obj: C:/Users/sakka/AgenC/menu.c \
   C:/Program\ Files/JetBrains/CLion\ 2023.1.3/bin/mingw/x86_64-w64-mingw32/include/string.h \
@@ -313,6 +306,12 @@ C:/Users/sakka/AgenC/list.h:
 
 C:/Users/sakka/AgenC/file.h:
 
+C:/Users/sakka/AgenC/appointment.c:
+
+C:/Users/sakka/AgenC/cell.c:
+
+C:/Users/sakka/AgenC/list.c:
+
 C:/Users/sakka/AgenC/timer.h:
 
 C:/Program\ Files/JetBrains/CLion\ 2023.1.3/bin/mingw/x86_64-w64-mingw32/include/_timeval.h:
@@ -322,11 +321,5 @@ C:/Program\ Files/JetBrains/CLion\ 2023.1.3/bin/mingw/x86_64-w64-mingw32/include
 C:/Program\ Files/JetBrains/CLion\ 2023.1.3/bin/mingw/x86_64-w64-mingw32/include/sec_api/sys/timeb_s.h:
 
 C:/Program\ Files/JetBrains/CLion\ 2023.1.3/bin/mingw/x86_64-w64-mingw32/include/pthread_time.h:
-
-C:/Users/sakka/AgenC/appointment.c:
-
-C:/Users/sakka/AgenC/cell.c:
-
-C:/Users/sakka/AgenC/list.c:
 
 C:/Users/sakka/AgenC/menu.c:

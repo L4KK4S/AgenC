@@ -169,9 +169,9 @@ int main() {
                 break;
 
             case 14:
-                if (argument = "w"){
+                if (argument == "w"){
                     system("cls");
-                } else if (argument = "mc"){
+                } else if (argument == "mc"){
                     system("clear");
                 }
 
