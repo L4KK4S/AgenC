@@ -1,10 +1,10 @@
-/Users/thomas/Desktop/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" -S /Users/thomas/CLionProjects/AgenC -B /Users/thomas/CLionProjects/AgenC/cmake-build-debug
--- The C compiler identification is AppleClang 15.0.0.15000040
+"C:\Program Files\JetBrains\CLion 2023.1.3\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" -S C:\Users\sakka\AgenC -B C:\Users\sakka\AgenC\cmake-build-debug
+-- The C compiler identification is GNU 11.2.0
 -- Detecting C compiler ABI info
 -- Detecting C compiler ABI info - done
--- Check for working C compiler: /Library/Developer/CommandLineTools/usr/bin/cc - skipped
+-- Check for working C compiler: C:/Program Files/JetBrains/CLion 2023.1.3/bin/mingw/bin/gcc.exe - skipped
 -- Detecting C compile features
 -- Detecting C compile features - done
--- Configuring done (1.2s)
--- Generating done (0.0s)
--- Build files have been written to: /Users/thomas/CLionProjects/AgenC/cmake-build-debug
+-- Configuring done
+-- Generating done
+-- Build files have been written to: C:/Users/sakka/AgenC/cmake-build-debug

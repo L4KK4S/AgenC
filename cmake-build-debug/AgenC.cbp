@@ -8,116 +8,120 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/Users/thomas/CLionProjects/AgenC/cmake-build-debug"/>
+				<Option working_dir="C:/Users/sakka/AgenC/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/thomas/CLionProjects/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/thomas/CLionProjects/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/thomas/CLionProjects/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/thomas/CLionProjects/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/sakka/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/sakka/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/sakka/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/sakka/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="AgenC">
-				<Option output="/Users/thomas/CLionProjects/AgenC/cmake-build-debug/AgenC" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/thomas/CLionProjects/AgenC/cmake-build-debug"/>
+				<Option output="C:/Users/sakka/AgenC/cmake-build-debug/AgenC.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/sakka/AgenC/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2023.1.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2023.1.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2023.1.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2023.1.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/thomas/CLionProjects/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 AgenC"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/thomas/CLionProjects/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/thomas/CLionProjects/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/thomas/CLionProjects/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/sakka/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 AgenC"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/sakka/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/sakka/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/sakka/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="AgenC/fast">
-				<Option output="/Users/thomas/CLionProjects/AgenC/cmake-build-debug/AgenC" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/thomas/CLionProjects/AgenC/cmake-build-debug"/>
+				<Option output="C:/Users/sakka/AgenC/cmake-build-debug/AgenC.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/sakka/AgenC/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2023.1.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2023.1.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2023.1.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2023.1.3/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/thomas/CLionProjects/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 AgenC/fast"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/thomas/CLionProjects/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/thomas/CLionProjects/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/thomas/CLionProjects/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/sakka/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 AgenC/fast"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/sakka/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/sakka/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/sakka/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/Users/thomas/CLionProjects/AgenC/cmake-build-debug"/>
+				<Option working_dir="C:/Users/sakka/AgenC/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/thomas/CLionProjects/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/thomas/CLionProjects/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/thomas/CLionProjects/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/thomas/CLionProjects/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/sakka/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/sakka/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/sakka/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/sakka/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/Users/thomas/CLionProjects/AgenC/cmake-build-debug"/>
+				<Option working_dir="C:/Users/sakka/AgenC/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/thomas/CLionProjects/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/thomas/CLionProjects/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/thomas/CLionProjects/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/thomas/CLionProjects/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/sakka/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/sakka/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/sakka/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.3/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/sakka/AgenC/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/thomas/CLionProjects/AgenC/Main.c">
+		<Unit filename="C:/Users/sakka/AgenC/Main.c">
 			<Option target="AgenC"/>
 		</Unit>
-		<Unit filename="/Users/thomas/CLionProjects/AgenC/appointment.c">
+		<Unit filename="C:/Users/sakka/AgenC/appointment.c">
 			<Option target="AgenC"/>
 		</Unit>
-		<Unit filename="/Users/thomas/CLionProjects/AgenC/appointment.h">
+		<Unit filename="C:/Users/sakka/AgenC/appointment.h">
 			<Option target="AgenC"/>
 		</Unit>
-		<Unit filename="/Users/thomas/CLionProjects/AgenC/cell.c">
+		<Unit filename="C:/Users/sakka/AgenC/cell.c">
 			<Option target="AgenC"/>
 		</Unit>
-		<Unit filename="/Users/thomas/CLionProjects/AgenC/cell.h">
+		<Unit filename="C:/Users/sakka/AgenC/cell.h">
 			<Option target="AgenC"/>
 		</Unit>
-		<Unit filename="/Users/thomas/CLionProjects/AgenC/contact.c">
+		<Unit filename="C:/Users/sakka/AgenC/contact.c">
 			<Option target="AgenC"/>
 		</Unit>
-		<Unit filename="/Users/thomas/CLionProjects/AgenC/contact.h">
+		<Unit filename="C:/Users/sakka/AgenC/contact.h">
 			<Option target="AgenC"/>
 		</Unit>
-		<Unit filename="/Users/thomas/CLionProjects/AgenC/list.c">
+		<Unit filename="C:/Users/sakka/AgenC/file.c">
 			<Option target="AgenC"/>
 		</Unit>
-		<Unit filename="/Users/thomas/CLionProjects/AgenC/list.h">
+		<Unit filename="C:/Users/sakka/AgenC/file.h">
 			<Option target="AgenC"/>
 		</Unit>
-		<Unit filename="/Users/thomas/CLionProjects/AgenC/menu.c">
+		<Unit filename="C:/Users/sakka/AgenC/list.c">
 			<Option target="AgenC"/>
 		</Unit>
-		<Unit filename="/Users/thomas/CLionProjects/AgenC/menu.h">
+		<Unit filename="C:/Users/sakka/AgenC/list.h">
 			<Option target="AgenC"/>
 		</Unit>
-		<Unit filename="/Users/thomas/CLionProjects/AgenC/timer.c">
+		<Unit filename="C:/Users/sakka/AgenC/menu.c">
 			<Option target="AgenC"/>
 		</Unit>
-		<Unit filename="/Users/thomas/CLionProjects/AgenC/timer.h">
+		<Unit filename="C:/Users/sakka/AgenC/menu.h">
 			<Option target="AgenC"/>
 		</Unit>
-		<Unit filename="/Users/thomas/CLionProjects/AgenC/CMakeLists.txt">
+		<Unit filename="C:/Users/sakka/AgenC/timer.c">
+			<Option target="AgenC"/>
+		</Unit>
+		<Unit filename="C:/Users/sakka/AgenC/timer.h">
+			<Option target="AgenC"/>
+		</Unit>
+		<Unit filename="C:/Users/sakka/AgenC/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

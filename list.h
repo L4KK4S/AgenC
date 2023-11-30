@@ -51,4 +51,10 @@ p_list createWaveFormList();
 p_list createWaveFormList2();
 
 
+// ------------------------ Cells function --------------------------
+
+void insertCell(p_cell cell, p_list list, int level);       // Insert a cell while keeping the list in order
+void insertCellHead(p_cell cell, p_list list, int level);   // Insert a cell by at the head of the level
+p_list createListPart2(int n);
+
 #endif //AGENC_LIST_H

@@ -13,16 +13,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "appointment.h"
 #include "cell.h"
+#include "contact.h"
+#include "file.h"
 #include "list.h"
 #include "menu.h"
-#include "menu.c"
-#include "list.c"
-#include "cell.c"
-#include "appointment.c"
-#include "contact.c"
-#include "file.h"
-#include "file.c"
+
+
 
 // ------------------------- Main loop --------------------------
 
@@ -35,7 +33,7 @@ int main() {
 
 
 
-    // Menu Part 3
+    // Menu Part
 
     // ------------------------- Variable definition --------------------------
 
