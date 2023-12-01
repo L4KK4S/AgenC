@@ -14,6 +14,8 @@
 #define MAXLINES 1000
 
 
+
+
 void save_file(p_contact_list all_contact){
 
     // open a file for writing
@@ -120,37 +122,30 @@ p_contact_list load_file(int max_level) {
 
     }
 
-    /*
-    // Print or process the lines as needed
-    printf("Number of lines read: %d\n", line_count);
-    for (int i = 0; i < line_count; i++) {
-        printf("Line %d: %s", i + 1, lines[i]);
-    }*/
 
-
-
-    char temp_name[100];
-    int letter_cursor = 0;
+    int letter_cursor = 0, word_cpt = 0;
     p_contact_list temp_contact_list = createEmptyList();
-    temp_contact_list->max_levels = max_level;
+    char** all_names = (char**) malloc(line_count*sizeof(char*));
 
     for (int i = 0; i < line_count; i++) {
+
+        char* temp_name = (char*) malloc(100*sizeof(char));
+
         while(lines[i][letter_cursor] != ';'){
             temp_name[letter_cursor] = lines[i][letter_cursor];
             letter_cursor++;
         }
         temp_name[letter_cursor] = '\0';
         letter_cursor = 0;
-        printf("\n%s", temp_name);
 
-        insertContact(temp_contact_list, createContact(temp_name));
-
-        if (i == 2) {
-            printf("\n%s", temp_contact_list->levels[0]->name);
-        }
+        all_names[word_cpt++] = temp_name;
 
     }
 
+    for (int i = 0; i < line_count; i++) {
+        p_contact newcontact = createContact(all_names[i]);
+        insertContact(temp_contact_list, newcontact);
+    }
 
     // close the file
     fclose(file);
