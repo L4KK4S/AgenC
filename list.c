@@ -79,7 +79,7 @@ void show_level(p_list list, int level) {
 }
 
 int checkListCompatibility(p_list list, int level) {
-    if (level>list->max_levels || level<=0) {                                                   // Check if the level is superior than the max level of the list
+    if (level>list->max_levels || level<0) {                                                   // Check if the level is superior than the max level of the list
         return 0;
     } else {
         return 1;
@@ -283,7 +283,29 @@ void compareSearchMethod(int seed) {
     printf("\n\n");
 }
 
+void compareSearchMethod2 (p_list testlist, int searchnumber) {
+    srand(searchnumber);
+    int random;
+    startTimer();
+    for (int i = 0 ; i<searchnumber ; i++) {
+        random = rand();
+        random %= 135000;
+        counter_std_search(testlist, random);
+    }
+    stopTimer();
+    displayTime();
 
+    srand(searchnumber);
+    startTimer();
+    for (int i = 0 ; i<searchnumber ; i++) {
+        random = rand();
+        random %= 135000;
+        counter_dtc_search(testlist, random);
+    }
+    stopTimer();
+    displayTime();
+    return;
+}
 
 
 

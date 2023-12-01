@@ -34,6 +34,7 @@ int checkListCompatibility(p_list list, int level);  // Check if the level of th
 int std_search(p_list list, int value);              // Search a value in the level 0
 int dtc_search(p_list list, int value);              // Search a value using the ordered level
 void compareSearchMethod(int seed);
+void compareSearchMethod2 (p_list testlist, int searchnumber);
 int counter_dtc_search(p_list list, int value);
 int counter_std_search(p_list list, int value);
 int print_space(int a, int b);

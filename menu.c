@@ -237,7 +237,7 @@ void mainloop1() {
     allList[3] = createWaveFormList();
     allList[4] = createWaveFormList2();
     allList[5] = createTestList();
-    allList[0] = createListPart2(3);
+    allList[0] = createListPart2(17);
 
 
     while (exit==0) {
@@ -292,7 +292,7 @@ void mainloop1() {
                 }
                 break;
             case 4 :
-                compareSearchMethod(function_argument[0]);
+                compareSearchMethod2(allList[0], function_argument[0]);
                 break;
             case 5:
                 if (function_argument[0]>0) {
