@@ -9,6 +9,7 @@
 // -------------------------- Includes --------------------------
 
 #include "contact.h"
+#include "timer.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -410,10 +411,12 @@ void insertContact_dtc(p_contact_list list, p_contact new) {
     for (int i = 0 ; i<4 ; i++) {
         temp_tab[i]=NULL;
     }
+
     p_contact tmp = list->levels[current_level];                                                                                  // Create some pointer to use as cursor
     p_contact prev = tmp;                                                                                                                      // Set the previous cursor to the tmp
 
     if (list->levels[0]==NULL) {                                                                                                               // Case where level is empty
+        //printf("empty : ");
         p_contact* levels = (p_contact*) malloc (4*sizeof(p_contact));                                                                    // Create a tab of 4 elements for the new cell
         new->levels = levels;
         for (int i = 0 ; i<4 ; i++) {                                                                                                          // Loop to set the head of each level to the cell
@@ -425,7 +428,8 @@ void insertContact_dtc(p_contact_list list, p_contact new) {
         free(prev);                                                                                                                            // Freeing unused variable
         return;
     } else if (compareString(tmp->name, new->name)==-1) {                                                                           // Case head insertion
-            tmp = list->levels[0];                                                                                                                // Set the tmp to the level 0 (before on the last level)
+        //printf("head :");
+        tmp = list->levels[0];                                                                                                                // Set the tmp to the level 0 (before on the last level)
             p_contact *levels = (p_contact *) malloc(4 * sizeof(p_contact));                                                                 // Create a tab of 4 elements for the new cell
             for (int i = 0; i < 4; i++) {
                 levels[i] = NULL;
@@ -458,6 +462,7 @@ void insertContact_dtc(p_contact_list list, p_contact new) {
             if (tmp == NULL && current_level != 0) {                                                                                                // Check if we have to go down a level
                 tmp = prev;                                                                                                                         // Set the tmp to the last cell not NULL
                 temp_tab[current_level] = prev;                                                                                                     // Save the prev value, because we know that if we have to link a value it will be this one
+                //printf("actual : %s\n",tmp->name);
                 current_level--;                                                                                                                    // Down the level
             } else {                                                                                                                                // Check if we can go forward
                 if (compareString(tmp->name, new->name) == -1 && current_level != 0) {                                                // Case where the next value is > and we're not at level 0
@@ -469,10 +474,12 @@ void insertContact_dtc(p_contact_list list, p_contact new) {
                     tmp = tmp->levels[current_level];
                 }
             }
+
         }
 
         temp_tab[current_level] = prev;                                                                                                             // Initializing the last cell of the temp tab because it hasn't been done
-        if (compareString(prev->name, new->name)==1 && tmp==NULL) {                                                                   // End insertion case
+        if (compareString(prev->name, new->name)==1 && tmp == NULL) {                                                                   // End insertion case
+            //printf("end : ");
             p_contact* levels = (p_contact*) malloc (getMatch(prev, new)*sizeof(p_contact));                                                   // We allocate the memory for the new tab
             new->levels = levels;                                                                                                                   // Attributing the tab
             for (int i = 0; i<getMatch(prev, new) ; i++) {                                                                                          // We relink the different next saved to the new cell
@@ -491,6 +498,7 @@ void insertContact_dtc(p_contact_list list, p_contact new) {
             }
             new->levels = levels;                                                                                                                   // Attributing the tab
             if (getMatch(prev, new) <= getMatch(new, tmp)) {                                                                             // No rebuild case (don't have to recreate the tab of the next cell)
+                //printf("mid (no rebuild) : ");
                 for (int i = 0 ; i< getMatch(prev, new) ; i++) {                                                                                    // Loop to relink the prev next to the nex cell + the matching level of the new cell to the tmp
                     new->levels[i] = tmp;                                                                                                           // Linking the matching level of the new cell to the next (tmp)
                     temp_tab[i]->levels[i] = new;                                                                                                   // Linking prev matching level to the new cell
@@ -502,6 +510,7 @@ void insertContact_dtc(p_contact_list list, p_contact new) {
                 free(temp_tab);
                 return ;
             } else {                                                                                                                                // Rebuild case (we have to change the adress tab of the next cell)
+                //printf("mid (rebuild) :");
                 p_contact *rebuild_tab = (p_contact *) malloc(getMatch(new, tmp) * sizeof(p_contact));                              // Allocate the memory
                 for (int i = 0; i < getMatch(new, tmp); i++) {                                                                           // Force the tab to NULL
                     rebuild_tab[i] = NULL;
@@ -911,6 +920,100 @@ p_contact_list createExempleList1(int showstep) {
 
 }
 
+p_contact_list  createComplexityList() {
+    char* liste[496] = { "anderson_liam", "davis_olivia", "brown_noah", "wilson_emma", "martinez_ava",
+                         "taylor_lucas", "harris_isabella", "turner_mia", "thomas_sophia", "clark_ethan",
+                         "johnson_amelia", "white_jackson", "scott_benjamin", "walker_harper", "lewis_aria",
+                         "moore_elijah", "robinson_aiden", "hall_grace", "taylor_caleb", "garcia_lily",
+                         "miller_ella", "adams_samuel", "hill_abigail", "martin_sebastian", "turner_avery",
+                         "davis_scarlett", "lewis_carter", "hall_chloe", "martin_zoe", "allen_grayson",
+                         "harris_luna", "robinson_mason", "martinez_layla", "wilson_henry", "walker_penelope",
+                         "clark_logan", "turner_victoria", "scott_evelyn", "hall_liam", "miller_nora",
+                         "walker_eli", "harris_stella", "robinson_levi", "taylor_aurora", "jackson_aiden",
+                         "white_mila", "turner_ezra", "robinson_camila", "davis_maverick", "smith_alice",
+                         "johnson_bob", "williams_charlie", "davis_david", "anderson_eva",
+                         "brown_frank", "taylor_grace", "wilson_henry", "miller_isabel", "martin_jack",
+                         "lee_sophia", "harris_daniel", "martinez_olivia", "jackson_james", "taylor_emma",
+                         "white_mia", "thomas_liam", "moore_ava", "davis_lucas", "garcia_aria",
+                         "hernandez_ethan", "robinson_amelia", "thompson_logan", "martinez_harper", "clark_mason",
+                         "rodriguez_ella", "walker_oliver", "scott_avery", "hall_lily", "adams_carter",
+                         "turner_chloe", "wright_jackson", "lewis_abigail", "taylor_caleb", "brown_emily",
+                         "moore_sebastian", "lewis_scarlett", "hill_gabriel", "johnson_hazel", "hall_sofia",
+                         "davis_jackson", "harris_madison", "wilson_lucy", "allen_cameron", "moore_penelope",
+                         "robinson_aiden", "davis_emma", "turner_zoe", "garcia_wyatt", "tremblay_marie", "gagnon_pierre", "roy_lucie", "cote_jacques", "bouchard_sylvie", "gauthier_martin", "morin_isabelle",
+                         "lavoie_paul", "fortin_alice", "gagne_louis", "ouellet_josee", "pelletier_marc", "belanger_michelle", "levesque_guy",
+                         "bergeron_nathalie", "leblanc_louise", "paquette_richard", "girard_lise", "simard_daniel", "boucher_claudia", "caron_stephane",
+                         "beaulieu_johanne", "cloutier_pierre", "dube_julie", "poirier_robert", "fournier_chantal", "lapointe_eric", "leclerc_francine",
+                         "lefebvre_jacques", "poulin_anne", "thibault_catherine", "st-pierre_patrick", "nadeau_marie", "martin_sophie", "landry_yves",
+                         "martel_caroline", "bedard_alain", "grenier_denise", "lessard_denis", "bernier_luc", "richard_martine", "michaud_diane",
+                         "hebert_stephan", "desjardins_jacqueline", "couture_benoit", "turcotte_michele", "lachance_pierre", "parent_julie", "blais_jacques",
+                         "gosselin_chantal", "savard_francois", "proulx_louise", "beaudoin_ginette", "demers_mario", "perreault_claude", "boudreau_marie",
+                         "lemieux_luc", "cyr_annette", "perron_jean", "dufour_louise", "dion_gaetan", "mercier_nancy", "bolduc_richard", "berube_celine",
+                         "boisvert_ginette", "langlois_johann", "menard_suzanne", "therrien_julien", "plante_audrey", "bilodeau_guy", "blanchette_evelyne",
+                         "dubois_rene", "champagne_christine", "paradis_michel", "fortier_madeleine", "arsenault_micheline", "dupuis_andre", "gaudreault_claudette",
+                         "hamel_pascal", "houle_louison", "villeneuve_michele", "rousseau_gabriel", "gravel_denise", "theriault_patricia", "lemay_daniel",
+                         "robert_johanne", "allard_annie", "deschenes_yvon", "giroux_jocelyne", "guay_renee", "leduc_andre", "boivin_marcel", "charbonneau_normand",
+                         "lambert_chantal", "raymond_gaetan", "vachon_sylvain", "gilbert_genevieve", "audet_danielle", "jean_mario", "larouche_julie", "legault_francis",
+                         "trudel_jacqueline", "fontaine_marcel", "picard_lyse", "labelle_dominique", "lacroix_pierre", "jacques_madeleine", "moreau_real", "carrier_diane",
+                         "bernard_lucie", "desrosiers_claude", "goulet_sonia", "renaud_pierre", "dionne_marie", "lapierre_luc", "vaillancourt_chantal", "fillion_paul",
+                         "lalonde_johanne", "tessier_eric", "bertrand_lise", "tardif_martin", "lepage_france", "gingras_sylvie", "benoit_francois", "rioux_jacques",
+                         "giguere_madeleine", "drouin_guy", "harvey_jocelyne", "lauzon_patrick", "nguyen_huong", "gendron_gilles", "boutin_julie", "laflamme_richard",
+                         "vallee_jocelyne", "dumont_nathalie", "breton_micheline", "pare_andre", "paquin_ginette", "robitaille_pierre", "gelinas_marie-claude",
+                         "duchesne_patrick", "lussier_suzanne", "seguin_guy", "veilleux_claude", "potvin_johanne", "gervais_louise", "pepin_jacques", "laroche_marie",
+                         "morissette_ghislain", "charron_nicole", "lavallee_denis", "laplante_jocelyne", "chabot_jacques", "brunet_claudette", "vezina_ginette",
+                         "desrochers_sylvain", "labrecque_linda", "coulombe_luc", "tanguay_sonia", "chouinard_luc", "noel_denise", "pouliot_gaetan", "lacasse_claude",
+                         "daigle_lise", "marcoux_celine", "lamontagne_pierre", "turgeon_paul", "larocque_jean", "roberge_catherine", "auger_diane", "masse_roger",
+                         "pilon_madeleine", "racine_patrick", "dallaire_claudine", "emond_paul", "gregoire_diane", "beauregard_sylvain", "smith_louise", "denis_martin",
+                         "lebel_lynda", "blouin_jacques", "martineau_claudette", "labbe_claude", "beauchamp_patrick", "st-onge_paul", "charette_diane", "dupont_marie",
+                         "letourneau_daniel", "rodrigue_carole", "cormier_michele", "rivard_claude", "mathieu_chantal", "asselin_luc", "st-jean_francine", "plourde_pierre",
+                         "thibodeau_jacques", "milot_johanne", "veilleux_richard", "grenon_ginette", "lachapelle_marc", "lizotte_marie-claude", "pare_michel", "berthiaume_martine",
+                         "ross_marc", "pare_paule", "trottier_pierre", "huard_lise", "lemay_stephane", "pelletier_michele", "lamoureux_jacques", "gagne_johanne", "fiset_luc",
+                         "theriault_diane", "turcotte_denis", "dion_martine", "leclerc_jean", "ranger_michele", "hamel_stephane", "ferland_claudette", "dubois_real",
+                         "forest_ginette", "perrault_louis", "duguay_danielle", "bilodeau_robert", "brochu_chantal", "verreault_marc", "larose_marie", "morneau_richard",
+                         "blanchet_nathalie", "boutin_stephane", "lacombe_claudette", "dupuis_sylvain", "labonte_lucie", "collin_andre", "champagne_ginette", "legare_pierre",
+                         "rioux_marie-claude", "lavigne_paul", "pelletier_jacqueline", "chagnon_pierre", "vigneault_lucie", "bernier_marc", "rivest_jocelyne", "brousseau_denis",
+                         "page_madeleine", "champagne_marc", "thivierge_johanne", "dion_real", "pelletier_claudette", "lemay_marc", "roussin_diane", "couture_richard",
+                         "legault_louise", "lessard_gilles", "beaudry_nicole", "dufour_guy", "goulet_claudette", "bourque_jacques", "robert_luc", "perron_madeleine",
+                         "provost_denis", "boulianne_pierrette", "gosselin_francois", "clement_diane", "savoie_louis", "morin_johanne", "beaudoin_michel", "marcoux_denise",
+                         "carrier_stephane", "rondeau_ginette", "fontaine_denis", "bilodeau_lucie", "vincent_pierre", "lamarche_johanne", "boucher_andre", "chartrand_lise",
+                         "simard_michel", "aube_marie", "lachapelle_paul", "roy_annie", "marchand_lucie", "larose_denis", "lamoureux_lucie", "morin_roger", "landry_ginette",
+                         "bergeron_denis", "belanger_jacqueline", "richer_pierre", "cloutier_lucie", "beaudry_pierre", "bibeau_michele", "tanguay_gilles", "pelletier_johanne",
+                         "bergeron_pierre", "roy_chantal", "leduc_daniel", "st-laurent_ginette", "sevigny_pierre", "lamontagne_claudette", "duchesne_real", "riopel_claudette",
+                         "menard_jacques", "dupuis_madeleine", "gingras_luc", "roberge_louise", "duchesne_daniel", "desrosiers_ginette", "giroux_pierre", "corbeil_lucie",
+                         "girard_stephane", "charbonneau_raymonde", "girard_guy", "perreault_ginette", "rochon_marc", "leduc_ginette", "fournier_pierre", "giroux_pauline",
+                         "fournier_richard", "veilleux_micheline", "nadeau_michel", "martin_johanne", "lavoie_luc", "parent_lucie", "pare_jacques", "poirier_claudette",
+                         "bouchard_pierre", "lefebvre_denise", "lavoie_jacques", "tremblay_claudette", "labrie_stephane", "couture_louise", "langlois_martin", "simard_louise",
+                         "sylvain_micheline", "gagne_denis", "lefebvre_lise", "morin_pierre", "deschamps_denise", "lebrun_daniel", "demers_lucie", "verreault_claude",
+                         "lavoie_micheline", "lemay_jocelyn", "boulet_claudette", "desrochers_daniel", "boisvert_lise", "leclerc_michel", "morin_nathalie", "girard_louis",
+                         "renaud_louise", "trudeau_marc", "beauchesne_denise", "dupuis_jacques", "tremblay_johanne", "bergeron_gaetan", "leclerc_lucie", "labrie_paul",
+                         "lapointe_claudette", "grenier_luc", "gagnon_martine", "belanger_sylvain", "labonte_lise", "boivin_claude", "paquette_lucie", "riopel_jacques",
+                         "dion_pierrette", "beaulieu_pierre", "nadeau_chantal", "st-amand_denis", "martin_micheline", "bergeron_luc", "ouellet_claudette", "boucher_jean",
+                         "desrosiers_paule", "rheault_guy", "thibodeau_ginette", "richer_luc", "laflamme_johanne", "pepin_denis", "couture_jacqueline", "ranger_diane",
+                         "perron_richard", "couture_jean", "cyr_johanne", "dufour_michel", "fournier_jocelyne", "larochelle_paul", "duchesne_diane", "roy_marc",
+                         "fournier_suzanne", "boucher_luc", "beauchemin_micheline", "morin_louis", "fournier_louise", "gagne_jean", "fortier_johanne", "leblanc_pierre",
+                         "couture_ginette"};
+
+    p_contact_list newdtc = createEmptyList();
+    p_contact_list newstd = createEmptyList();
+    startTimer();
+    for (int i = 0; i<496 ; i++) {
+        p_contact newcontact = createContact(liste[i]);
+        insertContact(newstd, newcontact);
+    }
+    stopTimer();
+    displayTime();
+    startTimer();
+    for (int i = 17; i<496 ; i++) {
+        p_contact newcontact = createContact(liste[i]);
+        insertContact_dtc(newdtc, newcontact);
+        printf("%s %d\n",newcontact->name, i);
+    }
+    stopTimer();
+    displayTime();
+
+    return newstd;
+}
+
 p_contact_list createExempleList2(int showstep) {
     p_contact_list new = createEmptyList();
     p_contact c1 = createContact("flamel_stephanie");
@@ -989,27 +1092,17 @@ p_contact_list createExempleList3(int showstep) {
         uniform_display_contact_list(new);
         printf("\n\n");
     }
-    insertContact_dtc(new, c3);
-    if (showstep==1) {
-        uniform_display_contact_list(new);
-        printf("\n\n");
-    }
     insertContact_dtc(new, c2);
     if (showstep==1) {
         uniform_display_contact_list(new);
         printf("\n\n");
     }
-    insertContact_dtc(new, c8);
+    insertContact_dtc(new, c3);
     if (showstep==1) {
         uniform_display_contact_list(new);
         printf("\n\n");
     }
-    insertContact_dtc(new, c7);
-    if (showstep==1) {
-        uniform_display_contact_list(new);
-        printf("\n\n");
-    }
-    insertContact_dtc(new, c6);
+    insertContact_dtc(new, c4);
     if (showstep==1) {
         uniform_display_contact_list(new);
         printf("\n\n");
@@ -1019,7 +1112,17 @@ p_contact_list createExempleList3(int showstep) {
         uniform_display_contact_list(new);
         printf("\n\n");
     }
-    insertContact_dtc(new, c4);
+    insertContact_dtc(new, c6);
+    if (showstep==1) {
+        uniform_display_contact_list(new);
+        printf("\n\n");
+    }
+    insertContact_dtc(new, c7);
+    if (showstep==1) {
+        uniform_display_contact_list(new);
+        printf("\n\n");
+    }
+    insertContact_dtc(new, c8);
     if (showstep==1) {
         uniform_display_contact_list(new);
         printf("\n\n");
