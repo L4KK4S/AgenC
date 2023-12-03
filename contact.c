@@ -416,7 +416,6 @@ void insertContact_dtc(p_contact_list list, p_contact new) {
     p_contact prev = tmp;                                                                                                                      // Set the previous cursor to the tmp
 
     if (list->levels[0]==NULL) {                                                                                                               // Case where level is empty
-        //printf("empty : ");
         p_contact* levels = (p_contact*) malloc (4*sizeof(p_contact));                                                                    // Create a tab of 4 elements for the new cell
         new->levels = levels;
         for (int i = 0 ; i<4 ; i++) {                                                                                                          // Loop to set the head of each level to the cell
@@ -428,7 +427,6 @@ void insertContact_dtc(p_contact_list list, p_contact new) {
         free(prev);                                                                                                                            // Freeing unused variable
         return;
     } else if (compareString(tmp->name, new->name)==-1) {                                                                           // Case head insertion
-        //printf("head :");
         tmp = list->levels[0];                                                                                                                // Set the tmp to the level 0 (before on the last level)
             p_contact *levels = (p_contact *) malloc(4 * sizeof(p_contact));                                                                 // Create a tab of 4 elements for the new cell
             for (int i = 0; i < 4; i++) {
@@ -462,7 +460,6 @@ void insertContact_dtc(p_contact_list list, p_contact new) {
             if (tmp == NULL && current_level != 0) {                                                                                                // Check if we have to go down a level
                 tmp = prev;                                                                                                                         // Set the tmp to the last cell not NULL
                 temp_tab[current_level] = prev;                                                                                                     // Save the prev value, because we know that if we have to link a value it will be this one
-                //printf("actual : %s\n",tmp->name);
                 current_level--;                                                                                                                    // Down the level
             } else {                                                                                                                                // Check if we can go forward
                 if (compareString(tmp->name, new->name) == -1 && current_level != 0) {                                                // Case where the next value is > and we're not at level 0
@@ -479,7 +476,6 @@ void insertContact_dtc(p_contact_list list, p_contact new) {
 
         temp_tab[current_level] = prev;                                                                                                             // Initializing the last cell of the temp tab because it hasn't been done
         if (compareString(prev->name, new->name)==1 && tmp == NULL) {                                                                   // End insertion case
-            //printf("end : ");
             p_contact* levels = (p_contact*) malloc (getMatch(prev, new)*sizeof(p_contact));                                                   // We allocate the memory for the new tab
             new->levels = levels;                                                                                                                   // Attributing the tab
             for (int i = 0; i<getMatch(prev, new) ; i++) {                                                                                          // We relink the different next saved to the new cell
@@ -498,7 +494,6 @@ void insertContact_dtc(p_contact_list list, p_contact new) {
             }
             new->levels = levels;                                                                                                                   // Attributing the tab
             if (getMatch(prev, new) <= getMatch(new, tmp)) {                                                                             // No rebuild case (don't have to recreate the tab of the next cell)
-                //printf("mid (no rebuild) : ");
                 for (int i = 0 ; i< getMatch(prev, new) ; i++) {                                                                                    // Loop to relink the prev next to the nex cell + the matching level of the new cell to the tmp
                     new->levels[i] = tmp;                                                                                                           // Linking the matching level of the new cell to the next (tmp)
                     temp_tab[i]->levels[i] = new;                                                                                                   // Linking prev matching level to the new cell
@@ -510,7 +505,6 @@ void insertContact_dtc(p_contact_list list, p_contact new) {
                 free(temp_tab);
                 return ;
             } else {                                                                                                                                // Rebuild case (we have to change the adress tab of the next cell)
-                //printf("mid (rebuild) :");
                 p_contact *rebuild_tab = (p_contact *) malloc(getMatch(new, tmp) * sizeof(p_contact));                              // Allocate the memory
                 for (int i = 0; i < getMatch(new, tmp); i++) {                                                                           // Force the tab to NULL
                     rebuild_tab[i] = NULL;
@@ -921,10 +915,10 @@ p_contact_list createExempleList1(int showstep) {
 }
 
 p_contact_list  createComplexityList() {
-    char* liste[496] = { "anderson_liam", "davis_olivia", "brown_noah", "wilson_emma", "martinez_ava",
+    char* liste[1001] = { "anderson_liam", "davis_olivia", "brown_noah", "wilson_emma", "martinez_ava",
                          "taylor_lucas", "harris_isabella", "turner_mia", "thomas_sophia", "clark_ethan",
                          "johnson_amelia", "white_jackson", "scott_benjamin", "walker_harper", "lewis_aria",
-                         "moore_elijah", "robinson_aiden", "hall_grace", "taylor_caleb", "garcia_lily",
+                         "moore_elijah", "theo_aiden", "hall_grace", "taylor_caleb", "garcia_lily",
                          "miller_ella", "adams_samuel", "hill_abigail", "martin_sebastian", "turner_avery",
                          "davis_scarlett", "lewis_carter", "hall_chloe", "martin_zoe", "allen_grayson",
                          "harris_luna", "robinson_mason", "martinez_layla", "wilson_henry", "walker_penelope",
@@ -991,27 +985,137 @@ p_contact_list  createComplexityList() {
                          "desrosiers_paule", "rheault_guy", "thibodeau_ginette", "richer_luc", "laflamme_johanne", "pepin_denis", "couture_jacqueline", "ranger_diane",
                          "perron_richard", "couture_jean", "cyr_johanne", "dufour_michel", "fournier_jocelyne", "larochelle_paul", "duchesne_diane", "roy_marc",
                          "fournier_suzanne", "boucher_luc", "beauchemin_micheline", "morin_louis", "fournier_louise", "gagne_jean", "fortier_johanne", "leblanc_pierre",
-                         "couture_ginette"};
+                         "couture_ginette", "lorem_nicolas", "ipsum_lea", "dolor_theo", "sit_thomas", "amet_manon", "consectetur_marie", "adipiscing_kevin", "elit_alexandre", "sed_camille", "do_melissa",
+                         "eiusmod_maxime", "tempor_laura", "incididunt_lucas", "ut_alexis", "labore_clement", "et_quentin", "dolore_julien", "magna_oceane", "aliqua_anais", "dolor_julie",
+                         "purus_hugo", "non_pierre", "enim_pauline", "praesent_emma", "elementum_antoine", "facilisis_chloe", "convallis_florian", "a_valentin", "cras_lucie", "semper_sarah",
+                         "auctor_sebastien", "neque_marine", "vitae_romain", "tempus_marion", "quam_guillaume", "quis_paul", "varius_anthony", "quam_jessica", "quisque_justine", "id_emilie",
+                         "pellentesque_nathan", "diam_melanie", "volutpat_benjamin", "commodo_louis", "sed_elodie", "egestas_enzo", "egestas_jeremy", "sagittis_dylan", "orci_baptiste", "a_mathilde",
+                         "scelerisque_maman", "purus_michel", "semper_clara", "eget_amandine", "lacus_vincent", "suspendisse_isabelle", "faucibus_audrey", "interdum_caroline", "posuere_leo", "lorem_philippe",
+                         "ipsum_papa", "nisl_david", "rhoncus_mathieu", "mattis_corentin", "rhoncus_daniel", "urna_christophe", "neque_aurelie", "viverra_adrien", "diam_monique", "quam_nathalie",
+                         "nulla_sophie", "porttitor_alain", "massa_amelie", "id_axel", "neque_damien", "aliquam_sandrine", "justo_stephanie", "donec_tom", "enim_arthur", "diam_maeva",
+                         "nulla_jean", "porttitor_charlotte", "massa_frederic", "id_celine", "neque_stephane", "aliquam_claude", "justo_morgane", "enim_patrick", "diam_mathis", "vulputate_noemie",
+                         "quam_claire", "nulla_eric", "porttitor_laetitia", "massa_raphael", "id_sylvie", "neque_dominique", "aliquam_martine", "justo_virginie", "enim_eva", "diam_jerome",
+                         "vulputate_juliette", "quam_pascal", "nulla_loic", "porttitor_christine", "massa_romane", "id_francoise", "neque_laurent", "aliquam_olivier", "justo_papy", "enim_alicia",
+                         "diam_bernard", "vulputate_clemence", "quam_maxence", "nulla_francois", "porttitor_mickael", "massa_jade", "id_remi", "neque_catherine", "aliquam_cedric", "justo_gabriel",
+                         "enim_helene", "diam_jeanne", "vulputate_jonathan", "quam_lisa", "nulla_thierry", "porttitor_aurelien", "massa_christian", "id_coralie", "neque_jacqueline", "aliquam_jules",
+                         "justo_andre", "enim_jordan", "diam_nicole", "vulputate_alice", "quam_chantal", "nulla_fabien", "porttitor_matheo", "massa_elise", "id_valerie", "neque_victor",
+                         "aliquam_angelique", "justo_arnaud", "enim_celia", "diam_dorian", "vulputate_elisa", "quam_fanny", "nulla_gerard", "porttitor_mamie", "massa_marc", "id_simon",
+                         "neque_anne", "aliquam_christelle", "justo_jacques", "enim_annie", "diam_maelys", "vulputate_margaux", "quam_alexandra", "nulla_estelle", "porttitor_ludovic", "massa_ophelie",
+                         "id_samuel", "neque_veronique", "aliquam_sylvain", "justo_zoe", "enim_bruno", "diam_mamy", "vulputate_aurore", "quam_ines", "nulla_jean_pierre", "porttitor_louise",
+                         "massa_tony", "id_tristan", "neque_benoit", "aliquam_cecile", "justo_erwan", "enim_laurine", "diam_matthieu", "vulputate_sandra", "quam_lena", "nulla_robert",
+                         "porttitor_cindy", "massa_florence", "id_jean_claude", "neque_yann", "aliquam_bastien", "justo_laurence", "enim_mael", "diam_matteo", "vulputate_ambre", "quam_guy",
+                         "nulla_cassandra", "porttitor_elisabeth", "massa_evan", "id_lola", "neque_franck", "aliquam_jennifer", "justo_maelle", "enim_remy", "diam_xavier", "vulputate_fabrice",
+                         "quam_laure", "nulla_lilou", "porttitor_noah", "massa_patricia", "id_thibault", "neque_yanis", "aliquam_corinne", "justo_genevieve", "enim_michele", "diam_william",
+                         "vulputate_gregory", "quam_martin", "nulla_charles", "porttitor_cloe", "massa_delphine", "id_simone", "neque_beatrice", "aliquam_ethan", "justo_kylian", "enim_rene",
+                         "diam_brigitte", "vulputate_christiane", "quam_evelyne", "nulla_francis", "porttitor_gaelle", "massa_sabrina", "id_didier", "neque_dimitri", "aliquam_edouard", "justo_lou",
+                         "enim_ludivine", "diam_robin", "vulputate_solene", "quam_adeline", "nulla_anna", "porttitor_emeline", "massa_herve", "id_leonie", "neque_mathias", "aliquam_bryan",
+                         "justo_colette", "enim_esteban", "diam_gaetan", "vulputate_gwendoline", "quam_severine", "nulla_steven", "porttitor_denise", "massa_georges", "id_gilles", "neque_madeleine",
+                         "aliquam_suzanne", "justo_elsa", "enim_valentine", "diam_yves", "vulputate_alexia", "quam_allan", "nulla_aymeric", "porttitor_christopher", "massa_claudine", "id_eloise",
+                         "neque_jason", "aliquam_killian", "justo_ryan", "enim_sacha", "diam_vanessa", "vulputate_yoann", "quam_agathe", "nulla_alex", "porttitor_florent", "massa_joel",
+                         "id_karine", "neque_marcel", "aliquam_roger", "justo_anaelle", "enim_bernadette", "diam_gisele", "vulputate_henri", "quam_josette", "nulla_margot", "porttitor_aline",
+                         "massa_emmanuel", "id_julia", "neque_kelly", "aliquam_louane", "justo_alan", "enim_luc", "diam_magali", "vulputate_andrea", "quam_anne_marie", "nulla_antonin",
+                         "porttitor_charline", "massa_melina", "id_michael", "neque_nina", "aliquam_noa", "justo_samantha", "enim_thibaut", "diam_lucile", "vulputate_nolan", "quam_olivia",
+                         "nulla_yannick", "porttitor_axelle", "massa_cyril", "id_denis", "neque_laurie", "aliquam_lilian", "nicolas_lea", "theo_thomas", "manon_marie", "kevin_alexandre", "camille_melissa",
+                         "maxime_laura", "lucas_alexis", "clement_quentin", "julien_oceane", "anais_julie",
+                         "hugo_pierre", "pauline_emma", "antoine_chloe", "florian_valentin", "lucie_sarah",
+                         "sebastien_marine", "romain_marion", "guillaume_paul", "anthony_jessica", "justine_emilie",
+                         "nathan_melanie", "benjamin_louis", "elodie_enzo", "jeremy_dylan", "baptiste_mathilde",
+                         "maman_michel", "clara_amandine", "vincent_isabelle", "audrey_caroline", "leo_philippe",
+                         "papa_david", "mathieu_corentin", "daniel_christophe", "aurelie_adrien", "monique_nathalie",
+                         "sophie_alain", "amelie_axel", "damien_sandrine", "stephanie_tom", "arthur_maeva",
+                         "jean_charlotte", "frederic_celine", "stephane_claude", "morgane_patrick", "mathis_noemie",
+                         "claire_eric", "laetitia_raphael", "sylvie_dominique", "martine_virginie", "eva_jerome",
+                         "juliette_pascal", "loic_christine", "romane_francoise", "laurent_olivier", "papy_alicia",
+                         "bernard_clemence", "maxence_francois", "mickael_jade", "remi_catherine", "cedric_gabriel",
+                         "helene_jeanne", "jonathan_lisa", "thierry_aurelien", "christian_coralie", "jacqueline_jules",
+                         "andre_jordan", "nicole_alice", "chantal_fabien", "matheo_elise", "valerie_victor",
+                         "angelique_arnaud", "celia_dorian", "elisa_fanny", "gerard_mamie", "marc_simon",
+                         "anne_christelle", "jacques_annie", "maelys_margaux", "alexandra_estelle", "ludovic_ophelie",
+                         "samuel_veronique", "sylvain_zoe", "bruno_mamy", "aurore_ines", "jean_pierre_louise",
+                         "tony_tristan", "benoit_cecile", "erwan_laurine", "matthieu_sandra", "lena_robert",
+                         "cindy_florence", "jean_claude_yann", "bastien_laurence", "mael_matteo", "ambre_guy",
+                         "cassandra_elisabeth", "evan_lola", "franck_jennifer", "maelle_remy", "xavier_fabrice",
+                         "laure_lilou", "noah_patricia", "thibault_yanis", "corinne_genevieve", "michele_william",
+                         "gregory_martin", "charles_cloe", "delphine_simone", "beatrice_ethan", "kylian_rene",
+                         "brigitte_christiane", "evelyne_francis", "gaelle_sabrina", "didier_dimitri", "edouard_lou",
+                         "ludivine_robin", "solene_adeline", "anna_emeline", "herve_leonie", "mathias_bryan",
+                         "colette_esteban", "gaetan_gwendoline", "severine_steven", "denise_georges", "gilles_madeleine",
+                         "suzanne_elsa", "valentine_yves", "alexia_allan", "aymeric_christopher", "claudine_eloise",
+                         "jason_killian", "ryan_sacha", "vanessa_yoann", "agathe_alex", "florent_joel", "karine_marcel",
+                         "roger_anaelle", "bernadette_gisele", "henri_josette", "margot_aline", "emmanuel_julia",
+                         "kelly_louane", "alan_luc", "magali_andrea", "anne_marie_antonin", "charline_melina",
+                         "michael_nina", "noa_samantha", "thibaut_lucile", "nolan_olivia", "yannick_axelle",
+                         "cyril_denis", "laurie_lilian", "marjorie_myriam", "adam_mireille", "paulette_victoria",
+                         "yvette_coline", "jean_baptiste_jimmy", "maurice_roland", "tiffany_titouan", "annick_carole",
+                         "cathy_etienne", "flavie_joseph", "kilian_morgan", "odette_cynthia", "gabin_gwenaelle",
+                         "jean_michel_luna", "noe_serge", "agnes_fabienne", "heloise_jean_francois", "jean_marie_josiane",
+                         "marina_marius", "mateo_sabine", "therese_alison", "alizee_carla", "daniele_dorothy",
+                         "lionel_lise", "salome_dany", "jean_paul_jose", "lorena_rachel", "teddy_jean_luc", "joelle_leane",
+                         "lydie_matthias", "mylene_nadine", "odile_raymond", "sonia_cassandre", "clarisse_clementine",
+                         "emmanuelle_gabrielle", "gaetan_lorenzo", "luca_michelle", "muriel_pascale", "carine_floriane",
+                         "jacky_jeannine", "loris_maria", "melvin_renee", "tanguy_cynthia", "gaelle_sabrina",
+                         "didier_dimitri", "edouard_lou"};
 
-    p_contact_list newdtc = createEmptyList();
-    p_contact_list newstd = createEmptyList();
     startTimer();
-    for (int i = 0; i<496 ; i++) {
-        p_contact newcontact = createContact(liste[i]);
-        insertContact(newstd, newcontact);
+
+    // Test de création
+    printf("Création\n");
+    for (int count = 0 ; count<100 ; count++) {
+        p_contact_list newstd = createEmptyList();
+        for (int i = 0; i < 1001; i++) {
+            p_contact newcontact = createContact(liste[i]);
+            insertContact(newstd, newcontact);
+        }
+        free(newstd);
     }
     stopTimer();
     displayTime();
     startTimer();
-    for (int i = 17; i<496 ; i++) {
-        p_contact newcontact = createContact(liste[i]);
-        insertContact_dtc(newdtc, newcontact);
-        printf("%s %d\n",newcontact->name, i);
+    for (int count = 0 ; count<100 ; count++) {
+        p_contact_list newdtc = createEmptyList();
+        for (int i = 0; i < 1001; i++) {
+            p_contact newcontact = createContact(liste[i]);
+            insertContact_dtc(newdtc, newcontact);
+        }
+        free(newdtc);
     }
     stopTimer();
     displayTime();
 
-    return newstd;
+    // Test de recherche
+
+    srand(542);
+    p_contact_list new = createEmptyList();
+    for (int i = 0; i < 998; i++) {
+        p_contact newcontact = createContact(liste[i]);
+        insertContact_dtc(new, newcontact);
+    }
+
+    int random;
+    printf("Recherche\n");
+    startTimer();
+    for (int i = 0 ; i<10000 ; i++) {
+        random = (int) rand();
+        random %= 980;
+        searchContact(liste[random], new);
+    }
+    stopTimer();
+    displayTime();
+    startTimer();
+    for (int i = 0 ; i<10000 ; i++) {
+        random = (int) rand();
+        random %= 980;
+        searchContact_dtc(new ,liste[random]);
+    }
+    stopTimer();
+    displayTime();
+    return new;
+
+
+
+
+
+    return NULL;
 }
 
 p_contact_list createExempleList2(int showstep) {
@@ -1138,3 +1242,7 @@ p_contact_list createExempleList3(int showstep) {
     return new;
 
 }
+
+
+
+
