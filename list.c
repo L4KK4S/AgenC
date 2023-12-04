@@ -29,7 +29,6 @@ p_list createEmptylistCell(int x) {                                             
     return new_list;                                                                        // Return the new list
 }
 
-
 void uniform_display_list (p_list list) {
     p_cell level0cur;                                                           // Create a cursor to compare to higher value (because the first level will be the most complete, we have to check if we have to fill higher level or not)
     p_cell tmp_h;                                                               // Create a cursor pointer to go through each level
@@ -78,8 +77,9 @@ void show_level(p_list list, int level) {
     }
     printf("-->NULL\n");                                                            // Special print to indicate the end of the level list
 }
+
 int checkListCompatibility(p_list list, int level) {
-    if (level>list->max_levels || level<=0) {                                                   // Check if the level is superior than the max level of the list
+    if (level>list->max_levels || level<0) {                                                   // Check if the level is superior than the max level of the list
         return 0;
     } else {
         return 1;
@@ -123,7 +123,7 @@ int dtc_search(p_list list, int value) {
     startTimer();
 
     int operation = 0;                                                              // Initialize a counter for the differents operations
-    int current_level = list->max_levels;                                           // Set a variable to decrement the current level
+    int current_level = list->max_levels-1;                                           // Set a variable to decrement the current level
     p_cell tmp = list->levels[current_level];                                       // Set the cursor to the head of the last level
 
     while (tmp==NULL) {                                                             // Loop to downgrade every empty level
@@ -132,11 +132,18 @@ int dtc_search(p_list list, int value) {
         tmp = list->levels[current_level];                                          // Move the cursor to the inferior level
     }
 
-    while (tmp->value > value && current_level>0) {                                 // Loop to downgrade the level why the first value is superior than what we're searching
+    while (tmp->value > value && current_level > 0) {                                 // Loop to downgrade the level why the first value is superior than what we're searching
         current_level--;                                                            // Decrement the current level variable
         operation++;                                                                // Increment the operation counter
         tmp = list->levels[current_level];                                          // Move the cursor to the inferior level
     }
+    if (tmp->value == value) {                                                      // As we won't check the current value everytime, then we check is the first value is the one searched for
+        printf("%d operations effectued\n", operation);
+        stopTimer();
+        displayTime();
+        return 1;
+    }
+
     if (current_level==0) {                                                         // If every value at every level were superior, it means the searched value is not in the tab
         printf("%d operations effectued\n", operation);
         stopTimer();
@@ -145,12 +152,6 @@ int dtc_search(p_list list, int value) {
 
     }
 
-    if (tmp->value == value) {                                                      // As we won't check the current value everytime, then we check is the first value is the one searched for
-        printf("%d operations effectued\n", operation);
-        stopTimer();
-        displayTime();
-        return 1;
-    }
     while (current_level!=0 || tmp!=NULL) {                                         // Loop to go through in the worst case to the level 0 and last value
         if (tmp->levels[current_level] != NULL) {                                   // We check if the next level is not NULL to avoid crash because we've tried to compare it
             if (tmp->levels[current_level]->value == value) {                       // If the next value is the searched value we return 1
@@ -189,7 +190,7 @@ int dtc_search(p_list list, int value) {
 
 int counter_dtc_search(p_list list, int value) {
     int operation = 0;                                                              // Initialize a counter for the differents operations
-    int current_level = list->max_levels;                                           // Set a variable to decrement the current level
+    int current_level = list->max_levels-1;                                           // Set a variable to decrement the current level
     p_cell tmp = list->levels[current_level];                                       // Set the cursor to the head of the last level
 
     while (tmp==NULL) {                                                             // Loop to downgrade every empty level
@@ -280,6 +281,30 @@ void compareSearchMethod(int seed) {
         printf ("%d\t", results[i][2]);
     }
     printf("\n\n");
+}
+
+void compareSearchMethod2 (p_list testlist, int searchnumber) {
+    srand(searchnumber);
+    int random;
+    startTimer();
+    for (int i = 0 ; i<searchnumber ; i++) {
+        random = rand();
+        random %= 135000;
+        counter_std_search(testlist, random);
+    }
+    stopTimer();
+    displayTime();
+
+    srand(searchnumber);
+    startTimer();
+    for (int i = 0 ; i<searchnumber ; i++) {
+        random = rand();
+        random %= 135000;
+        counter_dtc_search(testlist, random);
+    }
+    stopTimer();
+    displayTime();
+    return;
 }
 
 

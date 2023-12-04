@@ -18,10 +18,12 @@ typedef struct s_date {                                                 // Struc
     int years;                                                          // Int to stock the years
 }t_date;
 
+
 typedef struct s_time {                                                 // Structure for the time
     int hours;                                                          // Int that stock the hours
     int minutes;                                                        // Int that stock the minutes
 } t_time;
+
 
 struct s_appointment {                                                  // Structure of an appointment
     t_time hour;                                                        // Hours of the appointment
@@ -34,13 +36,14 @@ struct s_appointment {                                                  // Struc
 typedef struct s_appointment t_appointment, *p_appointment;             // Creating an alias for pointer to structure appointment
 
 
-
 // -------------------------- Structures --------------------------
 
-
+p_appointment createEmptyAppointment();
+char* deleteLastChar(char* input);                          // Delete the last char from an input and return it
 int checkDateFormat(p_appointment);                         // Secure entry for the date
 int checkHourFormat(p_appointment);                         // Secure entry for the time
 int checkLengthAppointmentFormat(p_appointment);            // Secure entry for the length of an appointment
-int checkLengthObject(p_appointment);                       // Secure entry for the object of an appointment
+int checkLengthObject(p_appointment);                       // Secure entry for the object of an appointment + delete the \n
+int compareDate(p_appointment, p_appointment);              // Compare the date of 2 appointments
 
 #endif //AGENC_APPOINTMENT_H

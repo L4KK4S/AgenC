@@ -10,8 +10,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "cell.h"
 #include <math.h>
+#include "cell.h"
+
 
 
 // -------------------------- Functions --------------------------
@@ -32,29 +33,18 @@ p_cell createEmptyCell(int x, int levels) {                                     
 }
 
 int cellLength (p_cell cell) {                            // This function returns the number of character needed to make a cell
-
     int cell_val = cell->value;                           // The cell value
     int counter = 7;                                      // 7 is the number of characters of the cell without the value [ x|@-]
     int n = 1;                                            // A counter for 10's pow
-
-
     if (cell_val < 0) {                                   // If the value is negative we count the "-" character
-
         counter ++;
         cell_val *= -1;
-    
     }
-
     while (cell_val >= (pow(10, n))) {                     // While the value is greater than 10^n, we increase n and counter
-    
         counter++;
         n++;
-
     }
-
     return counter;                                       // Return counter
-
-    
 }
 
 
@@ -83,12 +73,9 @@ void insertCell(p_cell cell, p_list list, int level) {
                     cell->levels[i]=tmp_h;                                              // Set the "next" of the new cell to NULL / the temporary cursor
                 }
             }
-
-
         }
     }
 }
-
 
 void insertCellHead(p_cell cell, p_list list, int level) {
 
@@ -107,7 +94,7 @@ p_list createListPart2(int n) {
     int size = (int) pow(2,n)-1;
 
     for (int i = 1 ; i<n+1 ; i++) {
-        for (int j = (int) pow(2,i-1); j<size+1; j+= (int)pow(2,i)) {
+        for (int j = (int) pow(2,i-1); j<size+1; j+= (int) pow(2,i)) {
             p_cell new_cell = createEmptyCell(j, i);
             insertCell(new_cell, new, i);
         }
