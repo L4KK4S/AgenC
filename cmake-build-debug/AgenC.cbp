@@ -99,6 +99,12 @@
 		<Unit filename="/Users/thomas/CLionProjects/AgenC/contact.h">
 			<Option target="AgenC"/>
 		</Unit>
+		<Unit filename="/Users/thomas/CLionProjects/AgenC/file.c">
+			<Option target="AgenC"/>
+		</Unit>
+		<Unit filename="/Users/thomas/CLionProjects/AgenC/file.h">
+			<Option target="AgenC"/>
+		</Unit>
 		<Unit filename="/Users/thomas/CLionProjects/AgenC/list.c">
 			<Option target="AgenC"/>
 		</Unit>

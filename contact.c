@@ -915,24 +915,16 @@ p_contact_list createExempleList1(int showstep) {
 }
 
 p_contact_list  createComplexityList() {
-    char* liste[1001] = { "anderson_liam", "davis_olivia", "brown_noah", "wilson_emma", "martinez_ava",
-                         "taylor_lucas", "harris_isabella", "turner_mia", "thomas_sophia", "clark_ethan",
-                         "johnson_amelia", "white_jackson", "scott_benjamin", "walker_harper", "lewis_aria",
-                         "moore_elijah", "theo_aiden", "hall_grace", "taylor_caleb", "garcia_lily",
-                         "miller_ella", "adams_samuel", "hill_abigail", "martin_sebastian", "turner_avery",
-                         "davis_scarlett", "lewis_carter", "hall_chloe", "martin_zoe", "allen_grayson",
-                         "harris_luna", "robinson_mason", "martinez_layla", "wilson_henry", "walker_penelope",
-                         "clark_logan", "turner_victoria", "scott_evelyn", "hall_liam", "miller_nora",
-                         "walker_eli", "harris_stella", "robinson_levi", "taylor_aurora", "jackson_aiden",
-                         "white_mila", "turner_ezra", "robinson_camila", "davis_maverick", "smith_alice",
-                         "johnson_bob", "williams_charlie", "davis_david", "anderson_eva",
-                         "brown_frank", "taylor_grace", "wilson_henry", "miller_isabel", "martin_jack",
-                         "lee_sophia", "harris_daniel", "martinez_olivia", "jackson_james", "taylor_emma",
-                         "white_mia", "thomas_liam", "moore_ava", "davis_lucas", "garcia_aria",
-                         "hernandez_ethan", "robinson_amelia", "thompson_logan", "martinez_harper", "clark_mason",
-                         "rodriguez_ella", "walker_oliver", "scott_avery", "hall_lily", "adams_carter",
-                         "turner_chloe", "wright_jackson", "lewis_abigail", "taylor_caleb", "brown_emily",
-                         "moore_sebastian", "lewis_scarlett", "hill_gabriel", "johnson_hazel", "hall_sofia",
+
+    char* liste[1001] = { "anderson_liam", "davis_olivia", "brown_noah", "wilson_emma", "martinez_ava","taylor_lucas", "harris_isabella", "turner_mia", "thomas_sophia", "clark_ethan",
+                         "johnson_amelia", "white_jackson", "scott_benjamin", "walker_harper", "lewis_aria","moore_elijah", "theo_aiden", "hall_grace", "taylor_caleb", "garcia_lily",
+                         "miller_ella", "adams_samuel", "hill_abigail", "martin_sebastian", "turner_avery","davis_scarlett", "lewis_carter", "hall_chloe", "martin_zoe", "allen_grayson",
+                         "harris_luna", "robinson_mason", "martinez_layla", "wilson_henry", "walker_penelope","clark_logan", "turner_victoria", "scott_evelyn", "hall_liam", "miller_nora",
+                         "walker_eli", "harris_stella", "robinson_levi", "taylor_aurora", "jackson_aiden","white_mila", "turner_ezra", "robinson_camila", "davis_maverick", "smith_alice",
+                         "johnson_bob", "williams_charlie", "davis_david", "anderson_eva","brown_frank", "taylor_grace", "wilson_henry", "miller_isabel", "martin_jack",
+                         "lee_sophia", "harris_daniel", "martinez_olivia", "jackson_james", "taylor_emma","white_mia", "thomas_liam", "moore_ava", "davis_lucas", "garcia_aria",
+                         "hernandez_ethan", "robinson_amelia", "thompson_logan", "martinez_harper", "clark_mason","rodriguez_ella", "walker_oliver", "scott_avery", "hall_lily", "adams_carter",
+                         "turner_chloe", "wright_jackson", "lewis_abigail", "taylor_caleb", "brown_emily","moore_sebastian", "lewis_scarlett", "hill_gabriel", "johnson_hazel", "hall_sofia",
                          "davis_jackson", "harris_madison", "wilson_lucy", "allen_cameron", "moore_penelope",
                          "robinson_aiden", "davis_emma", "turner_zoe", "garcia_wyatt", "tremblay_marie", "gagnon_pierre", "roy_lucie", "cote_jacques", "bouchard_sylvie", "gauthier_martin", "morin_isabelle",
                          "lavoie_paul", "fortin_alice", "gagne_louis", "ouellet_josee", "pelletier_marc", "belanger_michelle", "levesque_guy",
@@ -1016,44 +1008,25 @@ p_contact_list  createComplexityList() {
                          "massa_emmanuel", "id_julia", "neque_kelly", "aliquam_louane", "justo_alan", "enim_luc", "diam_magali", "vulputate_andrea", "quam_anne_marie", "nulla_antonin",
                          "porttitor_charline", "massa_melina", "id_michael", "neque_nina", "aliquam_noa", "justo_samantha", "enim_thibaut", "diam_lucile", "vulputate_nolan", "quam_olivia",
                          "nulla_yannick", "porttitor_axelle", "massa_cyril", "id_denis", "neque_laurie", "aliquam_lilian", "nicolas_lea", "theo_thomas", "manon_marie", "kevin_alexandre", "camille_melissa",
-                         "maxime_laura", "lucas_alexis", "clement_quentin", "julien_oceane", "anais_julie",
-                         "hugo_pierre", "pauline_emma", "antoine_chloe", "florian_valentin", "lucie_sarah",
-                         "sebastien_marine", "romain_marion", "guillaume_paul", "anthony_jessica", "justine_emilie",
-                         "nathan_melanie", "benjamin_louis", "elodie_enzo", "jeremy_dylan", "baptiste_mathilde",
-                         "maman_michel", "clara_amandine", "vincent_isabelle", "audrey_caroline", "leo_philippe",
-                         "papa_david", "mathieu_corentin", "daniel_christophe", "aurelie_adrien", "monique_nathalie",
-                         "sophie_alain", "amelie_axel", "damien_sandrine", "stephanie_tom", "arthur_maeva",
-                         "jean_charlotte", "frederic_celine", "stephane_claude", "morgane_patrick", "mathis_noemie",
-                         "claire_eric", "laetitia_raphael", "sylvie_dominique", "martine_virginie", "eva_jerome",
-                         "juliette_pascal", "loic_christine", "romane_francoise", "laurent_olivier", "papy_alicia",
-                         "bernard_clemence", "maxence_francois", "mickael_jade", "remi_catherine", "cedric_gabriel",
-                         "helene_jeanne", "jonathan_lisa", "thierry_aurelien", "christian_coralie", "jacqueline_jules",
-                         "andre_jordan", "nicole_alice", "chantal_fabien", "matheo_elise", "valerie_victor",
-                         "angelique_arnaud", "celia_dorian", "elisa_fanny", "gerard_mamie", "marc_simon",
-                         "anne_christelle", "jacques_annie", "maelys_margaux", "alexandra_estelle", "ludovic_ophelie",
-                         "samuel_veronique", "sylvain_zoe", "bruno_mamy", "aurore_ines", "jean_pierre_louise",
-                         "tony_tristan", "benoit_cecile", "erwan_laurine", "matthieu_sandra", "lena_robert",
-                         "cindy_florence", "jean_claude_yann", "bastien_laurence", "mael_matteo", "ambre_guy",
-                         "cassandra_elisabeth", "evan_lola", "franck_jennifer", "maelle_remy", "xavier_fabrice",
-                         "laure_lilou", "noah_patricia", "thibault_yanis", "corinne_genevieve", "michele_william",
-                         "gregory_martin", "charles_cloe", "delphine_simone", "beatrice_ethan", "kylian_rene",
-                         "brigitte_christiane", "evelyne_francis", "gaelle_sabrina", "didier_dimitri", "edouard_lou",
-                         "ludivine_robin", "solene_adeline", "anna_emeline", "herve_leonie", "mathias_bryan",
-                         "colette_esteban", "gaetan_gwendoline", "severine_steven", "denise_georges", "gilles_madeleine",
-                         "suzanne_elsa", "valentine_yves", "alexia_allan", "aymeric_christopher", "claudine_eloise",
-                         "jason_killian", "ryan_sacha", "vanessa_yoann", "agathe_alex", "florent_joel", "karine_marcel",
-                         "roger_anaelle", "bernadette_gisele", "henri_josette", "margot_aline", "emmanuel_julia",
-                         "kelly_louane", "alan_luc", "magali_andrea", "anne_marie_antonin", "charline_melina",
-                         "michael_nina", "noa_samantha", "thibaut_lucile", "nolan_olivia", "yannick_axelle",
-                         "cyril_denis", "laurie_lilian", "marjorie_myriam", "adam_mireille", "paulette_victoria",
-                         "yvette_coline", "jean_baptiste_jimmy", "maurice_roland", "tiffany_titouan", "annick_carole",
-                         "cathy_etienne", "flavie_joseph", "kilian_morgan", "odette_cynthia", "gabin_gwenaelle",
-                         "jean_michel_luna", "noe_serge", "agnes_fabienne", "heloise_jean_francois", "jean_marie_josiane",
-                         "marina_marius", "mateo_sabine", "therese_alison", "alizee_carla", "daniele_dorothy",
-                         "lionel_lise", "salome_dany", "jean_paul_jose", "lorena_rachel", "teddy_jean_luc", "joelle_leane",
-                         "lydie_matthias", "mylene_nadine", "odile_raymond", "sonia_cassandre", "clarisse_clementine",
-                         "emmanuelle_gabrielle", "gaetan_lorenzo", "luca_michelle", "muriel_pascale", "carine_floriane",
-                         "jacky_jeannine", "loris_maria", "melvin_renee", "tanguy_cynthia", "gaelle_sabrina",
+                         "maxime_laura", "lucas_alexis", "clement_quentin", "julien_oceane", "anais_julie","hugo_pierre", "pauline_emma", "antoine_chloe", "florian_valentin", "lucie_sarah",
+                         "sebastien_marine", "romain_marion", "guillaume_paul", "anthony_jessica", "justine_emilie","nathan_melanie", "benjamin_louis", "elodie_enzo", "jeremy_dylan", "baptiste_mathilde",
+                         "maman_michel", "clara_amandine", "vincent_isabelle", "audrey_caroline", "leo_philippe","papa_david", "mathieu_corentin", "daniel_christophe", "aurelie_adrien", "monique_nathalie",
+                         "sophie_alain", "amelie_axel", "damien_sandrine", "stephanie_tom", "arthur_maeva","jean_charlotte", "frederic_celine", "stephane_claude", "morgane_patrick", "mathis_noemie",
+                         "claire_eric", "laetitia_raphael", "sylvie_dominique", "martine_virginie", "eva_jerome","juliette_pascal", "loic_christine", "romane_francoise", "laurent_olivier", "papy_alicia",
+                         "bernard_clemence", "maxence_francois", "mickael_jade", "remi_catherine", "cedric_gabriel","helene_jeanne", "jonathan_lisa", "thierry_aurelien", "christian_coralie", "jacqueline_jules",
+                         "andre_jordan", "nicole_alice", "chantal_fabien", "matheo_elise", "valerie_victor","angelique_arnaud", "celia_dorian", "elisa_fanny", "gerard_mamie", "marc_simon",
+                         "anne_christelle", "jacques_annie", "maelys_margaux", "alexandra_estelle", "ludovic_ophelie","samuel_veronique", "sylvain_zoe", "bruno_mamy", "aurore_ines", "jean_pierre_louise",
+                         "tony_tristan", "benoit_cecile", "erwan_laurine", "matthieu_sandra", "lena_robert","cindy_florence", "jean_claude_yann", "bastien_laurence", "mael_matteo", "ambre_guy",
+                         "cassandra_elisabeth", "evan_lola", "franck_jennifer", "maelle_remy", "xavier_fabrice","laure_lilou", "noah_patricia", "thibault_yanis", "corinne_genevieve", "michele_william",
+                         "gregory_martin", "charles_cloe", "delphine_simone", "beatrice_ethan", "kylian_rene","brigitte_christiane", "evelyne_francis", "gaelle_sabrina", "didier_dimitri", "edouard_lou",
+                         "ludivine_robin", "solene_adeline", "anna_emeline", "herve_leonie", "mathias_bryan","colette_esteban", "gaetan_gwendoline", "severine_steven", "denise_georges", "gilles_madeleine",
+                         "suzanne_elsa", "valentine_yves", "alexia_allan", "aymeric_christopher", "claudine_eloise","jason_killian", "ryan_sacha", "vanessa_yoann", "agathe_alex", "florent_joel", "karine_marcel",
+                         "roger_anaelle", "bernadette_gisele", "henri_josette", "margot_aline", "emmanuel_julia","kelly_louane", "alan_luc", "magali_andrea", "anne_marie_antonin", "charline_melina",
+                         "michael_nina", "noa_samantha", "thibaut_lucile", "nolan_olivia", "yannick_axelle","cyril_denis", "laurie_lilian", "marjorie_myriam", "adam_mireille", "paulette_victoria",
+                         "yvette_coline", "jean_baptiste_jimmy", "maurice_roland", "tiffany_titouan", "annick_carole","cathy_etienne", "flavie_joseph", "kilian_morgan", "odette_cynthia", "gabin_gwenaelle",
+                         "jean_michel_luna", "noe_serge", "agnes_fabienne", "heloise_jean_francois", "jean_marie_josiane","marina_marius", "mateo_sabine", "therese_alison", "alizee_carla", "daniele_dorothy",
+                         "lionel_lise", "salome_dany", "jean_paul_jose", "lorena_rachel", "teddy_jean_luc", "joelle_leane","lydie_matthias", "mylene_nadine", "odile_raymond", "sonia_cassandre", "clarisse_clementine",
+                         "emmanuelle_gabrielle", "gaetan_lorenzo", "luca_michelle", "muriel_pascale", "carine_floriane","jacky_jeannine", "loris_maria", "melvin_renee", "tanguy_cynthia", "gaelle_sabrina",
                          "didier_dimitri", "edouard_lou"};
 
     startTimer();
@@ -1094,7 +1067,7 @@ p_contact_list  createComplexityList() {
     int random;
     printf("Recherche\n");
     startTimer();
-    for (int i = 0 ; i<10000 ; i++) {
+    for (int i = 0 ; i<100000 ; i++) {
         random = (int) rand();
         random %= 980;
         searchContact(liste[random], new);
@@ -1102,7 +1075,7 @@ p_contact_list  createComplexityList() {
     stopTimer();
     displayTime();
     startTimer();
-    for (int i = 0 ; i<10000 ; i++) {
+    for (int i = 0 ; i<100000 ; i++) {
         random = (int) rand();
         random %= 980;
         searchContact_dtc(new ,liste[random]);

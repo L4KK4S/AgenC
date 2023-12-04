@@ -225,6 +225,30 @@ contact.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/AgenC.dir/build.make CMakeFiles/AgenC.dir/contact.c.s
 .PHONY : contact.c.s
 
+file.o: file.c.o
+.PHONY : file.o
+
+# target to build an object file
+file.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AgenC.dir/build.make CMakeFiles/AgenC.dir/file.c.o
+.PHONY : file.c.o
+
+file.i: file.c.i
+.PHONY : file.i
+
+# target to preprocess a source file
+file.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AgenC.dir/build.make CMakeFiles/AgenC.dir/file.c.i
+.PHONY : file.c.i
+
+file.s: file.c.s
+.PHONY : file.s
+
+# target to generate assembly for a file
+file.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AgenC.dir/build.make CMakeFiles/AgenC.dir/file.c.s
+.PHONY : file.c.s
+
 list.o: list.c.o
 .PHONY : list.o
 
@@ -318,6 +342,9 @@ help:
 	@echo "... contact.o"
 	@echo "... contact.i"
 	@echo "... contact.s"
+	@echo "... file.o"
+	@echo "... file.i"
+	@echo "... file.s"
 	@echo "... list.o"
 	@echo "... list.i"
 	@echo "... list.s"

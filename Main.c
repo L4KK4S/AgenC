@@ -21,6 +21,8 @@
 #include "cell.c"
 #include "appointment.c"
 #include "contact.c"
+#include "file.h"
+#include "file.c"
 
 
 // ------------------------- Main loop --------------------------
@@ -40,9 +42,10 @@ int main() {
     char* input = (char*) malloc(100*sizeof(char));
     char* input2 = (char*) malloc(100*sizeof(char));
     char* argument = (char*) malloc (100*sizeof(char));
+    p_contact_list tmp;
     //p_contact_list contactList = createEmptyList();
-    //p_contact_list contactList = createExempleList3(0);
-    p_contact_list contactList = createComplexityList();
+    p_contact_list contactList = createExempleList3(0);
+    createComplexityList();
     p_contact new;
     int exit = 0, function;
 
@@ -134,10 +137,8 @@ int main() {
                 }
                 break;
             case 8:
-                printf("Auto Completion enable, please enter a contact name : \n");
-                input2 = autoCompletion(contactList);
                 if (input2!=NULL) {
-                    printf("save file (contact) : not coded yet\n");
+                    save_file(contactList);
                 } else {
                     printf("Not a contact name\n");
                 }
@@ -168,7 +169,12 @@ int main() {
                 break;
 
             case 13:
-                printf("load file (filename.txt) : not coded yet\n");
+                tmp = load_file(4, argument);
+                if (tmp!=NULL) {
+                    contactList = tmp;
+                    printf("List load with success !\n");
+                }
+
                 break;
             default:
                 printf("Uncovered path - Error in the code\n");
