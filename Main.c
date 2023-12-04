@@ -13,16 +13,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "cell.h"
-#include "list.h"
-#include "menu.h"
-#include "menu.c"
-#include "list.c"
-#include "cell.c"
-#include "appointment.c"
-#include "contact.c"
 #include "file.h"
-#include "file.c"
+#include "menu.h"
+#include "appointment.h"
+#include "contact.h"
 
 
 // ------------------------- Main loop --------------------------
