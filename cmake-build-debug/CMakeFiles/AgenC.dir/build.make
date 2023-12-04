@@ -73,113 +73,113 @@ CMakeFiles/AgenC.dir/Main.c.o: CMakeFiles/AgenC.dir/flags.make
 CMakeFiles/AgenC.dir/Main.c.o: /Users/thomas/CLionProjects/AgenC/Main.c
 CMakeFiles/AgenC.dir/Main.c.o: CMakeFiles/AgenC.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/thomas/CLionProjects/AgenC/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/AgenC.dir/Main.c.o"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/AgenC.dir/Main.c.o -MF CMakeFiles/AgenC.dir/Main.c.o.d -o CMakeFiles/AgenC.dir/Main.c.o -c /Users/thomas/CLionProjects/AgenC/Main.c
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/AgenC.dir/Main.c.o -MF CMakeFiles/AgenC.dir/Main.c.o.d -o CMakeFiles/AgenC.dir/Main.c.o -c /Users/thomas/CLionProjects/AgenC/Main.c
 
 CMakeFiles/AgenC.dir/Main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/AgenC.dir/Main.c.i"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/thomas/CLionProjects/AgenC/Main.c > CMakeFiles/AgenC.dir/Main.c.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/thomas/CLionProjects/AgenC/Main.c > CMakeFiles/AgenC.dir/Main.c.i
 
 CMakeFiles/AgenC.dir/Main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/AgenC.dir/Main.c.s"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/thomas/CLionProjects/AgenC/Main.c -o CMakeFiles/AgenC.dir/Main.c.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/thomas/CLionProjects/AgenC/Main.c -o CMakeFiles/AgenC.dir/Main.c.s
 
 CMakeFiles/AgenC.dir/cell.c.o: CMakeFiles/AgenC.dir/flags.make
 CMakeFiles/AgenC.dir/cell.c.o: /Users/thomas/CLionProjects/AgenC/cell.c
 CMakeFiles/AgenC.dir/cell.c.o: CMakeFiles/AgenC.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/thomas/CLionProjects/AgenC/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/AgenC.dir/cell.c.o"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/AgenC.dir/cell.c.o -MF CMakeFiles/AgenC.dir/cell.c.o.d -o CMakeFiles/AgenC.dir/cell.c.o -c /Users/thomas/CLionProjects/AgenC/cell.c
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/AgenC.dir/cell.c.o -MF CMakeFiles/AgenC.dir/cell.c.o.d -o CMakeFiles/AgenC.dir/cell.c.o -c /Users/thomas/CLionProjects/AgenC/cell.c
 
 CMakeFiles/AgenC.dir/cell.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/AgenC.dir/cell.c.i"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/thomas/CLionProjects/AgenC/cell.c > CMakeFiles/AgenC.dir/cell.c.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/thomas/CLionProjects/AgenC/cell.c > CMakeFiles/AgenC.dir/cell.c.i
 
 CMakeFiles/AgenC.dir/cell.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/AgenC.dir/cell.c.s"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/thomas/CLionProjects/AgenC/cell.c -o CMakeFiles/AgenC.dir/cell.c.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/thomas/CLionProjects/AgenC/cell.c -o CMakeFiles/AgenC.dir/cell.c.s
 
 CMakeFiles/AgenC.dir/list.c.o: CMakeFiles/AgenC.dir/flags.make
 CMakeFiles/AgenC.dir/list.c.o: /Users/thomas/CLionProjects/AgenC/list.c
 CMakeFiles/AgenC.dir/list.c.o: CMakeFiles/AgenC.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/thomas/CLionProjects/AgenC/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/AgenC.dir/list.c.o"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/AgenC.dir/list.c.o -MF CMakeFiles/AgenC.dir/list.c.o.d -o CMakeFiles/AgenC.dir/list.c.o -c /Users/thomas/CLionProjects/AgenC/list.c
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/AgenC.dir/list.c.o -MF CMakeFiles/AgenC.dir/list.c.o.d -o CMakeFiles/AgenC.dir/list.c.o -c /Users/thomas/CLionProjects/AgenC/list.c
 
 CMakeFiles/AgenC.dir/list.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/AgenC.dir/list.c.i"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/thomas/CLionProjects/AgenC/list.c > CMakeFiles/AgenC.dir/list.c.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/thomas/CLionProjects/AgenC/list.c > CMakeFiles/AgenC.dir/list.c.i
 
 CMakeFiles/AgenC.dir/list.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/AgenC.dir/list.c.s"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/thomas/CLionProjects/AgenC/list.c -o CMakeFiles/AgenC.dir/list.c.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/thomas/CLionProjects/AgenC/list.c -o CMakeFiles/AgenC.dir/list.c.s
 
 CMakeFiles/AgenC.dir/menu.c.o: CMakeFiles/AgenC.dir/flags.make
 CMakeFiles/AgenC.dir/menu.c.o: /Users/thomas/CLionProjects/AgenC/menu.c
 CMakeFiles/AgenC.dir/menu.c.o: CMakeFiles/AgenC.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/thomas/CLionProjects/AgenC/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/AgenC.dir/menu.c.o"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/AgenC.dir/menu.c.o -MF CMakeFiles/AgenC.dir/menu.c.o.d -o CMakeFiles/AgenC.dir/menu.c.o -c /Users/thomas/CLionProjects/AgenC/menu.c
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/AgenC.dir/menu.c.o -MF CMakeFiles/AgenC.dir/menu.c.o.d -o CMakeFiles/AgenC.dir/menu.c.o -c /Users/thomas/CLionProjects/AgenC/menu.c
 
 CMakeFiles/AgenC.dir/menu.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/AgenC.dir/menu.c.i"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/thomas/CLionProjects/AgenC/menu.c > CMakeFiles/AgenC.dir/menu.c.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/thomas/CLionProjects/AgenC/menu.c > CMakeFiles/AgenC.dir/menu.c.i
 
 CMakeFiles/AgenC.dir/menu.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/AgenC.dir/menu.c.s"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/thomas/CLionProjects/AgenC/menu.c -o CMakeFiles/AgenC.dir/menu.c.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/thomas/CLionProjects/AgenC/menu.c -o CMakeFiles/AgenC.dir/menu.c.s
 
 CMakeFiles/AgenC.dir/timer.c.o: CMakeFiles/AgenC.dir/flags.make
 CMakeFiles/AgenC.dir/timer.c.o: /Users/thomas/CLionProjects/AgenC/timer.c
 CMakeFiles/AgenC.dir/timer.c.o: CMakeFiles/AgenC.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/thomas/CLionProjects/AgenC/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/AgenC.dir/timer.c.o"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/AgenC.dir/timer.c.o -MF CMakeFiles/AgenC.dir/timer.c.o.d -o CMakeFiles/AgenC.dir/timer.c.o -c /Users/thomas/CLionProjects/AgenC/timer.c
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/AgenC.dir/timer.c.o -MF CMakeFiles/AgenC.dir/timer.c.o.d -o CMakeFiles/AgenC.dir/timer.c.o -c /Users/thomas/CLionProjects/AgenC/timer.c
 
 CMakeFiles/AgenC.dir/timer.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/AgenC.dir/timer.c.i"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/thomas/CLionProjects/AgenC/timer.c > CMakeFiles/AgenC.dir/timer.c.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/thomas/CLionProjects/AgenC/timer.c > CMakeFiles/AgenC.dir/timer.c.i
 
 CMakeFiles/AgenC.dir/timer.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/AgenC.dir/timer.c.s"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/thomas/CLionProjects/AgenC/timer.c -o CMakeFiles/AgenC.dir/timer.c.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/thomas/CLionProjects/AgenC/timer.c -o CMakeFiles/AgenC.dir/timer.c.s
 
 CMakeFiles/AgenC.dir/contact.c.o: CMakeFiles/AgenC.dir/flags.make
 CMakeFiles/AgenC.dir/contact.c.o: /Users/thomas/CLionProjects/AgenC/contact.c
 CMakeFiles/AgenC.dir/contact.c.o: CMakeFiles/AgenC.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/thomas/CLionProjects/AgenC/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/AgenC.dir/contact.c.o"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/AgenC.dir/contact.c.o -MF CMakeFiles/AgenC.dir/contact.c.o.d -o CMakeFiles/AgenC.dir/contact.c.o -c /Users/thomas/CLionProjects/AgenC/contact.c
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/AgenC.dir/contact.c.o -MF CMakeFiles/AgenC.dir/contact.c.o.d -o CMakeFiles/AgenC.dir/contact.c.o -c /Users/thomas/CLionProjects/AgenC/contact.c
 
 CMakeFiles/AgenC.dir/contact.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/AgenC.dir/contact.c.i"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/thomas/CLionProjects/AgenC/contact.c > CMakeFiles/AgenC.dir/contact.c.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/thomas/CLionProjects/AgenC/contact.c > CMakeFiles/AgenC.dir/contact.c.i
 
 CMakeFiles/AgenC.dir/contact.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/AgenC.dir/contact.c.s"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/thomas/CLionProjects/AgenC/contact.c -o CMakeFiles/AgenC.dir/contact.c.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/thomas/CLionProjects/AgenC/contact.c -o CMakeFiles/AgenC.dir/contact.c.s
 
 CMakeFiles/AgenC.dir/appointment.c.o: CMakeFiles/AgenC.dir/flags.make
 CMakeFiles/AgenC.dir/appointment.c.o: /Users/thomas/CLionProjects/AgenC/appointment.c
 CMakeFiles/AgenC.dir/appointment.c.o: CMakeFiles/AgenC.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/thomas/CLionProjects/AgenC/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/AgenC.dir/appointment.c.o"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/AgenC.dir/appointment.c.o -MF CMakeFiles/AgenC.dir/appointment.c.o.d -o CMakeFiles/AgenC.dir/appointment.c.o -c /Users/thomas/CLionProjects/AgenC/appointment.c
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/AgenC.dir/appointment.c.o -MF CMakeFiles/AgenC.dir/appointment.c.o.d -o CMakeFiles/AgenC.dir/appointment.c.o -c /Users/thomas/CLionProjects/AgenC/appointment.c
 
 CMakeFiles/AgenC.dir/appointment.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/AgenC.dir/appointment.c.i"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/thomas/CLionProjects/AgenC/appointment.c > CMakeFiles/AgenC.dir/appointment.c.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/thomas/CLionProjects/AgenC/appointment.c > CMakeFiles/AgenC.dir/appointment.c.i
 
 CMakeFiles/AgenC.dir/appointment.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/AgenC.dir/appointment.c.s"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/thomas/CLionProjects/AgenC/appointment.c -o CMakeFiles/AgenC.dir/appointment.c.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/thomas/CLionProjects/AgenC/appointment.c -o CMakeFiles/AgenC.dir/appointment.c.s
 
 CMakeFiles/AgenC.dir/file.c.o: CMakeFiles/AgenC.dir/flags.make
 CMakeFiles/AgenC.dir/file.c.o: /Users/thomas/CLionProjects/AgenC/file.c
 CMakeFiles/AgenC.dir/file.c.o: CMakeFiles/AgenC.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/thomas/CLionProjects/AgenC/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/AgenC.dir/file.c.o"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/AgenC.dir/file.c.o -MF CMakeFiles/AgenC.dir/file.c.o.d -o CMakeFiles/AgenC.dir/file.c.o -c /Users/thomas/CLionProjects/AgenC/file.c
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/AgenC.dir/file.c.o -MF CMakeFiles/AgenC.dir/file.c.o.d -o CMakeFiles/AgenC.dir/file.c.o -c /Users/thomas/CLionProjects/AgenC/file.c
 
 CMakeFiles/AgenC.dir/file.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/AgenC.dir/file.c.i"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/thomas/CLionProjects/AgenC/file.c > CMakeFiles/AgenC.dir/file.c.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/thomas/CLionProjects/AgenC/file.c > CMakeFiles/AgenC.dir/file.c.i
 
 CMakeFiles/AgenC.dir/file.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/AgenC.dir/file.c.s"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/thomas/CLionProjects/AgenC/file.c -o CMakeFiles/AgenC.dir/file.c.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/thomas/CLionProjects/AgenC/file.c -o CMakeFiles/AgenC.dir/file.c.s
 
 # Object files for target AgenC
 AgenC_OBJECTS = \

@@ -144,7 +144,6 @@ p_contact_list load_file(int max_level,  char* name) {
     }
 
     for (int i = 0; i < line_count; i++) {
-        printf("%s \n", all_names[i]);
         p_contact newcontact = createContact(all_names[i]);
         insertContact(temp_contact_list, newcontact);
 
