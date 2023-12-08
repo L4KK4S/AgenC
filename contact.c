@@ -1103,6 +1103,30 @@ p_contact_list createExempleList2(int showstep) {
     p_contact c8 = createContact("humbert_dave");
     p_contact c9 = createContact("zerator_charlotte");
     p_contact c10 = createContact("picou_thomas");
+
+    p_appointment temp_apt = createEmptyAppointment();
+    temp_apt->object = "test";
+    temp_apt->date.day = 13;
+    temp_apt->date.month = 10;
+    temp_apt->date.years = 2004;
+    temp_apt->hour.hours = 12;
+    temp_apt->hour.minutes = 00;
+    temp_apt->length.hours = 2;
+    temp_apt->length.minutes = 00;
+    insertAppointment(c1, temp_apt);
+
+    p_appointment temp_apt2 = createEmptyAppointment();
+    temp_apt2->object = "test2";
+    temp_apt2->date.day = 13;
+    temp_apt2->date.month = 10;
+    temp_apt2->date.years = 2005;
+    temp_apt2->hour.hours = 12;
+    temp_apt2->hour.minutes = 00;
+    temp_apt2->length.hours = 2;
+    temp_apt2->length.minutes = 00;
+    insertAppointment(c1, temp_apt2);
+
+
     insertContact(new, c3);
     if (showstep==1) {
         uniform_display_contact_list(new);
