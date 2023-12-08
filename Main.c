@@ -23,7 +23,19 @@
 
 int main() {
 
-    printf("\nWelcome to AgenC, please type a command or type help if needed :\n\n");
+
+    printf("\n  /$$$$$$                                 /$$$$$$\n");
+    printf(" /$$__  $$                               /$$__  $$\n");
+    printf("| $$  \\ $$  /$$$$$$   /$$$$$$  /$$$$$$$ | $$  \\__/\n");
+    printf("| $$$$$$$$ /$$__  $$ /$$__  $$| $$__  $$| $$      \n");
+    printf("| $$__  $$| $$  \\ $$| $$$$$$$$| $$  \\ $$| $$      \n");
+    printf("| $$  | $$| $$  | $$| $$_____/| $$  | $$| $$    $$\n");
+    printf("| $$  | $$|  $$$$$$$|  $$$$$$$| $$  | $$|  $$$$$$/\n");
+    printf("|__/  |__/ \\____  $$ \\_______/|__/  |__/ \\______/ \n");
+    printf("           /$$  \\ $$  Welcome to AgenC, please type a command or type help if needed:\n");
+    printf("          |  $$$$$$/                              \n");
+    printf("           \\______/                               \n\n\n");
+
 
     // Menu Part 1 and 2
     //mainloop1();
@@ -38,7 +50,7 @@ int main() {
     char* argument = (char*) malloc (100*sizeof(char));
     p_contact_list tmp;
     //p_contact_list contactList = createEmptyList();
-    p_contact_list contactList = createExempleList1(0);
+    p_contact_list contactList = createExempleList2(0);
     //createComplexityList();
     p_contact new;
     int exit = 0, function;
@@ -58,7 +70,7 @@ int main() {
                 exit=1;
                 break;
             case 2:
-                printf("========================================= Help Menu =========================================\n\n"
+                printf("====================================================== Help Menu ======================================================\n\n"
                        "\033[0mGeneral Functions\n"
                        "\t\033[0;36m exit \033[0;37m: exit the programm\n"
                        "\t\033[0;36m help \033[0;37m: show the help menu\n\n"

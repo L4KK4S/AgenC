@@ -874,42 +874,42 @@ p_contact_list createExempleList1(int showstep) {
     p_contact c8 = createContact("hma");
     insertContact(new, c1);
     if (showstep==1) {
-        uniform_display_contact_list(new);
+        //uniform_display_contact_list(new);
         printf("\n\n");
     }
     insertContact(new, c2);
     if (showstep==1) {
-        uniform_display_contact_list(new);
+        //uniform_display_contact_list(new);
         printf("\n\n");
     }
     insertContact(new, c3);
     if (showstep==1) {
-        uniform_display_contact_list(new);
+        //uniform_display_contact_list(new);
         printf("\n\n");
     }
     insertContact(new, c4);
     if (showstep==1) {
-        uniform_display_contact_list(new);
+        //uniform_display_contact_list(new);
         printf("\n\n");
     }
     insertContact(new, c5);
     if (showstep==1) {
-        uniform_display_contact_list(new);
+        //uniform_display_contact_list(new);
         printf("\n\n");
     }
     insertContact(new, c6);
     if (showstep==1) {
-        uniform_display_contact_list(new);
+        //uniform_display_contact_list(new);
         printf("\n\n");
     }
     insertContact(new, c7);
     if (showstep==1) {
-        uniform_display_contact_list(new);
+        //uniform_display_contact_list(new);
         printf("\n\n");
     }
     insertContact(new, c8);
-    uniform_display_contact_list(new);
-    printf("\n\n");
+    //uniform_display_contact_list(new);
+    //printf("\n\n");
     return new;
 
 }
