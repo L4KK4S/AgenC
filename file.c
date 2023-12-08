@@ -44,47 +44,6 @@ void save_file(p_contact_list all_contact){
         // write the name of the contact
         fprintf(file, "%s;", current_contact->name);
 
-        // if conctact has appointments
-        if (current_contact->head != NULL) {
-            // browse the appointments
-            while (current_contact->head  !=NULL ) {
-
-
-                // write the appointment
-                fprintf(file, "[");
-
-                // object
-                fprintf(file, all_contact->levels[0]->head->object);
-                fprintf(file, ";");
-
-                // date
-                fprintf(file, "%d", all_contact->levels[0]->head->date.day);
-                fprintf(file, ";");
-                fprintf(file, "%d", all_contact->levels[0]->head->date.month);
-                fprintf(file, ";");
-                fprintf(file, "%d", all_contact->levels[0]->head->date.years);
-                fprintf(file, ";");
-
-                // hour
-                fprintf(file, "%d", all_contact->levels[0]->head->hour.hours);
-                fprintf(file, ";");
-                fprintf(file, "%d", all_contact->levels[0]->head->hour.minutes);
-                fprintf(file, ";");
-
-                // length
-                fprintf(file, "%d", all_contact->levels[0]->head->length.hours);
-                fprintf(file, ";");
-                fprintf(file, "%d", all_contact->levels[0]->head->length.minutes);
-
-                fprintf(file, "]");
-
-                // go to the next appointment
-                current_contact->head = current_contact->head->next;
-            }
-
-            printf("\n");
-        }
-
         // go to the next contact
         current_contact = current_contact->levels[0];
         fprintf(file, "\n");
@@ -97,10 +56,10 @@ void save_file(p_contact_list all_contact){
 
 }
 
-p_contact_list load_file(int max_level,  char* name) {
+p_contact_list load_file() {
 
     // open the file for reading
-    FILE *file = fopen(name, "r");
+    FILE *file = fopen("data.txt", "r");
 
     // check if the file was opened successfully
     if (file == NULL) {

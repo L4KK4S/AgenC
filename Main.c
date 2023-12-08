@@ -49,8 +49,6 @@ int main() {
     printf("           \\______/                               \n\n\n");
 
 
-    printf("Système d'exploitation: %s\n", OS);
-
     // Menu Part 1 and 2
     //mainloop1();
 
@@ -163,6 +161,7 @@ int main() {
             case 8:
                 if (input2!=NULL) {
                     save_file(contactList);
+                    printf("Successfuly saved the file\n");
                 } else {
                     printf("Not a contact name\n");
                 }
@@ -193,10 +192,10 @@ int main() {
                 break;
 
             case 13:
-                tmp = load_file(4, argument);
+                tmp = load_file();
                 if (tmp != NULL) {
                     contactList = tmp;
-                    printf("List load with success !\n");
+                    printf("Contacts load with success !\n");
                 }
                 break;
 
@@ -225,5 +224,5 @@ int main() {
 
 
     return 0;
- 
+
 }

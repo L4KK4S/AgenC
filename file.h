@@ -14,7 +14,7 @@
 #include "contact.h"
 
 void save_file(p_contact_list);
-p_contact_list load_file(int, char*);
+p_contact_list load_file();
 
 
 #endif //AGENC_FILE_H
