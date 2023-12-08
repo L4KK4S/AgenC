@@ -1,3 +1,0 @@
-C:/Users/Abdel-Waheb/CLionProjects/AgenC/cmake-build-debug/CMakeFiles/AgenC.dir
-C:/Users/Abdel-Waheb/CLionProjects/AgenC/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Abdel-Waheb/CLionProjects/AgenC/cmake-build-debug/CMakeFiles/rebuild_cache.dir

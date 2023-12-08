@@ -388,7 +388,7 @@ void mainloop1() {
 }
 
 int get_inputs_part3 (char* input) {
-    char* functions[15] = {"error", "exit", "help","show list","show agenda", "search contact -d","search contact -s","delete appointment",                             // List of all available function in argument order to compare the input
+    char* functions[15] = {"error", "exit", "help","show list","show agenda", "search -d","search -s","delete appointment",                             // List of all available function in argument order to compare the input
                            "save file","agenda","create appointment","create contact -d","create contact -s",
                            "load file", "clear"};
     int j, True;                                                                             // Set some variable to parcour and test the different strings
