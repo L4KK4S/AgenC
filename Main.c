@@ -38,8 +38,8 @@ int main() {
     char* argument = (char*) malloc (100*sizeof(char));
     p_contact_list tmp;
     //p_contact_list contactList = createEmptyList();
-    p_contact_list contactList = createExempleList3(0);
-    createComplexityList();
+    p_contact_list contactList = createExempleList1(0);
+    //createComplexityList();
     p_contact new;
     int exit = 0, function;
 
