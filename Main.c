@@ -18,6 +18,18 @@
 #include "appointment.h"
 #include "contact.h"
 
+//
+
+#if defined(_WIN32) || defined(_WIN64)
+#define OS "Windows"
+#elif defined(__linux__)
+#define OS "Linux"
+#elif defined(__APPLE__)
+    #define OS "macOS"
+#else
+    #define OS "Inconnu"
+#endif
+
 
 // ------------------------- Main loop --------------------------
 
@@ -36,6 +48,8 @@ int main() {
     printf("          |  $$$$$$/                              \n");
     printf("           \\______/                               \n\n\n");
 
+
+    printf("Système d'exploitation: %s\n", OS);
 
     // Menu Part 1 and 2
     //mainloop1();
@@ -91,6 +105,10 @@ int main() {
                        "\033[0mFile Functions\n"
                        "\t\033[0;36m load file \033[0;34mfilename.txt \033[0;37m: load a new appointment file\n"
                        "\t\033[0;36m save file \033[0;31m(a) \033[0;37m: update or create an appointment file of an existing contact\n\n\n"
+                       "\033[0mExtra Functions\n"
+                       "\t\033[0;36m clear \033[0;35m-option \033[0;37m: clear the terminal\n"
+                       "\t\t \033[0;35m-w\033[0;37m  : clear if your have an windows OS\n"
+                       "\t\t \033[0;35m-mc\033[0;37m : clear if your have an Mac OS\n\n\n"
                        "\033[0m* \033[0;31m(a)\033[0;37m stand for autocompletion, you have to confirm first the function + option then you'll have access to the autocompletion\n"
                        "\t  for the contact\n"
                        "\033[0m** \033[0;37moptions are mandatory\033[0m\n\n");
@@ -176,12 +194,21 @@ int main() {
 
             case 13:
                 tmp = load_file(4, argument);
-                if (tmp!=NULL) {
+                if (tmp != NULL) {
                     contactList = tmp;
                     printf("List load with success !\n");
                 }
-
                 break;
+
+            case 14:
+
+                if (OS == "Windows") {
+                    system("cls");
+                } else if (OS == "Linux" || OS == "macOS") {
+                    system("clear");
+                }
+                break;
+
             default:
                 printf("Uncovered path - Error in the code\n");
                 break;
