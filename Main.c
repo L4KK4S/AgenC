@@ -50,7 +50,7 @@ int main() {
 
 
     // Menu Part 1 and 2
-    //mainloop1();
+    mainloop1();
 
     // Menu Part 3
 
@@ -91,7 +91,7 @@ int main() {
                        "\t\033[0;36m show agenda \033[0;37m: show all agenda\n"
                        "\t\033[0;36m agenda \033[0;31m(a) \033[0;37m: show the agenda of a specific contact\n\n"
                        "\033[0mContact Functions\n"
-                       "\t\033[0;36m search contact \033[0;35m-option \033[0;31m(a) \033[0;37m: search a specific contact and return if it's in the list or not\n"
+                       "\t\033[0;36m search \033[0;35m-option \033[0;31m(a) \033[0;37m: search a specific contact and return if it's in the list or not\n"
                        "\t\t \033[0;35m-s\033[0;37m : standard research\n"
                        "\t\t \033[0;35m-d\033[0;37m : dichotomous research\n"
                        "\t\033[0;36m create contact \033[0;35m-option \033[0;34m(name)\033[0;37m : create a contact\n"
@@ -180,26 +180,14 @@ int main() {
                 createAppointment(contactList);
                 printf("Successfuly created an appointment\n");
                 break;
-            case 11 :
-                new = createContact(argument);
-                insertContact_dtc(contactList, new);
-                printf("Successfuly created a contact\n");
-                break;
-            case 12:
-                new = createContact(argument);
-                insertContact(contactList, new);
-                printf("Successfuly created a contact\n");
-                break;
-
-            case 13:
+            case 11:
                 tmp = load_file();
                 if (tmp != NULL) {
                     contactList = tmp;
-                    printf("Contacts load with success !\n");
+                    printf("Agenda load with success !\n");
                 }
                 break;
-
-            case 14:
+            case 12:
 
                 if (OS == "Windows") {
                     system("cls");
@@ -207,6 +195,18 @@ int main() {
                     system("clear");
                 }
                 break;
+            case 13 :
+                new = createContact(argument);
+                insertContact_dtc(contactList, new);
+                printf("Successfuly created a contact\n");
+                break;
+            case 14:
+                new = createContact(argument);
+                insertContact(contactList, new);
+                printf("Successfuly created a contact\n");
+                break;
+
+
 
             default:
                 printf("Uncovered path - Error in the code\n");

@@ -101,7 +101,6 @@ p_contact_list load_file() {
 
     }
 
-
     int letter_cursor = 0, word_cpt = 0;
     p_contact_list temp_contact_list = createEmptyList();
     char** all_names = (char**) malloc(line_count*sizeof(char*));
@@ -132,7 +131,6 @@ p_contact_list load_file() {
                     strcpy(h_length, "");
                     strcpy(m_length, "");
                     strcpy(object, "");
-
 
                 } else if (lines[i][letter_cursor] == '/' ) {
                     separator_cpt ++;
@@ -177,6 +175,7 @@ p_contact_list load_file() {
                 }
 
                 letter_cursor++;
+
                 if (lines[i][letter_cursor] == ':' || lines[i][letter_cursor] == ';') {
                     p_appointment new = createEmptyAppointment();
                     new->date.day = atoi(day);

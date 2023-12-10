@@ -211,7 +211,6 @@ char* autoCompletion(p_contact_list list) {
             return NULL;
         }
         strcpy(newres, res);                                                                                                            // We update the new result string which is used here as a previous string
-
     } while (strlen(input)<=1 || input[strlen(input)-2]!=' ');                                                                    // Loop to continue while the input doesn't end by SPACE and ENTER
     if (checkNameEntry(deleteLastChar(res))!=NULL) {                                                                                              // Check if the input as the correct format
         return formatString(deleteLastChar(res));                                                                                                 // If yes we return the format version of the string
@@ -232,12 +231,12 @@ void mainloop1() {
     // ------------------------- Test list definition --------------------------
 
 
-    allList[1] = createOrderedList();
+    allList[4] = createOrderedList();
     allList[2] = createChaoticValueList();
-    allList[3] = createWaveFormList();
-    allList[4] = createWaveFormList2();
+    allList[0] = createWaveFormList();
+    allList[3] = createWaveFormList2();
     allList[5] = createTestList();
-    allList[0] = createListPart2(17);
+    allList[1] = createListPart2(4);
 
 
     while (exit==0) {
@@ -389,8 +388,8 @@ void mainloop1() {
 
 int get_inputs_part3 (char* input) {
     char* functions[15] = {"error", "exit", "help","show list","show agenda", "search -d","search -s","delete appointment",                             // List of all available function in argument order to compare the input
-                           "save file","agenda","create appointment","create contact -d","create contact -s",
-                           "load file", "clear"};
+                           "save file","agenda","create appointment","load file", "clear","create contact -d","create contact -s",
+    };
     int j, True;                                                                             // Set some variable to parcour and test the different strings
     input = change_maj_to_min(input);
 
@@ -420,13 +419,13 @@ char *get_argument_part3(int function, char *input) {
     char *argument = (char*) malloc (30*sizeof(char));
     char tmp[5] =" ";
     char* functions[15] = {"error", "exit", "help","show list","show agenda", "search -d","search -s","delete appointment",                             // List of all available function in argument order to compare the input
-                           "save file","agenda","create appointment","create contact -d","create contact -s",
-                           "load file", "clear"};
+                           "save file","agenda","create appointment","load file", "clear","create contact -d","create contact -s",
+                           };
     int space = 0, i;
 
     if (function !=0) {                                                                                      // Doesn't check if there was an invalid function
         i = (int) strlen(functions[function]) ;                                                                 // Set the start point to the last character of the recognize function
-        if (input[i]!=' ' && function > 10 && function != 13 && function != 14) {                                                                // Check if function that need to have an argument have the right delimiter
+        if (input[i]!=' ' && function > 10) {                                                                // Check if function that need to have an argument have the right delimiter
             printf("A space is missing\n");
             return NULL;
         }
@@ -441,12 +440,10 @@ char *get_argument_part3(int function, char *input) {
             i++;
         }
     }
-    if ((function < 11 || function == 13 || function == 14) && strlen(input) == strlen(functions[function])+1) {                            // We check if function without argument doesn't have any space or more characters than the base function
+    if ((function < 13) && strlen(input) == strlen(functions[function])+1) {                            // We check if function without argument doesn't have any space or more characters than the base function
         return input;                                                                                       // As we have to return something else but NULL we return the input but that won't be use
-    } else if (function >= 11 && function < 13 && space == 1 && checkNameEntry(argument)!=NULL)  {    // Check if function with a name entry have a correct format for the entry
+    } else if (function >= 13 && function < 14 && space == 1 && checkNameEntry(argument)!=NULL)  {    // Check if function with a name entry have a correct format for the entry
         return formatString(argument);                                                                // We return the formated input
-    } else if (function == 13 && space == 0) {                                                              // Check if the last function really have only 1 space
-        return argument;
     } else {                                                                                                // Else we return NULL
         printf("The number of space is incorrect\n");
         return NULL;
