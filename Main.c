@@ -12,7 +12,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "file.h"
 #include "menu.h"
 #include "appointment.h"
@@ -49,11 +48,6 @@ int main() {
     printf("           \\______/                               \n\n\n");
 
 
-    // Menu Part 1 and 2
-    //mainloop1();
-
-    // Menu Part 3
-
 
     // ------------------------- Variable definition --------------------------
 
@@ -61,9 +55,7 @@ int main() {
     char* input2 = (char*) malloc(100*sizeof(char));
     char* argument = (char*) malloc (100*sizeof(char));
     p_contact_list tmp;
-    //p_contact_list contactList = createEmptyList();
-    p_contact_list contactList = createExempleList3(0);
-    //createComplexityList();
+    p_contact_list contactList = createExempleList2(0);
     p_contact new;
     int exit = 0, function;
 
@@ -91,22 +83,20 @@ int main() {
                        "\t\033[0;36m show agenda \033[0;37m: show all agenda\n"
                        "\t\033[0;36m agenda \033[0;31m(a) \033[0;37m: show the agenda of a specific contact\n\n"
                        "\033[0mContact Functions\n"
-                       "\t\033[0;36m search contact \033[0;35m-option \033[0;31m(a) \033[0;37m: search a specific contact and return if it's in the list or not\n"
+                       "\t\033[0;36m search \033[0;35m-option \033[0;31m(a) \033[0;37m: search a specific contact and return if it's in the list or not\n"
                        "\t\t \033[0;35m-s\033[0;37m : standard research\n"
                        "\t\t \033[0;35m-d\033[0;37m : dichotomous research\n"
-                       "\t\033[0;36m create contact \033[0;35m-option \033[0;34m(name)\033[0;37m : create a contact\n"
+                       "\t\033[0;36m create \033[0;35m-option \033[0;34m(name)\033[0;37m : create a contact\n"
                        "\t\t \033[0;35m-s\033[0;37m : standard insertion of the contact\n"
                        "\t\t \033[0;35m-d\033[0;37m : dichotomous insertion of the contact\n\n"
                        "\033[0mAppointment Functions\n"
                        "\t\033[0;36m create appointment \033[0;37m: ask all detail about a new event (can't be cancelled)\n"
                        "\t\033[0;36m delete appointment \033[0;31m(a) \033[0;34mobject \033[0;37m: delete an appointment of a specific contact with a specific object\n\n"
                        "\033[0mFile Functions\n"
-                       "\t\033[0;36m load file \033[0;34mfilename.txt \033[0;37m: load a new appointment file\n"
-                       "\t\033[0;36m save file \033[0;31m(a) \033[0;37m: update or create an appointment file of an existing contact\n\n\n"
+                       "\t\033[0;36m load file \033[0;37m:: load a new appointment file\n"
+                       "\t\033[0;36m save file \033[0;37m: update or create an appointment file of an existing contact\n\n\n"
                        "\033[0mExtra Functions\n"
-                       "\t\033[0;36m clear \033[0;35m-option \033[0;37m: clear the terminal\n"
-                       "\t\t \033[0;35m-w\033[0;37m  : clear if your have an windows OS\n"
-                       "\t\t \033[0;35m-mc\033[0;37m : clear if your have an Mac OS\n\n\n"
+                       "\t\033[0;36m clear \033[0;37m: clear the terminal\n\n"
                        "\033[0m* \033[0;31m(a)\033[0;37m stand for autocompletion, you have to confirm first the function + option then you'll have access to the autocompletion\n"
                        "\t  for the contact\n"
                        "\033[0m** \033[0;37moptions are mandatory\033[0m\n\n");
